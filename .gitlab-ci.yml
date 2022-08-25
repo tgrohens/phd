@@ -5,4 +5,7 @@ build:
 
   artifacts:
     paths:
-      - "*.pdf"
+      - "phd.pdf"
+
+  tags:
+    - small
