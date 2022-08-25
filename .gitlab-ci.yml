@@ -1,3 +1,7 @@
+stages:
+  - build
+  - pages
+
 build:
   image: listx/texlive:2020
   script:
@@ -18,3 +22,6 @@ pages:
   artifacts:
     paths:
       - public
+
+  tags:
+    - small
