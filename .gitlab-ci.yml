@@ -9,3 +9,12 @@ build:
 
   tags:
     - small
+
+pages:
+  script:
+    - mkdir public
+    - cp phd.pdf public
+
+  artifacts:
+    paths:
+      - public
