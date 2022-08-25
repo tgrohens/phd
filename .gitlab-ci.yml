@@ -1,8 +1,9 @@
 stages:
   - build
-  - pages
+  - deploy
 
-build:
+latex:
+  stage: build
   image: listx/texlive:2020
   script:
     - latexmk -pdf
@@ -15,6 +16,7 @@ build:
     - small
 
 pages:
+  stage: deploy
   script:
     - mkdir public
     - cp phd.pdf public
