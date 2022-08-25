@@ -1,0 +1,8 @@
+build:
+  image: listx/texlive:2020
+  script:
+    - latexmk -pdf
+
+  artifacts:
+    paths:
+      - "*.pdf"
