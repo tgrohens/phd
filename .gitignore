@@ -1,10 +1,17 @@
 # LaTeX
 *.aux
+*.bbl
+*.blg
 *.fdb*
 *.fls
 *.lof
 *.log
 *.out
-*.pdf
 *.synctex.gz
 *.toc
+
+# Generated
+phd.pdf
+
+# macOS
+.DS_Store
