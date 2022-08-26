@@ -20,6 +20,7 @@ pages:
   script:
     - mkdir public
     - cp phd.pdf public
+    - cp www/index.html public
 
   artifacts:
     paths:
