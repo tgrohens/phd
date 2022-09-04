@@ -3,14 +3,19 @@
 \usepackage[T1]{fontenc}
 \usepackage{libertinus}
 \usepackage{natbib}
-\usepackage[margin=3cm]{geometry}
+\usepackage[french, english]{babel}
+%\usepackage[left=2.5cm,right=2.5cm,top=1.5cm,bottom=2cm]{geometry}
 \usepackage{graphicx}
 \usepackage{subcaption}
 %\usepackage{xspace}
 %\usepackage{xcolor}
 \usepackage{float}
 %\usepackage{setspace}
+\usepackage{pdfpages}
 \usepackage[hidelinks]{hyperref}
+
+% Fix warning about head height
+\setlength{\headheight}{28pt}
 
 \maxtocdepth{subsection}
 \setsecnumdepth{subsection}
@@ -20,25 +25,33 @@
 \begin{document}
 
 
-\frontmatter
-
 \author{Théotime Grohens}
 \title{Thèse}
 
 \maketitle
-
+\thispagestyle{empty}
 \pagebreak
+
+\frontmatter
+
+\include{fr-abstract.tex}
+%\pagebreak
 
 \tableofcontents
 \listoffigures
+\listoftables
 
 \mainmatter
 
 \include{aevol/aevol.tex}
-
 \include{alife/alife.tex}
-
 \include{ploscb/ploscb.tex}
+
+\appendix
+
+\include{covid/covid.tex}
+
+\backmatter
 
 \bibliographystyle{apalike}
 \bibliography{phd,swh}
