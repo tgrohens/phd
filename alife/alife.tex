@@ -139,7 +139,7 @@ Using this interaction matrix, we compute the level of supercoiling $\sigma_i$ a
 
 \begin{equation}
   \sigma_i = \sigma_{basal} + \sigma_{env} + \sum_{j=1}^n\frac{\partial\sigma_{i}}{\partial e_j}e_j
-  \label{eq:sigma}
+  \label{eq:alife_sigma}
 \end{equation}
 
 The transcription level $e_i$ of every gene as a function of total supercoiling is then modeled with a sigmoidal activation curve, following~\cite{elhoudaigui2019}.
@@ -152,9 +152,9 @@ The equation is given by:
 
 In this equation, $\sigma_0$ is a parameter that represents the inflexion point of the sigmoid, that is the supercoiling level at which the gene is at half its maximum transcription rate, and $\epsilon$ a scaling factor that represents the strength of the dependence of the transcription level on the supercoiling level.
 
-Finally, in order to obtain the phenotype of an individual, we numerically compute a solution to the system of equations~\ref{eq:sigma} and~\ref{eq:transcr}, using a fixed point algorithm.
+Finally, in order to obtain the phenotype of an individual, we numerically compute a solution to the system of equations~\ref{eq:alife_sigma} and~\ref{eq:transcr}, using a fixed point algorithm.
 This solution represents the state (of gene expression and supercoiling at every locus) towards which the individual would converge over time.
-Let $f(e_i)$ be the function that computes new supercoiling levels $\sigma'_i$ from $e_i$ using equation~\ref{eq:sigma}, then computes new expression levels $e'_i$ from the new $\sigma'_i$ using equation~\ref{eq:transcr}, and finally returns $e'_i$.
+Let $f(e_i)$ be the function that computes new supercoiling levels $\sigma'_i$ from $e_i$ using equation~\ref{eq:alife_sigma}, then computes new expression levels $e'_i$ from the new $\sigma'_i$ using equation~\ref{eq:transcr}, and finally returns $e'_i$.
 In order to compute a fixed point of $f$, that is a set of transcription levels $e_i^*$ such that $f(e_i^*) = e_i^*$, we start with the basal transcription levels $e_i^0$ that are a property of each gene, and iterate the sequence $e_i^{t+1} = \frac{1}{2}(e_i^t + f(e_i^t))$, until the difference between two successive iterations is below a given threshold.
 In our setting, this algorithm has empirically always converged to a solution that is a stable fixed point of the function, and that is therefore interpretable from a biological perspective.
 
@@ -300,7 +300,7 @@ The gap $g_A$ is computed as follows:
 
 \begin{equation}
   g_A(e^A) = \frac{1}{n} \sum_{i=1}^{n} (e^A_i - \tilde{e}^A_i)^2
-  \label{eq:gap}
+  \label{eq:alife_gap}
 \end{equation}
 
 The gap $g_B$ is computed in the same way.
