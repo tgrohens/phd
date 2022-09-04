@@ -6,7 +6,7 @@ latex:
   stage: build
   image: listx/texlive:2020
   script:
-    - latexmk -pdf
+    - latexmk -pdf phd.tex
 
   artifacts:
     paths:
