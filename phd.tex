@@ -5,18 +5,17 @@
 \usepackage{inconsolata}
 \usepackage{natbib}
 \usepackage[french, english]{babel}
-%\usepackage[left=2.5cm,right=2.5cm,top=1.5cm,bottom=2cm]{geometry}
 \usepackage{graphicx}
 \usepackage{subcaption}
-%\usepackage{xspace}
-%\usepackage{xcolor}
 \usepackage{float}
-%\usepackage{setspace}
 \usepackage{pdfpages}
 \usepackage[hidelinks]{hyperref}
 
+% Fix epsilon
+\renewcommand{\epsilon}{\varepsilon}
+
 % Fix warning about head height
-\setlength{\headheight}{28pt}
+\setlength{\headheight}{29pt}
 
 \maxtocdepth{subsection}
 \setsecnumdepth{subsection}
@@ -43,6 +42,8 @@
 \listoftables
 
 \mainmatter
+
+% biblio des modèles de superhélicité
 
 \include{aevol/aevol.tex}
 \include{alife/alife.tex}
