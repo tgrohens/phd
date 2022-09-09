@@ -1,156 +1,102 @@
-\chapter{Global Supercoiling in Aevol}
+\chapter{Global Supercoiling in \emph{Aevol}}
 \label{chap:aevol}
 
+In this chapter, I present the first main line of work of that I undertook during my Ph. D., in which I implemented a model of the effect of DNA supercoiling on gene transcription into the \emph{Aevol} \emph{in silico} experimental evolution platform, in order to study the possible epistatic interactions between mutations that regulate the supercoiling level and other kinds of mutations.
+
 \section{Introduction}
+\label{sec:aevol_intro}
 
-\subsection{Motivation}
+In the \emph{Long-Term Evolution Experiment}, started by Richard Lenski in 1988~\citep{lenski1991}, 12 populations of \emph{E. coli}, originating from the same ancestral strain, were placed to evolve in a new environment, a glucose-limited medium.
+Every day since the beginning of the experiment, which is still running, a sample from each population has been propagated into fresh medium, resulting in the longest-running evolution experiment in the lab, and demonstrated that fitness can keep on increasing for much longer than originally expected in a constant environment~\citep{good2017}.
+As sequencing capacity and synthetic biology developed in the late 1990s and early 2000s, identifying the precise DNA mutations underpinning these increases in fitness became possible.
+Mutations in the \emph{fis} and \emph{topA} gene were thus found to lead to an increased growth rate in the conditions of the experiment, as well as to an increase in the basal supercoiling level of the cells bearing these mutations~\citep{crozat2005}.
+\textbf{Devrait plutôt aller dans l'intro globale ?
+Tel quel ça pose la question du rôle de la superhélicité dans l'évolution mais il n'y a pas (dans Crozat 2005 ou 2010) d'étude des suites évolutives de ces mutations de superhélicité.}
 
-We want to study the interaction between supercoiling mutations and other  mutations under an epistasis and evolution lens.
+As mutations in genes regulating the level of supercoiling in \emph{E. coli}, such as \emph{topA} and \emph{fis}, were shown to increase fitness in the LTEE, we sought to investigate whether these mutations, by globally altering the regulatory landscape of the cell, could open up new evolutionary pathways and thereby speed up evolution, that is display positive epistasis with other mutations.
+In order to explore this theoretical possibility without having to resort to wet-lab experiments, I resorted to the \emph{in silico} experimental evolution toolbox, using the \emph{Aevol} platform.
 
-- Mutations in the genes regulating supercoiling (henceforth called supercoiling mutations) affect the phenotype globally, as they alter the expression level of many genes at once.
 
-- In experimental evolution settings (E. coli in LTEE), supercoiling mutations have been found to have gone to fixation early in some lineages, and they have been measured to have a positive fitness impact.
-This has been interpreted as a blunt adaptation of the gene regulation network of E. coli to its new LTEE-specific environment.
+\section{The \emph{Aevol} model}
+\label{sec:aevol_model}
 
-But what happens after those mutations?
-Could supercoiling mutations enable subsequent local mutations that wouldn't have been beneficial without these mutations?
-That would be a sign of positive epistasis between two kinds of mutations: mutations that affect regulation networks and "baseline" mutations.
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{aevol/images/aevol.pdf}
+\caption[Overview of the \emph{Aevol} model]{Broad overview of the \emph{Aevol} model.}
+\label{fig:aevol_model}
+\end{figure}
 
-In order to detect such an epistasis mechanism, a possible evolutionary signature would be that, along the lineage of an given individual, more genomic mutations happen just after a supercoiling mutation rather than just before.
-This would be the sign that the supercoiling mutation is a "jump" through the fitness landscape, allowing for genomic mutations that fine-tune adaptation by locally exploring the new region of the fitness landscape.
+\subsection{Overview}
 
-\section{Method}
+The \emph{Aevol} platform, developed in the Inria Beagle team~\citep{rutten2019}, is a software suite designed to run artificial evolution experiments on a computer, rather than at the bench.
+As an excellent and very thorough description of \emph{Aevol} (in French) can be found in~\cite{liard2020b}, the following presentation of the model will be shorter and to the point.
+Figure~\ref{fig:aevol_model} provides a comprehensive overview of the evolutionary algorithm at the core of \emph{Aevol}.
+It follows the evolution over a given number of generations of a population of individuals that are defined by their genome, encoded as a circular string of nucleotides (A), in an environment described by an optimal phenotype.
+At every generation, the genome of every individual is transcribed into RNA then translated into proteins (B), following the ``central dogma of molecular biology``~\citep{crick1958}.
+These proteins are then mapped to an abstract phenotypic space (C), and the resulting phenotype is compared to the optimal phenotype in order to compute the fitness of the individual.
+The population is laid out on a square grid (D), and the ancestor of the new individual in each cell is chosen at random among the neighboring individuals, proportionally to their fitness (F).
+Once chosen, its genome undergoes a series of random mutations, including genomic rearrangements as well as local mutations (G), in order to obtain the genome of its successor in the next generation (H).
 
-In order to investigate this, we used the digital genetics framework Aevol.
-Aevol is a set of tools based upon an individual-based simulation with discrete non-overlapping generations, simulating a population of individuals evolving in a fixed environment.
-The Aevol model focuses on precise modeling of the individuals' genome, following the central dogma of molecular biology: individuals have a genome, which is transcribed into RNAs, that are in turn translated into proteins that are assembled into a comprehensive phenotype.
-Based on this phenotype, individuals compete for reproduction, and pass their genomes, which undergo random mutations, to the next generation.
+\subsection{The Genotype-Phenotype Map in \emph{Aevol}}
 
-\subsection{Changes to the model}
+A genome in \emph{Aevol} consists in a sequence of binary characters ($0$ or $1$), representing a double-stranded circular sequence of DNA.
+The genome sequence explicitly describes the first, or leading, strand, while the second, or lagging, strand is obtained by taking the complement of the sequence (replacing $0$ by $1$ and vice-versa).
+The decoding algorithm starts by looking for sequences that code for viable RNAs, reading the leading strand left-to-right and the lagging strand right-to-left.
+An RNA starts with a promoter sequence, which has to match a consensus sequence up to a few errors, and ends with a hairpin-like terminator.
+Then, each RNA is scanned for ribosome binding sites followed by a 3-nucleotide start codon.
+Reading continues until a stop codon is found in the same frame, and the resulting string of codons is then translated into a protein.
 
-In the classical Aevol model, assuming a constant environment, the phenotype of an individual is fully described by its genetic sequence (in Aevol, a single circular chromosome).
+As the genetic alphabet is binary in \emph{Aevol}, there are 8 different 3-nucleotide codons, and therefore 6 codons left to encode protein data.
+These codons are grouped into three pairs, each respectively encoding the width $w$, height $h$, and mean position $m$ of a kernel function from $[0, 1]$ to $[0, 1]$ representing the function of the protein in the abstract phenotypic space.
+To obtain the expression $e$ of the protein, the height of the triangle is weighted by the difference $d$ of the promoter sequence to the consensus sequence: $e = 1 - \frac{d}{1+d_{max}}$, where $d_{max} = 4$.
+Finally, in order to compute the complete phenotype of the individual from the set of its proteins, all the kernel functions are summed using Łukasiewicz operators, capping at $1$ the maximum value of the phenotype function.
 
-In order to model supercoiling, we started with the simplest mathematical model: each chromosome has a supercoiling level that is constant along the genome and over time, which can be interpreted as the spatial and temporal average of the supercoiling level (which, in real life, varies in both time and space).
+\subsection{Fitness}
 
-To implement this model in Aevol, we changed the genotype of individuals, by adding a single positive real number representing the (average) supercoiling level of this individual's genome.
+Once the phenotype of an individual has been decoded from its genome, we can compute its fitness.
+As the environment is specified in \emph{Aevol} using an optimal phenotype, we first compute a gap value as the integral of the absolute value of the difference between the phenotype of the individual and the optimal phenotype, taken from $0$ to $1$ (the $L^1$ distance between the functions).
+Then, we compute the fitness as the inverse exponential of the gap, multiplied by a selection coefficient: the higher this coefficient, the larger the difference in fitness between individuals with the same difference in gap.
 
-We represent the supercoiling level of an individual by $\sigma$, and constrain it to be in the interval $[-1, 1]$.
-Then, we slightly alter the process for computing the expression level $e$ of a protein.
-In vanilla Aevol, this expression level is determined by the distance $d$ of the current RNA's promoter to a baseline promoter, according to the formula: $e = 1 - \frac{d}{1+d_{max}}$, where $d_{max} = 4$, meaning that we allow a maximum of $4$ mutations away from the optimal promoter.
+\subsection{Mutational Operators}
 
-To reflect the biological effect of supercoiling, which is that more tightly wound DNA (more positive $\sigma$) is less transcribed than less tightly wound DNA (more negative $\sigma$), we alter this formula using a linear model:
-$e = (1 - \frac{d}{1+d_{max}}) * (1 - \sigma)$.
+Once the ancestor of a new individual has been chosen, a set of random mutations are applied to its genome to obtain the new genome.
+These mutations are split in two classes, depending on the proportion of the genome that they can modify.
+Genomic rearrangements, possibly affecting the whole genome, comprise large-scale deletions and duplications, inversions, and translocations.
+Local mutations comprise small insertions and deletions (indels), and switches.
 
-In this model, $\sigma = 0$ represents the baseline level of supercoiling, resulting in no effect on transcription.
+\subsection{Modeling DNA Supercoiling in \emph{Aevol}}
 
-The mutation operator that we chose is a continuous variation model: when an individual reproduces and undergoes the mutation process, we first use a Bernoulli trial with probability $p$ to decide whether its supercoiling level should change or remain constant.
-Then, if the individual's supercoiling level is to change, we choose a delta $\delta\sigma$ according to a normal distribution $\mathcal{N}(0, s^2)$, and finally set the supercoiling level $\sigma'$ of the descendant as $\sigma' = \sigma + \delta\sigma$.
-The parameters of these laws are given as parameters to the Aevol simulation, with typical values $p = 10^{-1}$ and $s^2 = 10^{-2}$.
+In order to model the effect of supercoiling on gene transcription in \emph{Aevol}, I chose to start with the simplest approximation, considering that the supercoiling level is constant along the genome and over time, which can be interpreted as considering the spatial and temporal average of a dynamic supercoiling level.
+To implement this model inside \emph{Aevol}, I changed the genotype of individuals by adding, alongside the string-of-nucleotide genome, a single parameter $\gamma$, which represents the variation in the supercoiling level $\sigma$ of this individual compared to a reference supercoiling level $\sigma_0$: $\gamma = \frac{\sigma-\sigma_0}{\sigma_0}$.
 
-\subsection{Experimental protocol}
+\paragraph{Gene Expression}
+To keep the model as simple as possible, supercoiling linearly effects the transcription level of all genes, adding a term into the computation of their expression level:
 
-In order to measure the possible difference in the number of genomic mutations happening in a lineage just before and after a supercoiling mutation, we adopted the following experimental protocol.
+\begin{equation}
+e = (1 - \frac{d}{1+d_{max}}) \cdot (1 - \gamma)
+\label{eq:aevol_sc}
+\end{equation}
 
-We ran 5 replicas of the evolution of a population of 1,024 individuals, initialized as clones of a random genome that has at least one good gene, and an initial value of supercoiling of zero, for 1,000,000 generations.
+When $\gamma$ is 0, the supercoiling level is equal to the baseline, resulting in no change to the expression level.
 
-At the end of the experiment, we retrace the evolutionary lineage of a focal individual in the population, and list all the mutations that have happened since its original ancestor.
+\paragraph{Mutational Operator}
+In order to model mutations resulting in a new supercoiling level, I chose a continuous variation model: when an individual reproduces, we first use a Bernoulli trial with probability $p$ to decide whether its supercoiling level should change or remain constant during reproduction.
+Then, if the supercoiling level changes, we choose a delta $\delta\gamma$ according to a normal distribution $\mathcal{N}(0, s^2)$, and finally set the supercoiling level $\gamma'$ of the offspring as $\gamma' = \gamma + \delta\gamma$.
+The parameters of these laws are given as parameters to the \emph{Aevol} simulation, with the following values: $p = 10^{-1}$ and $s^2 = 10^{-2}$.
 
-(Note: it is fine to choose any individual rather than the best of the last generation, as a population of 1,024 haploid individuals should coalesce in around 1,000 generations.)
-
-Then, for each of the mutation operators in Aevol, we measured the time since the previous and before the next mutation (of any type).
-
-\pagebreak
 
 \section{Results}
+\label{sec:aevol_results}
 
-\subsection{Evolution of the populations}
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.75\textwidth]{aevol/images/fitness_agrege.pdf}
-  \caption{Fitness of the lineage of the focal individual.}
-  \label{fig:fitness}
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{aevol/images/with_sc_mut_time_150k_995k.pdf}
+\caption{I need to remember the mutation types}
 \end{figure}
 
-Figure~\ref{fig:fitness} shows the fitness of the lineage of the focal individual over the 1M generations of each run.
-Two evolutionary phases are distinguishable: during the first 100,000 to 200,000 generations, fitness increases very quickly.
-Then, over the last 800,000 generations, fitness increases much more slowly, but never completely stops doing so.
+\subsection{Experimental Protocol}
+
+Using this version of \emph{Aevol}, I compared the evolution of populations in which supercoiling is impacted by mutations, and populations in which supercoiling is kept constant.
 
 
-\subsection{Evolution of the supercoiling level}
-
-\begin{figure}[h!]
-  \centering
-  \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{aevol/images/superhelicite_agrege_zoom.pdf}
-    \caption{Zoom on the first 150,000 generations.}
-    \label{fig:sc_zoom}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{aevol/images/superhelicite_agrege.pdf}
-    \caption{Evolution over the complete runs.}
-    \label{fig:sc_all}
-  \end{subfigure}
-  \caption{Evolution of the supercoiling level in the lineage of the focal individual of each run.}
-  \label{fig:sc}
-\end{figure}
-
-Figure~\ref{fig:sc} shows the evolution of the supercoiling level of the lineage of the focal individual during each of the 5 runs.
-With the global supercoiling model, we observe that supercoiling stabilizes very quickly, in the 100,000 first generations of evolution, and remains nearly constant afterwards.
-
-We interpret this as a coevolutionary process between the genome and the global supercoiling level, until the genome evolution starts to slow down.
-Indeed, when the phenotype is already well-matched to the environment, a variation of the supercoiling level in this model alters the phenotype (the size of the triangles) at all points of the phenotypic space, tweaking supercoiling mutations towards being much more harmful than beneficial.
-
-This quick stabilization of the supercoiling level seems to be a first sign that the global supercoiling model is too simplistic to express interesting evolutionary behaviors for the supercoiling system.
-
-\subsection{Average times before and after mutations}
-
-In this section, we look at the distribution of the time since the previous mutation and before the next mutation, for each kind of mutation, in the lineage of the focal individual: if these are significantly different, this might signal that a kind of mutation accelerates (or slows) down evolution.
-
-Moreover, since we are observing the lineage of an individual, not all fixed mutations are beneficial: most of them are neutral, and some are harmful.
-
-\begin{figure}[h!]
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{aevol/images/with_sc_mut_time_150k_995k.pdf}
-    \caption{With supercoiling, with neutral mutations}
-    \label{subfig:sc_neut}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{aevol/images/without_sc_mut_time_150k_995k.pdf}
-    \caption{Without supercoiling, with neutral mutations}
-    \label{subfig:no_sc_neut}
-  \end{subfigure}
-
-  \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{aevol/images/with_sc_mut_time_no_neutral_150k_995k.pdf}
-    \caption{With supercoiling, without neutral mutations}
-    \label{subfig:sc_no_neut}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{aevol/images/without_sc_mut_time_no_neutral_150k_995k.pdf}
-    \caption{Without supercoiling, without neutral mutations}
-    \label{subfig:no_sc_no_neut}
-  \end{subfigure}
-
-  \caption{Average times before and after each type of mutation, in the experimental (left column) and control (right column) groups, including (top row) or excluding (bottom row) neutral mutations. Each color represents one of the 5 runs.}
-  \label{fig:mut_times}
-\end{figure}
-
-Figure~\ref{fig:mut_times} summarizes these results.
-As we can see in figures~\ref{subfig:sc_neut} and~\ref{subfig:sc_no_neut}, it does not look like mutation times after a supercoiling mutation are significantly lower than before supercoiling mutations, suggesting that under this model supercoiling mutations do not play a potentiating role.
-
-This seems true whether looking at the mutation times including all mutations, or including only non-neutral mutations, which are under selection.
-
-In figures~\ref{subfig:sc_neut} (resp.~\ref{subfig:no_sc_neut}), the pale green (resp. deep purple) run shows significantly lower mutation times than the other ones.
-This can be explained by the fact that the genome of individuals in this lineage are larger than in the other runs, mechanically increasing the number of mutations (the mutation rate per generation is proportional to the genome size), and therefore reducing the delay between mutations.
-
-On the contrary, we can distinguish an effect in large-scale duplications and deletions (most clearly when looking only at non-neutral mutations): mutations happen faster after a duplication than before (smaller time to the next mutation), but slower after a deletion (larger time to next mutation).
-This might however due to the effect of these mutations on genome size, as larger genomes statistically undergo more mutations.
-
-\section{Discussion}
-
-This preliminary work, modeling supercoiling as constant in time and space, is not sufficient to show that mutations in the supercoiling regulation system can impact the evolutionary trajectory of a population.
-
-Indeed, many aspects of the biology of supercoiling are left out in this model, most notably the transcription-supercoiling coupling: gene transcription locally affects the supercoiling level in a chromosome, resulting in complex coupling between the transcription level of neighboring genes.
-
-The next step would therefore be to create a model of supercoiling comprising local variations in the supercoiling level, to allow for supercoiling mutations to have non-linear phenotypic effects; then, to incorporate this model into Aevol and determine to which level selection acts upon these mutations.
+\section{Conclusion}
+\label{sec:aevol_ccl}
