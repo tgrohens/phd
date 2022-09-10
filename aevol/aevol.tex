@@ -4,7 +4,7 @@
 In this chapter, I present the first main line of work of that I undertook during my Ph. D., in which I implemented a model of the effect of DNA supercoiling on gene transcription into the \emph{Aevol} \emph{in silico} experimental evolution platform, in order to study the possible epistatic interactions between mutations that regulate the supercoiling level and other kinds of mutations.
 
 \section{Introduction}
-\label{sec:aevol_intro}
+\label{sec:aevol:intro}
 
 In the \emph{Long-Term Evolution Experiment}, started by Richard Lenski in 1988~\citep{lenski1991}, 12 populations of \emph{E. coli}, originating from the same ancestral strain, were placed to evolve in a new environment, a glucose-limited medium.
 Every day since the beginning of the experiment, which is still running, a sample from each population has been propagated into fresh medium, resulting in the longest-running evolution experiment in the lab, and demonstrated that fitness can keep on increasing for much longer than originally expected in a constant environment~\citep{good2017}.
@@ -18,19 +18,19 @@ In order to explore this theoretical possibility without having to resort to wet
 
 
 \section{The \emph{Aevol} model}
-\label{sec:aevol_model}
+\label{sec:aevol:model}
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{aevol/images/aevol.pdf}
 \caption[Overview of the \emph{Aevol} model]{Broad overview of the \emph{Aevol} model.}
-\label{fig:aevol_model}
+\label{fig:aevol:model}
 \end{figure}
 
 \subsection{Overview}
 
 The \emph{Aevol} platform, developed in the Inria Beagle team~\citep{rutten2019}, is a software suite designed to run artificial evolution experiments on a computer, rather than at the bench.
 As an excellent and very thorough description of \emph{Aevol} (in French) can be found in~\cite{liard2020b}, the following presentation of the model will be kept short and to the point.
-Figure~\ref{fig:aevol_model} provides a comprehensive overview of the evolutionary algorithm at the core of \emph{Aevol}.
+Figure~\ref{fig:aevol:model} provides a comprehensive overview of the evolutionary algorithm at the core of \emph{Aevol}.
 It follows the evolution over a given number of discrete generations of a population of individuals that are defined by their genome, encoded as a circular string of nucleotides (A), in an environment described by a phenotype that is optimal in this environment.
 At every generation, the genome of every individual is transcribed into RNA then translated into proteins (B), following the ``central dogma of molecular biology''~\citep{crick1958}.
 These proteins are then mapped to an abstract phenotypic space (C), and the resulting phenotype is compared to the optimal phenotype in order to compute the fitness of the individual.
@@ -81,7 +81,7 @@ To keep the model as simple as possible, I also chose to model the effect of sup
 
 \begin{equation}
 e = (1 - \frac{d}{1+d_{max}}) \cdot (1 - \gamma)
-\label{eq:aevol_sc}
+\label{eq:aevol:sc}
 \end{equation}
 
 When $\gamma$ is equal to 0, the supercoiling level is equal to the baseline, resulting in no change to the expression level.
@@ -91,21 +91,56 @@ In real organisms, the supercoiling level is not a direct property of the genome
 In order to model mutations in the supercoiling level in \emph{Aevol}, I therefore chose a continuous variation model, which directly reflects the effect of the mutation in the supercoiling-controlling genes.
 When an individual reproduces, we first use a Bernoulli trial with a probability $p$ that represents the probability of a supercoiling-protein gene to undergo a non-synonymous mutation, and change the supercoiling level, during reproduction.
 Then, if the supercoiling level changes, we pick the variation in relative supercoiling $\delta\gamma$ according to a normal distribution $\mathcal{N}(0, s^2)$, and finally set the relative supercoiling level $\gamma'$ of the offspring to $\gamma' = \gamma + \delta\gamma$.
-The parameters of these laws are given as parameters to the simulation, with the following values: $p = 10^{-1}$ and $s^2 = 10^{-2}$.
+The parameters of these laws are given as parameters to the simulation, and their values are given in Table~\ref{tab:aevol:param_values}.
 
 
 \section{Results}
-\label{sec:aevol_results}
+\label{sec:aevol:results}
+
+\subsection{Experimental Setup}
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{ l  r r }
+    \toprule
+    \textbf{Parameter} & \textbf{Symbol} & \textbf{Value}\\
+    \midrule
+    Population size & N & 1,024 (32x32 grid) \\
+    Initial genome size & $g_0$ & 5,000 bp \\
+    Local mutation rate & $\mu_{loc}$ & $10^{-7}$ bp$^{-1}$.gen$^{-1}$ \\
+    Rearrangement rate & $\mu_{rear}$ &$10^{-6}$ bp$^{-1}$.gen$^{-1}$ \\
+    \midrule
+    Initial supercoiling level & $\gamma_0$ & 0 \\
+    Supercoiling mutation probability & $p$ & $10^{-1}$ \\
+    Supercoiling mutation variance & $s^2$ & $10^{-2}$ \\
+    \midrule
+    Generations & T & 1,000,000 \\
+    Replicates & $n$ & 5\\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+  \caption[Table of parameter values for the \emph{Aevol} runs]{Table of parameter values used in the \emph{Aevol} evolutionary runs.
+  The top part describes parameters common to the experimental and control set of rules, the middle part the supercoiling-related parameters introduced in the supercoiling model, and the bottom part the simulation parameters.}
+  \label{tab:aevol:param_values}
+\end{table}
+
+
+The goal of implementing a supercoiling model in \emph{Aevol} was twofold.
+The first aim was to see to which extent adding a new dimension to the phenotypic space, and a new mutational operator to explore it, would allow for faster adaptation than allowed by the original model, thank to the wide jumps in the phenotypic landscape made possible by these mutations.
+The second aim was to disentangle the possible epistatic effects between supercoiling mutations and genomic mutations in \emph{Aevol}.
+
+In order to tackle these questions, I ran two sets of simulations: the experimental runs using the supercoiling model, and the control runs using the vanilla version of \emph{Aevol}.
+Each set of runs comprises 5 replicate populations, which evolved for 1,000,000 generations, starting from a clonal population.
+The initial individual was obtained for each run by randomly drawing 5,000 bp-long genomes, until a genome with a non-zero fitness (i.e., at least one protein-coding gene partially matching the phenotypic target) was found.
+The simulations were run on a 24-core Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz server with 128 GB of RAM, and lasted approximately a week for each set of replicates.
+
+\subsection{Evolution of the Supercoiling Level}
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{aevol/images/with_sc_mut_time_150k_995k.pdf}
 \caption{I need to remember the mutation types}
 \end{figure}
 
-\subsection{Experimental Protocol}
-
-Using this version of \emph{Aevol}, I compared the evolution of populations in which supercoiling is impacted by mutations, and populations in which supercoiling is kept constant.
-
 
 \section{Conclusion}
-\label{sec:aevol_ccl}
+\label{sec:aevol:ccl}
