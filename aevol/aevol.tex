@@ -29,60 +29,69 @@ In order to explore this theoretical possibility without having to resort to wet
 \subsection{Overview}
 
 The \emph{Aevol} platform, developed in the Inria Beagle team~\citep{rutten2019}, is a software suite designed to run artificial evolution experiments on a computer, rather than at the bench.
-As an excellent and very thorough description of \emph{Aevol} (in French) can be found in~\cite{liard2020b}, the following presentation of the model will be shorter and to the point.
+As an excellent and very thorough description of \emph{Aevol} (in French) can be found in~\cite{liard2020b}, the following presentation of the model will be kept short and to the point.
 Figure~\ref{fig:aevol_model} provides a comprehensive overview of the evolutionary algorithm at the core of \emph{Aevol}.
-It follows the evolution over a given number of generations of a population of individuals that are defined by their genome, encoded as a circular string of nucleotides (A), in an environment described by an optimal phenotype.
-At every generation, the genome of every individual is transcribed into RNA then translated into proteins (B), following the ``central dogma of molecular biology``~\citep{crick1958}.
+It follows the evolution over a given number of discrete generations of a population of individuals that are defined by their genome, encoded as a circular string of nucleotides (A), in an environment described by a phenotype that is optimal in this environment.
+At every generation, the genome of every individual is transcribed into RNA then translated into proteins (B), following the ``central dogma of molecular biology''~\citep{crick1958}.
 These proteins are then mapped to an abstract phenotypic space (C), and the resulting phenotype is compared to the optimal phenotype in order to compute the fitness of the individual.
-The population is laid out on a square grid (D), and the ancestor of the new individual in each cell is chosen at random among the neighboring individuals, proportionally to their fitness (F).
-Once chosen, its genome undergoes a series of random mutations, including genomic rearrangements as well as local mutations (G), in order to obtain the genome of its successor in the next generation (H).
+The population is laid out on a square grid (D), with one individual per cell.
+In order to produce a new generation, the ancestor of the new individual in each cell is chosen at random among the neighboring individuals, proportionally to their fitness (F).
+Once this ancestor is chosen, its genome undergoes a series of random mutations, including genomic rearrangements as well as local mutations (G), in order to obtain the genome of the new inidvidual in the cell at the next generation (H).
 
 \subsection{The Genotype-Phenotype Map in \emph{Aevol}}
 
 A genome in \emph{Aevol} consists in a sequence of binary characters ($0$ or $1$), representing a double-stranded circular sequence of DNA.
-The genome sequence explicitly describes the first, or leading, strand, while the second, or lagging, strand is obtained by taking the complement of the sequence (replacing $0$ by $1$ and vice-versa).
-The decoding algorithm starts by looking for sequences that code for viable RNAs, reading the leading strand left-to-right and the lagging strand right-to-left.
-An RNA starts with a promoter sequence, which has to match a consensus sequence up to a few errors, and ends with a hairpin-like terminator.
-Then, each RNA is scanned for ribosome binding sites followed by a 3-nucleotide start codon.
-Reading continues until a stop codon is found in the same frame, and the resulting string of codons is then translated into a protein.
+The genome sequence explicitly describes the first (leading) strand, while the second (lagging) strand is obtained by taking the complement of the sequence, replacing $0$ by $1$ and vice-versa.
+The decoding algorithm starts by looking for sequences that code for RNAs, reading the leading strand left-to-right and the lagging strand right-to-left.
+An RNA starts with a promoter sequence, which has to match a consensus sequence up to $d_{max}$ errors, and ends with a hairpin-like terminator.
+Then, each RNA is scanned for genes, which start with a ribosome binding site followed by a 3-nucleotide start codon.
+Reading continues until a stop codon is found in the same frame, and the resulting string of codons is then translated into a protein, or discarded if there no stop codon was found before the end of the RNA sequence.
+An RNA can thus contain zero, one, or several protein-coding genes.
 
-As the genetic alphabet is binary in \emph{Aevol}, there are 8 different 3-nucleotide codons, and therefore 6 codons left to encode protein data.
-These codons are grouped into three pairs, each respectively encoding the width $w$, height $h$, and mean position $m$ of a kernel function from $[0, 1]$ to $[0, 1]$ representing the function of the protein in the abstract phenotypic space.
-To obtain the expression $e$ of the protein, the height of the triangle is weighted by the difference $d$ of the promoter sequence to the consensus sequence: $e = 1 - \frac{d}{1+d_{max}}$, where $d_{max} = 4$.
-Finally, in order to compute the complete phenotype of the individual from the set of its proteins, all the kernel functions are summed using Łukasiewicz operators, capping at $1$ the maximum value of the phenotype function.
+As the genetic alphabet is binary in \emph{Aevol}, there are 8 different 3-nucleotide codons, and 6 codons can therefore be used to encode protein data, on top of the start and stop codons.
+These codons are grouped into three pairs, each respectively encoding the width $w$, height $h$, and mean position $m$ of a kernel function from $[0, 1]$ to $[0, 1]$.
+The mean $m$ represents the main function that the protein fulfills in the abstract phenotypic space, the height $h$ the intensity with which it does, and the width $w$ the pleiotropic ability of the protein to fulfill neighboring phenotypic functions.
+
+In order to obtain the final contribution of the protein to the phenotype, the constitutive height $h$ of the gene is weighted by the expression level $e$ of the RNA that carries it.
+This expression level depends on the difference $d$ between the promoter sequence of this RNA and the consensus sequence: $e = 1 - \frac{d}{1+d_{max}}$.
+Finally, in order to compute the complete phenotype of the individual from the set of its proteins, the kernel functions representing each gene are summed, resulting in a piecewise-linear phenotype function.
+As the maximum degree to which each phenotypic function can be fulfilled is bound to 1, the phenotype function is finally capped using Łukasiewicz operators in order to keep within this limit.
 
 \subsection{Fitness}
 
 Once the phenotype of an individual has been decoded from its genome, we can compute its fitness.
-As the environment is specified in \emph{Aevol} using an optimal phenotype, we first compute a gap value as the integral of the absolute value of the difference between the phenotype of the individual and the optimal phenotype, taken from $0$ to $1$ (the $L^1$ distance between the functions).
-Then, we compute the fitness as the inverse exponential of the gap, multiplied by a selection coefficient: the higher this coefficient, the larger the difference in fitness between individuals with the same difference in gap.
+As the environment is specified using an optimal phenotype, we first compute a gap value as the integral of the absolute value of the difference between the phenotype of the individual and the optimal phenotype, taken over the range of phenotypic values (the $L^1$ distance between the functions).
+Then, we compute the fitness as the inverse exponential of the gap, multiplied by a selection coefficient: the higher the coefficient, the larger the difference in fitness between individuals with the same difference in gap.
 
 \subsection{Mutational Operators}
 
 Once the ancestor of a new individual has been chosen, a set of random mutations are applied to its genome to obtain the new genome.
-These mutations are split in two classes, depending on the proportion of the genome that they can modify.
-Genomic rearrangements, possibly affecting the whole genome, comprise large-scale deletions and duplications, inversions, and translocations.
-Local mutations comprise small insertions and deletions (indels), and switches.
+These mutations are split in two classes, depending on the proportion of the genome that they can affect.
+Genomic rearrangements, which can change up to the whole genome, comprise large-scale deletions and duplications, inversions, and translocations.
+Local mutations, on the contrary, comprise small insertions, small  deletions (collectively known as indels), and switches.
 
 \subsection{Modeling DNA Supercoiling in \emph{Aevol}}
 
-In order to model the effect of supercoiling on gene transcription in \emph{Aevol}, I chose to start with the simplest approximation, considering that the supercoiling level is constant along the genome and over time, which can be interpreted as considering the spatial and temporal average of a dynamic supercoiling level.
+In order to model the effect of supercoiling on gene transcription in \emph{Aevol}, I chose to start with a very simple approximation, considering that the supercoiling level is constant along the genome and over time.
+This can be interpreted as considering the spatial and temporal average of the (actually dynamic) supercoiling level.
 To implement this model inside \emph{Aevol}, I changed the genotype of individuals by adding, alongside the string-of-nucleotide genome, a single parameter $\gamma$, which represents the variation in the supercoiling level $\sigma$ of this individual compared to a reference supercoiling level $\sigma_0$: $\gamma = \frac{\sigma-\sigma_0}{\sigma_0}$.
 
 \paragraph{Gene Expression}
-To keep the model as simple as possible, supercoiling linearly effects the transcription level of all genes, adding a term into the computation of their expression level:
+To keep the model as simple as possible, I also chose to model the effect of supercoiling on transcription as linear for all genes, updating the computation of the final expression level $e$ to take supercoiling into account:
 
 \begin{equation}
 e = (1 - \frac{d}{1+d_{max}}) \cdot (1 - \gamma)
 \label{eq:aevol_sc}
 \end{equation}
 
-When $\gamma$ is 0, the supercoiling level is equal to the baseline, resulting in no change to the expression level.
+When $\gamma$ is equal to 0, the supercoiling level is equal to the baseline, resulting in no change to the expression level.
 
 \paragraph{Mutational Operator}
-In order to model mutations resulting in a new supercoiling level, I chose a continuous variation model: when an individual reproduces, we first use a Bernoulli trial with probability $p$ to decide whether its supercoiling level should change or remain constant during reproduction.
-Then, if the supercoiling level changes, we choose a delta $\delta\gamma$ according to a normal distribution $\mathcal{N}(0, s^2)$, and finally set the supercoiling level $\gamma'$ of the offspring as $\gamma' = \gamma + \delta\gamma$.
-The parameters of these laws are given as parameters to the \emph{Aevol} simulation, with the following values: $p = 10^{-1}$ and $s^2 = 10^{-2}$.
+In real organisms, the supercoiling level is not a direct property of the genome but is controlled by a set of proteins that are not modeled in \emph{Aevol} (as the phenotypic space is completely abstract), and changes in the supercoiling level come from mutations affecting these proteins.
+In order to model mutations in the supercoiling level in \emph{Aevol}, I therefore chose a continuous variation model, which directly reflects the effect of the mutation in the supercoiling-controlling genes.
+When an individual reproduces, we first use a Bernoulli trial with a probability $p$ that represents the probability of a supercoiling-protein gene to undergo a non-synonymous mutation, and change the supercoiling level, during reproduction.
+Then, if the supercoiling level changes, we pick the variation in relative supercoiling $\delta\gamma$ according to a normal distribution $\mathcal{N}(0, s^2)$, and finally set the relative supercoiling level $\gamma'$ of the offspring to $\gamma' = \gamma + \delta\gamma$.
+The parameters of these laws are given as parameters to the simulation, with the following values: $p = 10^{-1}$ and $s^2 = 10^{-2}$.
 
 
 \section{Results}
