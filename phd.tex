@@ -1,4 +1,4 @@
-\documentclass[a4paper,twoside,11pt]{memoir}
+\documentclass[a4paper,twoside,12pt]{memoir}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{libertinus}
@@ -11,6 +11,19 @@
 \usepackage{pdfpages}
 \usepackage[hidelinks]{hyperref}
 
+%% Magic layout from the memoir class manual
+\settrimmedsize{297mm}{210mm}{*}
+\setlength{\trimtop}{0pt}
+\setlength{\trimedge}{\stockwidth}
+\addtolength{\trimedge}{-\paperwidth}
+\settypeblocksize{634pt}{448.13pt}{*}
+\setulmargins{4cm}{*}{*}
+\setlrmargins{*}{*}{1.5}
+\setmarginnotes{17pt}{51pt}{\onelineskip}
+\setheadfoot{\onelineskip}{2\onelineskip}
+\setheaderspaces{*}{2\onelineskip}{*}
+\checkandfixthelayout
+
 % Fix epsilon
 \renewcommand{\epsilon}{\varepsilon}
 
@@ -20,10 +33,10 @@
 \maxtocdepth{subsection}
 \setsecnumdepth{subsection}
 
-%\OnehalfSpacing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Actual content
 
 \begin{document}
-
 
 \author{Théotime Grohens}
 \title{Cutting out the Transcription Factor: \\
