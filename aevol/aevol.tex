@@ -85,6 +85,8 @@ e = (1 - \frac{d}{1+d_{max}}) \cdot (1 - \gamma)
 \end{equation}
 
 When $\gamma$ is equal to 0, the supercoiling level is equal to the baseline, resulting in no change to the expression level.
+When $\gamma < 0$, that is when supercoiling is negative, gene expression is increased; and when $\gamma > 0$, gene expression is decreased.
+Note that, when keeping $\gamma$ to 0, the behavior of the vanilla \emph{Aevol} model is replicated in this model.
 
 \paragraph{Mutational Operator}
 In real organisms, the supercoiling level is not a direct property of the genome but is controlled by a set of proteins that are not modeled in \emph{Aevol} (as the phenotypic space is completely abstract), and changes in the supercoiling level come from mutations affecting these proteins.
@@ -97,11 +99,29 @@ The parameters of these laws are given as parameters to the simulation, and thei
 \section{Results}
 \label{sec:aevol:results}
 
+The goal of implementing a supercoiling model in \emph{Aevol} was twofold.
+The first aim was to see to which extent adding a new dimension to the phenotypic space, and a new mutational operator to explore it, would allow for faster adaptation than allowed by the original model, thank to the wide jumps in the phenotypic landscape made possible by these mutations.
+The second aim was to disentangle the possible epistatic effects between supercoiling mutations and genomic mutations in \emph{Aevol}.
+In this section, I first present the experimental setup that I used in order to answer these questions.
+Then, I show that adding regulation by supercoiling did not measurably increase the rate of adaptation of the populations compared to the control, and that supercoiling indeed follows a very constrained evolutionary trajectory in these experiments.
+Finally, I conclude that I could not find any observable epistasis between supercoiling and other mutations, when using the supercoiling model presented in Section~\ref{sec:aevol:model}.
+
 \subsection{Experimental Setup}
 
-\begin{table}[H]
+In order to tackle these questions, I ran two sets of simulations: the experimental runs using the supercoiling model, and the control runs using the vanilla version of \emph{Aevol}.
+Each set of runs comprises 5 replicate populations, which evolved for 1,000,000 generations, starting from a clonal population.
+The initial individual was obtained for each run by randomly drawing 5,000 bp-long genomes, until a genome with a non-zero fitness (i.e., at least one protein-coding gene partially matching the phenotypic target) was found.
+The simulations were run on a 24-core Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz server with 128 GB of RAM, and lasted approximately a week for each set of replicates.
+
+\paragraph{Studying Lineages}
+The data that is presented in the rest of this section was obtained by reconstructing the lineage, starting from the initial generation, of a random individual at the last generation of each replicate.
+Studying a given lineage, rather than the best individual at every generation (which need not sire one another), allows us to reconstruct the precise set of mutations that happened throughout the evolutionary history of this lineage, and therefore gives us information about the possible causal link between these mutations.
+
+As a theoretical haploid Wright-Fisher population with $N$ individuals coalesces on average in $2N$ generations (without selection) (\textbf{citation ? dans Felsenstein}), we chose to analyze the data from generation 0 to 990,000 (taking out the last 10,000 generations), ensuring that this lineage is indeed ancestral to the whole population of the last generation.
+
+\begin{table}[h]
   \begin{center}
-    \begin{tabular}{ l  r r }
+    \begin{tabular}{ l r r }
     \toprule
     \textbf{Parameter} & \textbf{Symbol} & \textbf{Value}\\
     \midrule
@@ -124,17 +144,48 @@ The parameters of these laws are given as parameters to the simulation, and thei
   \label{tab:aevol:param_values}
 \end{table}
 
+\subsection{Adaptation Rate}
 
-The goal of implementing a supercoiling model in \emph{Aevol} was twofold.
-The first aim was to see to which extent adding a new dimension to the phenotypic space, and a new mutational operator to explore it, would allow for faster adaptation than allowed by the original model, thank to the wide jumps in the phenotypic landscape made possible by these mutations.
-The second aim was to disentangle the possible epistatic effects between supercoiling mutations and genomic mutations in \emph{Aevol}.
+\begin{figure}[H]
+  \includegraphics[width=\textwidth]{aevol/images/fitness_all.pdf}
+  \caption[Evolution of the fitness of the control and experimental runs in \emph{Aevol}]{Left: Evolution of the fitness at every generation throughout the lineage of the final population of each replicate of the experimental (green) and control (red) runs.
+  Both axes follow logarithmic scales.
+  Right: Fitness of the lineage individual at the 990,000th generation of each run, separated between supercoiling (green) and control (red) runs.}
+  \label{fig:aevol:fitness}
+\end{figure}
 
-In order to tackle these questions, I ran two sets of simulations: the experimental runs using the supercoiling model, and the control runs using the vanilla version of \emph{Aevol}.
-Each set of runs comprises 5 replicate populations, which evolved for 1,000,000 generations, starting from a clonal population.
-The initial individual was obtained for each run by randomly drawing 5,000 bp-long genomes, until a genome with a non-zero fitness (i.e., at least one protein-coding gene partially matching the phenotypic target) was found.
-The simulations were run on a 24-core Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz server with 128 GB of RAM, and lasted approximately a week for each set of replicates.
+Figure~\ref{fig:aevol:fitness} presents, on the left-hand side, the fitness of the individual at every generation of the lineage of the final population, in each replicate.
+In each case, the fitness follows a broadly sigmoid shape, quickly increasing during the first 100,000 generations of the run, then slowing down for the remaining 900,000 generations, but never completely ceasing to increase.
+The right-hand side of Figure~\ref{fig:aevol:fitness} shows the fitness of the lineage individual at the 990,000th generation.
+
+Even with the limited number of replicates of each run, there is no discernible difference in fitness between the two experimental conditions, with and without mutations in the supercoiling level.
+Adding the new phenotypic dimension of the supercoiling level, and the associated supercoiling mutational operator, therefore did not seem to play an important role in the evolution of populations in \emph{Aevol}.
 
 \subsection{Evolution of the Supercoiling Level}
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth]{aevol/images/supercoiling_all.pdf}
+  \caption[Evolution of the supercoiling level of the experimental runs in \emph{Aevol}]{Evolution of the relative level of supercoiling at every generation of the lineage of each of the experimental runs.}
+  \label{fig:aevol:sc}
+\end{figure}
+
+Figure~\ref{fig:aevol:sc} shows the evolution of the supercoiling level throughout the lineage in each of the 5 replicates.
+In every run, the supercoiling level evolves only at the very beginning of the run, stabilizing in a few tens of thousands of generations, and remaining essentially constant afterwards.
+This is in strong contrast to the fitness of the runs (presented in Figure~\ref{fig:aevol:sc}), which keeps increasing until the end of the runs.
+
+It therefore seems that the supercoiling level might play a role in the early evolution of the runs, but not in their long-term fitness improvement.
+This result can be disappointing but was not entirely unexpected.
+Indeed, in the early evolution of individuals in \emph{Aevol}, the phenotypic target is only very imperfectly fit by the proteins expressed by the individual.
+At that stage, mutations in the supercoiling level, which affect the expression level of every protein equally, could indeed be favorable by bringing the whole phenotype closer to the optimum, in a very broad swipe.
+More precisely, at the early stage of evolution in \emph{Aevol}, phenotypic functions are often under-performed by individuals, as the width of the kernel functions can be small, or the expression level of the RNAs low if the promoter contains many errors.
+At that stage, an increase in negative supercoiling could be adaptive, as it boosts gene expression levels.
+This could explain why run 4 in the simulations (Figure~\ref{fig:aevol:sc}, in pale green) evolves towards a very high level of negative supercoiling compared to the other runs.
+
+However, as evolution progresses, and as the optimal phenotype is more closely matched by the individual, changing the whole expression profile at once becomes less and less susceptible to be favorable, and supercoiling mutations therefore less and less susceptible to be picked up in the lineage.
+
+Once again, these results point to the model in which supercoiling has a global, linear effect on gene expression levels being too simplistic in order to produce phenotypic effects that are variable enough to have a chance to be picked up by selection; and therefore to this model being insufficient to study the interplay between mutations regulating the supercoiling level and genomic mutations in \emph{Aevol}.
+
+\subsection{Positive Epistasis}
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{aevol/images/with_sc_mut_time_150k_995k.pdf}
