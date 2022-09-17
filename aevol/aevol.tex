@@ -32,10 +32,10 @@ The chapter starts with a brief overview of the \emph{Aevol} model; then, I pres
 \section{The \emph{Aevol} model}
 \label{sec:aevol:model}
 
-\begin{figure}[H]
+\begin{figure}
 \includegraphics[width=\textwidth]{aevol/images/aevol.pdf}
 \caption[Overview of the \emph{Aevol} model]{Broad overview of the \emph{Aevol} model.
-The model applies an evaluation-selection-replication evolutionary loop to a population of individuals defined by their genome, encoded as a circular string of nucleotides (A, central ring), on which RNA sequences and genes are decoded (A, black segments).
+\emph{Aevol} applies an evaluation-selection-replication evolutionary loop to a population of individuals defined by their genome, encoded as a circular string of nucleotides (A, central ring), on which RNA sequences and genes are decoded (A, black segments).
 The resulting proteins (B, in black) are mapped to an abstract phenotypic space, and summed in order to obtain the phenotype of the individual (C, in black), which is compared to an optimal phenotype (that implicitly represents the environment -- B and C, in pink), in order to compute its fitness.
 In the model, the population is laid out on a square grid (D), with one individual per cell.
 In order to produce a new generation, the ancestor of the new individual in each cell is chosen at random among the neighboring individuals, proportionally to their fitness (F).
@@ -67,8 +67,9 @@ As the genetic alphabet is binary in \emph{Aevol}, there are 8 different 3-nucle
 These codons are grouped into three pairs, each respectively encoding the width $w$, height $h$, and mean position $m$ of a triangle kernel function from $[0, 1]$ to $[0, 1]$ (as represented in Figure~\ref{fig:aevol:model} B).
 The mean $m$ represents the main function that the protein fulfills in the abstract phenotypic space, the height $h$ the intensity with which it does, and the width $w$ the pleiotropic ability of the protein to fulfill neighboring phenotypic functions.
 
-In order to obtain the final contribution of the protein to the phenotype, the constitutive height $h$ of the gene is weighted by the expression level $e$ of the RNA that carries it.
-This expression level depends on the difference $d$ between the promoter sequence of this RNA and the consensus sequence: $e = 1 - \frac{d}{1+d_{max}}$.
+In order to obtain the final contribution of the protein to the phenotype, the constitutive height $h$ of the gene is weighted by the expression level $e$ of the RNA that carries the gene, which depends on the activity of the promoter of that RNA.
+In the model, the promoter activity decreases linearly with the difference $d$ between its sequence and the consensus sequence, and vanishes at $d=d_{max}$.
+The expression level of the RNA is then finally given by the following equation: $e = 1 - \frac{d}{1+d_{max}}$.
 Finally, in order to compute the complete phenotype of the individual from the set of its proteins, the kernel functions representing each gene are summed, resulting in a piecewise-linear phenotype function.
 As the maximum degree to which each phenotypic function can be fulfilled is bound to 1, the phenotype function is finally capped using Łukasiewicz operators in order to keep within this limit.
 
@@ -97,29 +98,33 @@ In a switch, the value of a random nucleotide is switched, from 1 to 0 or vice-v
 
 \section{Modeling DNA Supercoiling in \emph{Aevol}}
 
-In order to model the effect of supercoiling on gene transcription in \emph{Aevol}, I chose to start with a very simple approximation, considering that the supercoiling level is constant along the genome and over time.
-This can be interpreted as considering the spatial and temporal average of the (actually dynamic) supercoiling level.
-To implement this model inside \emph{Aevol}, I changed the genotype of individuals by adding, alongside the string-of-nucleotide genome, a single parameter $\gamma$, which represents the variation in the supercoiling level $\sigma$ of this individual compared to a reference supercoiling level $\sigma_0$: $\gamma = \frac{\sigma-\sigma_0}{\sigma_0}$.
+In order to model the effect of supercoiling on gene transcription in \emph{Aevol} I chose to start with very simple approximations,
+both for the level of supercoiling itself and for its effect on transcription, as the \emph{Aevol} model is already quite complex by itself.
+
+\subsection{Level of DNA Supercoiling}
+First, I consider the supercoiling level as constant along the genome and over time, which can be interpreted as taking the spatial and temporal average of the (actually dynamic) supercoiling level.
+To implement this model inside \emph{Aevol}, I changed the genotype of individuals by adding, alongside the string-of-nucleotides genome, a single parameter $\gamma$ which represents the relative variation in the supercoiling level $\sigma$ of this individual compared to a reference supercoiling level $\sigma_0$: $\gamma = \frac{\sigma-\sigma_0}{\sigma_0}$.
 
 \subsection{Gene Expression}
-To keep the model as simple as possible, I also chose to model the effect of supercoiling on transcription as linear for all genes, updating the computation of the final expression level $e$ to take supercoiling into account:
+To keep the model as simple as possible, I also chose to model the effect of supercoiling on transcription as having the same linear effect on the transcription rate of every RNA on the genome.
+I therefore updated the computation of the gene expression $e$ to take supercoiling into account, in addition to promoter activity:
 
 \begin{equation}
 e = (1 - \frac{d}{1+d_{max}}) \cdot (1 - \gamma)
 \label{eq:aevol:sc}
 \end{equation}
 
-When $\gamma$ is equal to 0, the supercoiling level is equal to the baseline, resulting in no change to the expression level.
-When $\gamma < 0$, that is when supercoiling is negative, gene expression is increased; and when $\gamma > 0$, gene expression is decreased.
-Note that, when keeping $\gamma$ to 0, the behavior of the vanilla \emph{Aevol} model is replicated in this model.
+When $\gamma$ is equal to 0, the supercoiling level is equal to the baseline, resulting in no change to the expression level and replicating the behavior of the original \emph{Aevol} model.
+When $\gamma < 0$, that is when supercoiling is negative, gene expression is increased; and when $\gamma > 0$, gene expression is decreased instead.
 
 \subsection{Mutational Operator}
-In real organisms, the supercoiling level is not a direct property of the genome but is controlled by a set of proteins that are not modeled in \emph{Aevol} (as the phenotypic space is completely abstract), and changes in the supercoiling level come from mutations affecting these proteins.
-In order to model mutations in the supercoiling level in \emph{Aevol}, I therefore chose a continuous variation model, which directly reflects the effect of the mutation in the supercoiling-controlling genes.
-When an individual reproduces, we first use a Bernoulli trial with a probability $p$ that represents the probability of a supercoiling-protein gene to undergo a non-synonymous mutation, and change the supercoiling level, during reproduction.
-Then, if the supercoiling level changes, we pick the variation in relative supercoiling $\delta\gamma$ according to a normal distribution $\mathcal{N}(0, s^2)$, and finally set the relative supercoiling level $\gamma'$ of the offspring to $\gamma' = \gamma + \delta\gamma$.
-The parameters of these laws are given as parameters to the simulation, and their values are given in Table~\ref{tab:aevol:param_values}.
-Throughout this chapter, I will for clarity refer to the usual DNA-affecting mutations presented in~\ref{sec:aevol:model} as \emph{genomic mutations}, and to mutations in the supercoiling level as \emph{supercoiling mutations}.
+In biological organisms, the supercoiling level is only a direct property of the DNA molecule, but is also controlled by topoisomerases and nucleoid-associated proteins that are not modeled in \emph{Aevol} (as the phenotypic space is completely abstract), and changes in the supercoiling level come from mutations affecting the genes that encode these proteins, such as \emph{gyrA} or \emph{fis}~\citep{crozat2005}.
+In order to model mutations in the supercoiling level in \emph{Aevol}, I chose a continuous model, in which a small variation in $\gamma$ indirectly reflects the effect of a mutation in one of the supercoiling-controlling genes.
+
+When an individual reproduces, we first use a Bernoulli trial, with a probability $p$ that represents the probability that a supercoiling-protein gene undergoes a non-synonymous mutation, to decide whether to change the supercoiling level.
+Then, if the supercoiling level should change, we draw a variation in relative supercoiling $\Delta\gamma$ according to a normal distribution $\mathcal{N}(0, s^2)$, and finally set the relative supercoiling level $\gamma'$ of the offspring to $\gamma' = \gamma + \Delta\gamma$.
+The parameters of these laws are parameters of the simulation, and their values are given in Table~\ref{tab:aevol:param_values}.
+Throughout this chapter, I will for clarity refer to the usual DNA-affecting mutations presented in~\ref{sec:aevol:model} as \emph{genomic mutations}, and to the mutations in the supercoiling level presented here as \emph{supercoiling mutations}.
 
 
 \section{Results}
