@@ -47,7 +47,7 @@ Once this ancestor is chosen, its genome undergoes a series of random mutations,
 \subsection{Overview}
 
 The \emph{Aevol} platform, developed in the Inria Beagle team~\citep{rutten2019}, is a software suite designed to run artificial evolution experiments on a computer, rather than at the bench.
-It was originally created to investigate the influence of classical population genetics parameters such as population size, mutation rate, or selection pressure on genomes themselves, seen as an integral part of the phenotype and not only as the source of genetic information; in \emph{Aevol}, individuals have a very abstract phenotype, in exchange for a genome that is modeled down to the nucleotide level.
+It was originally created to investigate the influence of classical population genetics parameters such as population size, mutation rate, or selection pressure on genomes themselves, seen as an integral part of the phenotype and not only as the source of genetic information; in \emph{Aevol}, individuals have a very abstract phenotype, in exchange for a genome that is modeled down to the nucleotide level, and follows the ``central dogma of molecular biology''~\citep{crick1958}, with an accurate representation of RNA transcription and gene translation.
 This approach contrasts with other artificial evolution platforms such as \emph{Avida}~\citep{adami1994,ofria2004}, which aim at studying the evolutionary process itself, rather than its impact on biological organisms.
 \emph{Aevol} has for instance been used to study the effect of mutation rate on genome size~\citep{knibbe2005}, or of the selection pressure on the percentage of non-coding bases and number of genes on the genome~\citep{batut2013}.
 As an excellent and very thorough description of \emph{Aevol} (in French) can be found in~\cite{liard2020b}, the following presentation of the model will be kept short and to the point.
@@ -55,16 +55,16 @@ Figure~\ref{fig:aevol:model} provides a comprehensive overview of the evolutiona
 
 \subsection{The Genotype-Phenotype Map in \emph{Aevol}}
 
-A genome in \emph{Aevol} consists in a sequence of binary characters ($0$ or $1$), representing a double-stranded circular sequence of DNA.
-The genome sequence explicitly describes the first (leading) strand, while the second (lagging) strand is obtained by taking the complement of the sequence, replacing $0$ by $1$ and vice-versa.
-The decoding algorithm starts by looking for sequences that code for RNAs, reading the leading strand left-to-right and the lagging strand right-to-left.
-An RNA starts with a promoter sequence, which has to match a consensus sequence up to $d_{max}$ errors, and ends with a hairpin-like terminator.
+A genome or genotype in \emph{Aevol} consists in a sequence of binary characters ($0$ or $1$), which represent a double-stranded circular sequence of DNA.
+The genome sequence explicitly describes the first (forward) strand of DNA, while the second (reverse) strand is obtained by taking the complement of the sequence, replacing $0$ by $1$ and vice-versa.
+In order to turn this genotype into a phenotype (Figure~\ref{fig:aevol:model} C), the decoding algorithm starts by looking for sequences that code for RNAs, reading the forward strand left-to-right and the reverse strand right-to-left.
+An RNA starts with a promoter sequence, which has to match a consensus sequence with up to $d_{max}$ errors, and ends with a hairpin-like terminator.
 Then, each RNA is scanned for genes, which start with a ribosome binding site followed by a 3-nucleotide start codon.
-Reading continues until a stop codon is found in the same frame, and the resulting string of codons is then translated into a protein, or discarded if there no stop codon was found before the end of the RNA sequence.
+Reading continues until a stop codon is found in the same frame, and the resulting string of codons is then translated into a protein, or discarded if no stop codon is found in frame before the end of the RNA sequence.
 An RNA can thus contain zero, one, or several protein-coding genes.
 
 As the genetic alphabet is binary in \emph{Aevol}, there are 8 different 3-nucleotide codons, and 6 codons can therefore be used to encode protein data, on top of the start and stop codons.
-These codons are grouped into three pairs, each respectively encoding the width $w$, height $h$, and mean position $m$ of a kernel function from $[0, 1]$ to $[0, 1]$.
+These codons are grouped into three pairs, each respectively encoding the width $w$, height $h$, and mean position $m$ of a triangle kernel function from $[0, 1]$ to $[0, 1]$ (as represented in Figure~\ref{fig:aevol:model} B).
 The mean $m$ represents the main function that the protein fulfills in the abstract phenotypic space, the height $h$ the intensity with which it does, and the width $w$ the pleiotropic ability of the protein to fulfill neighboring phenotypic functions.
 
 In order to obtain the final contribution of the protein to the phenotype, the constitutive height $h$ of the gene is weighted by the expression level $e$ of the RNA that carries it.
@@ -75,15 +75,25 @@ As the maximum degree to which each phenotypic function can be fulfilled is boun
 \subsection{Fitness}
 
 Once the phenotype of an individual has been decoded from its genome, we can compute its fitness.
-As the environment is specified using an optimal phenotype, we first compute a gap value as the integral of the absolute value of the difference between the phenotype of the individual and the optimal phenotype, taken over the range of phenotypic values (the $L^1$ distance between the functions).
-Then, we compute the fitness as the inverse exponential of the gap, multiplied by a selection coefficient: the higher the coefficient, the larger the difference in fitness between individuals with the same difference in gap.
+As the environment is indirectly specified by an optimal phenotype, we first compute a phenotypic gap as the integral of the absolute value of the difference between the phenotype of the individual and the optimal phenotype, taken over the range of phenotypic values (the $L^1$ distance between the functions).
+Then, we compute the fitness as the inverse exponential of the phenotypic gap, multiplied by a selection coefficient: the higher the coefficient, the larger the difference in fitness between individuals with the same difference in gap.
 
 \subsection{Mutational Operators}
 
 Once the ancestor of a new individual has been chosen, a set of random mutations are applied to its genome to obtain the new genome.
-These mutations are split in two classes, depending on the proportion of the genome that they can affect.
-Genomic rearrangements, which can change up to the whole genome, comprise large-scale deletions and duplications, inversions, and translocations.
+These mutations are split in two classes, depending on the proportion of the genome that they can affect: genomic rearrangements, and local mutations.
+
+Genomic rearrangements can affect up to the whole genome, and comprise four kinds of structural changes: duplications, deletions, inversions, and translocations.
+In each of these rearrangements, the two endpoints of the affected segment are first drawn randomly on the genome.
+In a large duplication, an additional insertion point are randomly selected on the genome, and the genetic content located between the endpoints is copied at the insertion point.
+In a large deletion, the genetic content between the endpoints is simply discarded.
+In an inversion, the segment is reinserted left-to-right between the endpoints, reversing the orientation of every gene located on the inversion.
+Finally, in a translocation, the genetic content is removed, turned into a circular plasmid, cut at a random point in the plasmid, and reinserted at another insertion point in the genome.
+
 Local mutations, on the contrary, comprise small insertions, small  deletions (collectively known as indels), and switches.
+In a small insertion or deletion, up to 6 contiguous bases are either inserted (choosing each base at random) or deleted at a random point in the genome.
+In a switch, the value of a random nucleotide is switched, from 1 to 0 or vice-versa.
+
 
 \section{Modeling DNA Supercoiling in \emph{Aevol}}
 
