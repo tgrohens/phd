@@ -207,7 +207,7 @@ Adding the new phenotypic dimension of the supercoiling level, and the associate
 
 \subsection{Evolution of the Supercoiling Level}
 
-\begin{figure}[H]
+\begin{figure}
   \includegraphics[width=\textwidth]{aevol/images/supercoiling_all.pdf}
   \caption[Evolution of the supercoiling level of the experimental runs in \emph{Aevol}]{Evolution of the relative level of supercoiling at every generation of the lineage of each of the experimental runs.}
   \label{fig:aevol:sc}
@@ -219,42 +219,42 @@ This is in strong contrast to the fitness of the runs (presented in Figure~\ref{
 
 It therefore seems that the supercoiling level might play a role in the early evolution of the runs, but not in their long-term fitness improvement.
 This result is in a sense slightly disappointing but was not entirely unexpected.
-Indeed, in the early evolution of individuals in \emph{Aevol}, the phenotypic target is only very imperfectly fit by the proteins expressed by the individual.
+Indeed, in the early evolution of individuals in \emph{Aevol}, the phenotypic target is only very imperfectly approached by the proteins expressed by the individual.
 At that stage, mutations in the supercoiling level, which affect the expression level of every protein equally, could indeed have a positive effect by bringing the whole phenotype closer to the optimum, in a very broad swipe.
-More precisely, at the early stage of evolution in \emph{Aevol}, phenotypic functions are often under-performed by individuals, as the width of the kernel functions can be small, or the expression level of the RNAs low if the promoter contains many errors.
-At that stage, an increase in negative supercoiling could be adaptive, as it boosts gene expression levels.
-This could explain why run 4 in the simulations (Figure~\ref{fig:aevol:sc}, in pale green) evolves towards a very high level of negative supercoiling compared to the other runs.
+Indeed, as individuals in \emph{Aevol} evolve from an ancestor with a single good gene, phenotypic functions are often under-performed by individuals at the early stages of evolution in the model, as the width and height of the kernel functions of their genes can be small, and as the expression level of their RNAs can be quite low if their promoters contain too many errors.
+The different supercoiling value towards which each of the replicates tends to converge in Figure~\ref{fig:aevol:sc} could therefore be interpreted as a founding effect coming from the genome of the original individual in that run, which could be confirmed by a more detailed analysis of the series of mutations that happened in each lineage.
 
-However, as evolution progresses, and as the optimal phenotype is more closely matched by the individual, changing the whole expression profile at once becomes less and less susceptible to be favorable, and supercoiling mutations therefore less and less susceptible to be picked up in the lineage.
+However, as evolution progresses, and as the optimal phenotype is more and more closely matched by the individual, changing the whole expression profile at once becomes less and less susceptible to be favorable.
+This case is represented in Figure~\ref{fig:aevol:sc_phenotype}: any change in supercoiling, be it positive or negative, will decrease the fitness of the individual, and supercoiling mutations are therefore less and less susceptible to be picked up in the lineage.
 
-Once again, these results point to the model in which supercoiling has a global, linear effect on gene expression levels being too simplistic in order to produce phenotypic effects that are variable enough to have a chance to be picked up by selection; and therefore to this model being insufficient to study the interplay between mutations regulating the supercoiling level and genomic mutations in \emph{Aevol}.
+These results tend to show that the model in which supercoiling has a global, linear effect on gene expression levels is too simplistic in order to produce phenotypic effects that are variable enough to have a chance to be picked up by selection; and therefore that this model is insufficient to study the interplay between supercoiling mutations and genomic mutations in \emph{Aevol}.
 
 \subsection{Looking for Epistasis}
 
 \paragraph{Waiting Times Before and After Mutations}
 In order to detect signs of positive or negative epistasis between the different kinds of mutations, I used the following approach, which considers the waiting times before and after mutations happen:
-if, for a given mutation type (such as inversions), the average time until a favorable mutation fixes in the lineage after an inversion is smaller than the average time since the last favorable mutation before the inversion, this could be interpreted as a sign that the inversion has increased the probability of a favorable mutation happening; in other terms, as a broadening of the evolutionary paths available to the genome, or a sign of positive epistasis between inversions and other kinds of mutations.
-On the contrary, if it takes longer for a new favorable mutation to fix in the lineage after the inversion, it would be a sign that the evolutionary paths have been constrained by the inversion, or as a sign of negative epistasis.
+if, for a given mutation type, the average time until a new favorable mutation fixes in the lineage after a mutation of that type is smaller than the average time since the last favorable mutation before that mutation, this could be interpreted as a sign that the mutation has increased the probability of a favorable mutation happening; in other terms, as a broadening of the evolutionary paths available to the genome, or a sign of positive epistasis between that kind of mutation and other kinds of mutations.
+On the contrary, if it takes longer for a new favorable mutation to fix in the lineage after that mutation, it would be a sign that the evolutionary paths have been constrained by the inversion, or as a sign of negative epistasis.
 
 The data obtained following this approach is presented in Figure~\ref{fig:aevol:epistasis}.
-For each mutation type, it shows the average number of mutations of that type that fixed in the lineage of each replicate, as well as the average time after which a mutation of that types fixes after a non-neutral mutation (left), and before a non-neutral mutation fixes after a mutation of that type (right), in the experimental runs (top) and the control runs (bottom).
+For each mutation type, it shows the average number of mutations of that type that fixed in the lineage of each replicate, as well as the average time after which a mutation of that types fixes after a non-neutral mutation (left), and before a non-neutral mutation fixes after a mutation of that type (right), in the control runs (top) and in the experimental runs (bottom).
 
 \paragraph{Epistasis of Duplications and Deletions}
 In the control, a faint pattern seems to be discernible for large-scale inversions and deletions: the average time to a new mutation after a deletion is slightly higher than the time before a deletion, hinting that deletions could present a negative epistasis with other mutations.
 Conversely, the time to a new mutation after a duplication is slightly lower than the time before the mutation, hinting that duplications could on the contrary present positive epistasis with other mutations.
 Local mutations, as well as rearrangements and inversions, do however not seem to swing one way or the other.
 
-In the experimental runs, no such pattern is visible at first sight, including for the supercoiling mutations.
-The global average waiting times are smaller than in the control, which is consistent with the introduction of a new mutation type.
+In the experimental runs, no such pattern is visible at first sight, including for the supercoiling mutations, and the global average waiting times are smaller than in the control, which is consistent with the introduction of a new mutation type.
+There therefore seems to be no sign of epistasis between the supercoiling mutations and the genomic mutations, when following the approach explained above.
 
-\begin{figure}[H]
-  \begin{subfigure}[t]{\textwidth}
-    \includegraphics[width=\textwidth]{aevol/images/epistasis_sc.pdf}
-  \end{subfigure}
+\begin{figure}
   \begin{subfigure}[t]{\textwidth}
     \includegraphics[width=\textwidth]{aevol/images/epistasis_control.pdf}
   \end{subfigure}
-  \caption[Measuring epistasis with the average times before and after mutations]{Average time before and after a mutation of each kind, in the experimental runs (top) and the control runs (bottom).
+  \begin{subfigure}[t]{\textwidth}
+    \includegraphics[width=\textwidth]{aevol/images/epistasis_sc.pdf}
+  \end{subfigure}
+  \caption[Measuring epistasis with the average times before and after mutations]{Average time before and after a mutation of each kind, in the control runs (top) and the experimental runs (bottom).
   For each kind of mutation, the times presented show the wait time until a neutral mutation of that kind after a non-neutral mutation of any kind, and the time until the next non-neutral mutation of any kind after a mutation of that kind.
   The bars show the average over the five replicates, and the colored dots are the value for every replicate.
   The average number of neutral mutations of each type is displayed at the bottom of the corresponding bar.}
@@ -262,21 +262,22 @@ The global average waiting times are smaller than in the control, which is consi
 \end{figure}
 
 \paragraph{Role of the Genome Size}
-A possible interpretation of the pattern visible in the control runs for the large deletions and duplications is that the difference in waiting times, and hence the positive or negative epistasis, is simply due to the change in the genome size caused by this mutations.
-Indeed, all mutation rates are proportional to the genome size, and the number of mutations at each generation therefore increases and decreases with the genome size (assuming that there is no fitness effect or selection).
-In the experimental runs, the probability of a supercoiling mutation importantly does not depend on the genome size, which could hide the epistasis signal between duplications or deletions and other mutation types.
-
+A hypothesis that could explain the pattern visible in the control runs for the large deletions and duplications is that the difference in waiting times, and hence the positive or negative epistasis, is simply due to the change in the genome size caused by this mutations.
+All mutation rates in the model are indeed proportional to the genome size, and the expected number of mutations at each generation therefore increases and decreases with the genome size (assuming that there is no fitness effect or selection).
+However, in the experimental runs, the probability of a supercoiling mutation importantly does not depend on the genome size.
+A hypothesis to explain the disappearance of the signal (possibly) present in the control for duplications and deletions could therefore be that supercoiling mutations tick according to their own clock, which depends on their parameters $p$ and $s^2$, but not on the state of the genome itself.
+For example, if a certain beneficial indel is allowed to happen because of a duplication and indeed happens sometime after that duplication in the lineage, but a supercoiling mutation has happened between the duplication and the indel, then the signal from this particular epistatic relationship will have been hidden by that supercoiling mutation.
 
 \section{Conclusion}
 \label{sec:aevol:ccl}
 
-The goal of this initial work was to study the ways in which supercoiling mutations affect the fitness landscape, that is the possible epistatic interactions between supercoiling mutations and other kinds of mutations.
-In order to approach this question, I implemented a model of the effect of the supercoiling level on gene expression, as well as a model of mutations in the supercoiling level, into the \emph{Aevol} \emph{in silico} experimental evolution platform.
-I ran evolutionary experiments, in which I compared the evolution of populations using this model of supercoiling with control populations by analyzing the fitness, supercoiling level, and mutations fixed in the lineage of individuals that leads to the final population of every replicate.
+The goal of this initial work was to study the ways in which supercoiling mutations affect the fitness landscape of individuals in \emph{Aevol}, that is the possible epistatic interactions between supercoiling mutations and other kinds of mutations.
+In order to tackle this question, I implemented a model of the effect of the supercoiling level on gene expression, as well as a model of mutations in the supercoiling level, in \emph{Aevol}.
+Using this version of the model, I ran evolutionary experiments, in which I compared the evolution of populations with supercoiling with control populations by analyzing the fitness, supercoiling level, and mutations fixed in the lineage of individuals that leads to the final population of every replicate.
 
-With the limited data available, I could not find a difference in the evolution rates of each set of experiments, showing that supercoiling does not seem to play an important evolutionary role in this model; this result was substantiated by the fact that the supercoiling level converges very quickly to a fixed level in the evolutionary history of each population.
+With the limited data available, I could not find a difference in the evolution rates of each set of experiments, and deduced that supercoiling does not seem to play an important evolutionary role in this model; this result was substantiated by the fact that the supercoiling level converges very quickly to a fixed level in the evolutionary history of each population.
 I then tried to detect signals of positive or negative epistasis between the different kinds of mutations, by looking at the waiting times between each kind of mutation.
-While this approach did not lead to meaningful results in the experimental runs, it did hint at a possible epistatic link between duplications or deletions and the other mutation kinds, due to their effect on genome size, in the control runs.
+While this approach did not lead to meaningful results in the experimental runs, it did hint at a possible epistatic link between duplications or deletions and the other mutation kinds, due to their effect on genome size, in the control runs, which seems promising to further investigation.
 
 \paragraph{}
 The verdict of these preliminary experiments was that the model of supercoiling that I implemented in \emph{Aevol}, in which supercoiling is kept constant along the genome and affects the expression level of all genes equally, was probably too simplistic to obtain meaningful results as-is.
