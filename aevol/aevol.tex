@@ -21,28 +21,29 @@ Second, mutations affecting supercoiling-regulating genes, especially in \emph{g
 A possible interpretation of this repeated mutational targeting of supercoiling-regulating genes is that, by globally altering the transcriptional landscape of the bacteria (as the level of supercoiling directly affects gene transcription), these mutations enable the exploration of new evolutionary pathways that would have been deleterious in the ancestral strain, and enable the lineages that bear these mutations to evolve faster than the competing strains.
 In other words, there could be positive epistatic relationships between these mutations and the subsequent adaptive mutations that they enable through the rewiring the fitness landscape of their bearer lineages.
 
-In the work presented in this chapter, I built an \emph{in silico} experimental evolution model based on the \emph{Aevol} framework and in which such epistatic relationships could possibly appear, in order to see whether the same patterns of repeated evolution detected in the LTEE would be replicable in the simpler, more controlled setting of artificial evolution.
+In this chapter, I present an \emph{in silico} experimental evolution model based on the \emph{Aevol} framework and in which such epistatic relationships could possibly appear, and use it to determine whether the same patterns of repeated evolution detected in the LTEE would be detectable in the simpler, more controlled setting of artificial evolution.
 
 \section{The \emph{Aevol} model}
 \label{sec:aevol:model}
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{aevol/images/aevol.pdf}
-\caption[Overview of the \emph{Aevol} model]{Broad overview of the \emph{Aevol} model.}
+\caption[Overview of the \emph{Aevol} model]{Broad overview of the \emph{Aevol} model.
+The model follows an evaluation-selection-replication evolutionary loop on a population of individuals that are defined by their genome, encoded as a circular string of nucleotides (A, central ring), on which RNA sequences and protein-coding genes are decoded (A, black segments).
+The resulting proteins (B, in black) are mapped to an abstract phenotypic space, and summed in order to obtain the phenotype of the individual (C, in black), which is compared to an optimal phenotype (that implicitly represents the environment -- B and C, in pink), in order to compute the individual's fitness.
+In the model, the population is laid out on a square grid (D), with one individual per cell, and in order to produce a new generation, the ancestor of the new individual in each cell is chosen at random among the neighboring individuals, proportionally to their fitness (F).
+Once this ancestor is chosen, its genome undergoes a series of random mutations, including genomic rearrangements as well as local mutations (G), in order to obtain the genome of the new individual in the cell at the next generation (H).}
 \label{fig:aevol:model}
 \end{figure}
 
 \subsection{Overview}
 
 The \emph{Aevol} platform, developed in the Inria Beagle team~\citep{rutten2019}, is a software suite designed to run artificial evolution experiments on a computer, rather than at the bench.
+It was originally created to investigate the influence of classical population genetics parameters such as population size, mutation rate, or selection pressure on genomes themselves, seen as an integral part of the phenotype and not only as the source of genetic information; in \emph{Aevol}, individuals have a very abstract phenotype, in exchange for a genome that is modeled down to the nucleotide level.
+This approach contrasts with other artificial evolution platforms such as \emph{Avida}~\citep{adami1994,ofria2004}, which aim at studying the evolutionary process itself, rather than its impact on biological organisms.
+\emph{Aevol} has for instance been used to study the effect of mutation rate on genome size~\citep{knibbe2005}, or of the selection pressure on the percentage of non-coding bases and number of genes on the genome~\citep{batut2013}.
 As an excellent and very thorough description of \emph{Aevol} (in French) can be found in~\cite{liard2020b}, the following presentation of the model will be kept short and to the point.
 Figure~\ref{fig:aevol:model} provides a comprehensive overview of the evolutionary algorithm at the core of \emph{Aevol}.
-It follows the evolution over a given number of discrete generations of a population of individuals that are defined by their genome, encoded as a circular string of nucleotides (A), in an environment described by a phenotype that is optimal in this environment.
-At every generation, the genome of every individual is transcribed into RNA then translated into proteins (B), following the ``central dogma of molecular biology''~\citep{crick1958}.
-These proteins are then mapped to an abstract phenotypic space (C), and the resulting phenotype is compared to the optimal phenotype in order to compute the fitness of the individual.
-The population is laid out on a square grid (D), with one individual per cell.
-In order to produce a new generation, the ancestor of the new individual in each cell is chosen at random among the neighboring individuals, proportionally to their fitness (F).
-Once this ancestor is chosen, its genome undergoes a series of random mutations, including genomic rearrangements as well as local mutations (G), in order to obtain the genome of the new individual in the cell at the next generation (H).
 
 \subsection{The Genotype-Phenotype Map in \emph{Aevol}}
 
