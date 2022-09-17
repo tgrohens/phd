@@ -21,7 +21,13 @@ Second, mutations affecting supercoiling-regulating genes, especially in \emph{g
 A possible interpretation of this repeated mutational targeting of supercoiling-regulating genes is that, by globally altering the transcriptional landscape of the bacteria (as the level of supercoiling directly affects gene transcription), these mutations enable the exploration of new evolutionary pathways that would have been deleterious in the ancestral strain, and enable the lineages that bear these mutations to evolve faster than the competing strains.
 In other words, there could be positive epistatic relationships between these mutations and the subsequent adaptive mutations that they enable through the rewiring the fitness landscape of their bearer lineages.
 
-In this chapter, I present an \emph{in silico} experimental evolution model based on the \emph{Aevol} framework and in which such epistatic relationships could possibly appear, and use it to determine whether the same patterns of repeated evolution detected in the LTEE would be detectable in the simpler, more controlled setting of artificial evolution.
+In this chapter, I describe how I leveraged the \emph{Aevol} \emph{in silico} experimental evolution platform in order to test this evolutionary hypothesis in the simpler, more controlled setting of artificial evolution.
+\emph{Aevol} is a model that is particularly well-suited to this problem, for several reasons.
+First, the genome biology of individuals is very precisely modeled, as the genome is described at the nucleotide level, and as the transcription and translation stages that constitute the core of biological gene expression are accurately represented in the model.
+Second, \emph{Aevol} incorporates a rich variety of mutational operators, including both genomic rearrangements such as inversions and translocations or duplications and deletions, as well as local mutations such as indels and switches.
+The richness of the genome-level description of \emph{Aevol} therefore makes it an ideal tool for the study of epistatic relationships.
+
+The chapter starts with a brief overview of the \emph{Aevol} model; then, I present the model of supercoiling and its effect on transcription that I incorporated to the model, and describe the experiment that I performed in order to test the presence of epistasis between supercoiling mutations and other kinds of mutations.
 
 \section{The \emph{Aevol} model}
 \label{sec:aevol:model}
