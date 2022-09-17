@@ -17,7 +17,6 @@ The genes affected by these mutations are involved in the regulation of DNA supe
 This makes these mutation extremely interesting in two regards.
 First, there is no direct phenotypic link between the supercoiling level of the chromosome and the growth rate of the bacteria, and yet these mutations, when inserted into the genetic background of the ancestral strain, still confer a fitness advantage.
 Second, mutations affecting supercoiling-regulating genes, especially in \emph{gyrA} and \emph{fis}, were subsequently found in 11 of the 12 replicates of the experiment after 20,000 generations of evolution, a rate that is much higher than for randomly chosen genes~\citep{crozat2010}.
-
 A possible interpretation of this repeated mutational targeting of supercoiling-regulating genes is that, by globally altering the transcriptional landscape of the bacteria (as the level of supercoiling directly affects gene transcription), these mutations enable the exploration of new evolutionary pathways that would have been deleterious in the ancestral strain, and enable the lineages that bear these mutations to evolve faster than the competing strains.
 In other words, there could be positive epistatic relationships between these mutations and the subsequent adaptive mutations that they enable through the rewiring the fitness landscape of their bearer lineages.
 
@@ -101,6 +100,15 @@ In a switch, the value of a random nucleotide is switched, from 1 to 0 or vice-v
 In order to model the effect of supercoiling on gene transcription in \emph{Aevol} I chose to start with very simple approximations,
 both for the level of supercoiling itself and for its effect on transcription, as the \emph{Aevol} model is already quite complex by itself.
 
+\begin{figure}
+\includegraphics[width=\textwidth]{aevol/images/supercoiling_aevol.pdf}
+\caption[Effect of supercoiling on the phenotype of an individual in \emph{Aevol}]{Effect of supercoiling on the phenotype of an \emph{Aevol} individual.
+Left: genome (central ring) and genes (black rectangles) of the individual.
+Middle: kernel function encoded by every gene in the phenotypic space, affected by an excess of positive supercoiling (top), no extra supercoiling (middle), or an excess of negative supercoiling (bottom).
+Right: phenotype of the individual in each situation, compared to the optimal phenotype (in pink).}
+\label{fig:aevol:sc_phenotype}
+\end{figure}
+
 \subsection{Level of DNA Supercoiling}
 First, I consider the supercoiling level as constant along the genome and over time, which can be interpreted as taking the spatial and temporal average of the (actually dynamic) supercoiling level.
 To implement this model inside \emph{Aevol}, I changed the genotype of individuals by adding, alongside the string-of-nucleotides genome, a single parameter $\gamma$ which represents the relative variation in the supercoiling level $\sigma$ of this individual compared to a reference supercoiling level $\sigma_0$: $\gamma = \frac{\sigma-\sigma_0}{\sigma_0}$.
@@ -110,12 +118,14 @@ To keep the model as simple as possible, I also chose to model the effect of sup
 I therefore updated the computation of the gene expression $e$ to take supercoiling into account, in addition to promoter activity:
 
 \begin{equation}
-e = (1 - \frac{d}{1+d_{max}}) \cdot (1 - \gamma)
+e = (1 - \frac{d}{1+d_{max}}) \cdot (1 + \gamma)
 \label{eq:aevol:sc}
 \end{equation}
 
-When $\gamma$ is equal to 0, the supercoiling level is equal to the baseline, resulting in no change to the expression level and replicating the behavior of the original \emph{Aevol} model.
-When $\gamma < 0$, that is when supercoiling is negative, gene expression is increased; and when $\gamma > 0$, gene expression is decreased instead.
+The effect of supercoiling on the phenotype of an example (pre-evolved) individual in the model is presented in Figure~\ref{fig:aevol:sc_phenotype}.
+When $\gamma < 0$ (top row), that is when there is an excess of positive supercoiling compared to the baseline, the expression of every gene is decreased.
+When $\gamma$ is equal to 0 (middle row), the supercoiling level is equal to the baseline, resulting in no change to gene expression levels, and replicating the behavior of the original \emph{Aevol} model.
+Finally, when $\gamma > 0$ (bottom row), that is when supercoiling is more negative than the baseline, the expression of every gene is increased.
 
 \subsection{Mutational Operator}
 In biological organisms, the supercoiling level is only a direct property of the DNA molecule, but is also controlled by topoisomerases and nucleoid-associated proteins that are not modeled in \emph{Aevol} (as the phenotypic space is completely abstract), and changes in the supercoiling level come from mutations affecting the genes that encode these proteins, such as \emph{gyrA} or \emph{fis}~\citep{crozat2005}.
@@ -130,8 +140,8 @@ Throughout this chapter, I will for clarity refer to the usual DNA-affecting mut
 \section{Results}
 \label{sec:aevol:results}
 
-The goal of implementing a supercoiling model in \emph{Aevol} was twofold.
-The first aim was to see to which extent adding a new dimension to the phenotypic space, and a new mutational operator to explore it, would allow for faster adaptation than allowed by the original model, thank to the wide jumps in the phenotypic landscape made possible by these mutations.
+As presented in the introduction of this chapter, the goal of implementing a supercoiling model in \emph{Aevol} was twofold.
+The first aim was to see to which extent adding a new dimension to the phenotypic space, and a new mutational operator to explore this new dimension, would allow populations to evolve faster than allowed by the original model, thank to the wide jumps in the phenotypic landscape made possible by the supercoiling mutations.
 The second aim was to disentangle the possible epistatic effects between supercoiling mutations and genomic mutations in \emph{Aevol}.
 In this section, I first present the experimental setup that I used in order to answer these questions.
 Then, I show that adding regulation by supercoiling did not measurably increase the rate of adaptation of the populations compared to the control, and that supercoiling indeed follows a very constrained evolutionary trajectory in these experiments.
@@ -140,19 +150,19 @@ Finally, I conclude that I could not find any observable epistasis between super
 \subsection{Experimental Setup}
 
 In order to tackle these questions, I ran two sets of simulations: the experimental runs using the supercoiling model, and the control runs using the vanilla version of \emph{Aevol}.
-Each set of runs comprises 5 replicate populations, which evolved for 1,000,000 generations, starting from a clonal population.
-The initial individual was obtained for each run by randomly drawing 5,000 bp-long genomes, until a genome with a non-zero fitness (i.e., at least one protein-coding gene partially matching the phenotypic target) was found.
+Each set of runs comprises 5 replicate populations, which were evolved for 1,000,000 generations, each starting from a clonal population.
+Each of the initial individuals were obtained by randomly drawing 5,000 bp-long genomes, until a genome with a non-zero fitness (i.e., at least one protein-coding gene partially matching the phenotypic target) was found.
 The simulations were run on a 24-core Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz server with 128 GB of RAM, and lasted approximately a week for each set of replicates.
-I simulated the evolution of only a limited number of replicates with and without supercoiling, out of concern for the energy expenditure of the simulations as the work was preliminary.
+The limited number of replicates for each set of simulations was chosen to balance their energy expenditure with the preliminary character of the work, which alleviates the need for statistical strength in the resulting data.
 
+\subsection{Studying Lineages}
 
-\paragraph{Studying Lineages}
 The data that is presented in the rest of this section was obtained by reconstructing the lineage, starting from the initial generation, of a random individual at the last generation of each replicate.
-Studying a given lineage, rather than the best individual at every generation (which need not sire one another), allows us to reconstruct the precise set of mutations that happened throughout the evolutionary history of this lineage, and therefore gives us information about the possible causal link between these mutations.
+Studying a given lineage, rather than the best individual at every generation (which need not sire one another), allows us to reconstruct the precise set of mutations that happened throughout the evolutionary history of this lineage, and therefore gives us information about the possible causal link between these mutations, and hence about their possible epistatic relationships.
 
-As a theoretical haploid Wright-Fisher population with $N$ individuals coalesces on average in $2N$ generations (without selection) (\textbf{citation ? dans Felsenstein}), we chose to analyze the data from generation 0 to 990,000 (taking out the last 10,000 generations), ensuring that this lineage is indeed ancestral to the whole population of the last generation.
+As a theoretical haploid Wright-Fisher population with $N$ individuals coalesces on average in $2N$ generations without mutation or selection~\citep{felsenstein2019}, we chose to analyze the data from generation 0 to 990,000 of every replicate (excluding the last 10,000 generations), ensuring that each lineage is indeed ancestral to the whole population of the last generation of that replicate.
 
-\begin{table}[h]
+\begin{table}
   \begin{center}
     \begin{tabular}{ l r r }
     \toprule
@@ -168,7 +178,7 @@ As a theoretical haploid Wright-Fisher population with $N$ individuals coalesces
     Supercoiling mutation variance & $s^2$ & $10^{-2}$ \\
     \midrule
     Generations & T & 1,000,000 \\
-    Replicates & $n$ & 5\\
+    Number of replicates & $n$ & 5\\
     \bottomrule
     \end{tabular}
     \end{center}
@@ -177,9 +187,10 @@ As a theoretical haploid Wright-Fisher population with $N$ individuals coalesces
   \label{tab:aevol:param_values}
 \end{table}
 
+
 \subsection{Evolution of the Fitness Level}
 
-\begin{figure}[H]
+\begin{figure}
   \includegraphics[width=\textwidth]{aevol/images/fitness_all.pdf}
   \caption[Evolution of the fitness of the control and experimental runs in \emph{Aevol}]{Left: Evolution of the fitness at every generation throughout the lineage of the final population of each replicate of the experimental (green) and control (red) runs.
   Both axes follow logarithmic scales.
@@ -187,12 +198,12 @@ As a theoretical haploid Wright-Fisher population with $N$ individuals coalesces
   \label{fig:aevol:fitness}
 \end{figure}
 
-Figure~\ref{fig:aevol:fitness} presents, on the left-hand side, the fitness of the individual at every generation of the lineage of the final population, in each replicate.
-In each case, the fitness follows a broadly sigmoid shape, quickly increasing during the first 100,000 generations of the run, then slowing down for the remaining 900,000 generations, but never completely ceasing to increase.
-The right-hand side of Figure~\ref{fig:aevol:fitness} shows the fitness of the lineage individual at the 990,000th generation.
+Figure~\ref{fig:aevol:fitness} presents, on the left-hand side, the fitness of the individual at every generation of the lineage of the final population, or lineage individual, in each replicate.
+In each case, the fitness follows a broadly sigmoid shape (note that both axes are logarithmic): fitnesses quickly increase from generation 100 up to generation 100,000, then slow down for the remaining 900,000 generations, but never completely cease to progress, mirroring in \emph{Aevol} the open-ended evolution observed in the LTEE.
+The right-hand side of Figure~\ref{fig:aevol:fitness} shows the fitness of the lineage individual at the 990,000th generation of each run.
 
-Even with the limited number of replicates of each run, there is no discernible difference in fitness between the two experimental conditions, with and without mutations in the supercoiling level.
-Adding the new phenotypic dimension of the supercoiling level, and the associated supercoiling mutational operator, therefore did not seem to play an important role in the evolution of populations in \emph{Aevol}.
+With the limited number of replicates of each run, there is no discernible difference in fitness between the two experimental conditions, with and without mutations in the supercoiling level.
+Adding the new phenotypic dimension of the supercoiling level, and the associated supercoiling mutational operator, therefore does not seem to play an important role in the rate of evolution of the populations modeled in \emph{Aevol}.
 
 \subsection{Evolution of the Supercoiling Level}
 
@@ -203,13 +214,13 @@ Adding the new phenotypic dimension of the supercoiling level, and the associate
 \end{figure}
 
 Figure~\ref{fig:aevol:sc} shows the evolution of the supercoiling level throughout the lineage in each of the 5 replicates.
-In every run, the supercoiling level evolves only at the very beginning of the run, stabilizing in a few tens of thousands of generations, and remaining essentially constant afterwards.
-This is in strong contrast to the fitness of the runs (presented in Figure~\ref{fig:aevol:sc}), which keeps increasing until the end of the runs.
+In every run, the supercoiling level evolves only at the very beginning of the run, stabilizing in a few tens of thousands of generations, and remains essentially constant afterwards.
+This is in strong contrast to the fitness of the runs (presented in Figure~\ref{fig:aevol:sc}), which keep increasing until the end of the runs.
 
 It therefore seems that the supercoiling level might play a role in the early evolution of the runs, but not in their long-term fitness improvement.
-This result can be disappointing but was not entirely unexpected.
+This result is in a sense slightly disappointing but was not entirely unexpected.
 Indeed, in the early evolution of individuals in \emph{Aevol}, the phenotypic target is only very imperfectly fit by the proteins expressed by the individual.
-At that stage, mutations in the supercoiling level, which affect the expression level of every protein equally, could indeed be favorable by bringing the whole phenotype closer to the optimum, in a very broad swipe.
+At that stage, mutations in the supercoiling level, which affect the expression level of every protein equally, could indeed have a positive effect by bringing the whole phenotype closer to the optimum, in a very broad swipe.
 More precisely, at the early stage of evolution in \emph{Aevol}, phenotypic functions are often under-performed by individuals, as the width of the kernel functions can be small, or the expression level of the RNAs low if the promoter contains many errors.
 At that stage, an increase in negative supercoiling could be adaptive, as it boosts gene expression levels.
 This could explain why run 4 in the simulations (Figure~\ref{fig:aevol:sc}, in pale green) evolves towards a very high level of negative supercoiling compared to the other runs.
