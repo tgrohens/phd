@@ -1,0 +1,38 @@
+\chapter{Software Contributions}
+\label{chap:soft}
+
+\section{\emph{Aevol}}
+
+For the first year of my Ph.D., I mainly used the \emph{Aevol} software platform to run experiments, which is available here: \url{https://gitlab.inria.fr/aevol/aevol}.
+\emph{Aevol} has been in development in the Inria BEAGLE team for over 17 years, and contains over 90,000 lines of C++ code.
+While I was using \emph{Aevol}, I took an active part in the maintenance of its complex code base, and particularly focused on fixing memory leaks, and on improving the overall quality of the code.
+The associated commits can be found here: \url{https://gitlab.inria.fr/aevol/aevol/-/commits/main?author=Théotime%20Grohens}.
+
+\subsection{DNA Supercoiling in \emph{Aevol}}
+
+As presented in Section~\ref{sec:aevol:aevol_sc}, I developed a version of \emph{Aevol} that incorporates the effect of supercoiling on gene transcription into the model.
+This version can be found here: \url{https://gitlab.inria.fr/tgrohens/aevol/-/tree/rebased-supercoiling}.
+Developing this extension of the model required extensive changes in the evaluation of individuals, in order to take supercoiling into account; in the code handling the mutations, as I added a new kind of mutations to the model; and in the post-treatments, the code that analyses experimental data after the main simulation is complete.
+
+\subsection{Tooling for \emph{Aevol}}
+
+While using \emph{Aevol}, I developed a set of Python tools, \emph{aevol-utilities} (available here: \url{https://gitlab.inria.fr/tgrohens/aevol-utilities}), in order to make it easier to carry out full-fledged experiments.
+The default \emph{Aevol} executables indeed do not provide the most accessible interface to an untrained user, and do not reflect the way the platform is used to run experiments at present.
+The typical use case of \emph{Aevol} consists in the following steps, for each replicate of a given experiment:
+\begin{enumerate}
+  \item Create an initial random individual and initial population using this individual, with a different seed.
+  \item Run the proper evolution experiment for a given number of generations.
+  \item Pick an individual in the final population, and trace its lineage since the original population.
+  \item Compute a series of statistics over this lineage, by recovering every individual in the lineage.
+  \item Analyse and plot the resulting data.
+\end{enumerate}
+
+The \emph{aevol-utilities} package provide a Jupyter notebook which automatizes the first four steps of this pipeline, and that relies on a Python backend.
+The tool takes care of creating properly initialized repositories in order to minimize the risk of data loss.
+As \emph{Aevol} is computationally heavy, the tool also allows the user to choose the level of parallelism to use, and regulates the number of concurrently running replicates accordingly.
+Finally, the package also contains Jupyter notebooks that give examples of how to analyse \emph{Aevol} data, that are easily approachable and modifiable.
+
+\subsection{Web Version of \emph{Aevol}}
+
+
+\section{\emph{EvoTSC}}
