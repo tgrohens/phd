@@ -2,6 +2,7 @@
 \label{chap:alife}
 
 \section{Introduction}
+\label{sec:alife:intro}
 
 The DNA molecule is a double-stranded polymer of nucleotides that plays a fundamental role in life.
 It is shaped as a double helix which rotates around itself at a rate of around one turn per $10.5$ base pairs~\citep{krogh2018}.
@@ -31,6 +32,7 @@ Moreover, in some bacterial species such as \emph{Buchnera aphidicola}, an oblig
 
 
 \subsection{Dynamic Properties of DNA Supercoiling}
+
 DNA supercoiling is under the influence of both internal and external constraints.
 It varies both in time, during the lifecycle of the bacterium, which alternates between growth and stationary phases~\citep{krogh2018}, and in space, as different regions of the chromosome experience different supercoiling levels~\citep{lal2016, junier2016}.
 In bacteria, the supercoiling homeostasis is mainly regulated by the topoisomerases, but nucleoid-associated proteins (NAPs) such as \emph{H-NS} also play a topological role by preventing the relaxation of superhelical stress at their fixation points in the genome, resulting in topological domains that have different supercoiling levels~\citep{krogh2018}.
@@ -90,6 +92,7 @@ Moreover, we demonstrate that, using genomic inversions as the only mutation ope
 This article is an extended version of~\cite{grohens2021}.
 
 \section{A Genome-Wide Model of the Transcription-Supercoiling Coupling}
+\label{sec:alife:indiv_model}
 
 \begin{figure}[H]
   \centering
@@ -118,6 +121,7 @@ Importantly to our approach, here genes do not interact only with their closest 
 
 
 \subsection{Mathematical Description of the Model}
+
 We model the transcription-supercoiling coupling between an individual's genes as a system of equations, which relate the supercoiling level at the locus of each gene $\sigma_i$ (for $i$ ranging from $1$ to $n$, the number of genes of the individual), and the expression level of every gene $e_i$.
 The parameters of the system are described by the genome of the individual, as will be detailed below.
 
@@ -189,6 +193,7 @@ Highly transcribed genes, such as A and B, generate a large variation in the sup
 
 
 \subsection{Effect of the Environmental Supercoiling on Gene Activation Levels}
+\label{sec:alife:env_model}
 
 \begin{figure}[H]
   \centering
@@ -244,7 +249,7 @@ Finally, for $\sigma_{env} = -0.2$, there is a strong environmental pressure tow
 
 
 \subsection{Influence of Relative Gene Positions on Gene Activation Levels}
-\label{sec:gene_pos}
+\label{sec:alife:gene_pos}
 
 \begin{figure}[H]
   \centering
@@ -270,6 +275,7 @@ Based on these observations, we can confirm that in our model, the transcription
 
 
 \section{An Evolutionary Genome-Wide Model of the Transcription- Supercoiling Coupling}
+\label{sec:alife:evol_model}
 
 Having shown that transcriptional activity depends on the organization of the genome, we now question to which extent evolution can simultaneously leverage the organization of the genome and the transcription-supercoiling coupling in order to adapt gene regulatory activity to different environments.
 Indeed, as has been observed in \emph{Dickeya dadantii}~\citep{muskhelishvili2019}, different phenotypes can evolve as a response to different supercoiling levels induced by the environment, and the transcription-supercoiling coupling could play a role in enabling the existence of this reaction norm.
@@ -316,7 +322,7 @@ We introduce only one kind of mutation in our model, which is genomic inversions
 Genes are then reinserted in the genome in the opposite orientation and order, taking care to update all intergenic distances appropriately.
 Note that in our model, genes have a length of zero and the break points can therefore not fall inside a gene.
 Moreover, an inversion has no effect if both breakpoints fall between two neighboring genes (as only an intergenic region would be affected), but can impact any number of genes otherwise.
-Genomic inversions hence affect gene syntenies and orientations, and therefore affect gene expression levels as presented in subsection~\ref{sec:gene_pos}.
+Genomic inversions hence affect gene syntenies and orientations, and therefore affect gene expression levels as presented in subsection~\ref{sec:alife:gene_pos}.
 When mutating a genome during reproduction, we draw the number of inversions $k$ to perform from a Poisson law with parameter $\lambda = 2$, giving an average of 2 inversions between an individual and its ancestor; the probability of not undergoing any mutations is $P(k=0) = e^{-\lambda} \approx 0.136$.
 
 \begin{figure}[H]
@@ -436,6 +442,7 @@ Our experimental results show that, in a model of gene transcription that is str
 These gene interaction networks are sensitive to environmental variations, which are mediated in our model by a single parameter: $\sigma_{env}$, the amount of global supercoiling that is due to the environment.
 
 \subsection{Robustness of Gene Network Evolution}
+\label{sec:alife:param_explor}
 
 In order to ensure that our results remain experimentally valid over a broad range of parameter values, we ran additional sets of simulations, in which we changed respectively the sensitivity of gene promoters to supercoiling changes ($\epsilon$ in equation~\ref{eq:transcr}), the interaction coefficient used in computing the local supercoiling due to the transcription-supercoiling coupling ($c$ in equation~\ref{eq:dsde}), and the strength of the change in supercoiling imposed by the environment ($\sigma_A$ and $\sigma_B$).
 We chose sets of logarithmically-spaced values for each parameter, and ran 5 replicates of the evolution experiment for 250,000 generations for each parameter value.
