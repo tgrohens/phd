@@ -161,13 +161,13 @@ Environment A is a DNA relaxation-inducing environment, with a supercoiling shif
 We then define three classes of genes with environment-specific target expression levels: \emph{AB} genes should be expressed in both environments, akin to housekeeping genes; \emph{A} genes should be expressed in environment A but not in environment B; and, conversely, \emph{B} genes should be expressed in environment B but not in environment A; both classes represent environment-specific genes such as the pathogenic genes of \emph{S. enterica} or \emph{D. dadantii}~\citep{cameron2012,herault2014}.
 
 \paragraph{Fitness}
-Let $e^A$ be the phenotype of an individual with $n$ genes in environment A, that is the vector of the expression levels $e^A_i$ of all its genes in environment A, $e^B$ its phenotype in environment B, and $\tilde{e}^A$ and $\tilde{e}^B$ be target phenotypes in each environment.
-For environment A, we choose to set $\tilde{e}^A_i = 1$ if gene $i$ is of type \emph{A} or \emph{AB}, and $\tilde{e}^A_i = e^{-m}$ if gene $i$ is of type \emph{B}, which are respectively the maximal and minimal attainable gene expression levels in the model.
-Similarly, for environment B, we set $\tilde{e}^B_i = 1$ if the type of gene $i$ is \emph{B} or \emph{AB}, and $\tilde{e}^B_i = e^{-m}$ if the type of gene $i$ is \emph{A}.
-We then compute the mean squared error $g$ between the actual and targeted phenotypes in both environments:
+Let $(e^A_A, e^A_B, e^A_{AB})$ be the average gene expression level per gene type of an individual with $n$ genes in environment A, $(e^B_A, e^B_B, e^B_{AB})$ the average gene expression per type in environment B, and $(\tilde{e}^A_A, \tilde{e}^A_B, \tilde{e}^A_{AB})$ and $(\tilde{e}^B_A, \tilde{e}^B_B, \tilde{e}^B_{AB})$ be target expression values for each gene type in each environment.
+For environment A, we choose to set $\tilde{e}^A_A = \tilde{e}^A_{AB} = 1$, and $\tilde{e}^A_B = e^{-m}$, which are respectively the maximal and minimal attainable gene expression levels in the model.
+Similarly, for environment B, we set $\tilde{e}^B_B = \tilde{e}^B_{AB} = 1$, and $\tilde{e}^B_A = e^{-m}$.
+We then compute the sum $g$ of the squared error between the mean and targeted expression levels for each gene type in each environment:
 
 \begin{equation}
-  g = \frac{1}{n} \sum_{i=1}^{n} (e^A_i - \tilde{e}^A_i)^2 + \frac{1}{n} \sum_{i=1}^{n} (e^B_i - \tilde{e}^B_i)^2
+  g = \sum_{i\in\{A, B, AB\}}\left(e^A_i - \tilde{e}^A_i\right)^2 + \sum_{i\in\{A, B, AB\}}\left(e^B_i - \tilde{e}^B_i\right)^2
   \label{eq:gap}
 \end{equation}
 
