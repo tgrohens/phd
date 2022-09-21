@@ -5,7 +5,7 @@
 
 For the first year of my Ph.D., I mainly used the \emph{Aevol} \emph{in silico} experimental evolution platform, which is available here: \url{https://gitlab.inria.fr/aevol/aevol}, to run experiments.
 \emph{Aevol} has been in development in the Inria BEAGLE team for over 17 years, and contains over 90,000 lines of C++ code.
-It has been used to run experiments that resulted in numerous publications, among which~\cite{knibbe2005,batut2013,rutten2019}.
+It has been used to run experiments that resulted in numerous publications, among which~\cite{knibbe2005}, \cite{batut2013}, or \cite{rutten2019}.
 While I was using \emph{Aevol}, I took an active part in the maintenance of its complex code base, and particularly focused on fixing memory leaks, and on improving the overall quality of the code.
 The associated commits can be found here: \url{https://gitlab.inria.fr/aevol/aevol/-/commits/main?author=Théotime%20Grohens}.
 
@@ -28,10 +28,11 @@ The typical use case of \emph{Aevol} consists in the following steps, for each r
   \item Analyse and plot the resulting data.
 \end{enumerate}
 
-The \emph{aevol-utilities} package provide a Jupyter notebook which automatizes the first four steps of this pipeline, built as an interface to the associated \texttt{aevol.py} Python library.
-The tool takes care of creating properly initialized repositories in order to minimize the risk of data loss, starts concurrents \emph{Aevol} jobs with a parametrizable level of parallelism (cores per job and number of parallel jobs), handles restarting interrupted simulations, and can runs post-treatments once the main simulation is over.
+The \emph{aevol-utilities} repository comprises a Python library (named \texttt{aevol.py}), and a series of Jupyter notebooks that are built upon this library.
+The \texttt{Runner aevol} notebook automates the first four steps of the pipeline above.
+It takes care of creating properly initialized repositories in order to minimize the risk of data loss, of starting concurrents \emph{Aevol} jobs with a parametrizable level of parallelism (cores per job and number of parallel jobs), can handle restarting interrupted simulations, and can run \emph{Aevol} post-treatments once the main simulation is finished.
 The package also contains Jupyter notebooks that give easily approachable and modifiable examples of how to analyse \emph{Aevol} data.
-Finally, the \emph{aevol-utilities} package is in use by other members of the team, and could be part of a larger move towards a new high-level Python interface for \emph{Aevol}.
+Finally, the \emph{aevol-utilities} tools are in use by other members of the team, and could be part of a larger move towards a new high-level Python interface for \emph{Aevol}.
 
 %\subsection{Web Version of \emph{Aevol}}
 % Ça a l'air de difficilement marcher...
