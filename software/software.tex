@@ -40,24 +40,38 @@ Finally, the \emph{aevol-utilities} tools are in use by other members of the tea
 
 \section{\emph{EvoTSC}}
 
-In the second part of my Ph.D., I developed \emph{EvoTSC}, a Python simulation that implements an individual-level model of the transcription-supercoiling coupling and a population-level \emph{in silico} artificial evolution platform, which is accessible here: \url{https://gitlab.inria.fr/tgrohens/evotsc}.
-Chapter~\ref{chap:alife} presents a first version of the transcription-supercoiling coupling model and the results obtained using a corresponding version of \emph{EvoTSC}, which were published in~\cite{grohens2021} and in~\cite{grohens2022a}.
-The corresponding versions of the code, and accompanying data analysis notebooks, can respectively be found in the \href{https://gitlab.inria.fr/tgrohens/evotsc/-/tree/alife-model}{\texttt{alife-model}} and \href{https://gitlab.inria.fr/tgrohens/evotsc/-/tree/alife-journal}{\texttt{alife-journal}} branches of the git repository.
+In the second part of my Ph.D., I developed \emph{EvoTSC}, a Python simulation that implements an individual-level model of the transcription-supercoiling coupling and a population-level \emph{in silico} artificial evolution platform.
+The software is accessible here: \url{https://gitlab.inria.fr/tgrohens/evotsc}.
+\emph{EvoTSC} has been used in several publications.
+Chapter~\ref{chap:alife}, based on~\cite{grohens2021} and on~\cite{grohens2022a}, presents a first version of the transcription-supercoiling coupling model and the results obtained using a corresponding version of \emph{EvoTSC}.
+Chapter~\ref{chap:ploscb} presents a more realistic version of the individual-level model and the associated results, which will be submitted to publication.
+\textbf{Soumettre le preprint pour pouvoir citer ?}
+The corresponding versions of the code, and accompanying data analysis notebooks, can be found in the \href{https://gitlab.inria.fr/tgrohens/evotsc/-/tree/alife-model}{\texttt{alife-model}} \citep{grohens2021} and \href{https://gitlab.inria.fr/tgrohens/evotsc/-/tree/alife-journal}{\texttt{alife-journal}} \citep{grohens2022a} branches of the git repository.
 
-The current version of \emph{EvoTSC} implements the more detailed genome model presented in Section~\ref{sec:ploscb:model}, and is the one that is used in the results presented in Chapters~\ref{chap:ploscb} \textbf{ajouter les autres chapitres}.
+The current version of \emph{EvoTSC} implements the more detailed genome model presented in Section~\ref{sec:ploscb:model}, and is the one that is used in the results presented in Chapters~\ref{chap:ploscb} and~\ref{chap:param}.
 
 \subsection{Technical Description}
 
-\emph{EvoTSC} is written in Python, and measures around 1,800 lines of code.
-The code runs an evaluation-selection-mutation evolutionary loop on a populations of individuals consisting in a circular string-of-pearls genome.
-The computationally heavy parts are accelerated using \texttt{numba}~\citep{lam2015}.
-
-%\lstinputlisting[language=Python, caption=Code of the \texttt{numba}-accelerated \texttt{compute\_inter\_matrix} method.]{software/evotsc_core.py}
+\emph{EvoTSC} is written in Python, and measures around 1,800 lines of Python code.
+It comes as an installable \texttt{pip} package, and is licensed under a 3-clause BSD license.
+The \texttt{evotsc.py} file contains the main classes (\texttt{Gene}, \texttt{Individual} and \texttt{Population}) that are used in the simulations.
+The \texttt{core.py} files contains the computationally heavy parts of the code, which are accelerated using \texttt{numba}~\citep{lam2015}.
+The \texttt{run.py} contains the code responsible for initializing a simulation, and data input and output.
+The \texttt{lib.py} contains miscellaneous functions used throughout the notebooks.
+Finally, the \texttt{plot.py} file contains the code responsible for plotting, using the \texttt{matplotlib} library~\citep{hunter2007}.
+This file contains in particular the \texttt{plot\_genome\_and\_tsc} function used to create all the circular genome plots in the manuscript.
 
 \subsection{Tooling}
 
-In order to analyze data obtained with the core \emph{EvoTSC} simulation more easily, I developed an extensive set of visualization tools, which are used in the figures presented throughout the manuscript.
-In particular, I developed an extremely customizable view of the genomes, which can accommodate plotting the level of local supercoiling inside the genome (as in Figure \textbf{mettre une figure}), plotting subnetworks (\textbf{same}), or gene knockouts (\textbf{same}).
+In order to analyze the results of  \emph{EvoTSC} simulations more easily, I developed an extensive set of notebooks for data analysis and visualisation.
+The notebooks are available in a separate repository: \url{https://gitlab.inria.fr/tgrohens/evotsc-notebooks}, and are also licensed under the BSD 3-clause.
+In particular, these notebooks contain the code responsible for the computation of gene expression as a function of supercoiling (such as in Figure~\ref{fig:ploscb:activity_by_sigma}), for the generation of contiguous gene subnetworks (Figure~\ref{fig:ploscb:min_subnetwork}), and for the gene knock-out analysis (Figure~\ref{fig:ploscb:ko_genomes},~\ref{fig:ploscb:ko_graph} and~\ref{fig:ploscb:ko_graph}).
+
+\subsection{Use}
+
+I have up until now been the only user of \emph{EvoTSC}.
+However, the code has been written to be readily reusable and extendable.
+It is in particular documented with a \texttt{README.md} file, and extensive comments.
 
 
 %\lstinputlisting[language=Python, caption=dkozkdz]{software/evotsc_core.py}
