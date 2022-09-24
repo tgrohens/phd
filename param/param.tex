@@ -46,7 +46,7 @@ In this section, I present simulations run with an interaction distance of 25 kb
 \centering
 \includegraphics[width=0.495\textwidth]{param/interaction-25k/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/interaction-25k/gene_activity_env_B.pdf}
-\caption[Evolution of the number of activated genes in each environment with an interaction distance of 25 kb]{Evolution of the number of activated genes in environment A (left) and environment B (right), with an interaction distance of 25 kb.}
+\caption[Evolution of the number of activated genes in each environment, with an interaction distance of 25 kb]{Evolution of the number of activated genes in environment A (left) and environment B (right), with an interaction distance of 25 kb.}
 \label{fig:param:inter25k-activity-by-env}
 \end{figure}
 
@@ -57,7 +57,7 @@ Differentiated activation patterns can therefore still evolve even when the topo
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{param/interaction-25k/fitness_all_with_main.pdf}
-\caption[Average fitness during evolution with an interaction distance of 25 kb]{Average fitness during evolution with an interaction distance of 25 kb (yellow).
+\caption[Average fitness during evolution, with an interaction distance of 25 kb]{Average fitness during evolution with an interaction distance of 25 kb (yellow).
 The main run is presented in purple for comparison.}
 \label{fig:param:inter25k-fitness}
 \end{figure}
@@ -68,7 +68,7 @@ While fitness is systematically lower throughout evolution with the larger inter
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{param/interaction-25k/activity_sigmas_avg.pdf}
-\caption[Average gene expression as a function of background supercoiling with an interaction distance of 25 kb]{Average gene expression by type as a function of background supercoiling, with an interaction distance of 25 kb.
+\caption[Average gene expression as a function of background supercoiling, with an interaction distance of 25 kb]{Average gene expression by type as a function of background supercoiling, with an interaction distance of 25 kb.
 The dash-dotted line represents the average expression of genes on a random genome with an interaction distance of 25 kb.}
 \label{fig:param:inter25k-activ-by-sigma}
 \end{figure}
@@ -85,7 +85,7 @@ As in the main run, \emph{A} genes display a relaxation-activated phenotype.
   \begin{subfigure}[t]{0.495\textwidth}
     \includegraphics[width=\textwidth]{param/interaction-25k/effective_graph_combined_out_degree.pdf}
   \end{subfigure}
-  \caption[Average in- and out-degree of effective interaction graph nodes with an interaction distance of 25 kb]{Average out-degree (left) and in-degree (right) of the genes in the effective interaction graph, separated by gene type, for individuals with an interaction distance of 5 kb (main run) or 25 kb.}
+  \caption[Average in- and out-degree of effective interaction graph nodes, with an interaction distance of 25 kb]{Average out-degree (left) and in-degree (right) of the genes in the effective interaction graph, separated by gene type, for individuals with an interaction distance of 5 kb (main run) or 25 kb.}
   \label{fig:param:inter25k-degree}
 \end{figure}
 
@@ -100,7 +100,7 @@ Like the interaction distance, the mean intergenic distance plays a role in the 
 Conversely, when the mean intergenic distance is large compared to the interaction distance, the emergence of regulatory networks isolated from each other by large intergenic regions becomes possible.
 In this chapter, I present simulations with mean intergenic distances increasing logarithmically from 10 bp (or a gene density of 99\%) to 10 kb (or a gene density of 10\%), representing gene-scarce eukaryotic genomes~\citep{davilalopez2010}, in order to test the robustness of the results with regard to the range of gene densities found across living organisms.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.495\textwidth]{param/mean-intergene/inter-0.01k/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/mean-intergene/inter-0.01k/gene_activity_env_B.pdf}
@@ -110,7 +110,7 @@ In this chapter, I present simulations with mean intergenic distances increasing
 
 \includegraphics[width=0.495\textwidth]{param/mean-intergene/inter-10k/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/mean-intergene/inter-10k/gene_activity_env_B.pdf}
-\caption[Evolution of the number of activated genes in each environment with increasing mean intergenic distances]{Evolution of the number of activated genes per gene type in environment A (left) and B (right) during evolution, for average intergenic sizes of 10 bp (top), 1 kb (middle), and 10 kb (bottom).}
+\caption[Evolution of the number of activated genes in each environment, with increasing mean intergenic distances]{Evolution of the number of activated genes per gene type in environment A (left) and B (right) during evolution, for average intergenic sizes of 10 bp (top), 1 kb (middle), and 10 kb (bottom).}
 \label{fig:param:mean-intergene-activity-by-env}
 \end{figure}
 
@@ -121,7 +121,7 @@ For a mean intergenic distance of 10 kb, the behavior is different: while \emph{
 \begin{figure}
 \centering
 \includegraphics[width=0.75\textwidth]{param/mean-intergene/fitness_all_with_main.pdf}
-\caption[Average fitness during evolution with increasing mean intergenic distances]{Average fitness during evolution for average intergenic distances of 10 bp, 125 bp (main run), 1 kb, and 10 kb.}
+\caption[Average fitness during evolution, with increasing mean intergenic distances]{Average fitness during evolution for average intergenic distances of 10 bp, 125 bp (main run), 1 kb, and 10 kb.}
 \label{fig:param:mean-intergene-fitness}
 \end{figure}
 
@@ -132,7 +132,7 @@ For an intergenic size of 10 kb (in yellow), however, fitness increases much mor
 \begin{figure}
 \centering
 \includegraphics[width=0.9\textwidth]{param/mean-intergene/inter-10k/activity_sigmas_avg.pdf}
-\caption[Average gene expression as a function of background supercoiling with an intergenic distance of 10 kb]{Average gene expression as a function of background supercoiling, with an intergenic distance of 10 kb.}
+\caption[Average gene expression as a function of background supercoiling, with an intergenic distance of 10 kb]{Average gene expression as a function of background supercoiling, with an intergenic distance of 10 kb.}
 \label{fig:param:mean-intergene-10kb-activ-by-sigma}
 \end{figure}
 
@@ -144,7 +144,7 @@ Instead, the average expression level of \emph{A} genes is indeed slightly lower
 \begin{figure}
 \centering
 \includegraphics[width=0.9\textwidth]{param/mean-intergene/random_activ_per_sigma.pdf}
-\caption[Average gene expression level as a function of background supercoiling in random genomes with different mean intergenic distances]{Average gene expression level as a function of background supercoiling in random genomes with different mean intergenic distances (full lines), and theoretical expression level of an isolated gene (dashed line).}
+\caption[Average gene expression as a function of background supercoiling, with increasing mean intergenic distances, in random genomes]{Average gene expression as a function of background supercoiling in random genomes with different mean intergenic distances (full lines), and theoretical expression level of an isolated gene (dashed line).}
 \label{fig:param:mean-intergene-random-activ-by-sigma}
 \end{figure}
 
@@ -163,47 +163,56 @@ The increased proportion of neutral mutations when the intergenic distance is to
 
 \section{Environmental Shift in Supercoiling}
 
+In this section, I tested the robustness of the evolution of differentiated expression levels when the shift in supercoiling caused by the environment $\sigma_A$ and $\sigma_B$ is 10 times and 100 times smaller than in the main run.
+The approach is similar to Section~\ref{sec:alife:param_explor}, which however used the early version of the model.
 
-As in section~\ref{sec:alife:param_explor}, I then present evolutionary simulations with smaller environmental shifts in supercoiling, in order to test the sensitivity of the gene regulatory networks that emerge.
-
-
-\begin{figure}
-\centering
-\includegraphics[width=0.75\textwidth]{param/sigma/fitness_all_with_main.pdf}
-\caption{Average fitness during evolution for with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (top) and $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (bottom) \textbf{REFAIRE AVEC 15 REP}.}
-%\label{}
-\end{figure}
-
-
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.495\textwidth]{param/sigma/sigma-1e-3/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/sigma/sigma-1e-3/gene_activity_env_B.pdf}
 
 \includegraphics[width=0.495\textwidth]{param/sigma/sigma-1e-4/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/sigma/sigma-1e-4/gene_activity_env_B.pdf}
-\caption[Evolution of the number of active genes in each environment with an absolute environmental supercoiling shift of 0.001 or 0.0001]{Evolution of the number of active genes in environment A (left) and environment B (right), with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (top) and $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (bottom). \textbf{RELANCER AVEC 15 REP}}
-\label{}
+\caption[Evolution of the number of activated genes in each environment, with decreasing environmental supercoiling shifts]{Evolution of the number of activated genes in environment A (left) and environment B (right), with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (top) and $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$ (bottom). \textbf{RELANCER AVEC 15 REP}}
+\label{fig:param:sigma-activity-by-env}
 \end{figure}
 
-Evolution still works with a 10 times or 100 times smaller shift in supercoiling caused by the environment.
+Figure~\ref{fig:param:sigma-activity-by-env} shows the evolution of the number of activated genes by type in each environment, with environmental shifts in supercoiling 10 times smaller than the main run (top) and 100 times smaller (bottom), for 250,000 generations.
+In both cases, differentiated gene expression patterns evolve, although evolution seems to be slower when $\sigma_A$ and $\sigma_B$ are 100 times smaller than in the main run.
+The evolution of different gene expression levels as a response to changes in supercoiling is therefore sensitive even to very small perturbations.
+This reinforces the plausibility of the hypothesis that DNA supercoiling can be used as an environmental sensory device for the regulation of gene expression.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{param/sigma/fitness_all_with_main.pdf}
+\caption[Average fitness during evolution, with decreasing environmental supercoiling shifts]{Average fitness during evolution, with environmental shifts in supercoiling $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (10 times smaller than in the main run) and $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$ (100 times smaller than the main run). \textbf{REFAIRE AVEC 15 REP}.}
+\label{fig:param:sigma-fitness}
+\end{figure}
+
+Figure~\ref{fig:param:sigma-fitness} shows the evolution of the average fitness of the best individual in each replicate, for each pair of environmental supercoiling values.
+It confirms the results seen in the previous figure: fitness keeps increasing throughout the simulation in all cases, but more slowly when the environmental perturbation is the smallest.
 
 \begin{figure}
 \centering
 \includegraphics[width=0.9\textwidth]{param/sigma/sigma-1e-3/activity_sigmas_avg.pdf}
 \caption[Average gene expression as a function of background supercoiling, with an absolute environmental supercoiling shift of 0.001]{Average gene expression as a function of background supercoiling, with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$.\textbf{RELANCER AVEC 15 REP}}
+\label{fig:param:sigma-1e-3-activ-by-sigma}
 \end{figure}
+
+Figure~\ref{fig:param:sigma-1e-3-activ-by-sigma} shows the average gene expression per gene type as a function of background supercoiling, for the best individuals at the end of evolution with environmental shifts in supercoiling of $\sigma_A = 0.001$ and $\sigma_B = -0.001$.
+Even though the difference between the two environments is 10 times smaller than in the main run, \emph{A} genes are still able to evolve a relaxation-activated phenotype, and \emph{B} genes are still able to quickly transition from high activation to high inhibition in a much shorter range of supercoiling values.
 
 \begin{figure}
 \centering
 \includegraphics[width=0.9\textwidth]{param/sigma/sigma-1e-4/activity_sigmas_avg.pdf}
-\caption[Average gene expression as a function of background supercoiling, with an absolute environmental supercoiling shift of 0.0001]{Average gene expression as a function of background supercoiling, with environmental supercoiling shifts $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$.\textbf{RELANCER AVEC 15 REP}}
+\caption[Average gene expression as a function of background supercoiling, with an absolute environmental supercoiling shift of 0.0001]{Average gene expression as a function of background supercoiling, with environmental supercoiling shifts $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$.
+The inset at the top right of the figure shows a 150x zoom on supercoiling shift values near zero.}
+\label{fig:param:sigma-1e-4-activ-by-sigma}
 \end{figure}
 
-In all these cases, everything still works.
-
-
-
+Figure~\ref{fig:param:sigma-1e-4-activ-by-sigma} similarly shows average gene expression per gene type as a function of background supercoiling, this time with environmental supercoiling shifts $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$.
+Strikingly, \emph{A} genes and \emph{B} genes are still able to evolve different expression levels in the two environments, even though they are 100 times closer than in the original experiment.
+Even when the environments have an effect that is around 100 times smaller than the transcription-generated supercoiling (see Figure~\ref{fig:ploscb:genomes} for an example genome and the associated transcription-generated supercoiling values), the gene regulatory networks that evolve in the simulations are still able to separate the different environments and lead gene expression levels to very different states.
 
 
 
@@ -218,7 +227,7 @@ Finally, I present runs with a larger number of genes
 \centering
 \includegraphics[width=0.495\textwidth]{param/300-genes/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/300-genes/gene_activity_env_B.pdf}
-\caption[Evolution of the number of active genes in each environment, with a 300-gene genome]{Evolution of the number of active genes in environment A (top) and environment B (bottom), with an interaction distance of 25 kb.}
+\caption[Evolution of the number of activated genes in each environment, with a 300-gene genome]{Evolution of the number of activated genes in environment A (top) and environment B (bottom), with an interaction distance of 25 kb.}
 %\label{fig:param:inter25k-active}
 \end{figure}
 
@@ -252,7 +261,7 @@ Finally, I present runs with a larger number of genes
   \centering
   \includegraphics[width=0.495\textwidth]{param/evolve-intergene/gene_activity_env_A.pdf}
   \includegraphics[width=0.495\textwidth]{param/evolve-intergene/gene_activity_env_B.pdf}
-  \caption[Evolution of the number of active genes in each environment, with intergenic distance mutations]{Evolution of the number of active genes in environment A (top) and environment B (bottom), with intergenic distance mutations.}
+  \caption[Evolution of the number of activated genes in each environment, with intergenic distance mutations]{Evolution of the number of activated genes in environment A (top) and environment B (bottom), with intergenic distance mutations.}
   %\label{fig:param:inter25k-active}
   \end{figure}
 
