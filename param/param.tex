@@ -39,20 +39,19 @@ For each experiment, the row in bold font corresponds to the parameter values us
 The size of the topological domains of bacterial genomes, inside which DNA supercoils can freely propagate, has historically been estimated to be on the order of a few thousand base pairs~\citep{elhanafi2000,kouzine2013}.
 Recent work has however suggested that topological domains could be up to ten times larger than this, reaching up to 25 kb~\citep{visser2022}.
 As this distance sets a limit to the number of genes that can interact through the transcription-supercoiling coupling, it plays an important role in the structure of the supercoiling-mediated gene regulatory networks.
-
-A larger supercoiling interaction distance increases the number of neighboring genes that impact a given gene.
-It could therefore make genomic inversions more deleterious by making them disrupt a larger part of the regulatory networks at their boundaries, but could also allow more robust regulatory networks to evolve through a higher connectivity.
+By increasing the number of genes a given gene is coupled with, a larger interaction distance could make genomic inversions more deleterious by making them disrupt a larger part of the regulatory networks at their boundaries, but could also allow more robust regulatory networks to evolve through a higher connectivity.
+In this section, I present simulations run with an interaction distance of 25 kb, in order to test this hypothesis.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.495\textwidth]{param/interaction-25k/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/interaction-25k/gene_activity_env_B.pdf}
-\caption[Evolution of the number of active genes in each environment with an interaction distance of 25 kb]{Evolution of the number of active genes in environment A (left) and environment B (right), with an interaction distance of 25 kb.}
+\caption[Evolution of the number of activated genes in each environment with an interaction distance of 25 kb]{Evolution of the number of activated genes in environment A (left) and environment B (right), with an interaction distance of 25 kb.}
 \label{fig:param:inter25k-activity-by-env}
 \end{figure}
 
-Figure~\ref{fig:param:inter25k-activity-by-env} shows the evolution of the number of active genes of each type in the simulations with the interaction distance of 25 kb, over 250,000 generations.
-As in the main run, the number of active genes of each type evolves towards their respective target.
+Figure~\ref{fig:param:inter25k-activity-by-env} shows the evolution of the number of activated genes of each type in the simulations with the interaction distance of 25 kb, over 250,000 generations.
+As in the main run, the number of activated genes of each type evolves towards their respective target.
 Differentiated activation patterns can therefore still evolve even when the topological domains are 5 times larger.
 
 \begin{figure}[H]
@@ -79,6 +78,7 @@ As in the main run, \emph{A} genes display a relaxation-activated phenotype.
 \emph{AB} and \emph{B} genes are relaxation-inhibited, but nonetheless display quite different behaviors than the (dash-dotted light blue) curve for genes on a random genome with the same parameters, which present a much flatter response curve to background supercoiling than with the default interaction distance of 5 kb (shown in Figure~\ref{fig:ploscb:activity_by_sigma}).
 
 \begin{figure}[H]
+\centering
   \begin{subfigure}[t]{0.495\textwidth}
     \includegraphics[width=\textwidth]{param/interaction-25k/effective_graph_combined_in_degree.pdf}
   \end{subfigure}
@@ -95,17 +95,13 @@ As could be expected, the gene regulatory networks are much more connected with 
 
 \section{Mean Intergenic Size}
 
-Then, I present simulations with varying mean intergenic distances, in order to test the robustness of the results with regard to different bacterial gene densities~\citep{kuo2009}.
-
+In the main run, I set the initial intergenic distance between every gene to 125 bp, or a gene density of 88\%, representing the average \emph{E. coli} intergenic distance~\citep{postow2004}, but bacteria actually present a wider range of gene densities~\citep{kuo2009}.
+Like the interaction distance, the mean intergenic distance plays a role in the connectivity of the gene regulatory networks that stem from the transcription-supercoiling coupling: the smaller the mean intergenic distance, the more genes can interact.
+Conversely, when the mean intergenic distance is large compared to the interaction distance, the emergence of regulatory networks isolated from each other by large intergenic regions becomes possible.
+In this chapter, I present simulations with mean intergenic distances increasing logarithmically from 10 bp (or a gene density of 99\%) to 10 kb (or a gene density of 10\%), representing gene-scarce eukaryotic genomes~\citep{davilalopez2010}, in order to test the robustness of the results with regard to the range of gene densities found across living organisms.
 
 \begin{figure}
 \centering
-\includegraphics[width=0.75\textwidth]{param/mean-intergene/fitness_all_with_main.pdf}
-\caption{Evolution of the fitness during evolution for average intergenic sizes of 10 bp \textbf{REFAIRE AVEC 15 REP}, 125 bp (main run), 1,000 bp, and 10,000 bp.}
-%\label{}
-\end{figure}
-
-\begin{figure}
 \includegraphics[width=0.495\textwidth]{param/mean-intergene/inter-0.01k/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/mean-intergene/inter-0.01k/gene_activity_env_B.pdf}
 
@@ -114,31 +110,56 @@ Then, I present simulations with varying mean intergenic distances, in order to 
 
 \includegraphics[width=0.495\textwidth]{param/mean-intergene/inter-10k/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/mean-intergene/inter-10k/gene_activity_env_B.pdf}
-\caption{Evolution of the number of activated genes in environment A (left) and B (right) during evolution, for average intergenic sizes of 10 bp (top) \textbf{REFAIRE AVEC 15 REP}, 1,000 bp (middle), and 10,000 bp (bottom) base pairs.}
-%\label{}
+\caption[Evolution of the number of activated genes in each environment with increasing mean intergenic distances]{Evolution of the number of activated genes per gene type in environment A (left) and B (right) during evolution, for average intergenic sizes of 10 bp (top), 1 kb (middle), and 10 kb (bottom).}
+\label{fig:param:mean-intergene-activity-by-env}
 \end{figure}
 
-\begin{figure}
+Figure~\ref{fig:param:mean-intergene-activity-by-env} shows the evolution of the number of activated genes for each gene type in each environment, with mean intergenic distances increasing from top to bottom, for 250,000 generations.
+For intergenic distances of 10 bp and 1 kb, the number of activated genes converges towards the target in each environment, as in the main run.
+For a mean intergenic distance of 10 kb, the behavior is different: while \emph{AB} genes and \emph{B} genes evolve towards the correct activation state in each environment, the proportion of activated \emph{A} genes stays close to 50\% in each environment, showing that \emph{A} genes do not evolve a differentiated expression pattern depending on the environment.
 
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{param/mean-intergene/fitness_all_with_main.pdf}
+\caption[Average fitness during evolution with increasing mean intergenic distances]{Average fitness during evolution for average intergenic distances of 10 bp, 125 bp (main run), 1 kb, and 10 kb.}
+\label{fig:param:mean-intergene-fitness}
+\end{figure}
+
+Figure~\ref{fig:param:mean-intergene-fitness} shows the evolution of the average fitness of the best individual in each replicate of the simulations, for each value of the mean intergenic distance, including the main run for comparison.
+It confirms the results seen in the previous figure: for intergenic distances from 10 bp to 1 kb, populations evolve successfully towards differentiated gene activation patterns.
+For an intergenic size of 10 kb (in yellow), however, fitness increases much more slowly, and seems to converge towards a much smaller value.
+
+\begin{figure}
+\centering
 \includegraphics[width=0.9\textwidth]{param/mean-intergene/inter-10k/activity_sigmas_avg.pdf}
-\caption{Average gene expression as a function of background supercoiling, with an intergenic distance of 10 kb.}
+\caption[Average gene expression as a function of background supercoiling with an intergenic distance of 10 kb]{Average gene expression as a function of background supercoiling, with an intergenic distance of 10 kb.}
+\label{fig:param:mean-intergene-10kb-activ-by-sigma}
 \end{figure}
+
+Figure~\ref{fig:param:mean-intergene-10kb-activ-by-sigma} shows the average gene activity as a function of background supercoiling, for the best individual in each of the replicates with a mean intergenic distance of 10 kb.
+In this case, we do not observe a relaxation-activated phenotype for \emph{A} genes as clearly as in the main simulation.
+Instead, the average expression level of \emph{A} genes is indeed slightly lower in environment B than in environment A, but remains close to half expression for background supercoiling values between -0.08 and -0.05.
 
 
 \begin{figure}
-
-\includegraphics[width=\textwidth]{param/mean-intergene/random_activ_per_sigma.pdf}
-\caption{expression level of random genes.}
+\centering
+\includegraphics[width=0.9\textwidth]{param/mean-intergene/random_activ_per_sigma.pdf}
+\caption[Average gene expression level as a function of background supercoiling in random genomes with different mean intergenic distances]{Average gene expression level as a function of background supercoiling in random genomes with different mean intergenic distances (full lines), and theoretical expression level of an isolated gene (dashed line).}
+\label{fig:param:mean-intergene-random-activ-by-sigma}
 \end{figure}
 
+Figure~\ref{fig:param:mean-intergene-random-activ-by-sigma} shows the expression level as a function of background supercoiling for genes on random genomes with increasing mean intergenic distances.
+For distances from 10 bp to 1 kb, the curve is qualitatively similar, and quite different to the expression of an isolated, non-interacting genes.
+In particular, gene expression levels are sensibly lower than the maximum in both environment A and environment B.
+On the other hand, for a mean intergenic distance of 10 kb (in yellow), genes on average behave very closely to an isolated gene, and are all fully activated in environment B.
 
-
-
-
-
-
+A possible hypothesis that could explain the incomplete fulfillment of the evolutionary target in simulations with a mean intergenic distance of 10kb comes from the mutational operator used during evolution.
+As the endpoints of the genomic inversions are chosen by picking two bases uniformly at random in the intergenic regions, the number of fully neutral inversions increases with the size of this regions.
+Indeed, if the two endpoints fall in regions that are not within interaction distance of any gene, the inverted region does not interact with the rest of the genome, and the inversion is therefore neutral.
+The increased proportion of neutral mutations when the intergenic distance is too large could make the exploration of the fitness landscape more difficult for populations, by making flat valleys between fitness peaks larger and larger to cross.
 
 \FloatBlock
+
 
 \section{Environmental Shift in Supercoiling}
 
@@ -149,12 +170,13 @@ As in section~\ref{sec:alife:param_explor}, I then present evolutionary simulati
 \begin{figure}
 \centering
 \includegraphics[width=0.75\textwidth]{param/sigma/fitness_all_with_main.pdf}
-\caption{Evolution of the fitness during evolution for with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (top) and $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (bottom) \textbf{REFAIRE AVEC 15 REP}.}
+\caption{Average fitness during evolution for with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (top) and $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (bottom) \textbf{REFAIRE AVEC 15 REP}.}
 %\label{}
 \end{figure}
 
 
 \begin{figure}
+\centering
 \includegraphics[width=0.495\textwidth]{param/sigma/sigma-1e-3/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/sigma/sigma-1e-3/gene_activity_env_B.pdf}
 
@@ -223,7 +245,7 @@ Finally, I present runs with a larger number of genes
 
 \FloatBlock
 
-\section{Mutation in Intergenic Size}
+\section{Mutable Intergenic Size}
 
 
 \begin{figure}[H]
@@ -236,6 +258,7 @@ Finally, I present runs with a larger number of genes
 
 
 \begin{figure}
+\centering
 \begin{elasticrow}[width=\textwidth]
 \elasticfigure{param/evolve-intergene/fitness_all_with_main.pdf}
 \elasticfigure{param/evolve-intergene/intergenic_size_all.pdf}
@@ -246,8 +269,10 @@ Finally, I present runs with a larger number of genes
 
 
 \begin{figure}
+\centering
 \includegraphics[width=\textwidth]{param/evolve-intergene/effective_graph_combined_degree.pdf}
 \caption{Effective graph degrees at the end of evolution with intergenic distance mutations.}
 \end{figure}
 
-%\section{Mutation in Basal Supercoiling}
+\section{Conclusion}
+
