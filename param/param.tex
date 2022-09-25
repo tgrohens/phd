@@ -12,19 +12,19 @@ I then discuss the effect of introducing indels in intergenic sections as a new 
 \toprule
 \textbf{Parameter} & \textbf{Symbol} & \textbf{Value} & \textbf{Replicates} \\
 \midrule
-Interaction distance \textbf{OK} & $d_{max}$ & \textbf{5 kb} & \textbf{30}\\
+Interaction distance & $d_{max}$ & \textbf{5 kb} & \textbf{30}\\
 & & 25 kb & 15\\
 \midrule
 & & 10 bp& 15\\
-Mean intergenic distance \textbf{OK} & $d_{mean}$ & \textbf{125 bp} & \textbf{30} \\
+Mean intergenic distance & $d_{mean}$ & \textbf{125 bp} & \textbf{30} \\
 & & 1,000 bp & 15\\
 & & 10,000 bp & 15 \\
 \midrule
 & & 0.0001 & 15\\
-Environment supercoiling \textbf{PAS OK}& $\delta\sigma_{A/B}$ & 0.001 & 15\\
+Environment supercoiling & $\delta\sigma_{A/B}$ & 0.001 & 15\\
 & & \textbf{0.01} & \textbf{30}\\
 \midrule
-Number of genes \textbf{PAS OK} & $n$ & \textbf{60} & \textbf{30} \\
+Number of genes & $n$ & \textbf{60} & \textbf{30} \\
 & & 30 & 15 \\
 \bottomrule
 \end{tabular}
@@ -173,7 +173,7 @@ The approach is similar to Section~\ref{sec:alife:param_explor}, which however u
 
 \includegraphics[width=0.495\textwidth]{param/sigma/sigma-1e-4/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/sigma/sigma-1e-4/gene_activity_env_B.pdf}
-\caption[Evolution of the number of activated genes in each environment, with decreasing environmental supercoiling shifts]{Evolution of the number of activated genes in environment A (left) and environment B (right), with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (top) and $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$ (bottom). \textbf{RELANCER AVEC 15 REP}}
+\caption[Evolution of the number of activated genes in each environment, with decreasing environmental supercoiling shifts]{Evolution of the number of activated genes in environment A (left) and environment B (right), with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (top) and $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$ (bottom).}
 \label{fig:param:sigma-activ-by-env}
 \end{figure}
 
@@ -185,7 +185,7 @@ This reinforces the plausibility of the hypothesis that DNA supercoiling can be 
 \begin{figure}
 \centering
 \includegraphics[width=0.75\textwidth]{param/sigma/fitness_all_with_main.pdf}
-\caption[Average fitness during evolution, with decreasing environmental supercoiling shifts]{Average fitness during evolution, with environmental shifts in supercoiling $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (10 times smaller than in the main run) and $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$ (100 times smaller than the main run). \textbf{REFAIRE AVEC 15 REP}.}
+\caption[Average fitness during evolution, with decreasing environmental supercoiling shifts]{Average fitness during evolution, with environmental shifts in supercoiling $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (10 times smaller than in the main run) and $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$ (100 times smaller than the main run).}
 \label{fig:param:sigma-fitness}
 \end{figure}
 
@@ -195,7 +195,7 @@ It confirms the results seen in the previous figure: fitness keeps increasing th
 \begin{figure}
 \centering
 \includegraphics[width=0.9\textwidth]{param/sigma/sigma-1e-3/activity_sigmas_avg.pdf}
-\caption[Average gene expression as a function of background supercoiling, with an absolute environmental supercoiling shift of 0.001]{Average gene expression as a function of background supercoiling, with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$.\textbf{RELANCER AVEC 15 REP}}
+\caption[Average gene expression as a function of background supercoiling, with an absolute environmental supercoiling shift of 0.001]{Average gene expression as a function of background supercoiling, with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$.}
 \label{fig:param:sigma-1e-3-activ-by-sigma}
 \end{figure}
 
@@ -250,7 +250,7 @@ As expected from the number of activated genes in each environment presented in 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{param/300-genes/activity_sigmas_avg.pdf}
-\caption[Average gene expression as a function of background supercoiling, with a 300-gene genome]{Average gene expression as a function of background supercoiling, with a 300-gene genome\textbf{REFAIRE QUAND C'EST FINI}.}
+\caption[Average gene expression as a function of background supercoiling, with a 300-gene genome]{Average gene expression by type as a function of background supercoiling, with a 300-gene genome.}
 \label{fig:param:300genes-activ-by-sigma}
 \end{figure}
 
