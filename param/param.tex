@@ -322,7 +322,6 @@ As for the runs with an intergenic distance of 10 bp (in Figure~\ref{fig:param:m
 Finally, Figure~\ref{fig:param:evolve-intergene-activ-by-sigma} shows gene activity per type as a function of background supercoiling, for the simulations with mutable intergenic distances.
 As expected, we can see that \emph{A} genes display a relaxation-activated phenotype.
 
-
 It therefore seems that, even though evolving towards higher intergenic distances would allow populations to reach greater fitnesses, there is a stronger selection pressure that keeps intergenic distances low.
 This suggests that the fitness valley that has to be crossed in order to reach higher intergenic distances is too wide, or too deep, to cross with the parameters that we chose for the indel mutational operator.
 
@@ -333,7 +332,17 @@ This suggests that the fitness valley that has to be crossed in order to reach h
 %\caption{Effective graph degrees at the end of evolution with intergenic distance mutations.}
 %\end{figure}
 
-\section{Conclusion}
+\section{Discussion}
 
+The simulations that I carried out with the parameter values presented above show that the results obtained with the model are quite robust, as differentiated gene expression by type and environment evolve over a wide range of biologically relevant values.
+In particular, results are robust with regard to the size of topological domains, which corresponds to the maximum interaction distance for the transcription-supercoiling coupling and has been measured to different values, to the mean intergenic distance, which depends on the bacterial species, and to the environmental perturbations.
+The gene regulatory networks that evolve in the model can indeed differentiate between environments that create much smaller levels of supercoiling than transcription itself.
 
+The fact that genomes with a higher number of genes or intergenic distances (above 10 kb) are not able to evolve a fitness as high as the smaller genomes shows that the topology of the fitness landscape inherent to the model changes with the value of these parameters.
+The number of possible mutations using the mutational operator of genomic inversions indeed scales quadratically with the number of base pairs on the genome, thereby directing the number of possible genotypes that can be explored in a given number of generations with a constant number of individuals.
+In order to explore this effect, it would be interesting to run additional simulations in which every length-related parameter  (maximum interaction distance, mean intergenic distance, and gene length) would be scaled down down by the same factor, as this would allow to control the number of mutations available and therefore the speed of evolution, but should not in principle affect the biological relevance of the model.
 
+Finally, introducing indels as an additional mutational operator also reveals non-trivial evolutionary characteristics of the simulations.
+Indeed, the maximum fitness obtainable with a 1 kb intergenic distance is not reached by the simulations, which instead converge to a a very low average intergenic distance.
+It would be interesting to explore different initial values for this parameter and see whether they also converge towards this low value, or if there is a threshold above which the fitness peak at high intergenic distances is reachable.
+A possible hypothesis to explain the attraction to the low mean intergenic distance could be once again related to the genomic inversions, through selection for robustness: If larger genomes have descendants that more frequently have lower fitness because of deleterious inversions than smaller genomes, there can be a selection pressure towards these smaller genomes, even though they have a lower absolute fitness; this could be measured experimentally by measuring the average fitness of a large number of descendants of evolved individuals in the different simulations.
