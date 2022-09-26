@@ -11,6 +11,7 @@
 \usepackage{pdfpages}
 \usepackage{elasticrow}
 \usepackage[hidelinks]{hyperref}
+\usepackage[hyperpageref]{backref}
 
 %% Magic layout from the memoir class manual
 \settrimmedsize{297mm}{210mm}{*}
@@ -26,6 +27,17 @@
 \checkandfixthelayout
 
 \raggedbottom
+
+%% For backref
+\renewcommand*{\backref}[1]{}% for backref < 1.33 necessary
+\renewcommand*{\backrefalt}[4]{%
+  \ifcase #1 %
+    No citations.%
+  \or
+    (cited on page #2)%
+  \else
+    (cited on pages #2)%
+\fi }
 
 % Fix epsilon
 \renewcommand{\epsilon}{\varepsilon}
@@ -49,11 +61,15 @@ by Gene Transcription
 \includegraphics[width=0.5\textwidth]{art.pdf}}
 %\title{Thèse}
 
+\pagenumbering{roman}
+
 \maketitle
 \thispagestyle{empty}
 \pagebreak
 
 \frontmatter
+
+\setcounter{page}{1}  % resets the ROMAN page counter to 1
 
 \include{fr-abstract.tex}
 %\pagebreak
