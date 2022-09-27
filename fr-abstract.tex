@@ -37,18 +37,19 @@ Une modélisation aussi détaillée de la superhélicité se révélant délicat
 J'ai implémenté ce modèle, appelé \emph{EvoTSC}, à partir de zéro en Python, et il est disponible à l'adresse \url{https://gitlab.inria.fr/tgrohens/evotsc}.
 
 À l'aide d'\emph{EvoTSC}, j'ai dans un premier temps montré que, dans un modèle où le seul mécanisme de régulation de l'activité des gènes est le couplage médié par la superhélicité entre les niveaux de transcription de gènes proches, et où les seules mutations possibles sont les inversions chromosomiques (qui réorganisent les positions relatives des gènes), il est possible d'obtenir par sélection naturelle des individus dont les gènes suivent avec précision des cibles dépendant de l'environnement.
+En particulier, il est possible d'obtenir des gènes activés par la relaxation globale de l'ADN, alors que leurs promoteurs sont inhibés par une relaxation locale.
 Ces premiers résultats sont présentés dans le chapitre~\ref{chap:alife}, et démontrent que la superhélicité peut bien jouer un rôle majeur dans la régulation de l'activité des gènes bactériens, en tant que support d'un réseau de régulation génétique.
 Ils ont été publiés, d'abord sous forme d'article dans la conférence \emph{ALIFE 2021}~\citep{grohens2021}, puis dans une version étendue dans le journal associé, \emph{Artificial Life}~\citep{grohens2022a}.
 
-% trop précis : dégraisser un peu
-
-Dans un second temps, j'ai ensuite cherché à caractériser plus en détail l'impact évolutif de la superhélicité dans la structure des génomes bactériens, en m'intéressant à la disposition des gènes sur le génome résultant des nombreux réarrangements qui forgent, au cours de l'évolution, le réseau de régulation précédemment évoqué.
-Toujours en utilisant le modèle \emph{EvoTSC}, j'ai montré qu'au niveau le plus local, des paires de gènes voisins se forment, qui se positionnent conformément aux prédictions théoriques du couplage entre superhélicité et transcription afin de présenter plusieurs types d'interaction: soit en adoptant des orientations divergentes, afin de former une boucle de rétroaction positive entre les niveaux d'expression de gènes devant être actifs quel que soit l'environnement, soit au contraire en adoptant des orientations convergentes, formant une boucle de rétroaction négative qui résulte en un système bistable, pour des gènes devant être actifs dans des environnements distincts.
-J'ai montré que cette organisation à l'échelle locale du génome n'était toutefois pas entièrement suffisante pour expliquer les niveaux d'expression des gènes observés dans le génome entier, mais que des sous-réseaux impliquant jusqu'à plusieurs dizaines de gènes pouvaient être nécessaires pour ce faire.
+Dans un second temps, j'ai ensuite cherché à caractériser plus en détail l'impact évolutif de la superhélicité dans la structure des génomes bactériens.
+Toujours en utilisant le modèle \emph{EvoTSC}, j'ai montré qu'au niveau le plus local, des paires convergentes ou divergentes de gènes voisins se forment, conformément aux prédictions théoriques du couplage entre superhélicité et transcription.
+J'ai montré que cette organisation à l'échelle locale du génome n'était toutefois pas entièrement suffisante pour expliquer les niveaux d'expression des gènes observés dans le génome complet, mais que des sous-réseaux impliquant jusqu'à plusieurs dizaines de gènes peuvent au contraire être nécessaires.
 Enfin, en utilisant une approche par KO de gène, j'ai montré que dans les génomes des individus évolués, c'est sous la forme d'un réseau unique, s'étendant à l'échelle du génome entier, que s'organise la régulation de l'expression des gènes dans le modèle \emph{EvoTSC}.
-Ce second ensemble de résultats est présenté dans le chapitre~\ref{chap:ploscb}, et a été rédigé dans une prépublication~\citep{grohens2022b}.
+Ce second ensemble de résultats est présenté dans le chapitre~\ref{chap:ploscb}, et a été mis en forme dans une prépublication~\citep{grohens2022b}, prochainement soumise à relecture par les pairs.
 
-% parler des expés de fin
+Dans le chapitre~\ref{chap:params}, je présente ensuite un ensemble d'expériences complémentaires qui montrent la robustesse des résultats du modèle \emph{EvoTSC} présentés jusqu'ici, lorsque l'on fait varier les principaux paramètres du modèle.
+J'ai finalement incorporé dans \emph{EvoTSC} un modèle d'évolution du niveau de superhélicité globale, afin de pouvoir caractériser comme dans les expériences menées avec \emph{Aevol} les possibles relations épistatiques entre mutations de superhélicité et réarrangement chromosomiques.
+Ces résultats sont présentés dans le chapitre~\ref{chap:epistasis}.
 
 L'annexe~\ref{chap:software} présente les contributions logicielles que j'ai réalisées tout au long de ma thèse.
 J'ai d'abord participé au développement d'\emph{Aevol} et d'outils associés pour gérer des simulations, puis développé le modèle \emph{EvoTSC} ainsi qu'un ensemble d'outils pour visualiser et analyser les données en résultant.
