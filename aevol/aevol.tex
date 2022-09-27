@@ -3,15 +3,16 @@
 
 In this chapter, I present the first main line of work of that I undertook during my Ph.D.
 In order to understand the role of epistasis in the prediction of evolution, I focused on the study of the specific case of mutations affecting the DNA supercoiling level in bacteria, which were shown to be repeatable at the phenotypic level,  and partially repeatable at the molecular level, in an experimental evolution setting.
-I endeavored to replicate these results in the easier to study \emph{in silico} artificial evolution setting offered by the \emph{Aevol} software platform by implementing a model of supercoiling in \emph{Aevol} and trying to detect signs of epistasis in the resulting evolved populations.
+In order to replicate these results in the easier to study \emph{in silico} artificial evolution setting offered by the \emph{Aevol} software platform, I implemented a model of supercoiling in \emph{Aevol}, and tried to detect epistatic interactions in the evolutionary trajectories of populations evolved in the model.
 
 \section{Introduction}
 \label{sec:aevol:intro}
 
 In the \emph{Long-Term Evolution Experiment} (LTEE), started by Richard Lenski in 1988~\citep{lenski1991}, 12 populations of \emph{E. coli} cells, originating from the same ancestral strain, were placed to evolve in a new environment, an Erlenmeyer flask containing a glucose-limited medium.
 Every day since the beginning of the experiment, which is still running and has reached over 75,000 generations of bacteria, a sample from each population has been propagated into fresh medium, and samples have been cryogenically conserved every 500 generations, resulting in the longest-running evolution experiment in the lab.
-The LTEE demonstrated that fitness can keep on increasing for much longer than originally expected in a constant environment~\citep{good2017}, and as sequencing capacity and synthetic biology developed in the late 1990s and early 2000s, identifying the precise DNA mutations underpinning these increases in fitness became possible.
-When sequencing the conserved \emph{E. coli} lineages in the LTEE, beneficial mutations, that is mutations that confer their bearer a higher growth rate than the ancestral strain in the conditions of the experiment, were in particular found in the \emph{topA} gene  and the \emph{fis} gene in one of the lineages~\citep{crozat2005}.
+The LTEE demonstrated that fitness can keep on increasing for much longer than originally expected in a constant environment~\citep{good2017}.
+As sequencing capacity and synthetic biology subsequently developed in the late 1990s and early 2000s, identifying the precise DNA mutations underpinning these increases in fitness became possible.
+When sequencing the conserved \emph{E. coli} lineages in the LTEE, beneficial mutations -- mutations that confer their bearer a higher growth rate than the ancestral strain in the conditions of the experiment -- were in particular found in the \emph{topA} gene  and the \emph{fis} gene, in one of the twelve lineages~\citep{crozat2005}.
 
 The genes affected by these mutations are involved in the regulation of DNA supercoiling: Topoisomerase I (encoded by \emph{topA}) directly modifies the supercoiling level by introducing supercoils, and FIS (encoded by \emph{fis}) is a nucleoid-associated protein which helps regulate supercoiling by binding to DNA.
 This makes these mutation extremely interesting in two regards.
@@ -22,8 +23,10 @@ In other words, there could be positive epistatic relationships between these mu
 
 In this chapter, I describe how I leveraged the \emph{Aevol} \emph{in silico} experimental evolution platform in order to test this evolutionary hypothesis in the simpler, more controlled setting of artificial evolution.
 \emph{Aevol} is a model that is particularly well-suited to this problem, for several reasons.
-First, the genome biology of individuals is very precisely modeled, as the genome is described at the nucleotide level, and as the transcription and translation stages that constitute the core of biological gene expression are accurately represented in the model.
-Second, \emph{Aevol} incorporates a rich variety of mutational operators, including both genomic rearrangements such as inversions and translocations or duplications and deletions, as well as local mutations such as indels and switches.
+First, the genome biology of individuals is modeled very precisely in \emph{Aevol}.
+The genome is described at the nucleotide level, and the transcription and translation stages that constitute the core of biological gene expression are accurately represented in the model.
+Second, \emph{Aevol} incorporates a rich variety of mutational operators.
+It includes both genomic rearrangements such as inversions and translocations or duplications and deletions, and local mutations such as indels and switches.
 The richness of the genome-level description of \emph{Aevol} therefore makes it an ideal tool for the study of epistatic relationships.
 
 The chapter starts with a brief overview of the \emph{Aevol} model; then, I present the model of supercoiling and its effect on transcription that I incorporated to the model, and describe the experiment that I performed in order to test the presence of epistasis between supercoiling mutations and other kinds of mutations.
