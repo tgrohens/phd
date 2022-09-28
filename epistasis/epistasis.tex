@@ -1,0 +1,29 @@
+\chapter{Looking for Epistasis in \emph{EvoTSC}}
+
+The results obtained with the \emph{EvoTSC} model that I have presented up until now tackle the regulatory role that DNA supercoiling plays in bacterial genomes.
+In this chapter, I return to the idea of epistasis between mutations in the supercoiling level and other mutations that was the root question of the research agenda of my PhD, but within the frame of \emph{EvoTSC}.
+In the experiments conducted with \emph{Aevol} and presented in Chapter~\ref{chap:aevol}, one of the reasons for which I was not able to detect a signal of epistasis was that the supercoiling model was too simple, and that supercoiling mutations would not generate interesting paths to explore the fitness landscape.
+In \emph{EvoTSC}, supercoiling is on the contrary sufficiently finely modeled to allow the evolution of regulatory networks based on local variations in the level of supercoiling, as I demonstrated in the previous chapters.
+Allowing the basal supercoiling level to evolve in some \emph{EvoTSC} populations could therefore arguably, unlike in \emph{Aevol}, generate evolutionary trajectories that allow them to reach higher fitness peaks faster than populations with a constant basal supercoiling level.
+In this chapter, I present an experiment that aims at evaluating this hypothesis.
+
+\section{Experimental Setup}
+
+To that end, I first evolved two set of 5 populations, for 1,000,000 generations, in order to obtain \emph{wild-type} evolved individuals: the first without supercoiling mutations (the same populations that I used in Chapter~\ref{chap:ploscb}), and the second with supercoiling mutations.
+Then, I picked the best individual (the wild-type) at the end of the evolution of each population, and subjected each wild-type to a set of environmental shocks, by reassigning new types at random to a proportion of their genes.
+For each individual, I created 5 different shocked individuals, and let a population initialized with clones of the shocked individual evolve for 250,000 generations.
+
+\subsection{Mutational Operator for the Supercoiling Level}
+
+\subsection{Environmental Shock}
+
+\begin{figure}
+  \centering
+  \begin{elasticrow}[width=\textwidth]
+  \elasticfigure{epistasis/img/init_indiv_control00_env_A.pdf}
+  \elasticfigure{epistasis/img/init_indiv_rep00_env_A.pdf}
+  \end{elasticrow}
+  \caption[Evolved individual and shocked individual]{Genome of one of the control wild-types (left), and shocked individual created from that individual (right), both evaluated in environment A.
+  Only the type of the genes changes, but not the local supercoiling level, as gene positions are unchanged.}
+  \label{fig:epistasis:genomes}
+\end{figure}
