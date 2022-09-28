@@ -299,14 +299,14 @@ Differentiated expression levels nonetheless evolve in our model for each type o
   \caption[Average gene expression as a function of background supercoiling at the end of evolution in the advanced model]{Average gene expression level for each class of gene (\emph{A}, \emph{B}, and \emph{AB}), as a function of the background supercoiling level $\sigma_{basal} + \delta\sigma_{env}$, averaged over the best individual of each of the 30 replicates.
   The dash-dotted light blue line represents the average expression level of genes on a random genome, and the dashed light blue line represents the expression level of a single neighbor-less gene.
   The black vertical lines represent environments A and B, in which individuals evolve during the simulation, and the pink horizontal line marks $e_{1/2}$, the threshold above which a gene is considered active.}
-  \label{fig:ploscb:activity_by_sigma}
+  \label{fig:ploscb:activity-by-sigma}
 \end{figure}
 
 \paragraph{Evolution of Relaxation-Activated Genes}
 In our model, the expression level of a gene increases exponentially with the opening free energy of its promoter, which itself increases as a sigmoidal function of negative supercoiling.
 When measuring the response of an individual's genes to variation in the background supercoiling $\sigma_{basal} + \delta\sigma_{env}$, one could therefore expect a qualitatively similar response.
 
-Figure~\ref{fig:ploscb:activity_by_sigma} shows the responses of genes of different types to the background supercoiling level (as explained in equation~\ref{eq:sigma}), and highlights striking differences between the expression of evolved, random, or isolated genes, as well as between the different gene types in evolved genomes.
+Figure~\ref{fig:ploscb:activity-by-sigma} shows the responses of genes of different types to the background supercoiling level (as explained in equation~\ref{eq:sigma}), and highlights striking differences between the expression of evolved, random, or isolated genes, as well as between the different gene types in evolved genomes.
 The light blue lines in the figure serve as a reference point, showing the response of an isolated, non-interacting gene to environmental supercoiling (dashed line), and the average response (dash-dotted line) of genes on 30 random genomes, generated using the parameters from Table~\ref{tab:param_values}.
 While \emph{AB} and \emph{B} genes (blue and green curves) display an expression level that decreases with the level of negative supercoiling, and that remains qualitatively similar to the behavior of random genes (dash-dotted line), \emph{A} genes display a completely different behavior.
 These genes show a non-monotonic response to environmental supercoiling, as their expression level decreases until a local minimum in expression at $\delta\sigma_B$, then increases again even though negative supercoiling decreases until a local maximum at $\delta\sigma_A$, before decreasing again like the other kinds of genes.
@@ -417,7 +417,7 @@ In these examples, the activity of a gene is therefore not only dependent on its
 \end{figure}
 
 We averaged this data over every gene that presents the correct activation state in each environment, in the best individual of every replicate, and very different patterns once more appear, depending on whether the targeted behavior for the gene is activation or inhibition, as depicted in Figure~\ref{fig:ploscb:min_subnetwork}.
-For \emph{AB} genes in both environments, as well as for \emph{A} genes in environment A and \emph{B} genes in environment B, the experimentally obtained minimum subnetwork size is 1, which is consistent with the expression profile of an isolated gene, shown in Figure~\ref{fig:ploscb:activity_by_sigma}: With a basal supercoiling value of $\sigma_{basal} = -0.06$, an isolated gene already experiences a high expression level in both environments, even without interactions.
+For \emph{AB} genes in both environments, as well as for \emph{A} genes in environment A and \emph{B} genes in environment B, the experimentally obtained minimum subnetwork size is 1, which is consistent with the expression profile of an isolated gene, shown in Figure~\ref{fig:ploscb:activity-by-sigma}: With a basal supercoiling value of $\sigma_{basal} = -0.06$, an isolated gene already experiences a high expression level in both environments, even without interactions.
 
 When the evolutionary target of the gene is inhibition, that is for \emph{A} genes in environment B and for \emph{B} genes in environment A, the picture is however quite different.
 In this case, a significantly larger subnetwork is needed in order to obtain inhibition of the central gene: The median subnetwork size is 9 (4 genes on each side) for \emph{A} genes.
