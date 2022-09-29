@@ -40,13 +40,14 @@ In that case, decreasing the level of negative supercoiling lessens the bias tow
 \subsection{Environmental Shock}
 
 \begin{figure}
-  \centering
-  \begin{elasticrow}[width=\textwidth]
-  \elasticfigure{epistasis/img/init_indiv_with-sc00_env_A.pdf}
-  \elasticfigure{epistasis/img/init_indiv_rep02_env_A.pdf}
-  \end{elasticrow}
-  \caption[Evolved wild-type individual before and after an environmental shock]{Genome of one of the control wild-types (left), and shocked individual created from that individual (right), both evaluated in environment A.}
-  \label{fig:epistasis:shock}
+\centering
+\begin{elasticrow}[width=\textwidth]
+\elasticfigure{epistasis/img/init_indiv_with-sc00_env_A.pdf}
+\elasticfigure{epistasis/img/init_indiv_rep02_env_A.pdf}
+\end{elasticrow}
+\caption[Evolved wild-type individual before and after an environmental shock]{Genome of one of the control wild-types (left), and shocked individual created from that individual (right), both evaluated in environment A.
+Gene types (colors) change, but not the local supercoiling level, as gene positions remain constant.}
+\label{fig:epistasis:shock}
 \end{figure}
 
 In order to simulate an environmental shock on a given individual, we assign a new type at random to 50\% of the genes of that individual (also chosen at random), ensuring that the number of genes of each type remains constant.
@@ -54,7 +55,40 @@ This represents the fact that some genes that had to be activated in the old env
 A representative example of environmental shock is depicted in Figure~\ref{fig:epistasis:shock}.
 On the left-hand side is the genome of an evolved wild-type individual, and on the right-hand side is the result of applying an environmental shock to this individual.
 The type (color) of one third of the genes changes, but not the local supercoiling level along the genome, as the gene positions themselves remain unchanged.
-As a result, a certain number of genes are wrongly activated or inhibited, opening the door to compensatory mutations.
+As a result, a certain number of genes end up wrongly activated or inhibited, opening the door to compensatory mutations.
 
 \section{Results}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.495\textwidth]{epistasis/img/control/gene_activity_env_A.pdf}
+\includegraphics[width=0.495\textwidth]{epistasis/img/control/gene_activity_env_B.pdf}
+
+\includegraphics[width=0.495\textwidth]{epistasis/img/with-sc/gene_activity_env_A.pdf}
+\includegraphics[width=0.495\textwidth]{epistasis/img/with-sc/gene_activity_env_B.pdf}
+\caption[Evolution of the number of activated genes in each environment, with a]{Average number of activated genes of each type in environment A (left) and B (right) during evolution, without (top) and with (bottom) supercoiling mutations.}
+\label{fig:epistasis:activ-by-env}
+\end{figure}
+
+Figure~\ref{fig:epistasis:activ-by-env} shows the evolution of the average number of activated genes by type in each environment after the environmental shocks, averaged over the 25 simulations without supercoiling level mutations (top) and the 25 simulations with supercoiling level mutations (bottom).
+In both cases, the number of activated genes in each environment initially regresses towards one half as a consequence of the environmental shock, but evolves again towards their respective targets.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{epistasis/img/rel_fitness_sc_control.pdf}
+\caption{Left: relative fitness of the best individual in each simulation compared to the corresponding wild-type, averaged over the 5 replicates for each wild-type, at every generation.
+Right: average relative fitness of the 5 replicates for each wild-type at the end of the simulations.}
+\label{fig:epistasis:rel-fitness}
+\end{figure}
+
+
+Recall that the point of this experiment is to detect whether populations with supercoiling mutations evolve faster than populations without, which we can interpret as a sign of positive epistasis between supercoiling mutations and other mutations.
+In order to be able to compare the speed of evolution between the populations started from the different wild-types, we are therefore interested in the evolution of the fitness of each population compared to its original wild-type.
+Figure~\ref{fig:epistasis:rel-fitness} shows the evolution of this relative fitness, averaged over the 5 replicates for each wild-type, both during evolution (left) and at the last generation (right), with (green) or without (red) supercoiling mutations.
+
+Two main observations are possible on the figure.
+First, all populations evolve a fitness that is on the same order of magnitude as their ancestor by 250,000 generations, showing that the environmental shock has been successfully compensated during evolution.
+Second, we can observe the populations with supercoiling mutations do not seem to evolve faster than the populations without these mutations, as there is no clear separation between the relative fitness curves of each set of populations.
+This lack of separation remains in particular true at the last generation of the simulations, as shown on the right-hand side of the figure: the simulations with supercoiling mutations span a broader range of relative fitness values than the simulations without.
+These results therefore tend to indicate that, within the context of this experiment, introducing mutations in the basal supercoiling level does not seem to play a role in accelerating evolution, even though it does allow for a higher fitness overall.
+
+\section{Discussion}
