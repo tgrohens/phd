@@ -1,0 +1,10 @@
+Evolution is often considered an unpredictable process, as the genetic mutations that are its source happen at random.
+But the fixation of mutations is not completely arbitrary, as mutations need to pass the sieve of natural selection to be retained.
+The beneficial or deleterious character of a mutation can moreover on the genetic background in which it happens, an effect called epistasis between mutations.
+In this work, I study a particular kind of epistatic interactions, by focusing on the interplay between mutations in the mechanisms regulating bacterial DNA supercoiling -- the level of under- or overwinding of DNA -- and genomic rearrangements.
+
+I present a mathematical and computational model in which supercoiling is sufficiently precisely modeled to exhibit a phenomenon called the transcription-supercoiling coupling: as gene transcription locally affects the supercoiling level and the level of supercoiling at gene promoters in turns affects gene transcription, the transcription levels of neighboring genes on bacterial genome can form positive or negative feedback loops.
+Integrating this model into an evolutionary simulation, I show that evolution can leverage this mechanism to evolve gene regulatory networks that are able to tune gene expression in response to environmental perturbations, using only genomic inversions.
+In particular, I show that genes that are activated by DNA relaxation evolve in the model, providing a plausible mechanism to explain the similar behavior of many bacterial genes.
+I then characterize the structure of these gene regulatory networks, showing that they cannot be reduced to local pairwise interactions, but that interaction with many neighboring genes can be needed to inhibit gene expression through supercoiling.
+Finally, I show that in this model, introducing supercoiling mutations does not seem to speed up evolution, indicating that the evolutionary relevance of epistatic interactions might be not as important as initially thought.
