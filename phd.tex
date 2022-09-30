@@ -27,8 +27,6 @@
 \setheaderspaces{*}{2\onelineskip}{*}
 \checkandfixthelayout
 
-\raggedbottom
-
 %% For backref
 \renewcommand*{\backref}[1]{}% for backref < 1.33 necessary
 \renewcommand*{\backrefalt}[4]{%
@@ -48,6 +46,8 @@
 
 \maxtocdepth{subsection}
 \setsecnumdepth{subsection}
+
+\raggedbottom
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Actual content
@@ -72,7 +72,7 @@ by Gene Transcription
 
 \setcounter{page}{1}  % resets the ROMAN page counter to 1
 
-\include{fr-abstract.tex}
+\include{fr-intro.tex}
 %\pagebreak
 
 \tableofcontents
@@ -89,6 +89,7 @@ by Gene Transcription
 \include{ploscb/ploscb.tex}
 \include{param/param.tex}
 \include{epistasis/epistasis.tex}
+\include{conclusion.tex}
 
 \appendix
 
