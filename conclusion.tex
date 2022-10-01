@@ -1,0 +1,27 @@
+\chapter{Conclusion}
+\label{chap:conclusion}
+
+\section{Summary}
+
+The overarching scientific question at the root of the work I conducted during my PhD is the following: can evolution, a supposedly random process, be made predictable?
+In order to refine this far-reaching endeavor into a more actionable research program, I focused on the study of the epistatic interactions between mutations, and asked the following question: can an improved understanding of the beneficial or deleterious nature of epistatic interactions help us predict which strain has the highest potential to harbor future favorable mutations and overtake competing strains, given its current genetic background?
+Inspired by results from the \emph{Long-Term Evolution Experiment}, I singled out DNA supercoiling as a prime example with which to try to corroborate this suggestion.
+The level of DNA supercoiling is indeed at the same time intricately governed by many cellular processes, that are subject to possible mutations, and a fundamental actor in the regulation of gene transcription and expression.
+The central role of DNA supercoiling, which bridges the physical structure of the genome with the molecular phenotype of the cell, makes mutations that influence its level prime suspects in the shaping of evolutionary trajectories by epistatic interactions.
+
+In order to tackle this problem, I first implemented a simple model of the level of supercoiling and its effect on transcription in the \emph{Aevol} \emph{in silico} experimental evolution platform, but could not establish a measurable role of supercoiling mutations in speeding up evolution after their appearance (Chapter~\ref{chap:aevol}).
+As I estimated this lack of results to be due to the inner complexity of the \emph{Aevol} model and to the initially extremely simple representation of supercoiling that I was able to incorporate into it, I designed and implemented a new multi-scale model, \emph{EvoTSC}, which trades off the precise genome description of \emph{Aevol} for a much more detailed model of the coupling between transcription and supercoiling.
+I first validated the relevance of this new model by showing that its description of supercoiling is rich enough to allow for the evolution of differentiated expression patterns in response to environmental perturbations (Chapter~\ref{chap:alife}), even when the only mutations are genomic inversions, and observed the emergence of relaxation-activated genes in the model(Chapter~\ref{chap:ploscb}).
+I then characterized the gene regulatory networks, mediated by the  transcription-supercoiling coupling, that are at the root of these differentiated transcriptional responses.
+I showed that these regulatory networks are based in the relative positions of genes on the genome, and that they require the interaction of multiple genes to function, spanning wide swaths of the genome.
+In order to reinforce confidences in the conclusions hitherto drawn from the model, I ran additional sets of simulations with different parameter values (Chapter~\ref{chap:param}).
+I showed that these results were robust with regard to the size of the topological domains (the distance at which supercoiling propagates), to the size of the intergenic regions within the range of observed bacterial values, and to the intensity of the environmental perturbations.
+Overall, I was able to conclude that the transcription-supercoiling coupling not only provides a mechanism that could explain the activation of certain genes by DNA relaxation, but also plausibly plays a role in the shaping of the organization of bacterial genomes over evolutionary time, through the gene regulatory networks that evolve from genomic rearrangements.
+
+These results, even though they provide fascinating insight into the evolution of bacterial genomes, do however not answer the original question of the putative positive epistatic interactions of supercoiling mutations that was left inconclusively answered in Chapter~\ref{chap:aevol}.
+I therefore re-attacked this question using the \emph{EvoTSC} model, by introducing supercoiling mutations along the original genomic inversions (Chapter~\ref{chap:epistasis}).
+This time, I investigated whether allowing supercoiling to mutate along genomic inversions would provide a boost in the fitness recovery speed of a population after an environmental shock, but did similarly not detect a meaningful impact.
+These negative results ultimately lead to questioning the viability of supercoiling as a fruitful example for the study of the evolutionary role of epistatic interactions.
+
+\section{Limits and Perspectives}
+
