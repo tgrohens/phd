@@ -119,7 +119,7 @@ If gene $j$ is upstream of gene $i$, and if it is on the same strand as (or poin
 Conversely, if gene $j$ is upstream of gene $i$ but on the other strand than (or points away from) gene $i$, it generates a buildup in negative supercoiling at gene $i$ ($\eta = -1$).
 If gene $j$ is instead located downstream of gene $i$, the sign of the interaction in each case is switched: $\eta = 1$ if the genes are on the same strand, and $\eta = -1$ otherwise.
 
-We then apply a scaling coefficient $c$, which represents the intensity to which the transcription-generated torsion of DNA affects the local level of supercoiling.
+We then apply a scaling coefficient $c$, which represents the intensity to which the transcription"=generated torsion of DNA affects the local supercoiling level.
 Finally, the strength of the interaction decreases linearly with the distance $d(i, j)$ between the promoter of gene $i$, which is the position where the local level of supercoiling affects the probability that an RNA polymerase binds to the DNA and starts transcribing gene $i$, and the middle of gene $j$, which is the average location of the RNA polymerases that transcribe gene $j$, assuming that DNA is transcribed at a constant speed.
 When this distance reaches a threshold of $d_{max}$, the two genes are considered to be too far away to interact and the effect vanishes.
 
@@ -269,8 +269,8 @@ Different activation patterns for each gene class are clearly visible on the gen
 Indeed, all \emph{AB} genes except one are activated (dark blue) in each environment, whereas 19 out of 20 \emph{B} genes are correctly inhibited (light green) in environment A (left) and 18 correctly activated (dark green) in environment B (right).
 Conversely, 16 \emph{A} genes are activated (dark red) in environment A, and 16 inhibited (light red) in environment B.
 
-The transcription-generated supercoiling represented in the inner ring furthermore changes consistently with the gene activation patterns between the two environments: red zones, where DNA is positively supercoiled, contain inhibited genes, whereas blue zones, where DNA is negatively supercoiled, contain activated genes.
-This individual therefore shows that it is possible for evolution to adjust the gene expression levels of an individual in our model to an environment-dependent target, by relying only on the transcription-supercoiling coupling and on the relative positions of genes on the genome.
+The transcription"=generated supercoiling that is represented in the inner ring furthermore changes consistently with the gene activation patterns between the two environments: red zones, where DNA is positively supercoiled, contain inhibited genes, whereas blue zones, where DNA is negatively supercoiled, contain activated genes.
+This individual therefore shows that it is possible for evolution to adjust the gene expression levels of an individual in our model to an environment-dependent target, by relying only on the transcription"=supercoiling coupling and on the relative positions of genes on the genome.
 
 % Evolution of gene _activation_ by gene class
 \begin{figure}[H]
@@ -371,7 +371,7 @@ In environment A, \emph{A} genes indeed generate an average positive supercoilin
 In environment B, it is instead \emph{B} genes that strongly inhibit \emph{A} genes through the generation of positive supercoiling.
 
 Convergently oriented \emph{A}/\emph{B} gene pairs therefore form toggle switches, or bistable gene regulatory circuits, in which the expression of one gene represses the expression of the other gene~\citep{gardner2000}.
-In accordance with the targeted expression patterns of \emph{A} and \emph{B} genes, we therefore observe that the local organization of the genome into toggle switches, like the divergent \emph{A}/\emph{B} pairs, is favored by evolution in order to produce environment-dependent differentiated expression levels.
+In accordance with the targeted expression patterns of \emph{A} and \emph{B} genes, we therefore observe that the local organization of the genome into toggle switches, like the divergent \emph{A}/\emph{B} pairs, is favored by evolution in order to produce environment"=dependent differentiated expression levels.
 
 
 \subsection{Local Interactions Do Not Recapitulate the Regulatory Network}
@@ -448,7 +448,7 @@ In order to characterize more finely the gene regulatory networks that evolve in
 \end{figure}
 
 \paragraph{Transcriptional Gene Knockouts}
-A transcriptional gene knockout (or simply gene knockout in the manuscript) completely suppresses the transcription of a gene, adapting the principle of gene knockouts to the transcription rather than the translation step of gene expression.
+A transcriptional gene knockout (or simply a gene knockout in the manuscript) completely suppresses the transcription of a gene, adapting the principle of gene knockouts to the transcription rather than the translation step of gene expression.
 In order to knock out a gene in an individual in our model, we simply set the transcription rate of that gene to zero during every step of the computation of the gene expression levels of that individual.
 This virtually removes the knocked-out gene from the genome, while keeping the intergenic distance between its upstream and downstream neighbors unchanged, and mimics a loss of function its the promoter.
 The result of such a knockout on the genome of an evolved individual is shown in Figure~\ref{fig:ploscb:ko_genomes}.

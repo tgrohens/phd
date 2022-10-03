@@ -85,7 +85,7 @@ In conclusion, DNA supercoiling plays an important evolutionary role.
 It can serve as the support for the evolution of particular chromosomal organizations as a way to trigger certain sets of genes based on the change in supercoiling caused by specific environments, and its regulation is itself subject to selective pressure when adapting to new environments.
 
 \paragraph{}
-Both the importance of supercoiling regulation and the detailed mechanisms of the transcription-supercoiling coupling at the local scale have well been studied, but a thorough analysis of the genome-wide effect of the transcription-supercoiling coupling on gene expression, and of its possible evolutionary use by natural selection, remains missing.
+Both the importance of supercoiling regulation and the detailed mechanisms of the transcription"=supercoiling coupling at the local scale have well been studied, but a thorough analysis of the genome-wide effect of the transcription-supercoiling coupling on gene expression, and of its possible evolutionary use by natural selection, remains missing.
 In this work, we describe a new model which incorporates a high-level model of global supercoiling regulation and of the transcription-supercoiling coupling within an \emph{in silico} experimental evolution setting.
 Using this model, we first investigate the non-linear variation in gene transcription levels at the whole-genome scale in response to variations in the global supercoiling level.
 Then, we study the evolutionary trajectory of gene activation patterns in individuals subjected to different environments.
@@ -110,9 +110,9 @@ This article is an extended version of~\cite{grohens2021}.
 %In this paper, we present a model which aims at studying the genome-wide effect of the transcription-supercoiling coupling in bacteria, expanding upon previous work which only considered local interactions.
 %In gene-dense genomes such as prokaryotic ones, transcription-supercoiling coupling between nearby genes is likely to give rise to a genome-wide transcriptional network, the topology of which depends on relative gene distances and orientations.
 
-Our model is written in Python and consists in an individual-based simulation, the source code of which is available at
-\url{https://gitlab.inria.fr/tgrohens/evotsc/-/tree/alife-journal}.
-It is also preserved for long-term archival~\citep{evotsc_swh} using the Software Heritage archive~\citep{dicosmo2020}.
+Our model consists in an individual-based simulation, written in Python.
+Its source code is available at \url{https://gitlab.inria.fr/tgrohens/evotsc/-/tree/alife-journal}.
+It is also preserved for long-term archival at~\citep{evotsc_swh} using the Software Heritage online archive~\citep{dicosmo2020}.
 An individual in the model is represented by a circular genome (representative of most bacterial genomes), comprising a fixed number of genes, separated by non-coding intergenic regions.
 Each gene is described by the following characteristics: its locus on the genome, its orientation, and its basal transcription (or expression) level.
 As we are mainly interested in the interplay between supercoiling and transcription, we voluntarily do not make the difference between gene expression levels, understood as mRNA or protein concentrations, and transcription levels, the immediate rate of mRNA
@@ -275,7 +275,7 @@ The start point of this inversion falls between genes A and B and its end point 
 Here, we can see that the diverging orientation that was present between genes A and B has vanished, replaced by a set of genes in colinear orientation, from A to D.
 This genomic reorganization results in the loss of the activation of genes A and B, as gene B is now more strongly inhibited by gene D due to its closer genomic location, and as genes A and B are not in a positive feedback loop due to diverging orientations any longer; only the pairs of genes D and E, and H and I, remain activated.
 
-Based on these observations, we can confirm that in our model, the transcription-supercoiling coupling generates complex networks of genome-wide interactions between genes, and that these networks are directly dependent on the architecture of the genome.
+Based on these observations, we can confirm that in our model, the transcription"=supercoiling coupling generates complex networks of genome-wide interactions between genes, and that these networks are directly dependent on the architecture of the genome.
 
 
 \section{An Evolutionary Genome-Wide Model of the Transcription-Supercoiling Coupling}
@@ -443,7 +443,7 @@ This shows the plasticity of the response to environmental change at the local s
   \label{fig:alife:best_indiv}
 \end{figure}
 
-Our experimental results show that, in a model of gene transcription that is structured around the transcription-supercoiling coupling, complex gene interaction networks can evolve.
+Our experimental results show that, in a model of gene transcription that is structured around the transcription"=supercoiling coupling, complex gene interaction networks can in fact evolve.
 These gene interaction networks are sensitive to environmental variations, which are mediated in our model by a single parameter: $\sigma_{env}$, the amount of global supercoiling that is due to the environment.
 
 \subsection{Robustness of Gene Network Evolution}

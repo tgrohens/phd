@@ -4,14 +4,14 @@
 \usepackage{libertinus}
 \usepackage{inconsolata}
 \usepackage{natbib}
-\usepackage[french, english]{babel}
+\usepackage[ngerman, french, english]{babel}
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{pdfpages}
 \usepackage{elasticrow}
-\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=OliveGreen]{hyperref}
+\usepackage[breaklinks=true,colorlinks=true,linkcolor=black,citecolor=black,urlcolor=OliveGreen]{hyperref}
 \usepackage[hyperpageref]{backref}
 
 %% Magic layout from the memoir class manual
@@ -37,6 +37,11 @@
   \else
     (cited on pages #2)%
 \fi }
+
+%% Hyphenation
+
+\useshorthands*{"}
+\addto\extrasenglish{\languageshorthands{ngerman}}
 
 % Fix epsilon
 \renewcommand{\epsilon}{\varepsilon}
