@@ -5,87 +5,8 @@
 This chapter presents the first version of the \emph{EvoTSC} model, and the first results that I obtained with the model: The evolution of differentiated expression levels in different environments, when gene expression is regulated by the transcription-supercoiling coupling.
 The text of the chapter is an edited version of the \emph{Artificial Life} paper~\citep{grohens2022a}.
 
-\section{Introduction}
-\label{sec:alife:intro}
-
-The DNA molecule is a double-stranded polymer of nucleotides that plays a fundamental role in life.
-It is shaped as a double helix which rotates around itself at a rate of around one turn per $10.5$ base pairs~\citep{krogh2018}.
-However, when subject to physical forces, it can become overwound or underwound, or writhe around itself, in a process known as DNA supercoiling;
-the supercoiling level $\sigma$ is measured as the density of extra turns (or coils) per base pair~\citep{duprey2021}.
-In bacterial cells, DNA is usually slightly underwound~\citep{lal2016}, with a negative value of $\sigma$.
-The basal supercoiling level depends on the species, but a typical value is $\sigma_{basal} \approx -0.066$ in \emph{Escherichia coli}~\citep{crozat2005}.
-DNA supercoiling is tightly regulated by a class of enzymes called topoisomerases.
-The main topoisomerases are topoisomerase I and gyrase: gyrase uses ATP to maintain DNA in a negative supercoiling state by adding negative coils, while topoisomerase I relaxes supercoiling and does not need ATP~\citep{martisb.2019}.
-
-DNA supercoiling furthermore plays an important role in bacterial cells as an ancestral regulator of gene activity~\citep{dorman2016}.
-Indeed, as shown in figure~\ref{fig:alife:theory}A and~\ref{fig:alife:theory}B, high negative supercoiling levels, or hypercoiling ($\sigma < \sigma_{basal}$), favor higher expression of bacterial genes, as the thermodynamic reaction of promoter opening required to begin transcription is facilitated~\citep{elhoudaigui2019}.
-Conversely, high supercoiling levels, or DNA relaxation ($\sigma > \sigma_{basal}$), reduce gene expression.
-DNA hypercoiling and relaxation have been shown to affect the expression of 10\% and 13\% respectively of the genome of \emph{Streptococcus pneumoniae}, in which supercoiling-sensitive genes can see up to 5-fold increases or decreases in their expression level when subjected to DNA relaxation~\citep{delacampa2017}.
-In \emph{Escherichia coli}, DNA relaxation has been shown to affect the expression of around 7\% of the genes~\citep{peter2004}.
-Moreover, in some bacterial species such as \emph{Buchnera aphidicola}, an obligate aphid endosymbiont with a highly reduced genome~\citep{vinuelas2007}, gene regulation still takes place even in the near-total absence of traditional transcription factors; in these species, DNA supercoiling is suspected to be the main, if not the sole, regulatory mechanism~\citep{brinza2013}.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\textwidth]{alife/img/fig-theorique.pdf}
-  \caption[Role of supercoiling in transcription, and description of the TSC]{\textbf{A}. When DNA is underwound ($\sigma < \sigma_{basal}$, left), gene transcription rates are higher than when DNA is overwound ($\sigma > \sigma_{basal}$, right).
-  \textbf{B}. Promoter activity (equivalently, transcription level) \emph{e} increases with the level of negative supercoiling $-\sigma$.
-  \textbf{C}. The transcription of a gene by RNA polymerase (RNAP) generates a decrease in supercoiling upstream of the transcribed gene, and an increase downstream of the transcribed gene.
-  \textbf{D}. Transcription-supercoiling coupling: the sign of the interaction between neighboring genes depends on their relative orientation.}
-  \label{fig:alife:theory}
-\end{figure}
-
-
-\subsection{Dynamic Properties of DNA Supercoiling}
-
-DNA supercoiling is under the influence of both internal and external constraints.
-It varies both in time, during the lifecycle of the bacterium, which alternates between growth and stationary phases~\citep{krogh2018}, and in space, as different regions of the chromosome experience different supercoiling levels~\citep{lal2016, junier2016}.
-In bacteria, the supercoiling homeostasis is mainly regulated by the topoisomerases, but nucleoid-associated proteins (NAPs) such as \emph{H-NS} also play a topological role by preventing the relaxation of superhelical stress at their fixation points in the genome, resulting in topological domains that have different supercoiling levels~\citep{krogh2018}.
-Moreover, the global supercoiling level can change as a genome-wide response to extracellular stresses, such as changes in pH, osmolarity, temperature, or oxidative stress~\citep{duprey2021}.
-
-Crucially, the transcription process itself plays a role in local supercoiling level variations.
-Indeed, when an RNA polymerase (RNAP in figure~\ref{fig:alife:theory}C) transcribes a gene, it follows the helical twist of the DNA template, but its rotation is hampered by frictional drag~\citep{ma2016}.
-The RNA polymerase therefore acts as a topological barrier and generates an accumulation of positive supercoiling through overwinding of the DNA molecule downstream of the transcribed region, and of negative supercoiling through underwinding upstream of the transcribed region, in what has been called the twin-domain model of DNA supercoiling~\citep{liu1987}, as shown in figure~\ref{fig:alife:theory}C.
-
-
-\subsection{The Transcription-Supercoiling Coupling}
-
-As transcription is itself regulated by supercoiling (figures~\ref{fig:alife:theory}A and B), these interactions result in a possible dynamic coupling between the transcription levels of neighboring genes, which has been named the transcription-supercoiling coupling~\citep{martisb.2019}.
-As previously described, when a gene is transcribed (figure~\ref{fig:alife:theory}C), DNA upstream of the transcribed gene is underwound and the level of negative supercoiling increases ($\sigma$ decreases), while DNA downstream of the transcribed gene is overwound and the level of negative supercoiling decreases ($\sigma$ increases).
-This, in turn, affects the transcription of neighboring genes, as a higher level of negative supercoiling at the promoter of a gene increases its transcriptional activity.
-Therefore, a highly transcribed gene can increase the transcription level of the genes that are upstream of itself, and decrease the transcription level of the genes that are downstream of itself.
-The influence of this coupling on gene transcription is represented in figure~\ref{fig:alife:theory}D: when two neighboring genes lie in diverging orientations (figure~\ref{fig:alife:theory}D, left), the transcription of each gene generates a local increase in negative supercoiling around the other gene, thereby increasing the transcription level of that gene; each gene therefore reinforces the transcription of the other gene.
-Conversely, when two neighboring genes face each other in converging orientations (figure~\ref{fig:alife:theory}D, center), each gene is located downstream of the RNA polymerase during the transcription  of the other gene, leading to a decrease in negative supercoiling and therefore a lower transcription level. In that case, each gene inhibits the other gene.
-Finally, if two genes are in a colinear orientation (figure~\ref{fig:alife:theory}D, right), the downstream gene up-regulates the upstream gene, and the upstream gene down-regulates its downstream neighbor.
-
-Several mathematical and computational models have been proposed to describe the effect of the transcription-supercoiling coupling on the expression level of neighboring genes.
-In~\cite{meyer2014}, a quantitative model of the supercoiling level at a locus of interest is proposed.
-DNA transcription is regulated by the opening energy of DNA around gene promoters, which directly depends on the supercoiling level.
-In this model, the reciprocal influence of neighboring genes can be obtained by computing the difference in transcription levels due to supercoiling and the subsequent variation in supercoiling, and iterating this system until a fixed point is reached.
-\cite{elhoudaigui2019} describe a more detailed stochastic model of DNA transcription involving explicit RNA polymerases and topoisomerases.
-The transcription level of a genomic region of interest is simulated using discrete time steps, during which RNA polymerases attach to the DNA template, progress along the transcribed region while generating positive supercoiling downstream and negative supercoiling upstream, and detach from the DNA, relaxing supercoiling constraints.
-
-These models however limit themselves to mechanistic descriptions of the local interaction between genes, but do not try to generalize to the whole-genome scale nor to an evolutionary time frame.
-Yet, the dense gene content of bacteria suggests that the transcription-supercoiling coupling can generate a global transcriptional interaction network through the propagation of local supercoiling variations.
-Indeed, in bacteria, the distances between the beginning of two consecutive genes average around 1,000 bp~\citep{blattner1997}.
-This is low enough to connect multiple genes through the transcription-supercoiling coupling, as the typical distance at which this interaction operates is around a few thousand base pairs on each side of the transcribed gene~\citep{elhanafi2000}.
-Measurements of the expression level of neighboring genes in bacteria have moreover experimentally demonstrated the existence of a coupling between transcription and supercoiling in specific gene systems, such as the ilvIH-leuO-leuABCD region in \emph{Escherichia coli} or \emph{Salmonella typhimurium}~\citep{elhanafi2000,sobetzko2016, dorman2016}.
-Finally, experimental evidence of this coupling has also been obtained in a synthetic system using the \emph{ilvY} and \emph{ilvC} promoters of \emph{E. coli} placed in diverging orientations on a plasmid, in which a decrease (resp. increase) in \emph{ilvY} expression was correlated with a decrease (resp. increase) in \emph{ilvC} expression~\citep{rhee1999}.
-
-
-In addition to a localized influence, global gene regulation through changes in the DNA supercoiling level has been shown to exist in nature.
-An example of this is \emph{Buchnera aphidicola}, an endosymbiotic bacteria with a streamlined genome, in which control of the supercoiling level has evolved to be one of the main regulatory mechanisms~\citep{brinza2013}.
-Moreover, in \emph{Dickeya dadantii}, a plant pathogenic bacteria, different genomic regions exhibit markedly different responses to changes in supercoiling \citep{muskhelishvili2019}, allowing the expression of pathogenic genes only in stressful environments.
-Finally, in the setting of experimental evolution, mutations in the regulation of supercoiling have been shown to drive the evolutionary response of \emph{Escherichia coli} strains.
-In the Long-Term Evolution Experiment (LTEE)~\citep{lenski1991}, 12 populations of \emph{Escherichia coli} have been maintained for over 80,000 generations, evolving and adapting to a glucose-limited environment.
-In this experiment, parallel increases in the level of negative supercoiling been measured in 10 of the populations~\citep{crozat2010}, suggesting that a more negatively supercoiled genome confers an evolutionary advantage for that environment.
-Furthermore, mutations in two genes regulating DNA supercoiling, \emph{topA} and \emph{fis}, have been identified as the genetic basis for this phenotypic change, and have been verified to confer a fitness advantage~\citep{crozat2005} when inserted into the genetic background of the ancestral strain.
-These results suggest a strong selection pressure to tune the level of DNA supercoiling to the new environment of the LTEE.
-
-In conclusion, DNA supercoiling plays an important evolutionary role.
-It can serve as the support for the evolution of particular chromosomal organizations as a way to trigger certain sets of genes based on the change in supercoiling caused by specific environments, and its regulation is itself subject to selective pressure when adapting to new environments.
-
 \paragraph{}
-Both the importance of supercoiling regulation and the detailed mechanisms of the transcription"=supercoiling coupling at the local scale have well been studied, but a thorough analysis of the genome-wide effect of the transcription-supercoiling coupling on gene expression, and of its possible evolutionary use by natural selection, remains missing.
+Both the importance of supercoiling regulation and the detailed mechanisms of the transcription"=supercoiling coupling at the local scale have well been studied (see Section~\ref{sec:background:sc}), but a thorough analysis of the genome-wide effect of the transcription-supercoiling coupling on gene expression, and of its possible evolutionary use by natural selection, remains missing.
 In this work, we describe a new model which incorporates a high-level model of global supercoiling regulation and of the transcription-supercoiling coupling within an \emph{in silico} experimental evolution setting.
 Using this model, we first investigate the non-linear variation in gene transcription levels at the whole-genome scale in response to variations in the global supercoiling level.
 Then, we study the evolutionary trajectory of gene activation patterns in individuals subjected to different environments.
@@ -93,7 +14,7 @@ Then, we study the evolutionary trajectory of gene activation patterns in indivi
 We show that in our model, a genome-scale gene interaction network emerges from local interactions, and creates a reaction norm in response to the change of a single parameter, the global supercoiling level, caused by different environments.
 Moreover, we demonstrate that, using genomic inversions as the only mutation operator, and therefore only changing the relative positions and orientations of genes on the genome, evolution can select genomes displaying qualitatively different phenotypes in different environments, characterized by different global supercoiling conditions.
 
-This article is an extended version of~\cite{grohens2021}.
+%This article is an extended version of~\cite{grohens2021}.
 
 \section{A Genome-Wide Model of the Transcription-Supercoiling Coupling}
 \label{sec:alife:indiv_model}
