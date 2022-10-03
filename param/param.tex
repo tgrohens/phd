@@ -76,7 +76,7 @@ The dash-dotted line represents the average expression of genes on a random geno
 
 Figure~\ref{fig:param:inter25k-activ-by-sigma} shows the average gene expression by type of evolved individuals, as a function of the background supercoiling level.
 As in the main run, \emph{A} genes display a relaxation-activated phenotype.
-\emph{AB} and \emph{B} genes are relaxation-inhibited, but nonetheless display quite different behaviors than the (dash-dotted light blue) curve for genes on a random genome with the same parameters, which present a much flatter response curve to background supercoiling than with the default interaction distance of 5 kb (shown in Figure~\ref{fig:ploscb:activity_by_sigma}).
+\emph{AB} and \emph{B} genes are relaxation-inhibited, but nonetheless display quite different behaviors than the (dash-dotted light blue) curve for genes on a random genome with the same parameters, which present a much flatter response curve to background supercoiling than with the default interaction distance of 5 kb (shown in Figure~\ref{fig:ploscb:activity-by-sigma}).
 
 \begin{figure}[H]
 \centering
@@ -276,7 +276,7 @@ We saw previously in Section~\ref{sec:param:mean-intergene} that the evolution o
 In order to see whether the fitness peak at high intergenic distances would be reachable from their original values, I introduced a new mutational operator which allows intergenic distances to evolve, through the addition or deletion of a small number of bases (indels).
 
 In order to perform an indel in the model, we first pick a number of base pairs to add or delete, by drawing from a normal distribution $\mathcal{N}(0, s^2)$, with $s^2 = $ 10.
-Then, we draw uniformly at random a gene, and add or remove the corresponding number of bases from the intergenic section starting at that gene \textbf{Ça devrait plutôt être uniforme selon la longueur des sections intergéniques -- note: ça n'a pas l'air de changer cf. figures}.
+Then, we draw uniformly at random a gene, and add or remove the corresponding number of bases from the intergenic section starting at that gene.
 If the intergenic section is too small to delete the chosen number of base pairs, we try drawing another gene at random, before giving up after a certain number of tries.
 For these simulations, I ran 15 replicates for 1,000,000 generations (as in the main runs in Chapter~\ref{chap:ploscb}), in order to give the mean intergenic distance the time to converge, and started from an initial value of 125 bp, as in the main simulations.
 
