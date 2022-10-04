@@ -104,12 +104,30 @@ This model has finally been used to propose a toggle switch~\citep{gardner2000} 
 
 The common limit to all the models described above is that these models focus on mechanistic descriptions of the local interaction between genes, but do not try to generalize to the whole-genome scale nor to an evolutionary time frame, as would be of interest in order to study the evolutionary role of supercoiling mutations.
 
-\section{Method: Evolutionary Systems Biology}
+
+\section{An Evolutionary Systems Biology Approach}
+
+The models of the transcription-supercoiling coupling presented above show that the system that emerges from the coupled transcription of neighboring genes on a genome is a complex system, in the sense that it presents behaviors that cannot explained by modeling each gene in isolation.
+In order to be able to study the epistatic interactions of mutations in the supercoiling homeostasis, a model that incorporates this homeostasis at least minimally is required, further increasing the complexity of the modeled system.
+The methodological approach that I used to tackle this question is the one of evolutionary systems biology, which adapts the tools of systems biology to study not only complex systems themselves but also their evolution (in the Darwinian sense) over time, with the help of computer simulations~\citep{beslon2021}.
 
 \begin{figure}
 \centering
-\includegraphics[width=0.9\textwidth]{background/img/evol_sys_bio.pdf}
-\caption{A nice figure.}
+\includegraphics[width=0.75\textwidth]{background/img/evol_sys_bio.pdf}
+\caption[Template of an evolutionary systems biology simulation]{Template of an evolutionary systems biology simulation.
+A population of complex systems each represented by their inner data structure $DS_i$ representing system $S_i$, and each having a defined fitness $f_i$, follows an evaluation-selection-variation-replication loop.
+Figure reproduced with permission from~\citep{beslon2021}.}
 \label{fig:background:evol-sys-bio}
 \end{figure}
 
+The core of the approach is represented in Figure~\ref{fig:background:evol-sys-bio}, which describes the evolution of a population of comparable complex systems.
+A complex system of interest $S$ is represented by the means of a data structure $DS$, representing an instantiation of the system with particular parameters.
+Using this data structure, the behavior of the instance of the complex system can be evaluated, and used to compute a fitness value $f$.
+Once the fitness of every system has been evaluated, the fittest systems can reproduce, and undergo stochastic mutations that affect their parameter values, giving rise to a new complex system that can be put back in the population, or used as part of a new population in a discrete generation model.
+
+Both \emph{Aevol} (introduced in Chapter~\ref{chap:aevol}) and \emph{EvoTSC} (introduced in Chapter~\ref{chap:alife}), the \emph{in silico} artificial evolution platforms that I used during my PhD, follow this approach.
+In both platforms, each complex system represents a given individual which is described by its genome; the models diverge in their representation of the genome, as \emph{Aevol} is a nucleotide-level model whereas \emph{EvoTSC} is a string-of-pearls model.
+Individuals are in both platforms evaluated by computing the transcription levels of their genes, which are used to compute fitness by comparing them to an implicit (in \emph{Aevol}) or explicit (in \emph{EvoTSC}) target.
+Finally, after selection of the new individuals, the models apply different mutational operators (matching the representation of the genome and of the supercoiling homeostasis) in order to obtain the new generation.
+
+Overall, the evolutionary systems biology approach therefore seems particularly well suited to the study of the epistatic interactions between supercoiling mutations and other mutations such as genomic rearrangements, as the supercoiling-mediated interactions between genes on a genome and the many factors that jointly affect supercoiling give rise to a complex system.
