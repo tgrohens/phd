@@ -6,7 +6,7 @@ latex:
   stage: build
   image: listx/texlive:2020
   script:
-    - latexmk -pdf phd.tex
+    - latexmk -e '$max_repeat=10' -pdf phd.tex
 
   artifacts:
     paths:
