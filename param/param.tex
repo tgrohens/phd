@@ -193,7 +193,7 @@ Evolution of gene regulation by supercoiling is therefore overall resilient to t
 \label{sec:param:sigma-env}
 
 In this section, I tested the robustness of the evolution of differentiated expression levels when the shift in supercoiling caused by the environment $\sigma_A$ and $\sigma_B$ is 10 times and 100 times smaller than in the main run.
-The approach is similar to Section~\ref{sec:alife:param_explor}, which however used the early version of the model.
+The approach is similar to the one in Section~\ref{sec:alife:param_explor}, which however used the early version of the model.
 
 \begin{figure}[H]
 \centering
@@ -202,46 +202,49 @@ The approach is similar to Section~\ref{sec:alife:param_explor}, which however u
 
 \includegraphics[width=0.495\textwidth]{param/sigma/sigma-1e-4/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{param/sigma/sigma-1e-4/gene_activity_env_B.pdf}
-\caption[Evolution of the number of activated genes in each environment, with decreasing environmental supercoiling shifts]{Evolution of the number of activated genes in environment A (left) and environment B (right), with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (top) and $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$ (bottom).}
+\caption[Evolution of the number of activated genes in each environment, with decreasing environmental supercoiling shifts]{Evolution of the number of activated genes in environment A (left) and environment B (right), with environmental supercoiling shifts $\sigma_A = 10^{-3}$ and $\sigma_B = -10^{-3}$ (top) and $\sigma_A = 10^{-4}$ and $\sigma_B = -10^{-4}$ (bottom).}
 \label{fig:param:sigma-activ-by-env}
 \end{figure}
 
-Figure~\ref{fig:param:sigma-activ-by-env} shows the evolution of the number of activated genes by type in each environment, with environmental shifts in supercoiling 10 times smaller than the main run (top) and 100 times smaller (bottom), for 250,000 generations.
+Figure~\ref{fig:param:sigma-activ-by-env} shows the evolution of the number of activated genes for each gene type in each environment, with environmental shifts in supercoiling 10 times smaller than the main run (top) and 100 times smaller (bottom), for 250,000 generations.
 In both cases, differentiated gene expression patterns evolve, although evolution seems to be slower when $\sigma_A$ and $\sigma_B$ are 100 times smaller than in the main run.
-The evolution of different gene expression levels as a response to changes in supercoiling is therefore sensitive even to very small perturbations.
+This shows that evolution of different gene expression levels as a response to changes in supercoiling can therefore be sensitive even to very small perturbations.
 This reinforces the plausibility of the hypothesis that DNA supercoiling can be used as an environmental sensory device for the regulation of gene expression.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{param/sigma/fitness_all_with_main.pdf}
-\caption[Average fitness during evolution, with decreasing environmental supercoiling shifts]{Average fitness during evolution, with environmental shifts in supercoiling $\sigma_A = 0.001$ and $\sigma_B = -0.001$ (10 times smaller than in the main run) and $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$ (100 times smaller than the main run).}
+\caption[Average fitness during evolution, with decreasing environmental supercoiling shifts]{Average fitness during evolution, with environmental shifts in supercoiling logarithmically decreasing in absolute value: $\sigma_A = 10^{-2}$ and $\sigma_B = -10^{-2}$ (main run), $\sigma_A = 10^{-3}$ and $\sigma_B = -10^{-3}$ (10 times smaller than in the main run) and $\sigma_A = 10^{-4}$ and $\sigma_B = -10^{-4}$ (100 times smaller than the main run).}
 \label{fig:param:sigma-fitness}
 \end{figure}
 
 Figure~\ref{fig:param:sigma-fitness} shows the evolution of the average fitness of the best individual in each replicate, for each pair of environmental supercoiling values.
 It confirms the results seen in the previous figure: fitness keeps increasing throughout the simulation in all cases, but more slowly when the environmental perturbation is the smallest.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{param/sigma/sigma-1e-3/activity_sigmas_avg.pdf}
-\caption[Average gene expression as a function of background supercoiling, with an absolute environmental supercoiling shift of 0.001]{Average gene expression as a function of background supercoiling, with environmental supercoiling shifts $\sigma_A = 0.001$ and $\sigma_B = -0.001$.}
+\caption[Average gene expression as a function of background supercoiling, with an absolute environmental supercoiling shift of 0.001]{Average gene expression as a function of background supercoiling, with environmental supercoiling shifts $\sigma_A = 10^{-3}$ and $\sigma_B = -10^{-3}$.}
 \label{fig:param:sigma-1e-3-activ-by-sigma}
 \end{figure}
 
-Figure~\ref{fig:param:sigma-1e-3-activ-by-sigma} shows the average gene expression per gene type as a function of background supercoiling, for the best individuals at the end of evolution with environmental shifts in supercoiling of $\sigma_A = 0.001$ and $\sigma_B = -0.001$.
+Figure~\ref{fig:param:sigma-1e-3-activ-by-sigma} shows the average gene expression per gene type as a function of background supercoiling, for the best individuals at the end of evolution with environmental shifts in supercoiling of $\sigma_A = 10^{-3}$ and $\sigma_B = -10^{-3}$.
 Even though the difference between the two environments is 10 times smaller than in the main run, \emph{A} genes are still able to evolve a relaxation-activated phenotype, and \emph{B} genes are still able to quickly transition from high activation to high inhibition in a much shorter range of supercoiling values.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{param/sigma/sigma-1e-4/activity_sigmas_avg.pdf}
-\caption[Average gene expression as a function of background supercoiling, with an absolute environmental supercoiling shift of 0.0001]{Average gene expression as a function of background supercoiling, with environmental supercoiling shifts $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$.
+\caption[Average gene expression as a function of background supercoiling, with an absolute environmental supercoiling shift of 0.0001]{Average gene expression as a function of background supercoiling, with environmental supercoiling shifts $\sigma_A = 10^{-4}$ and $\sigma_B = -10^{-4}$.
 The inset at the top right of the figure shows a 150x zoom on supercoiling shift values near zero.}
 \label{fig:param:sigma-1e-4-activ-by-sigma}
 \end{figure}
 
-Figure~\ref{fig:param:sigma-1e-4-activ-by-sigma} similarly shows average gene expression per gene type as a function of background supercoiling, this time with environmental supercoiling shifts $\sigma_A = 0.0001$ and $\sigma_B = -0.0001$.
-Strikingly, \emph{A} genes and \emph{B} genes are still able to evolve different expression levels in the two environments, even though they are 100 times closer than in the original experiment.
+Figure~\ref{fig:param:sigma-1e-4-activ-by-sigma} similarly shows average gene expression per gene type as a function of background supercoiling, this time with environmental supercoiling shifts $\sigma_A = 10^{-4}$ and $\sigma_B = -10^{-4}$.
+Strikingly, \emph{A} genes and \emph{B} genes are still able to evolve different expression levels in the two environments, even though they are 100 times closer than in the original experiment (see the inset for the precise expression levels between $\sigma_B$ and $\sigma_A$).
 Even when the environments have an effect that is around 100 times smaller than the transcription-generated supercoiling (see Figure~\ref{fig:ploscb:genomes} for an example genome and the associated transcription-generated supercoiling values), the gene regulatory networks that evolve in the simulations are still able to separate the different environments and lead gene expression levels to very different states.
+
+These results further confirm the results of the parametric exploration of the proof-of-concept version of \emph{EvoTSC}, at the end of Chapter~\ref{chap:alife}.
+They show that perturbations that have little to no effect either on an isolated gene, or on a random genome (averaging over every gene), can be picked up and amplified by supercoiling-mediated gene regulatory networks, and result in clearly differentiated gene expression levels.
 
 \FloatBlock
 
