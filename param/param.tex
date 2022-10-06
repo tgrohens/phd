@@ -5,8 +5,9 @@ In this chapter, I explore the robustness of the characteristics of evolving pop
 To this aim, I present several sets of additional evolutionary simulations.
 In these simulations, I first measure whether populations are able to evolve differentiated gene expression patterns as a response to different environments in the model variants.
 I then compare the speed of evolution of these populations with  the main runs presented in Chapter~\ref{chap:ploscb}.
-I first explore the sensitivity of the model to the genome-level parameters presented below in Table~\ref{tab:param:params}: the maximum interaction distance for the transcription-supercoiling coupling, the mean intergenic distance, the strength of the environment-caused shift in background supercoiling, and the number of genes on the genome.
-I then discuss the evolutionary effect of allowing intergenic distances to mutate, by introducing indels in intergenic sections as a new mutational operator in the model.
+I first explore the sensitivity of the model to the genome-level parameters presented below in Table~\ref{tab:param:params}: the maximum interaction distance for the transcription-supercoiling coupling, the mean intergenic distance, the strength of the environment-caused shift in background supercoiling.
+I then investigate simulating a higher number of genes on the genome.
+Finally, I discuss the evolutionary effect of allowing intergenic distances to mutate, by introducing indels in intergenic sections as a new mutational operator in the model.
 
 \begin{table}[H]
 \begin{center}
@@ -25,9 +26,9 @@ Mean intergenic size & $d_{mean}$ & \textbf{125 bp} & \textbf{30} \\
 & & 0.0001 & 15\\
 Environment supercoiling shift & $\delta\sigma_{A/B}$ & 0.001 & 15\\
 (Section~\ref{sec:param:sigma-env})& & \textbf{0.01} & \textbf{30}\\
-\midrule
-Number of genes & $n$ & \textbf{60} & \textbf{30} \\
-(Section~\ref{sec:param:300-genes})& & 30 & 15 \\
+%\midrule
+%Number of genes & $n$ & \textbf{60} & \textbf{30} \\
+%(Section~\ref{sec:param:300-genes})& & 30 & 15 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -246,8 +247,6 @@ Even when the environments have an effect that is around 100 times smaller than 
 These results further confirm the results of the parametric exploration of the proof-of-concept version of \emph{EvoTSC}, at the end of Chapter~\ref{chap:alife}.
 They show that perturbations that have little to no effect either on an isolated gene, or on a random genome (averaging over every gene), can be picked up and amplified by supercoiling-mediated gene regulatory networks, and result in clearly differentiated gene expression levels.
 
-\FloatBlock
-
 
 \section{Number of Genes}
 \label{sec:param:300-genes}
@@ -255,47 +254,58 @@ They show that perturbations that have little to no effect either on an isolated
 All the simulations presented up to now were run with $n = 60$ genes on the genomes of individuals.
 Although genes in our model correspond to transcriptional units, and could describe operons that contain multiple genes, this number remains much lower than the real number of genes in bacteria, which ranges from the 482 protein-coding genes found in \emph{Mycoplasma genitalium}, the bacteria with the smallest-known genome~\citep{glass2006}, up to over 9,000 predicted genes in \emph{Sorangium cellulosum}~\citep{schneiker2007}.
 At first sight, increasing the total number of genes in the model should not qualitatively change the simulation results, as with a genome size of 60, genes already only interact via the transcription-supercoiling coupling with a small proportion of the genome.
-In order to verify this hypothesis, I ran simulations with $n = 300$ genes.
+In order to verify this hypothesis, I ran simulations with $n = 300$ genes, with maximum supercoiling interaction distances of $d_{max} =$ 5~kb (the value used in the main runs) and $d_{max} =$ 25 kb.
 As the algorithmic complexity of the \emph{EvoTSC} scales quadratically with the number of genes, the simulations were run for 100,000 generations only, but already show qualitative results by that time.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.495\textwidth]{param/300-genes/gene_activity_env_A.pdf}
-\includegraphics[width=0.495\textwidth]{param/300-genes/gene_activity_env_B.pdf}
-\caption[Evolution of the number of activated genes in each environment, with a 300-gene genome]{Evolution of the number of activated genes in environment A (left) and environment B (right), with a genome containing 300 genes.}
+\includegraphics[width=0.495\textwidth]{param/300-genes/interaction-5k/gene_activity_env_A.pdf}
+\includegraphics[width=0.495\textwidth]{param/300-genes/interaction-5k/gene_activity_env_B.pdf}
+
+\includegraphics[width=0.495\textwidth]{param/300-genes/interaction-25k/gene_activity_env_A.pdf}
+\includegraphics[width=0.495\textwidth]{param/300-genes/interaction-25k/gene_activity_env_B.pdf}
+\caption[Evolution of the number of activated genes in each environment, with a 300-gene genome]{Evolution of the number of activated genes in environment A (left) and environment B (right), with a genome containing 300 genes, and an interaction distance of 5 kb (top) and 25 kb (bottom).}
 \label{fig:param:300genes-activ-by-env}
 \end{figure}
 
 Figure~\ref{fig:param:300genes-activ-by-env} shows the evolution of the number of activated genes of each type in each environment, for populations of individuals with a 300-gene genome, for 100,000 generations.
-Differentiated expression levels in each environment evolve for \emph{AB} and \emph{B} genes, but the average number of activated \emph{A} genes is only of 60 out of 100 in environment A, and 45 \emph{A} genes are wrongly activated in environment B.
-While these simulations lasted only for 100,000 simulations, these evolutionary trajectories are already different from the ones taken by the main run (in Figure~\ref{fig:ploscb:gene_activity_by_env}).
+While these simulations lasted only for 100,000 simulations, the evolutionary trajectories are already different from the ones taken by the main run (in Figure~\ref{fig:ploscb:gene_activity_by_env}).
+Different numbers of activated genes evolve in each case as a function of the environment, but the pattern differs depending on the interaction distance: the number of activated genes of each type seems to converge after about 10,000 generations (top), while evolution seems to continue by the end of the runs for the higher interaction distance (bottom).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{param/300-genes/fitness_all_with_main.pdf}
-\caption[Average fitness during evolution, with a 300-gene genome]{Average fitness during evolution, with a 300-gene genome.}
+\caption[Average fitness during evolution, with a 300-gene genome]{Average fitness during evolution, with a 300-gene genome, and an interaction distance of 5 kb or 25 kb.}
 \label{fig:param:300gene-fitness}
 \end{figure}
 
 Figure~\ref{fig:param:300gene-fitness} shows the evolution of the average fitness of the best individual in each replicate of the simulations with 300 genes per individual, compared to the main run.
-As expected from the number of activated genes in each environment presented in Figure~\ref{fig:param:300genes-activ-by-env}, the fitness of the runs with 300 genes is consistently lower than the fitness of the main runs, and seems to converge to a much lower value by the end of the 100,000 generations of evolution.
+As expected from the proportion of activated genes in each environment presented in Figure~\ref{fig:param:300genes-activ-by-env}, the fitness of the runs with 300 genes is consistently lower than the fitness of the main runs.
+Consistently with the results presented above, the evolution of fitness depends on the interaction distance: it seems to converge to a much lower value than the main run by the end of the 100,000 generations of evolution for an interaction distance of 5 kb, while it keeps on increasing steadily for an interaction distance of 25 kb.
+
+Figure~\ref{fig:param:300genes-activ-by-sigma} shows the average expression of genes for each gene type as a function of the background supercoiling level, for interaction distances of 5 kb (top) and 25 kb (bottom).
+In both cases, and similarly to the simulation with a 10 kb intergenic distance, \emph{A} genes do not seem to meaningfully evolve a relaxation-activated phenotype by the end of the simulations.
+With 300 genes, the response of each gene type seems to diverge less from the behavior of genes on a random genome than in the other simulations presented above.
+With an intergenic distance of 25 kb, the average expression of \emph{A} genes nonetheless goes below the activation threshold at $\sigma_B$ and above at $\sigma_A$, which correlates with the higher fitness observed for this value of the intergenic distance.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{param/300-genes/activity_sigmas_avg.pdf}
-\caption[Average gene expression as a function of background supercoiling, with a 300-gene genome]{Average gene expression by type as a function of background supercoiling, with a 300-gene genome.}
+\includegraphics[width=0.9\textwidth]{param/300-genes/interaction-5k/activity_sigmas_avg.pdf}
+\includegraphics[width=0.9\textwidth]{param/300-genes/interaction-25k/activity_sigmas_avg.pdf}
+\caption[Average gene expression as a function of background supercoiling, with a 300-gene genome]{Average gene expression as a function of background supercoiling, with a 300-gene genome and an interaction distance of 5 kb (top) and 25 kb (bottom).}
 \label{fig:param:300genes-activ-by-sigma}
 \end{figure}
 
-Figure~\ref{fig:param:300genes-activ-by-sigma} shows the average expression of genes, separated by type, to the background supercoiling level.
-Similarly to the simulation with a 10 kb intergenic distance, \emph{A} genes do not seem to meaningfully evolve a relaxation-activated phenotype by the end of the simulations.
-With 300 genes, the response of each gene type looks to diverge less from the behavior of genes on a random genome than for the other simulations presented above.
+A possible hypothesis for the slower evolution of the runs with $n = 300$ genes lies in the combinatorics of the genomic inversions.
+As an inversion is defined by two points chosen on the genome, the number of different inversions grows with the square of its size; if we disregard the role of the intergenic sequences (which have an average length of 125 bp in all the runs in this section), this number grows with the square of the number of genes.
+The number of inversions to explore in order to find beneficial relative gene positions could therefore be higher in larger genomes; as the number of inversions does not depend on genome size, larger genomes could take more time to explore the fitness landscape.
+A second hypothesis also depends on the number of genes affected by inversions, but in a slightly different way.
+As the end points of genomic inversions are chosen at random, the average size of an inversion is of half the genome with all parameter values, but the absolute distance between the end points of the inversion changes with the number of genes on the genome.
+In larger genomes, the genes located near one of the end points of an inversion are therefore further apart from the genes located near the other end point of the inversion, and could therefore be more rarely part of the same gene regulatory network than in smaller genomes.
+In particular, inversions affecting only a few genes could be rarer, making it more difficult to locally adjust gene regulatory networks, even though the relative orientation of neighbors and local networks play an important role (see Chapter~\ref{chap:ploscb}).
+This would in particular explain why the runs with 300 genes but a larger interaction distance evolve better, as the breadth of the regulatory networks increases with the interaction distance.
 
-This could indicate that the fitness landscape for these populations is more rugged than in the other cases.
-As the end points of genomic inversions are chosen at random, the average size of an inversion is of half the genome with all parameter values, but the absolute number of genes between the end points of the inversion changes with the number of genes on the genome.
-A possible hypothesis to explain the difference in evolutionary trajectories could therefore be that, in larger genomes, both end points of an inversion are more rarely part of the same gene regulatory network, which could make it more difficult for selection to tune these networks as precisely as in the smaller genomes.
-
-\FloatBlock
+A further investigation of the behavior of the model with larger number of genes could therefore seem warranted, but the overall qualitative evolution of different gene activation levels in response to environmental perturbations remains present when increasing the number of genes on the genome in the model.
 
 
 \section{Mutable Intergenic Distances}
@@ -310,7 +320,7 @@ Then, we draw uniformly at random a gene, and add or remove the corresponding nu
 If the intergenic section is too small to delete the chosen number of base pairs, we try drawing another gene at random, before giving up after a certain number of tries.
 For these simulations, I ran 15 replicates for 1,000,000 generations (as in the main runs in Chapter~\ref{chap:ploscb}), in order to give the mean intergenic distance the time to converge, and started from an initial value of 125 bp, as in the main simulations.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
   \includegraphics[width=0.75\textwidth]{param/evolve-intergene/intergenic_size_all.pdf}
 \caption[Average intergenic size during evolution, with intergenic distance mutations]{Average intergenic distance during evolution with indels, compared with the average intergenic distance in the main run.}
@@ -332,7 +342,7 @@ There therefore seems to be a selection pressure towards reducing intergenic dis
 Figure~\ref{fig:param:evolve-intergene-activ-by-env} shows the evolution of the number of activated genes of each type, in each environment.
 As in the main run, differentiated expression levels evolve in the two environments, with around 75\% of \emph{A} genes activated in environment A and 75\% of \emph{A} inhibited in environment B.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
   \includegraphics[width=0.75\textwidth]{param/evolve-intergene/fitness_all_with_main.pdf}
 \caption[Average fitness and intergenic size during evolution, with intergenic distance mutations]{Fitness and average genome size during evolution, with intergenic distance mutations.}
