@@ -1,31 +1,33 @@
 \chapter{Parametric Exploration of the \emph{EvoTSC} Model}
 \label{chap:param}
 
-In this chapter, I present several sets of additional evolutionary simulations.
-In these simulations, I explore the robustness of the characteristics of evolving populations to variations in the \emph{EvoTSC} model, measuring whether populations are able to evolve differentiated gene expression patterns as a response to different environments, and comparing their speed of evolution with that of the main runs presented in Chapter~\ref{chap:ploscb}.
-I first explore changing different parameters, presented in Table~\ref{tab:param:params}: the maximum interaction distance for the transcription-supercoiling coupling, the mean intergenic distance, the strength of the environment-caused shift in background supercoiling, and the number of genes on the genome.
-I then discuss the effect of introducing indels in intergenic sections as a new mutational operator in the model.
+In this chapter, I explore the robustness of the characteristics of evolving populations to variations in the \emph{EvoTSC} model.
+To this aim, I present several sets of additional evolutionary simulations.
+In these simulations, I first measure whether populations are able to evolve differentiated gene expression patterns as a response to different environments in the model variants.
+I then compare the speed of evolution of these populations with  the main runs presented in Chapter~\ref{chap:ploscb}.
+I first explore the sensitivity of the model to the genome-level parameters presented below in Table~\ref{tab:param:params}: the maximum interaction distance for the transcription-supercoiling coupling, the mean intergenic distance, the strength of the environment-caused shift in background supercoiling, and the number of genes on the genome.
+I then discuss the evolutionary effect of allowing intergenic distances to mutate, by introducing indels in intergenic sections as a new mutational operator in the model.
 
-\begin{table}
+\begin{table}[H]
 \begin{center}
 \begin{tabular}{l c r r}
 \toprule
 \textbf{Parameter} & \textbf{Symbol} & \textbf{Value} & \textbf{Replicates} \\
 \midrule
 Interaction distance & $d_{max}$ & \textbf{5 kb} & \textbf{30}\\
-& & 25 kb & 15\\
+(Section~\ref{sec:param:inter25k}) & & 25 kb & 15\\
 \midrule
 & & 10 bp& 15\\
-Mean intergenic distance & $d_{mean}$ & \textbf{125 bp} & \textbf{30} \\
-& & 1,000 bp & 15\\
+Mean intergenic size & $d_{mean}$ & \textbf{125 bp} & \textbf{30} \\
+(Section~\ref{sec:param:mean-intergene})& & 1,000 bp & 15\\
 & & 10,000 bp & 15 \\
 \midrule
 & & 0.0001 & 15\\
-Environment supercoiling & $\delta\sigma_{A/B}$ & 0.001 & 15\\
-& & \textbf{0.01} & \textbf{30}\\
+Environment supercoiling shift & $\delta\sigma_{A/B}$ & 0.001 & 15\\
+(Section~\ref{sec:param:sigma-env})& & \textbf{0.01} & \textbf{30}\\
 \midrule
 Number of genes & $n$ & \textbf{60} & \textbf{30} \\
-& & 30 & 15 \\
+(Section~\ref{sec:param:300-genes})& & 30 & 15 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -38,10 +40,10 @@ For each experiment, the row in bold font corresponds to the parameter values us
 \label{sec:param:inter25k}
 
 The size of the topological domains of bacterial genomes, inside which DNA supercoils can freely propagate, has historically been estimated to be on the order of a few thousand base pairs~\citep{elhanafi2000,kouzine2013}.
-Recent work has however suggested that topological domains could be up to ten times larger than this, reaching up to 25 kb~\citep{visser2022}.
-As this distance sets a limit to the number of genes that can interact through the transcription-supercoiling coupling, it plays an important role in the structure of the supercoiling-mediated gene regulatory networks.
+Recent work has however suggested that topological domains could be as much as ten times larger than this, reaching up to 25 kb~\citep{visser2022}.
+As the size of the topological domains sets a limit to the number of genes that can interact through the transcription-supercoiling coupling, it is likely to play an important role in the structure of the supercoiling-mediated gene regulatory networks.
 By increasing the number of genes a given gene is coupled with, a larger interaction distance could make genomic inversions more deleterious by making them disrupt a larger part of the regulatory networks at their boundaries, but could also allow more robust regulatory networks to evolve through a higher connectivity.
-In this section, I present simulations run with an interaction distance of 25 kb, in order to test this hypothesis.
+In this section, I present simulations run with an interaction distance of 25 kb, a five-fold increase from the value used in the main runs, in order to test these hypotheses.
 
 \begin{figure}[H]
 \centering
@@ -51,20 +53,20 @@ In this section, I present simulations run with an interaction distance of 25 kb
 \label{fig:param:inter25k-activ-by-env}
 \end{figure}
 
-Figure~\ref{fig:param:inter25k-activ-by-env} shows the evolution of the number of activated genes of each type in the simulations with the interaction distance of 25 kb, over 250,000 generations.
+Figure~\ref{fig:param:inter25k-activ-by-env} shows the evolution of the number of activated genes of each type in the simulations with the interaction distance of 25 kb, over 250,000 generations (to be compared to Figure~\ref{fig:ploscb:gene_activity_by_env} in Chapter~\ref{chap:ploscb}).
 As in the main run, the number of activated genes of each type evolves towards their respective target.
 Differentiated activation patterns can therefore still evolve even when the topological domains are 5 times larger.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{param/interaction-25k/fitness_all_with_main.pdf}
-\caption[Average fitness during evolution, with an interaction distance of 25 kb]{Average fitness during evolution with an interaction distance of 25 kb (yellow).
-The main run is presented in purple for comparison.}
+\caption[Average fitness during evolution, with an interaction distance of 25 kb]{Average fitness during evolution with an interaction distance of 25 kb (light blue), and in the main run (dark blue).
+Lighter lines represent the first and last decile of the data.}
 \label{fig:param:inter25k-fitness}
 \end{figure}
 
 Figure~\ref{fig:param:inter25k-fitness} shows the evolution of the average fitness of the best individual in each replicate of the simulation with a larger interaction distance, compared with the evolution of fitness in the main run, over 250,000 generations.
-While fitness is systematically lower throughout evolution with the larger interaction distance, it nonetheless follows a qualitatively similar pattern, and fitness keeps increasing until the end of the runs, suggesting that it could eventually reach the same value as in the main run (presented in full in Figure~\ref{fig:ploscb:main_fitness}).
+While fitness is systematically lower throughout evolution with the larger interaction distance, it nonetheless follows a qualitatively similar curve, and keeps on increasing until the end of the runs, suggesting that it could eventually reach the same value as in the main run (presented in full in Figure~\ref{fig:ploscb:main_fitness}).
 
 \begin{figure}[H]
 \centering
@@ -80,6 +82,17 @@ As in the main run, \emph{A} genes display a relaxation-activated phenotype.
 
 \begin{figure}[H]
 \centering
+\includegraphics[width=0.9\textwidth]{param/interaction-25k/random_activ_per_sigma.pdf}
+\caption[Average gene expression as a function of background supercoiling, with increasing interaction distances, in random genomes]{Average gene expression as a function of background supercoiling in random genomes with increasing interaction distances (full lines), and theoretical expression level of an isolated gene (dashed line).}
+\label{fig:param:inter25k-random-activ-by-sigma}
+\end{figure}
+
+Figure~\ref{fig:param:inter25k-random-activ-by-sigma} precisely shows how the expression of genes on random genomes of the same size as a function of the background supercoiling changes with the maximum interaction distance.
+As the interaction distance increases, the curve gets flatter and flatter, which we can interpret as a buffering of the environmental perturbation through the supercoiling-mediated interaction of more and more genes.
+Conversely, as the interaction distance gets closer to zero, the curve is closer and closer to that of an isolated, non-interacting gene.
+
+\begin{figure}[H]
+\centering
   \begin{subfigure}[t]{0.495\textwidth}
     \includegraphics[width=\textwidth]{param/interaction-25k/effective_graph_combined_in_degree.pdf}
   \end{subfigure}
@@ -91,7 +104,10 @@ As in the main run, \emph{A} genes display a relaxation-activated phenotype.
 \end{figure}
 
 Figure~\ref{fig:param:inter25k-degree} finally presents the average in- and out-degree of the genes in the effective interaction graph obtained with gene knockouts, compared to the same data from the main run.
-As could be expected, the gene regulatory networks are much more connected with the larger interaction distance, but the behavior per gene type remains qualitatively the same as in the main run.
+As could be expected, the gene regulatory networks are much more connected with the larger interaction distance, but the behavior for each gene type remains qualitatively the same as in the main run.
+
+Overall, the evolution of supercoiling-mediated gene regulatory networks that are able to show environment-specific activation patterns, and in particular relaxation-activated genes, therefore seems robust in our model to a larger maximum interaction distance.
+Even when the networks are more densely connected, buffering gene expression, the reorganization of the genome via genomic inversion allows for specific behaviors for each gene type.
 
 
 \section{Mean Intergenic Size}
@@ -145,7 +161,7 @@ Instead, the average expression level of \emph{A} genes is indeed slightly lower
 \begin{figure}
 \centering
 \includegraphics[width=0.9\textwidth]{param/mean-intergene/random_activ_per_sigma.pdf}
-\caption[Average gene expression as a function of background supercoiling, with increasing mean intergenic distances, in random genomes]{Average gene expression as a function of background supercoiling in random genomes with different mean intergenic distances (full lines), and theoretical expression level of an isolated gene (dashed line).}
+\caption[Average gene expression as a function of background supercoiling, with increasing mean intergenic distances, in random genomes]{Average gene expression as a function of background supercoiling in random genomes with increasing mean intergenic distances (full lines), and theoretical expression level of an isolated gene (dashed line).}
 \label{fig:param:mean-intergene-random-activ-by-sigma}
 \end{figure}
 
