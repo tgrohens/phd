@@ -152,7 +152,7 @@ While \emph{AB} genes and \emph{B} genes evolve towards the correct activation s
 
 Figure~\ref{fig:param:mean-intergene-fitness} shows the evolution of the average fitness of the best individual in each replicate of the simulations, for each value of the mean intergenic distance, including the main run for comparison.
 It confirms the results seen in the previous figure: for intergenic distances from 10 bp to 1 kb, populations evolve successfully towards differentiated gene activation patterns.
-For an intergenic size of 10 kb (in yellow), however, fitness increases much more slowly, and seems to converge towards a much smaller value.
+For an intergenic size of 10 kb (in light blue), however, fitness increases much more slowly, and seems to converge towards a much smaller value.
 
 \begin{figure}[H]
 \centering
@@ -175,7 +175,7 @@ Instead, the average expression level of \emph{A} genes is indeed slightly lower
 Figure~\ref{fig:param:mean-intergene-random-activ-by-sigma} shows the expression level as a function of background supercoiling for genes on random genomes with increasing mean intergenic distances.
 For distances from 10 bp to 1 kb, the curve is qualitatively similar, and quite different to the expression of an isolated, non-interacting genes.
 In particular, gene expression levels are sensibly lower than the maximum in both environment A and environment B.
-On the other hand, for a mean intergenic distance of 10 kb (in yellow), genes behave very closely to an isolated gene, and are all almost fully activated in both environments.
+On the other hand, for a mean intergenic distance of 10 kb (in light blue), genes behave very closely to an isolated gene, and are all almost fully activated in both environments.
 This is also visible in Figure~\ref{fig:param:mean-intergene-activ-by-env} (bottom row) at the beginning of evolution, and explains the initially much lower fitness at an intergenic distance of 10 kb compared to the other values in Figure~\ref{fig:param:mean-intergene-fitness}.
 
 Several hypotheses could explain the incomplete fulfillment of the evolutionary target in simulations with a mean intergenic distance of 10kb.
@@ -308,69 +308,68 @@ This would in particular explain why the runs with 300 genes but a larger intera
 A further investigation of the behavior of the model with larger number of genes could therefore seem warranted, but the overall qualitative evolution of different gene activation levels in response to environmental perturbations remains present when increasing the number of genes on the genome in the model.
 
 
-\section{Mutable Intergenic Distances}
+\section{Introducing Indels}
 \label{sec:param:evolve-intergene}
 
-The last set of simulations presented in this chapter tackle the exploration of the model in a different direction, by introducing a new mutational operator.
-We saw previously in Section~\ref{sec:param:mean-intergene} that the evolution of differentiated gene expression patterns is robust to variations in the mean distance between genes on the genome, with the clearest patterns (and, correspondingly, highest fitness) evolving at a mean intergenic distance of 1 kb (in Figure~\ref{fig:param:mean-intergene-activ-by-env}, middle row).
-In order to see whether the fitness peak at high intergenic distances would be reachable from their original values, I introduced a new mutational operator which allows intergenic distances to evolve, through the addition or deletion of a small number of bases (indels).
+In Section~\ref{sec:param:mean-intergene}, we saw that the evolution of differentiated gene expression patterns depends on the mean intergenic distance: at low to intermediate values (akin to bacterial genomes), genes present environment-specific activity levels, while \emph{A} genes fail to do so at the largest tested intergenic distance (akin to eukaryotic genomes).
+In order to understand more finely the role of intergenic distances in the evolution of the regulatory networks underpinning these expression patterns, I introduced a new mutational operator which allows these distances to evolve, through the addition or deletion of a small number of bases between genes (indels).
+The last set of simulations presented in this chapter tackle the exploration of the model with this additional mutational operator.
 
 In order to perform an indel in the model, we first pick a number of base pairs to add or delete, by drawing from a normal distribution $\mathcal{N}(0, s^2)$, with $s^2 = $ 10.
-Then, we draw uniformly at random a gene, and add or remove the corresponding number of bases from the intergenic section starting at that gene.
+Then, we draw uniformly at random a gene, and add or remove the corresponding number of bases from the intergenic section starting immediately after that gene, in the forward direction.
 If the intergenic section is too small to delete the chosen number of base pairs, we try drawing another gene at random, before giving up after a certain number of tries.
-For these simulations, I ran 15 replicates for 1,000,000 generations (as in the main runs in Chapter~\ref{chap:ploscb}), in order to give the mean intergenic distance the time to converge, and started from an initial value of 125 bp, as in the main simulations.
+For these simulations, I ran 15 replicates for 1,000,000 generations (as in the main runs in Chapter~\ref{chap:ploscb}), in order to allow for the mean intergenic distance to converge.
+The initial value of the mean intergenic distance was set to 125 bp, in order to match the main set of simulation.
 
 \begin{figure}[H]
 \centering
   \includegraphics[width=0.75\textwidth]{param/evolve-intergene/intergenic_size_all.pdf}
-\caption[Average intergenic size during evolution, with intergenic distance mutations]{Average intergenic distance during evolution with indels, compared with the average intergenic distance in the main run.}
+\caption[Average intergenic size during evolution, with indels]{Average intergenic distance during evolution with indels, compared with the constant average intergenic distance in the main run.}
 \label{fig:param:evolve-intergene-intergene}
 \end{figure}
 
-Figure~\ref{fig:param:evolve-intergene-intergene} show the evolution of the mean intergenic distance, averaged over he best individual of each replicate, at every generation, compared to the initial value of 125 bp.
-Oppositely to what was expected, the average intergenic distance actually decreases during evolution, and seems to converge to a value of around 40 bp.
-There therefore seems to be a selection pressure towards reducing intergenic distances, when they are allowed to evolve.
+Figure~\ref{fig:param:evolve-intergene-intergene} show the evolution of the mean intergenic distance, averaged over the best individual of each replicate, at every generation, compared to the initial value of 125 bp.
+The average intergenic distance actually decreases during evolution, and seems to converge to a value of around 40 bp.
+This result is opposite to what could have been expected, as the highest fitness when varying intergenic distances is actually reached for a value of 1 kb (Figure~\ref{fig:param:mean-intergene-fitness}).
+There therefore seems to be a selection pressure towards reducing intergenic distances through indels, even though this does not least to the highest attainable fitness.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.495\textwidth]{param/evolve-intergene/gene_activity_env_A.pdf}
   \includegraphics[width=0.495\textwidth]{param/evolve-intergene/gene_activity_env_B.pdf}
-  \caption[Evolution of the number of activated genes in each environment, with intergenic distance mutations]{Evolution of the number of activated genes in environment A (top) and environment B (bottom), with intergenic distance mutations.}
+  \caption[Evolution of the number of activated genes in each environment, with indels]{Evolution of the number of activated genes per gene type in environment A (top) and environment B (bottom), with indels.}
   \label{fig:param:evolve-intergene-activ-by-env}
 \end{figure}
 
 Figure~\ref{fig:param:evolve-intergene-activ-by-env} shows the evolution of the number of activated genes of each type, in each environment.
-As in the main run, differentiated expression levels evolve in the two environments, with around 75\% of \emph{A} genes activated in environment A and 75\% of \emph{A} inhibited in environment B.
+Similarly to the main run, differentiated expression levels evolve in the two environments, with in particular around 75\% of \emph{A} genes activated in environment A and 75\% of \emph{A} genes inhibited in environment B.
 
 \begin{figure}[H]
 \centering
   \includegraphics[width=0.75\textwidth]{param/evolve-intergene/fitness_all_with_main.pdf}
-\caption[Average fitness and intergenic size during evolution, with intergenic distance mutations]{Fitness and average genome size during evolution, with intergenic distance mutations.}
+\caption[Average fitness during evolution, with indels]{Average fitness during evolution, with indels and without indels (main run).}
 \label{fig:param:evolve-intergene-fitness}
 \end{figure}
 
 Figure~\ref{fig:param:evolve-intergene-fitness} shows the average fitness during evolution of the individuals in the simulations with mutations in the intergenic distances, compared with the main simulations.
-As for the runs with an intergenic distance of 10 bp (in Figure~\ref{fig:param:mean-intergene-fitness}), evolution progresses extremely similarly to the main runs.
+As in the runs with an intergenic distance of 10 bp (in Figure~\ref{fig:param:mean-intergene-fitness}), evolution progresses quite similarly to the main run.
+Consistently with the observed evolution of the mean intergenic distance, but still surprisingly as evolution towards higher intergenic distances is possible in the model, populations with indels attain a lower fitness after 1,000,000 generations than populations with a constant mean intergenic distance of 1 kb after 250,000 generations.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{param/evolve-intergene/activity_sigmas_avg.pdf}
-\caption[Average gene expression as a function of background supercoiling, with intergenic distance mutations]{Average gene expression by type as a function of background supercoiling, with intergenic distance mutations.}
+\caption[Average gene expression as a function of background supercoiling, with indels]{Average gene expression for each gene type type as a function of background supercoiling, with indels.}
 \label{fig:param:evolve-intergene-activ-by-sigma}
 \end{figure}
 
-Finally, Figure~\ref{fig:param:evolve-intergene-activ-by-sigma} shows gene activity per type as a function of background supercoiling, for the simulations with mutable intergenic distances.
-As expected, we can see that \emph{A} genes display a relaxation-activated phenotype.
+Finally, Figure~\ref{fig:param:evolve-intergene-activ-by-sigma} shows the average gene activity for each gene type as a function of background supercoiling, for the simulations with indels.
+Consistently with the results obtained in Section~\ref{sec:param:mean-intergene}, we can see that \emph{A} genes display a relaxation-activated phenotype.
 
-It therefore seems that, even though evolving towards higher intergenic distances would allow populations to reach greater fitnesses, there is a stronger selection pressure that keeps intergenic distances low.
-This suggests that the fitness valley that has to be crossed in order to reach higher intergenic distances is too wide, or too deep, to cross with the parameters that we chose for the indel mutational operator.
+These results seem to suggest that, even though evolving towards higher intergenic distances would allow populations to reach greater fitnesses, there is a stronger selection pressure that keeps intergenic distances low.
+A possible hypothesis to explain this discrepancy is the presence of a second-order selection pressure for robustness.
+If genomes with larger intergenic distances have offspring that on average ends up with lower fitnesses after mutations, then selecting smaller average intergenic distances could make evolutionary sense.
+This hypothesis would for example be testable by measuring the average fitness of the offspring of individuals evolved with different average intergenic distances.
 
-
-%\begin{figure}
-%\centering
-%\includegraphics[width=\textwidth]{param/evolve-intergene/effective_graph_combined_degree.pdf}
-%\caption{Effective graph degrees at the end of evolution with intergenic distance mutations.}
-%\end{figure}
 
 \section{Discussion}
 
