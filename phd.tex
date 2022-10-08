@@ -14,6 +14,10 @@
 \usepackage[breaklinks=true,colorlinks=true,linkcolor=black,citecolor=black,urlcolor=OliveGreen]{hyperref}
 \usepackage[hyperpageref]{backref}
 
+% Whether to include administrative stuff
+\newif\ifadmin
+\adminfalse
+
 %% Magic layout from the memoir class manual
 \settrimmedsize{297mm}{210mm}{*}
 \setlength{\trimtop}{0pt}
@@ -54,8 +58,6 @@
 \raggedbottom
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Actual content
-
 \begin{document}
 
 \author{Théotime Grohens}
@@ -64,9 +66,14 @@ Evolution of Supercoiling-Mediated\\
 Gene Regulatory Networks through\\
 Genomic Inversions\vspace{1cm}\\
 \includegraphics[width=0.5\textwidth]{art.pdf}}
-%\title{Thèse}
 
 \pagenumbering{roman}
+
+% Begin of the actual contents
+\ifadmin
+\includepdf{admin/front.pdf}
+\includepdf{admin/ed.pdf}
+\fi
 
 \maketitle
 \thispagestyle{empty}
@@ -77,7 +84,6 @@ Genomic Inversions\vspace{1cm}\\
 \setcounter{page}{1}  % resets the ROMAN page counter to 1
 
 \include{fr-intro.tex}
-%\pagebreak
 
 \renewcommand*{\contentsname}{Table of Contents}
 
@@ -105,5 +111,9 @@ Genomic Inversions\vspace{1cm}\\
 
 \bibliographystyle{apalike}
 \bibliography{phd,swh}
+
+\ifadmin
+\includepdf{admin/folio.pdf}
+\fi
 
 \end{document}
