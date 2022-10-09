@@ -2,17 +2,17 @@
 \chaptermark{Evolution of Environmental Sensing through DNA SC}
 \label{chap:alife}
 
-This chapter presents the first version of the \emph{EvoTSC} model, and the first results that I obtained with the model: The evolution of differentiated expression levels in different environments, when gene expression is regulated by the transcription-supercoiling coupling.
-The text of the chapter is an edited version of the \emph{Artificial Life} paper~\citep{grohens2022a}.
+This chapter presents the proof-of-concept version of the \emph{EvoTSC} model, and the first results that I obtained with that version of the model: I show that the evolution of differentiated expression levels in different environments is possible when gene expression is only regulated by the transcription-supercoiling coupling.
+The text of the chapter is an edited version of an article published in the \emph{Artificial Life} journal~\citep{grohens2022a}.
 
 \paragraph{}
-Both the importance of supercoiling regulation and the detailed mechanisms of the transcription"=supercoiling coupling at the local scale have well been studied (see Section~\ref{sec:background:sc}), but a thorough analysis of the genome-wide effect of the transcription-supercoiling coupling on gene expression, and of its possible evolutionary use by natural selection, remains missing.
-In this work, we describe a new model which incorporates a high-level model of global supercoiling regulation and of the transcription-supercoiling coupling within an \emph{in silico} experimental evolution setting.
+Both the importance of supercoiling regulation and the detailed mechanisms of the transcription"=supercoiling coupling at the local scale have already been well studied (see Section~\ref{sec:background:sc}). A thorough analysis of the genome-wide effect of the transcription-supercoiling coupling on gene expression, and of its possible evolutionary use by natural selection, however remains missing, in particular in the dense prokaryotic genomes, in which large groups of genes are likely to interact through this coupling.
+In this work, we describe a new model which incorporates a high-level model of global supercoiling regulation and of the transcription"=supercoiling coupling within an \emph{in silico} experimental evolution setting.
 Using this model, we first investigate the non-linear variation in gene transcription levels at the whole-genome scale in response to variations in the global supercoiling level.
 Then, we study the evolutionary trajectory of gene activation patterns in individuals subjected to different environments.
 
-We show that in our model, a genome-scale gene interaction network emerges from local interactions, and creates a reaction norm in response to the change of a single parameter, the global supercoiling level, caused by different environments.
-Moreover, we demonstrate that, using genomic inversions as the only mutation operator, and therefore only changing the relative positions and orientations of genes on the genome, evolution can select genomes displaying qualitatively different phenotypes in different environments, characterized by different global supercoiling conditions.
+We show that in our model, a genome-scale gene interaction network emerges from local supercoiling-mediated interactions, and creates a reaction norm in response to the change of a single parameter, the global supercoiling level, caused by different environments.
+Moreover, we demonstrate that, using genomic inversions as the only mutation operator, and therefore only changing the relative positions and orientations of genes on the genome, evolution can select genomes displaying qualitatively different phenotypes in different environments characterized by different global supercoiling conditions.
 
 %This article is an extended version of~\cite{grohens2021}.
 
@@ -40,9 +40,9 @@ As we are mainly interested in the interplay between supercoiling and transcript
 production.
 Indeed, assuming a separation of timescales between the fast equilibrium of the transcription-supercoiling coupling, and the slow degradation of mRNAs, the concentration of a given mRNA is directly proportional to the transcription rate of its source gene.
 
-Figure~\ref{fig:alife:network} shows the role played by the transcription-supercoiling coupling in an example genome.
+Figure~\ref{fig:alife:network} illustrates the role played by the transcription-supercoiling coupling in an example genome.
 It includes the local supercoiling variations due to gene transcription, and the resulting gene interaction network, with each gene possibly activating or inhibiting its neighbors, depending on their relative orientations.
-Importantly to our approach, here genes do not interact only with their closest neighbors, but also with more distant genes, as is assumed to be the case in the gene-rich bacterial genomes (remember that \emph{E. coli} genes are around one thousand base pairs apart, and that transcription-generated supercoiling propagates around a few thousand base pairs on each side of the transcription site).
+Importantly to our approach, here genes do not interact only with their closest neighbors, but also with more distant genes, as is likely to be the case in the gene-rich bacterial genomes: \emph{E. coli} gene promoters are around one thousand base pairs apart~\citep{peter2004}, and the transcription-generated supercoiling propagates around a few thousand base pairs on each side of the transcription site~\citep{postow2004}.
 
 
 \subsection{Mathematical Description of the Model}
