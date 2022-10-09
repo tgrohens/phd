@@ -72,7 +72,7 @@ If gene $j$ is instead located downstream of gene $i$, the sign of the interacti
 
 We then apply a scaling coefficient $c$, which represents the intensity to which the transcription"=generated torsion of DNA affects the local supercoiling level.
 Finally, the strength of the interaction decreases linearly with the distance $d(i, j)$ between the promoter of gene $i$, which is the position where the local level of supercoiling affects the probability that an RNA polymerase binds to the DNA and starts transcribing gene $i$, and the middle of gene $j$, which is the average location of the RNA polymerases that transcribe gene $j$, assuming that DNA is transcribed at a constant speed.
-When this distance reaches a threshold of $d_{max}$, the two genes are considered to be too far away to interact and the effect vanishes.
+When this distance reaches a threshold of $d_{max}$, the two genes are considered to be too far away to interact and the effect vanishes; in other words, $d_{max}$ represents the maximum interaction distance on either side of the gene.
 
 \paragraph{Effect of Supercoiling on Transcription}
 In order to compute the transcription level of a given gene, we first compute the opening free energy of its promoter, which depends on the local supercoiling level, following a sigmoidal curve that increases with negative supercoiling until a saturation threshold is reached~\citep{forquet2021}.
@@ -169,7 +169,7 @@ In our model, we introduced the torsional drag coefficient as a new parameter th
     %Number of genes & $n$ & 60 \\
     Gene length & $l$ & 1,000 bp & \cite{blattner1997} \\
     Initial intergenic distance & $d_0$ & 125 bp & \cite{blattner1997} \\
-    Supercoiling transmission distance & $d_{max}$ & 5,000 bp & \cite{klein2021} \\
+    Supercoiling transmission distance & $d_{max}$ & 5,000 bp & \cite{postow2004} \\
     Basal supercoiling level & $\sigma_{basal}$ & -0.066 & \cite{crozat2005} \\
     \midrule
     Torsional drag coefficient & $c$ & 0.03 & \\
