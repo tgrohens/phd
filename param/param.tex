@@ -5,7 +5,7 @@ In this chapter, I explore the robustness of the characteristics of evolving pop
 To this aim, I present several sets of additional evolutionary simulations.
 In these simulations, I first measure whether populations are able to evolve differentiated gene expression patterns as a response to different environments in the model variants.
 I then compare the speed of evolution of these populations with  the main runs presented in Chapter~\ref{chap:ploscb}.
-I first explore the sensitivity of the model to the genome-level parameters presented below in Table~\ref{tab:param:params}: the maximum interaction distance for the transcription-supercoiling coupling, the mean intergenic distance, the strength of the environment-caused shift in background supercoiling.
+I first explore the sensitivity of the model to the genome-level parameters (see Table~\ref{tab:param:params} below): the maximum interaction distance for the transcription-supercoiling coupling, the mean intergenic distance, and the strength of the environment-caused shift in background supercoiling.
 I then investigate simulating a higher number of genes on the genome.
 Finally, I discuss the evolutionary effect of allowing intergenic distances to mutate, by introducing indels in intergenic sections as a new mutational operator in the model.
 
@@ -41,9 +41,9 @@ For each experiment, the row in bold font corresponds to the parameter values us
 \label{sec:param:inter25k}
 
 The size of the topological domains of bacterial genomes, inside which DNA supercoils can freely propagate, has historically been estimated to be on the order of a few thousand base pairs~\citep{elhanafi2000,postow2004,kouzine2013}.
-Recent work has however suggested that the size of transcription-generated twin domains could be as much as ten times larger than this, reaching up to 25 kb on either side of the transcribed gene~\citep{visser2022}.
+Recent work has however suggested that the size of transcription-generated twin domains could be much larger than this, and reach up to 25 kb on either side of the transcribed gene~\citep{visser2022}.
 As the size of the topological domains sets a limit to the number of genes that can interact through the transcription-supercoiling coupling, it is likely to play an important role in the structure of the supercoiling-mediated gene regulatory networks.
-By increasing the number of genes a given gene is coupled with, a larger interaction distance could make genomic inversions more deleterious by making them disrupt a larger part of the regulatory networks at their boundaries, but could also allow more robust regulatory networks to evolve through a higher connectivity.
+By increasing the number of genes a given gene is coupled with, a larger interaction distance could make genomic inversions more deleterious by making them disrupt a larger part of the regulatory networks at their boundaries, but it could also allow more robust regulatory networks to evolve through a higher connectivity.
 In this section, I present simulations run with an interaction distance of 25 kb, a five-fold increase from the value used in the main runs, in order to test these hypotheses.
 
 \begin{figure}[H]
@@ -112,7 +112,7 @@ Conversely, as the interaction distance gets closer to zero, the curve is closer
 Figure~\ref{fig:param:inter25k-degree} finally presents the average in- and out-degree of the genes in the effective interaction graph obtained with gene knockouts, compared to the same data from the main run.
 As could be expected, the gene regulatory networks are much more connected with the larger interaction distance, but the behavior for each gene type remains qualitatively the same as in the main run.
 
-Overall, the evolution of supercoiling-mediated gene regulatory networks that are able to show environment-specific activation patterns, and in particular relaxation-activated genes, therefore seems robust in our model to a larger maximum interaction distance.
+Overall, the evolution of supercoiling-mediated gene regulatory networks that are able to show environment-specific activation patterns, and in particular relaxation-activated genes, therefore seems robust in our model to a larger interaction distance.
 Even when the networks are more densely connected, buffering gene expression, the reorganization of the genome via genomic inversion allows for specific behaviors for each gene type.
 
 
@@ -121,7 +121,7 @@ Even when the networks are more densely connected, buffering gene expression, th
 
 In the main run, I set the initial intergenic distance between every gene to 125 bp, or a gene density of 88\%, representing the average \emph{E. coli} intergenic distance~\citep{postow2004}.
 Bacteria actually present a wider range of gene densities, from 51\% in \emph{Sodalis glossinidius}, a bacteria that is undergoing massive pseudogenization after recently adopting an endosymbiotic lifestyle~\citep{toh2006}, up to 95\% in \emph{Thermotoga maritima}, an extremophile bacteria living in heated marine sediment~\citep{nelson1999}.
-Like the interaction distance, the mean intergenic distance plays a role in the connectivity of the gene regulatory networks that stem from the transcription-supercoiling coupling: when the mean intergenic distance is small, more genes can on average affected by the transcription of any given gene.
+Like the interaction distance, the mean intergenic distance plays a role in the connectivity of the gene regulatory networks that stem from the transcription-supercoiling coupling: when the mean intergenic distance is small, more genes can on average be affected by the transcription of any given gene.
 Conversely, when the mean intergenic distance is large compared to the interaction distance, the emergence of regulatory subnetworks isolated from each other by large intergenic regions becomes possible.
 In this section, I test the robustness of the results with regard to the range of gene densities found across living organisms.
 I present simulations with mean intergenic distances increasing logarithmically from 10 bp (or a gene density of 99\%), comparable to the median intergenic distance of 3 bp found in \emph{Pelagibacter ubique}, a free-living marine bacteria~\citep{giovannoni2005}, up to 10 kb (or a gene density of 10\%), akin to the gene-scarce eukaryotic genomes~\citep{davilalopez2010}.
@@ -219,7 +219,7 @@ Lighter lines represent the first and last decile of the data.}
 
 Figure~\ref{fig:param:sigma-activ-by-env} shows the evolution of the number of activated genes for each gene type in each environment, with environmental shifts in supercoiling 10 times smaller than the main run (top) and 100 times smaller (bottom), for 250,000 generations.
 In both cases, differentiated gene expression patterns evolve, although evolution seems to be slower when $\sigma_A$ and $\sigma_B$ are 100 times smaller than in the main run.
-This shows that evolution of different gene expression levels as a response to externally-induced perturbations in the supercoiling level can therefore be take place even when these perturbations are very minute, and reinforces the plausibility of the hypothesis that DNA supercoiling can be used as an sensory device for the regulation of gene expression in response to environmental stress.
+This shows that evolution of different gene expression levels as a response to externally-induced perturbations in the supercoiling level can therefore take place even when these perturbations are very minute compared to translation-generated supercoiling, and reinforces the plausibility of the hypothesis that DNA supercoiling can be used as an sensory device for the regulation of gene expression in response to environmental stress.
 
 \begin{figure}[H]
 \centering
@@ -294,8 +294,9 @@ Lighter lines represent the first and last decile of the data.}
 \end{figure}
 
 Figure~\ref{fig:param:300gene-fitness} shows the evolution of the average fitness of the best individual in each replicate of the simulations with 300 genes per individual, compared to the main run.
-As expected from the proportion of activated genes in each environment presented in Figure~\ref{fig:param:300genes-activ-by-env}, the fitness of the runs with 300 genes is consistently lower than the fitness of the main runs.
-Consistently with the results presented above, the evolution of fitness depends on the interaction distance: it seems to converge to a much lower value than the main run by the end of the 100,000 generations of evolution for an interaction distance of 5 kb, while it keeps on increasing steadily for an interaction distance of 25 kb.
+As expected given the high proportion of \emph{A} genes with an incorrect activation state in each environment that is visible in both sets of simulations in Figure~\ref{fig:param:300genes-activ-by-env}, the fitness of the runs with 300 genes remains much lower than the fitness of the main runs throughout evolution.
+Moreover, the fitness trajectory in the runs with 300 genes also depends on the interaction distance, in accordance with the evolution of the number of activated genes in each environment presented above.
+For an interaction distance of 5 kb, fitness indeed seems to plateau at a much lower value than the main run by the end of the 100,000 generations, while it keeps on steadily increasing for an interaction distance of 25 kb.
 
 Figure~\ref{fig:param:300genes-activ-by-sigma} shows the average expression of genes for each gene type as a function of the background supercoiling level, for interaction distances of 5 kb (top) and 25 kb (bottom).
 In both cases, and similarly to the simulation with a 10 kb intergenic distance, \emph{A} genes do not seem to meaningfully evolve a relaxation-activated phenotype by the end of the simulations.
@@ -416,5 +417,4 @@ In order to quantify the effect of these second-order selection pressures, both 
 
 The structure of the fitness landscape, as it emerges from the interplay between the biological parameters that control the supercoiling-mediated interaction between neighboring genes and the mutational operators that generate new genomes, therefore seems to play a fundamental role in determining the evolutionary trajectories that are available to evolving populations.
 Moreover, the structure itself of the fitness landscape changes in response to mutation of key parameters (such as genome size), resulting in a dynamic fitness seascape.
-For this reason, a better understanding of the evolution of this fitness seascape, or equivalently of the role that such mutations play in determining the evolutionary trajectories that are available to populations, would shed light on the epistatic interactions between mutations in the \emph{EvoTSC} model, and therefore be an important research direction to pursue.
-
+For this reason, a better understanding of the evolution of this fitness seascape, or equivalently of the role that supercoiling mutations play in determining the evolutionary trajectories that are available to populations, would shed light on the epistatic interactions between mutations in the \emph{EvoTSC} model, and therefore be an important research direction to pursue.
