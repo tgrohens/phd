@@ -17,7 +17,7 @@ Finally, I briefly present the general method with which I tackle the questions 
   \textbf{B}. Promoter activity (equivalently, transcription level) \emph{e} increases with the level of negative supercoiling $-\sigma$.
   \textbf{C}. The transcription of a gene by RNA polymerase (RNAP) generates a decrease in supercoiling upstream of the transcribed gene, and an increase downstream of the transcribed gene.
   \textbf{D}. Transcription-supercoiling coupling: the sign of the interaction between neighboring genes depends on their relative orientation.
-  Figure from~\citep{grohens2021}.}
+  Figure reproduced from~\citep{grohens2021}.}
   \label{fig:background:theory}
 \end{figure}
 
@@ -97,50 +97,60 @@ As genes measure on average 1~kb and intergenic distances 120 bp in \emph{E. col
 A statistical analysis of the relative position of neighboring genes on the \emph{E. coli} chromosome indeed shows that genes that are up-regulated by negative supercoiling have more neighbors in divergent orientations, while genes that are down-regulated by negative supercoiling have more neighbors in converging orientations~\citep{sobetzko2016}, further suggesting that the transcription-supercoiling coupling plays a role in regulating the activity of genes located in the same topological domain.
 
 
-\section{Existing Models of Supercoiling}
+\section{Existing Models of the Transcription-Supercoiling Coupling}
 
 Several mathematical and computational models have been proposed to describe the effect of the transcription-supercoiling coupling on the expression level of neighboring genes.
 In~\cite{meyer2014}, a quantitative model of the supercoiling level at a locus of interest is proposed, in order to study the transcription-supercoiling coupling between a pair of adjacent genes.
-In that model, DNA transcription is regulated by the opening energy of DNA around gene promoters, which directly depends on the supercoiling level.
+In that model, DNA transcription is regulated by the opening free energy of DNA around gene promoters, which directly depends on the supercoiling level.
 The reciprocal influence of neighboring genes is then obtained by computing the difference in transcription levels due to supercoiling and the subsequent variation in supercoiling, and iterating this system until a fixed point is reached.
 A more detailed stochastic model is presented in~\cite{elhoudaigui2019}.
-This model aims at making quantitative predictions of gene expression levels, and introduces explicit RNA polymerases and topoisomerases that delineate supercoiling domains.
-In that model, the transcription level of a genomic region of interest is simulated using discrete time steps, during which RNA polymerases attach to the DNA template, progress along the transcribed region while generating positive supercoiling downstream and negative supercoiling upstream, and detach from the DNA, relaxing supercoiling constraints.
+This model aims at making quantitative predictions of gene expression levels, and introduces explicit RNA polymerases and topoisomerases that delineate dynamic supercoiling domains inside which supercoils immediately propagate.
+In that model, the transcription level of a genomic region of interest is simulated using discrete time steps, during which RNA polymerases attach to the DNA template, progress along the transcribed region while generating positive supercoiling in the downstream domain and negative supercoiling in the upstream domain, and finally detach from DNA, merging the two domains separated by the polymerase.
 
-Another family of biophysical models aims at describing the behavior of RNA polymerases during gene transcription, and also model the level of DNA supercoiling to that end.
+Another family of biophysical models aims at describing the movement of RNA polymerases along the genome during gene transcription, and also model the level of DNA supercoiling as it impacts the speed at which polymerases can progress forward.
 In~\cite{brackley2016}, a stochastic model of the transcription of co-oriented genes is proposed, in order to study transcriptional bursts.
-This model is qualitatively different from the models presented above, as it explicitly models the level of supercoiling as a function of position along DNA, whereas the former models consider it constant in the intervals delimited by polymerases or NAPs.
+This model is qualitatively different from the models presented above, as it explicitly models the level of supercoiling as a function of time and of the position along DNA, whereas the former models consider it as constant in the intervals delimited by polymerases or NAPs.
 A similar model is introduced in~\cite{sevier2017}, in order to study the possible stalling of DNA polymerases due to excessive transcription-generated supercoiling in a single gene.
-This model has then been extended to accommodate the supercoiling-mediated interaction of neighboring genes in~\cite{sevier2018}, making qualitatively similar predictions of gene transcription rates as the first set of models presented above.
+This second model has then been extended to accommodate the supercoiling-mediated interaction of neighboring genes in~\cite{sevier2018}, making qualitatively similar predictions of gene transcription rates as the first set of models presented above.
 This model has finally been used to propose a toggle switch~\citep{gardner2000} in which gene regulation by transcription factors is replaced by regulation by transcription-generated supercoiling~\citep{sevier2021}.
 
-The common limit to all the models described above is that these models focus on mechanistic descriptions of the local interaction between genes, but do not try to generalize to the whole-genome scale nor to an evolutionary time frame, as would be of interest in order to study the evolutionary role of supercoiling mutations.
+The common limit to all the models described above is that these models focus on mechanistic descriptions of the supercoiling-mediated local interaction between neighboring genes, but do not try to generalize to the whole-genome scale nor to an evolutionary time frame.
+Exploring the role of the transcription-supercoiling coupling at the scale of complete bacterial genomes, and the reaction of supercoiling-mediated interactions to the changes in relative gene positions that can be caused by genomic rearrangement, however seems necessary in order to decipher the evolutionary role of supercoiling mutations.
 
 
 \section{An Evolutionary Systems Biology Approach}
 
-The models of the transcription-supercoiling coupling presented above show that the system that emerges from the coupled transcription of neighboring genes on a genome is a complex system, in the sense that it presents behaviors that cannot explained by modeling each gene in isolation.
-In order to be able to study the epistatic interactions of mutations in the supercoiling homeostasis, a model that incorporates this homeostasis at least minimally is required, further increasing the complexity of the modeled system.
-The methodological approach that I used to tackle this question is the one of evolutionary systems biology, which adapts the tools of systems biology to study not only complex systems themselves but also their evolution (in the Darwinian sense) over time, with the help of computer simulations~\citep{beslon2021}.
+The models of the transcription-supercoiling coupling presented above demonstrate that the system that emerges from the coupled transcription of neighboring genes on a genome is complex, in the sense that it presents behaviors that cannot be explained by modeling each gene in isolation.
+Moreover, studying the epistatic interactions between mutations in genes that regulate supercoiling and in genes that are regulated by supercoiling requires the addition of another layer of complexity, as the effect of supercoiling mutations or genomic rearrangements on gene transcription levels cannot be directly predicted from the mutations themselves.
+In order to tackle this problem, I followed the methodological approach of evolutionary systems biology, which adapts the tools of systems biology to study not only complex systems themselves but also their evolution -- in the Darwinian sense -- over time, with the help of computer simulations~\citep{beslon2021}.
 
 \begin{figure}
 \centering
 \includegraphics[width=0.75\textwidth]{background/img/evol_sys_bio.pdf}
 \caption[Template of an evolutionary systems biology simulation]{Template of an evolutionary systems biology simulation.
-A population of complex systems each represented by their inner data structure $DS_i$ representing system $S_i$, and each having a defined fitness $f_i$, follows an evaluation-selection-variation-replication loop.
+In a population of complex systems, each individual $i$ is represented by an inner data structure $DS_i$, from which systemic properties of interest $S_i$ emerge, and that is used to compute a fitness level $f_i$.
+The population can then evolve by following an evaluation-selection-variation-replication loop.
 Figure reproduced with permission from~\citep{beslon2021}.}
 \label{fig:background:evol-sys-bio}
 \end{figure}
 
-\textbf{revoir dans le bouquin}
-The core of the approach is represented in Figure~\ref{fig:background:evol-sys-bio}, which describes the evolution of a population of comparable complex systems.
-A complex system of interest $S$ is represented by the means of a data structure $DS$, representing an instantiation of the system with particular parameters.
-Using this data structure, the behavior of the instance of the complex system can be evaluated, and used to compute a fitness value $f$.
-Once the fitness of every system has been evaluated, the fittest systems can reproduce, and undergo stochastic mutations that affect their parameter values, giving rise to a new complex system that can be put back in the population, or used as part of a new population in a discrete generation model.
+The core of this approach is represented in Figure~\ref{fig:background:evol-sys-bio}, which describes the evolution of a population of complex systems, or ``digital organisms''~\citep{adami2006}.
+Each complex system in the population is represented by the means of a data structure $DS_i$, which represents an instantiation of  underlying system with a particular set of parameter values.
+Using this data structure, we can evaluate the systemic properties of interest $S_i$ of this individual, and its fitness value $f_i$.
+A new population of complex systems can then be created by selecting reproducers based on fitness, and making their underlying data structure undergo stochastic mutations that can affect both their systemic properties and their fitness.
+This cycle can then be repeated for a given number of generations, resulting in an experimental framework called ``\emph{in silico} experimental evolution'', as it adapts the traditional \emph{in vivo} experimental evolution methodology to the computational study of the evolution of arbitrary complex systems.
 
-Both \emph{Aevol} (introduced in Chapter~\ref{chap:aevol}) and \emph{EvoTSC} (introduced in Chapter~\ref{chap:alife}), the \emph{in silico} artificial evolution platforms that I used during my PhD, follow this approach.
-In both platforms, each complex system represents a given individual which is described by its genome; the models diverge in their representation of the genome, as \emph{Aevol} is a nucleotide-level model whereas \emph{EvoTSC} is a string-of-pearls model.
-Individuals are in both platforms evaluated by computing the transcription levels of their genes, which are used to compute fitness by comparing them to an implicit (in \emph{Aevol}) or explicit (in \emph{EvoTSC}) target.
-Finally, after selection of the new individuals, the models apply different mutational operators (matching the representation of the genome and of the supercoiling homeostasis) in order to obtain the new generation.
+Both \emph{Aevol} (introduced in Chapter~\ref{chap:aevol}) and \emph{EvoTSC} (introduced in Chapter~\ref{chap:alife}), the \emph{in silico} artificial evolution platforms that I developed and used during my PhD, follow this methodology.
+In both platforms, each complex system represents a given individual which is described by its genome; the models diverge in the data structure with which they represent genomes, as \emph{Aevol} is a nucleotide-level model whereas \emph{EvoTSC} is a ``string-of-pearls'' model, in which genomes are represented by a series of genes separated by non-coding sections (see~\cite{hindre2012} for an overview of these formalisms).
+The fitness of individuals is obtained in both platforms by evaluating their gene transcription levels, and comparing these transcription levels to an implicit (in \emph{Aevol}) or explicit (in \emph{EvoTSC}) target.
+Finally, the systemic properties of individuals differ in each model, according to their choice of underlying data structure: \emph{Aevol} can be used to study properties such as genome size or the proportion of coding bases, whereas \emph{EvoTSC} can be used to study the arrangement of genes on the genome.
 
-Overall, the evolutionary systems biology approach therefore seems particularly well suited to the study of the epistatic interactions between supercoiling mutations and other mutations such as genomic rearrangements, as the supercoiling-mediated interactions between genes on a genome and the many factors that jointly affect supercoiling give rise to a complex system.
+
+\section{Conclusion}
+
+The level of DNA supercoiling is an interesting property of bacterial genomes, standing at the crossroads of many processes: it is finely regulated by the joint action of topoisomerases and nucleoid-associated proteins, but remains sensitive to the external influence of environmental stress, and the internal influence of gene transcription.
+The repeated mutations targeting the regulation of the supercoiling level in the \emph{LTEE} demonstrate the role that supercoiling can play -- through its central position in genome biology -- in the adaptation of bacterial populations to new environments, and make it an ideal example to study the role of epistatic interactions in guiding evolutionary trajectories.
+Moreover, as gene transcription itself depends on DNA supercoiling, the resulting interplay between transcription and supercoiling generates a complex web of interactions between neighboring genes in the dense bacterial genomes: the transcription-supercoiling coupling
+While this effect of this coupling has already well been studied at the scale of a few neighboring genes, expanding this analysis to the whole-genome scale seems necessary in order to have a qualitative understanding of the phenotypic consequences of supercoiling mutations, and hence of their possible epistatic interactions.
+
+Finally, an \emph{in silico} experimental evolution approach seems to be the most promising way to tackle the study of the evolutionary role of these mutations, as this methodology enables the combination of a complex model of the transcription-supercoiling coupling -- an integral part of gene regulation by DNA supercoiling -- with an evolutionary model that allows for the emergence of complex epistatic interactions that can influence evolutionary trajectories.
