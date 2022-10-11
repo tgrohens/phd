@@ -3,9 +3,9 @@
 
 In this chapter, I introduce the biological concepts and methods that will be used throughout this manuscript.
 I first present DNA supercoiling and its regulation in bacteria.
-I outline its role in gene transcription, and the converse effect of transcription on supercoiling, which jointly result in the so-called transcription-supercoiling coupling.
-Then, I discuss a few cases studies in which supercoiling might have played an important evolutionary role, and that epitomize the interest of the study of supercoiling under an evolutionary light.
-Finally, I present the general method with which I tackle the questions raised in Chapter~\ref{chap:intro} throughout the manuscript.
+I outline its role in gene transcription, and the reciprocal effect of transcription on supercoiling, which jointly result in what is called the transcription-supercoiling coupling (TSC).
+Then, I discuss a few cases studies in which supercoiling might have played an important evolutionary role, and that illustrate the interest of studying DNA supercoiling through the lens of evolution.
+Finally, I briefly present the general method with which I tackle the questions raised in Chapter~\ref{chap:intro} throughout the manuscript.
 
 \section{DNA Supercoiling in Bacteria}
 \label{sec:background:sc}
@@ -16,53 +16,65 @@ Finally, I present the general method with which I tackle the questions raised i
   \caption[Role of supercoiling in transcription, and description of the TSC]{\textbf{A}. When DNA is underwound ($\sigma < \sigma_{basal}$, left), gene transcription rates are higher than when DNA is overwound ($\sigma > \sigma_{basal}$, right).
   \textbf{B}. Promoter activity (equivalently, transcription level) \emph{e} increases with the level of negative supercoiling $-\sigma$.
   \textbf{C}. The transcription of a gene by RNA polymerase (RNAP) generates a decrease in supercoiling upstream of the transcribed gene, and an increase downstream of the transcribed gene.
-  \textbf{D}. Transcription-supercoiling coupling: the sign of the interaction between neighboring genes depends on their relative orientation.}
+  \textbf{D}. Transcription-supercoiling coupling: the sign of the interaction between neighboring genes depends on their relative orientation.
+  Figure from~\citep{grohens2021}.}
   \label{fig:background:theory}
 \end{figure}
 
 %\paragraph{Definition of DNA supercoiling}
 DNA is the material basis of genetic information.
-It is a flexible polymer that comprises two strands of nucleotides that coil around each other, at a rate of 10.5 base pairs per turn.
+It is a flexible polymer that comprises two strands of nucleotides that coil around each other, at a rate of 10.5 base pairs per turn in the absence of external constraints.
 When subjected to torsional stress, DNA can either writhe and form 3-dimensional loops, or twist around itself more or less tightly than in its relaxed state~\citep{travers2005}; both writhing and twisting are referred to as DNA supercoiling.
 The level of supercoiling is measured as the relative density $\sigma$ of supercoils in over- or under-wound DNA, as compared to relaxed DNA.
 DNA is positively supercoiled ($\sigma > 0$) when it is overwound, and negatively supercoiled ($\sigma < 0$) when it is underwound.
-In bacteria, DNA is normally maintained in a moderately negatively supercoiled state, with a reference value of $\sigma_{basal}=-0.06$ in \emph{Escherichia coli}~\citep{travers2005}.
+In bacteria, DNA is normally maintained in a moderately negatively supercoiled state, with a reference value of $\sigma_{basal}=-0.06$ in \emph{Escherichia coli}~\citep{travers2005}, and the supercoiling level is an important regulator of gene transcription~\citep{dorman2016}.
+As transcription itself impacts DNA supercoiling~\citep{liu1987}, this results in a coupling between these two processes, of which Figure~\ref{fig:background:theory} presents an overview.
+As a general rule, genes are transcribed at a higher rate when DNA is more negatively supercoiled (A), following a sigmoidal curve (B).
+Transcription generates positive and negative supercoiling downstream and upstream of transcribed genes (C), resulting in a coupling between the expression levels of neighboring genes that depends on their relative orientations (D).
 
-\subsection{Regulation of DNA supercoiling}
+\subsection{Gene Regulation by DNA Supercoiling}
 
-The level of DNA supercoiling in bacteria is controlled by topoisomerases, enzymes that alter DNA supercoiling by cutting and rotating the DNA strands~\citep{duprey2021}.
-The two main topoisomerases are gyrase, which dissipates positive supercoiling by introducing negative supercoils at an ATP-dependent rate, and topoisomerase I, which oppositely relaxes negative supercoiling~\citep{martisb.2019}.
-Many other processes additionally influence the level of DNA supercoiling.
-While the intrinsic flexibility of the DNA polymer would in principle allow supercoils to propagate freely along its length, many nucleoid-associated proteins such as FIS, H-NS or HU bind to bacterial DNA~\citep{krogh2018}, in addition to RNA polymerases during gene transcription.
-These nucleoid-associated proteins create barriers that block in practice the diffusion of supercoils, resulting in what have been termed topological domains of supercoiling~\citep{postow2004}.
-At a local scale, according to the twin-domain of supercoiling~\citep{liu1987}, the transcription of a gene by RNA polymerase generates positive and negative supercoils.
-A buildup of positive supercoiling can be observed upstream of the gene, and of negative supercoiling downstream of the gene, as a consequence of the rotational drag that hampers the rotation of RNA polymerases around DNA as they transcribe~\citep{visser2022}.
-This phenomenon is pictured in subfigure C of Figure~\ref{fig:background:theory}.
-The level of DNA supercoiling can furthermore be affected by numerous environmental challenges in bacteria.
-Salt shock transiently increases negative DNA supercoiling in \emph{E. coli}~\citep{hsieh1991}; the acidic intracellular environment relaxes DNA in the facultative pathogen \emph{Salmonella enterica} var. Typhimurium~\citep{marshall2000}; and higher temperatures relax DNA in the plant pathogen \emph{Dickeya dadantii}~\citep{herault2014}.
-These constraints overall result in a very dynamic DNA ``supercoiling landscape'' in \emph{E. coli}~\citep{visser2022}, with a supercoiling level that varies in both time during the bacterial lifecycle and space along the chromosome.
+The level of DNA supercoiling influences gene expression, as a more negatively supercoiled DNA facilitates the initiation of transcription by RNA polymerase (Figure~\ref{fig:background:theory} A).
+The thermodynamical reaction of opening the DNA double strand, which is the initial step of gene transcription, is indeed favored by more negatively supercoiled DNA~\citep{elhoudaigui2019}, resulting in a sigmoidal response curve of gene expression to DNA supercoiling (Figure~\ref{fig:background:theory} B).
 
-\subsection{Regulation by DNA supercoiling}
+Supercoiling has experimentally been shown to act as a broad regulator of gene expression, due to this effect, in several bacteria.
+In \emph{E. coli},~\cite{peter2004} showed that 7\% of genes were sensitive to a relaxation of chromosomal DNA, of which one third were up-regulated by relaxation and two thirds down-regulated.
+Similar results were obtained for \emph{S. enterica}, in which 10\% of genes were sensitive to DNA relaxation~\citep{webber2013}, and for \emph{S. pneumoniae}, in which around 13\% of genes were sensitive to relaxation~\citep{ferrandiz2010}.
+When instead inducing extreme negative supercoiling in \emph{D. dadantii}, 13\% of the genes in the exponential phase and 7\% in the stationary phase were affected~\citep{pineau2022a}.
 
-The level of DNA supercoiling influences gene expression, as a more negatively supercoiled DNA facilitates the initiation of transcription by RNA polymerase~\citep{elhoudaigui2019}, as pictured in subfigures A and B of Figure~\ref{fig:background:theory}.
-This general response has been shown to depend in particular on both promoter sequence~\citep{forquet2021} and spacer length~\citep{forquet2022}.
-Many bacteria leverage the effect of DNA supercoiling on  transcription to regulate gene expression by modulating their DNA supercoiling level.
-Supercoiling acts as a broad regulator of gene expression in several bacteria such as \emph{E. coli}, \emph{S. enterica}, or \emph{D. dadantii}, between 5\% and 15\% of genes were found to be sensitive to relaxation or hypercoiling of chromosomal DNA, with genes being up-regulated or down-regulated in each condition~\citep{peter2004, ferrandiz2010, webber2013, pineau2022a}.
 In \emph{D. dadantii}, different genomic regions moreover exhibit markedly different responses to changes in supercoiling~\citep{muskhelishvili2019}, allowing the expression of pathogenic genes only in stressful environments.
 Finally, DNA supercoiling might be an especially important regulator of gene activity in bacteria with reduced genomes, such as the obligate aphid endosymbiotic bacterium \emph{Buchnera aphidicola}.
 \emph{B. aphidicola} is nearly devoid of transcription factors, and supercoiling is therefore though to be one of the sole regulation mechanisms available in this bacteria~\citep{brinza2013}.
 
+\subsection{A Dynamic DNA Supercoiling Level}
+
+The level of DNA supercoiling in bacteria is primarily controlled by topoisomerases, enzymes that alter DNA supercoiling by cutting and rotating the DNA strands~\citep{duprey2021}.
+The two main topoisomerases are gyrase, which dissipates positive supercoiling by introducing negative supercoils at an ATP-dependent rate, and topoisomerase I, which oppositely relaxes negative supercoiling~\citep{martisb.2019}.
+But numerous other processes also impact the level of DNA supercoiling, either by generating new supercoils or by constraining their diffusion.
+
+In particular, according to the twin-domain model of supercoiling~\citep{liu1987}, the transcription of a gene by RNA polymerase generates both positive and negative supercoils.
+As a consequence of the drag that hampers the rotation of the RNA polymerase complex around the DNA sequence during transcription, positive supercoiling builds up upstream of the transcribed gene, and negative supercoiling downstream of the transcribed gene~\citep{visser2022}.
+This phenomenon is pictured in subfigure C of Figure~\ref{fig:background:theory}.
+Moreover, while the intrinsic flexibility of the DNA polymer would in principle allow supercoils to propagate freely along the chromosome, many nucleoid-associated proteins such as FIS, H-NS or HU bind to bacterial DNA~\citep{krogh2018}, in addition to RNA polymerases.
+These DNA-bound proteins create barriers that block the diffusion of supercoils, resulting in what have been termed topological domains of supercoiling~\citep{postow2004}.
+
+The level of DNA supercoiling can furthermore be affected by numerous environmental stresses in bacteria.
+Salt shock transiently increases negative DNA supercoiling in \emph{E. coli}~\citep{hsieh1991}; the acidic intracellular environment relaxes DNA in the facultative pathogen \emph{Salmonella enterica} var. Typhimurium~\citep{marshall2000}; and higher temperatures relax DNA in the plant pathogen \emph{Dickeya dadantii}~\citep{herault2014}.
+These constraints overall paint the picture of a very dynamic DNA ``supercoiling landscape'' in bacteria~\citep{visser2022}, with a supercoiling level that varies in both time and space during the bacterial lifecycle and along the chromosome.
+
 \subsection{Supercoiling and Evolution}
 
-Gene regulation by DNA supercoiling can itself be subject to evolution by natural selection, as a way to adapt gene expression levels to new environments.
+Gene regulation by DNA supercoiling can itself be subject to evolution by natural selection, as a mechanism by which to adapt gene expression levels to new environments.
 In the \emph{Long-Term Evolution Experiment} (\emph{LTEE})~\citep{lenski1991}, 12 populations of \emph{E. coli} have been maintained for over 80,000 generations, evolving and adapting to a glucose-limited environment.
-In 10 of the 12 populations in the experiment, an increase in fitness was linked to mutations in the \emph{topA} and \emph{fis} genes, which participate in the regulation of the supercoiling level~\citep{crozat2010}.
-When inserted into the ancestral strain, these mutations increased the level of negative supercoiling as well as the bacterial growth rate~\citep{crozat2005}, demonstrating that the level of DNA supercoiling can evolve as part of a regulatory response to new environments.
-These results suggest a strong selection pressure to tune the level of DNA supercoiling to the new environment of the LTEE.
+In 11 of the 12 populations in the experiment, an increase in fitness was linked to mutations in genes which participate directly or indirectly in the regulation of the supercoiling level, such as \emph{topA}, \emph{fis}, or \emph{dusB}~\citep{crozat2010}.
+When inserted into the ancestral strain, the mutant \emph{topA} and \emph{fis} alleles increased the level of negative supercoiling as well as the bacterial growth rate, demonstrating
+that supercoiling mutations can play a role in the adaptation to new environments through their broad regulatory effect~\citep{crozat2005}.
+From an epistasis perspective, the repeated fixation of supercoiling mutations in the \emph{LTEE} suggests that these mutations could confer an evolutionary advantage to the lineages in which they appear by favoring the apparition of compensatory mutations in supercoiling-regulated genes; but this possible epistatic role should nonetheless be disentangled from their direct fitness effect in order to conclude with more certainty.
 
-Furthermore, the regulation of gene expression by DNA supercoiling could be a force that participates in shaping the evolution of bacterial genomes themselves.
-Indeed, supercoiling"=sensitive genes tend to group in up or down-regulated clusters in \emph{E. coli}~\citep{peter2004}, \emph{S. enterica}~\citep{webber2013} and \emph{S. pneumoniae}~\citep{ferrandiz2010}, suggesting the possibility of an adaptive role in the co-localization of these clusters~\citep{sobetzko2016}.
-Indeed, synteny segments, or clusters of neighboring genes that show correlated expression patterns, are evolutionarily conserved across \emph{E. coli} and the distantly related \emph{Bacillus subtilis}~\citep{junier2016}, strengthening the hypothesis that these domains could play an important role in the regulation of bacterial gene expression.
+The regulation of gene expression by DNA supercoiling could moreove be a force that participates in shaping the evolution of the organization itself of bacterial genomes.
+Indeed, supercoiling"=sensitive genes tend to group in up or down-regulated clusters in \emph{E. coli}~\citep{peter2004}, \emph{S. enterica}~\citep{webber2013} and \emph{S. pneumoniae}~\citep{ferrandiz2010}.
+This suggests the possibility of a phenotypic role in the co-localization of genes in these clusters, through a common regulation of their expression~\citep{sobetzko2016}.
+Synteny segments, or clusters of neighboring genes that show correlated expression patterns, are indeed evolutionarily conserved across \emph{E. coli} and the distantly related \emph{Bacillus subtilis}, strengthening the hypothesis that these domains could play an important role in the regulation of bacterial gene expression through supercoiling-mediated interactions~\citep{junier2016}.
 
 
 \section{The Transcription-Supercoiling Coupling}
