@@ -27,17 +27,18 @@ It is a flexible polymer that comprises two strands of nucleotides that coil aro
 When subjected to torsional stress, DNA can either writhe and form 3-dimensional loops, or twist around itself more or less tightly than in its relaxed state~\citep{travers2005}; both writhing and twisting are referred to as DNA supercoiling.
 The level of supercoiling is measured as the relative density $\sigma$ of supercoils in over- or under-wound DNA, as compared to relaxed DNA.
 DNA is positively supercoiled ($\sigma > 0$) when it is overwound, and negatively supercoiled ($\sigma < 0$) when it is underwound.
-In bacteria, DNA is normally maintained in a moderately negatively supercoiled state, with a reference value of $\sigma_{basal}=-0.06$ in \emph{Escherichia coli}~\citep{travers2005}, and the supercoiling level is an important regulator of gene transcription~\citep{dorman2016}.
-As transcription itself impacts DNA supercoiling~\citep{liu1987}, this results in a coupling between these two processes, of which Figure~\ref{fig:background:theory} presents an overview.
-As a general rule, genes are transcribed at a higher rate when DNA is more negatively supercoiled (A), following a sigmoidal curve (B).
-Transcription generates positive and negative supercoiling downstream and upstream of transcribed genes (C), resulting in a coupling between the expression levels of neighboring genes that depends on their relative orientations (D).
+In bacteria, DNA is normally maintained in a moderately negatively supercoiled state, with a reference value of $\sigma_{basal}=-0.06$ in \emph{Escherichia coli}~\citep{travers2005}.
+In these organisms, the supercoiling level is an important regulator of gene transcription~\citep{dorman2016}.
+Moreover, as transcription itself impacts DNA supercoiling~\citep{liu1987}, this results in a coupling between these two processes, of which Figure~\ref{fig:background:theory} presents an overview.
+As a general rule, genes are transcribed at a higher rate when DNA is more negatively supercoiled (A), following a sigmoidal response curve (B).
+Transcription generates positive and negative supercoiling downstream and upstream of transcribed genes respectively (C), resulting in a coupling between the expression levels of neighboring genes that depends on their relative orientations (D).
 
 \subsection{Gene Regulation by DNA Supercoiling}
 
-The level of DNA supercoiling influences gene expression, as a more negatively supercoiled DNA facilitates the initiation of transcription by RNA polymerase (Figure~\ref{fig:background:theory} A).
-The thermodynamical reaction of opening the DNA double strand, which is the initial step of gene transcription, is indeed favored by more negatively supercoiled DNA~\citep{elhoudaigui2019}, resulting in a sigmoidal response curve of gene expression to DNA supercoiling (Figure~\ref{fig:background:theory} B).
+The level of DNA supercoiling influences gene expression, as more negatively supercoiled DNA facilitates the initiation of transcription (Figure~\ref{fig:background:theory} A).
+The thermodynamical reaction of opening the DNA double strand, which is the initial step of gene transcription, is indeed favored in more negatively supercoiled DNA~\citep{elhoudaigui2019}, resulting in a sigmoidal response curve of gene expression to DNA supercoiling (Figure~\ref{fig:background:theory} B).
 
-Supercoiling has experimentally been shown to act as a broad regulator of gene expression, due to this effect, in several bacteria.
+Due to this effect, supercoiling has experimentally been shown to act as a broad regulator of gene expression in several bacteria.
 In \emph{E. coli},~\cite{peter2004} showed that 7\% of genes were sensitive to a relaxation of chromosomal DNA, of which one third were up-regulated by relaxation and two thirds down-regulated.
 Similar results were obtained for \emph{S. enterica}, in which 10\% of genes were sensitive to DNA relaxation~\citep{webber2013}, and for \emph{S. pneumoniae}, in which around 13\% of genes were sensitive to relaxation~\citep{ferrandiz2010}.
 When instead inducing extreme negative supercoiling in \emph{D. dadantii}, 13\% of the genes in the exponential phase and 7\% in the stationary phase were affected~\citep{pineau2022a}.
@@ -107,7 +108,7 @@ A more detailed stochastic model is presented in~\cite{elhoudaigui2019}.
 This model aims at making quantitative predictions of gene expression levels, and introduces explicit RNA polymerases and topoisomerases that delineate dynamic supercoiling domains inside which supercoils immediately propagate.
 In that model, the transcription level of a genomic region of interest is simulated using discrete time steps, during which RNA polymerases attach to the DNA template, progress along the transcribed region while generating positive supercoiling in the downstream domain and negative supercoiling in the upstream domain, and finally detach from DNA, merging the two domains separated by the polymerase.
 
-Another family of biophysical models aims at describing the movement of RNA polymerases along the genome during gene transcription, and also model the level of DNA supercoiling as it impacts the speed at which polymerases can progress forward.
+Another family of biophysical models aim at describing the movement of RNA polymerases along the genome during gene transcription, and therefore model the level of DNA supercoiling, as supercoils impact the speed at which polymerases can progress forward.
 In~\cite{brackley2016}, a stochastic model of the transcription of co-oriented genes is proposed, in order to study transcriptional bursts.
 This model is qualitatively different from the models presented above, as it explicitly models the level of supercoiling as a function of time and of the position along DNA, whereas the former models consider it as constant in the intervals delimited by polymerases or NAPs.
 A similar model is introduced in~\cite{sevier2017}, in order to study the possible stalling of DNA polymerases due to excessive transcription-generated supercoiling in a single gene.
@@ -148,9 +149,9 @@ Finally, the systemic properties of individuals differ in each model, according 
 
 \section{Conclusion}
 
-The level of DNA supercoiling is an interesting property of bacterial genomes, standing at the crossroads of many processes: it is finely regulated by the joint action of topoisomerases and nucleoid-associated proteins, but remains sensitive to the external influence of environmental stress, and the internal influence of gene transcription.
+The level of DNA supercoiling is an interesting property of bacterial genomes, standing at the crossroads of many processes: it is finely regulated by the joint action of topoisomerases and nucleoid-associated proteins, but remains sensitive to the external influence of environmental stress, and to the internal influence of gene transcription.
 The repeated mutations targeting the regulation of the supercoiling level in the \emph{LTEE} demonstrate the role that supercoiling can play -- through its central position in genome biology -- in the adaptation of bacterial populations to new environments, and make it an ideal example to study the role of epistatic interactions in guiding evolutionary trajectories.
-Moreover, as gene transcription itself depends on DNA supercoiling, the resulting interplay between transcription and supercoiling generates a complex web of interactions between neighboring genes in the dense bacterial genomes: the transcription-supercoiling coupling
-While this effect of this coupling has already well been studied at the scale of a few neighboring genes, expanding this analysis to the whole-genome scale seems necessary in order to have a qualitative understanding of the phenotypic consequences of supercoiling mutations, and hence of their possible epistatic interactions.
+Moreover, as gene transcription itself depends on DNA supercoiling, the resulting interplay between transcription and supercoiling generates a complex web of interactions between neighboring genes in the dense bacterial genomes: the transcription-supercoiling coupling.
+While the effect of this coupling has already well been studied at the scale of a few neighboring genes, expanding this analysis to the whole-genome scale seems necessary in order to have a qualitative understanding of the phenotypic consequences of supercoiling mutations, and hence of their possible epistatic interactions.
 
 Finally, an \emph{in silico} experimental evolution approach seems to be the most promising way to tackle the study of the evolutionary role of these mutations, as this methodology enables the combination of a complex model of the transcription-supercoiling coupling -- an integral part of gene regulation by DNA supercoiling -- with an evolutionary model that allows for the emergence of complex epistatic interactions that can influence evolutionary trajectories.
