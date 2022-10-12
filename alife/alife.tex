@@ -98,7 +98,7 @@ In our setting, this algorithm has empirically always converged to a solution th
     \includegraphics[width=\textwidth]{alife/img/13genes_expr_level.pdf}
     \label{subfig:alife:13genes_expr}
   \end{subfigure}
-  \caption[Example individual in the simple model]{Left: genome (outer ring) and stable state level of supercoiling $\sigma$ (inner ring) of an example individual with 13 genes in the model.
+  \caption[Example individual in the proof-of-concept model]{Left: genome (outer ring) and stable state level of supercoiling $\sigma$ (inner ring) of an example individual with 13 genes in the model.
   Right: transcription levels of the individual's genes during the iterations of the fixed point computation, in an environment given by $\sigma_{env} = 0.05$.
   Solid lines represent genes in forward orientation, and dashed lines genes in reverse orientation.}
   \label{fig:alife:13genes}
@@ -289,7 +289,7 @@ The final expression levels of \emph{A} genes therefore show that specific sets 
 \begin{figure}[H]
   \centering
 \includegraphics[width=0.8\textwidth]{alife/img/mean_activation.pdf}
-\caption[Fraction of activated genes of each type at the end of evolution in the simple model]{Fraction of activated genes of each type in each environment at the end of the lifecycle, averaged over the best individual in the last generation of each replica.
+\caption[Fraction of activated genes of each type at the end of evolution in the proof-of-concept model]{Fraction of activated genes of each type in each environment at the end of the lifecycle, averaged over the best individual in the last generation of each replica.
   Boxplots represent the median and quartiles, and dots flier data points.
   For \emph{A} genes and \emph{B} genes, activation levels differ depending on the environment: $p$-value $2.40\times10^{-17}$ for \emph{A} genes, and $p$-value $<1\times10^{-25}$ for \emph{B} genes (Student's $t$-test for dependent samples).}
   \label{fig:alife:mean_activ}
@@ -302,7 +302,7 @@ The rhythm of evolution is however progressively slower and slower (note the log
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{alife/img/all_fitness.pdf}
-  \caption[Fitness of every replicate during evolution in the simple model]{Evolution of the fitness of the best individual of each replicate at every generation.}
+  \caption[Fitness of every replicate during evolution in the proof-of-concept model]{Evolution of the fitness of the best individual of each replicate at every generation.}
   \label{fig:alife:fitnesses}
 \end{figure}
 
@@ -325,7 +325,7 @@ As already mentioned above, this asymmetry comes from the different requirements
     \label{subfig:alife:env_B}
   \end{subfigure}
 
-  \caption[Number of activated genes during evolution in one of the replicates in the simple model]{Number of activated genes of each type and fitness of the best individual at every generation of replicate 13, with a population size of $N=100$, for 250,000 generations.
+  \caption[Number of activated genes during evolution in one of the replicates in the proof-of-concept model]{Number of activated genes of each type and fitness of the best individual at every generation of replicate 13, with a population size of $N=100$, for 250,000 generations.
   The number of active \emph{AB} genes increases until it reaches 20, in both environment A (top) and environment B (bottom).
   The number of active \emph{A} (resp. \emph{B}) genes increases in environment A (resp. B) and decreases in environment B (resp. A) over time, thus converging towards their evolutionary target.}
   \label{fig:alife:evolution}
@@ -358,7 +358,7 @@ This shows the plasticity of the response to environmental change at the local s
     \includegraphics[width=\textwidth]{alife/img/best_rep13_env_B.pdf}
     \label{subfig:alife:best_expr_B}
   \end{subfigure}
-  \caption[Best individual at the end of evolution in one of the replicates in the simple model, evaluated in both environments]{Local supercoiling along the genome and gene transcription levels of the best individual in replicate 13 after 250,000 generations.
+  \caption[Best individual at the end of evolution in one of the replicates in the proof-of-concept model, evaluated in both environments]{Local supercoiling along the genome and gene transcription levels of the best individual in replicate 13 after 250,000 generations.
   Environment A is on top and environment B at the bottom.
   \emph{AB} genes are colored blue, \emph{A} genes colored red, and \emph{B} genes colored green.}
   \label{fig:alife:best_indiv}
@@ -394,7 +394,7 @@ In this situation, we chose to retain the gene expression levels at the last ste
     \includegraphics[width=\textwidth]{alife/img/mean_activation_epsilon-0.1.pdf}
     \label{subfig:alife:param_epsilon_4}
   \end{subfigure}
-  \caption[Parameter exploration in the simple model: varying $\epsilon$]{Average fraction of activated genes in each environment at the end of evolution, for increasing values of $\epsilon$, from top to bottom and left to right.
+  \caption[Parameter exploration in the proof-of-concept model: varying $\epsilon$]{Average fraction of activated genes in each environment at the end of evolution, for increasing values of $\epsilon$, from top to bottom and left to right.
   Every replicate is shown as a dot, and the bottom-left panel ($\epsilon = 0.03$) recalls data from the main run (which has 15 replicates) for comparison.
   For all values of $\epsilon$ except $0.1$, the behavior from the main run is qualitatively replicated.}
   \label{fig:alife:param_epsilon}
@@ -424,7 +424,7 @@ In this case, promoters are not sensitive enough to the supercoiling variations 
     \includegraphics[width=\textwidth]{alife/img/mean_activation_inter-coef-3.0.pdf}
     \label{subfig:alife:param_c_4}
   \end{subfigure}
-  \caption[Parameter exploration in the simple model: varying $c$]{Average fraction of activated genes in each environment at the end of evolution, for increasing values of $c$, from top to bottom and left to right.
+  \caption[Parameter exploration in the proof-of-concept model: varying $c$]{Average fraction of activated genes in each environment at the end of evolution, for increasing values of $c$, from top to bottom and left to right.
   Every replicate is shown as a dot, and the top-right panel ($c = 0.3$) recalls data from the main run for comparison.
   For all values of $c$ except $0.1$, the behavior from the main run is qualitatively replicated.}
   \label{fig:alife:param_c}
@@ -451,7 +451,7 @@ Similarly to $\epsilon$, when $c$ is too low (top-left panel), genes do not inte
     \includegraphics[width=\textwidth]{alife/img/mean_activation_sigma-0.2.pdf}
     \label{subfig:alife:param_sigma_4}
   \end{subfigure}
-  \caption[Parameter exploration in the simple model: varying $\sigma_A$ and $\sigma_B$]{Average fraction of activated genes in each environment at the end of evolution, for more and more distinct environments $\sigma_A$ and $\sigma_B$, from top to bottom and left to right.
+  \caption[Parameter exploration in the proof-of-concept model: varying $\sigma_A$ and $\sigma_B$]{Average fraction of activated genes in each environment at the end of evolution, for more and more distinct environments $\sigma_A$ and $\sigma_B$, from top to bottom and left to right.
   Every replicate is shown as a dot, and the bottom-left panel ($\sigma_A = 0.1$, $\sigma_B = -0.1$) recalls data from the main run for comparison.
   For all values except $\sigma_A = 0.2$ and $\sigma_B = -0.2$, the behavior from the main run is qualitatively replicated.}
   \label{fig:alife:param_sigma}
