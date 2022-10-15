@@ -3,7 +3,7 @@
 Evolution is often considered an unpredictable process, as genetic mutations happen at random.
 But the fixation of mutations is not completely arbitrary, as mutations need to pass the sieve of natural selection to be retained.
 In particular, the beneficial or deleterious character of a mutation can depend on the genetic background in which it happens, an effect called epistasis.
-In this work, I study a particular kind of epistatic interactions in bacteria:  the interplay between mutations in the mechanisms regulating DNA supercoiling -- the level of over- or under- winding of DNA -- and genomic rearrangements.
+In this work, I study a particular kind of epistatic interactions in bacteria: the interplay between mutations in the mechanisms regulating DNA supercoiling -- the level of over- or under- winding of DNA -- and genomic rearrangements.
 
 I present _EvoTSC_, a mathematical and computational model of DNA supercoiling tailored to study the mutual interaction between gene transcription and DNA supercoiling (the _transcription-supercoiling coupling_ or TSC), and integrated into a full-fledged evolutionary simulation.
 I first validate the model by showing that evolution can leverage this coupling to evolve gene regulatory networks that are able to tune gene expression levels in response to environmental perturbations, by changing only the relative positions of the genes through genomic inversions.

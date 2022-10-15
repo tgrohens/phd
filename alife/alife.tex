@@ -6,7 +6,7 @@ This chapter presents the proof-of-concept version of the \emph{EvoTSC} model, a
 The text of the chapter is an edited version of an article published in the \emph{Artificial Life} journal~\citep{grohens2022a}.
 
 \paragraph{}
-Both the importance of gene regulation via supercoiling and the detailed mechanisms of the transcription"=supercoiling coupling, at the local scale, have already been well studied in the literature (see Section~\ref{sec:background:sc}). A thorough analysis of the  effect of the transcription-supercoiling coupling on gene expression at the whole-genome scale -- and of its possible evolutionary use by natural selection -- however remains lacking, in particular in the dense prokaryotic genomes, in which large groups of genes are likely to interact through this coupling.
+Both the importance of gene regulation via supercoiling and the detailed mechanisms of the transcription"=supercoiling coupling, at the local scale, have already been well studied in the literature (see Section~\ref{sec:background:sc}). A thorough analysis of the effect of the transcription-supercoiling coupling on gene expression at the whole-genome scale -- and of its possible evolutionary use by natural selection -- however remains lacking, in particular in the dense prokaryotic genomes, in which large groups of genes are likely to interact through this coupling.
 In this work, we describe a new model which incorporates a high-level model of global supercoiling regulation and of the transcription"=supercoiling coupling within an \emph{in silico} experimental evolution setting.
 Using this model, we first investigate the non-linear variation in gene transcription levels at the whole-genome scale in response to variations in the global supercoiling level.
 Then, we study the evolutionary trajectory of gene activation patterns in individuals subjected to different environments.
@@ -20,12 +20,12 @@ Moreover, we demonstrate that, using genomic inversions as the only mutation ope
 \label{sec:alife:indiv_model}
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.75\textwidth]{alife/img/reseau.png}
-  \caption[Hand-drawn genome and local interactions resulting from the TSC]{Genes along an example genome and local variations in supercoiling (outer ring), and the associated gene interaction network (inner ring).
-  The outer ring color shows locally high ($\sigma > \sigma_0$, red) or low ($\sigma < \sigma_0$, blue) supercoiling levels due to gene transcription.
-  In the inner ring, closer genes interact more strongly (black arrows) than genes that are farther apart (gray arrows), either positively or negatively depending on their relative orientations.}
-  \label{fig:alife:network}
+\centering
+\includegraphics[width=0.75\textwidth]{alife/img/reseau.png}
+\caption[Hand-drawn genome and local interactions resulting from the TSC]{Genes along an example genome and local variations in supercoiling (outer ring), and the associated gene interaction network (inner ring).
+The outer ring color shows locally high ($\sigma > \sigma_0$, red) or low ($\sigma < \sigma_0$, blue) supercoiling levels due to gene transcription.
+In the inner ring, closer genes interact more strongly (black arrows) than genes that are farther apart (gray arrows), either positively or negatively depending on their relative orientations.}
+\label{fig:alife:network}
 \end{figure}
 
 %In this paper, we present a model which aims at studying the genome-wide effect of the transcription-supercoiling coupling in bacteria, expanding upon previous work which only considered local interactions.
@@ -68,16 +68,16 @@ Finally, an interaction coefficient $c$ is applied to adjust the strength of the
 Using this interaction matrix, we compute the level of supercoiling $\sigma_i$ at the locus of every gene, which depends on the transcription level of all the other genes, on the basal supercoiling and on the environmental supercoiling:
 
 \begin{equation}
-  \sigma_i = \sigma_{basal} + \sigma_{env} + \sum_{j=1}^n\frac{\partial\sigma_{i}}{\partial e_j}e_j
-  \label{eq:alife_sigma}
+\sigma_i = \sigma_{basal} + \sigma_{env} + \sum_{j=1}^n\frac{\partial\sigma_{i}}{\partial e_j}e_j
+\label{eq:alife_sigma}
 \end{equation}
 
 The transcription level $e_i$ of every gene as a function of total supercoiling is then modeled with a sigmoidal activation curve, following~\cite{elhoudaigui2019}.
 The equation is given by:
 
 \begin{equation}
-  e_i = \frac{1}{1 + e^{(\sigma_i - \sigma_0)/\epsilon}}
-  \label{eq:transcr}
+e_i = \frac{1}{1 + e^{(\sigma_i - \sigma_0)/\epsilon}}
+\label{eq:transcr}
 \end{equation}
 
 In this equation, $\sigma_0$ is a parameter that represents the inflexion point of the sigmoid, that is the supercoiling level at which the gene is at half its maximum transcription rate, and $\epsilon$ a scaling factor that represents the strength of the dependence of the transcription level on the supercoiling level.
@@ -89,19 +89,19 @@ In order to compute a fixed point of $f$, that is a set of transcription levels 
 In our setting, this algorithm has empirically always converged to a solution that is a stable fixed point of the function, and that is therefore interpretable from a biological perspective.
 
 \begin{figure}[H]
-  \centering
-  \begin{subfigure}[t]{0.42\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/13genes_genome.pdf}
-    \label{subfig:alife:13genes_genome}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.56\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/13genes_expr_level.pdf}
-    \label{subfig:alife:13genes_expr}
-  \end{subfigure}
-  \caption[Example individual in the proof-of-concept model]{Left: genome (outer ring) and stable state level of supercoiling $\sigma$ (inner ring) of an example individual with 13 genes in the model.
-  Right: transcription levels of the individual's genes during the iterations of the fixed point computation, in an environment given by $\sigma_{env} = 0.05$.
-  Solid lines represent genes in forward orientation, and dashed lines genes in reverse orientation.}
-  \label{fig:alife:13genes}
+\centering
+\begin{subfigure}[t]{0.42\textwidth}
+\includegraphics[width=\textwidth]{alife/img/13genes_genome.pdf}
+\label{subfig:alife:13genes_genome}
+\end{subfigure}
+\begin{subfigure}[t]{0.56\textwidth}
+\includegraphics[width=\textwidth]{alife/img/13genes_expr_level.pdf}
+\label{subfig:alife:13genes_expr}
+\end{subfigure}
+\caption[Example individual in the proof-of-concept model]{Left: genome (outer ring) and stable state level of supercoiling $\sigma$ (inner ring) of an example individual with 13 genes in the model.
+Right: transcription levels of the individual's genes during the iterations of the fixed point computation, in an environment given by $\sigma_{env} = 0.05$.
+Solid lines represent genes in forward orientation, and dashed lines genes in reverse orientation.}
+\label{fig:alife:13genes}
 \end{figure}
 
 Figure~\ref{fig:alife:13genes} shows the genome (left, outer ring) of an example individual with a genome of 13,000 bp and $n=13$ genes evenly spaced along the genome, and with a basal supercoiling of $\sigma_{basal} = -0.06$.
@@ -121,50 +121,50 @@ Highly transcribed genes, such as A and B, generate a large variation in the sup
 \label{sec:alife:env_model}
 
 \begin{figure}[H]
-  \centering
-  \begin{subfigure}[t]{0.28\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/13genes_genome_3.pdf}
-    \label{subfig:alife:genome_3}
-  \end{subfigure}
-  \hspace{-3mm}
-  \begin{subfigure}[t]{0.24\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/13genes_genome_2.pdf}
-    \label{subfig:alife:genome_2}
-  \end{subfigure}
-  \hspace{-3mm}
-  \begin{subfigure}[t]{0.24\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/13genes_genome_1.pdf}
-    \label{subfig:alife:genome_1}
-  \end{subfigure}
-  \hspace{-3mm}
-  \begin{subfigure}[t]{0.24\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/13genes_genome_0.pdf}
-    \label{subfig:alife:genome_0}
-  \end{subfigure}
-  \vspace{-3mm}
+\centering
+\begin{subfigure}[t]{0.28\textwidth}
+\includegraphics[width=\textwidth]{alife/img/13genes_genome_3.pdf}
+\label{subfig:alife:genome_3}
+\end{subfigure}
+\hspace{-3mm}
+\begin{subfigure}[t]{0.24\textwidth}
+\includegraphics[width=\textwidth]{alife/img/13genes_genome_2.pdf}
+\label{subfig:alife:genome_2}
+\end{subfigure}
+\hspace{-3mm}
+\begin{subfigure}[t]{0.24\textwidth}
+\includegraphics[width=\textwidth]{alife/img/13genes_genome_1.pdf}
+\label{subfig:alife:genome_1}
+\end{subfigure}
+\hspace{-3mm}
+\begin{subfigure}[t]{0.24\textwidth}
+\includegraphics[width=\textwidth]{alife/img/13genes_genome_0.pdf}
+\label{subfig:alife:genome_0}
+\end{subfigure}
+\vspace{-3mm}
 
-  \begin{subfigure}[t]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/13genes_sigma_3.pdf}
-    \label{subfig:alife:sigma_3}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/13genes_sigma_2.pdf}
-    \label{subfig:alife:sigma_2}
-  \end{subfigure}
-  \vspace{-5mm}
+\begin{subfigure}[t]{0.48\textwidth}
+\includegraphics[width=\textwidth]{alife/img/13genes_sigma_3.pdf}
+\label{subfig:alife:sigma_3}
+\end{subfigure}
+\begin{subfigure}[t]{0.48\textwidth}
+\includegraphics[width=\textwidth]{alife/img/13genes_sigma_2.pdf}
+\label{subfig:alife:sigma_2}
+\end{subfigure}
+\vspace{-5mm}
 
-  \begin{subfigure}[t]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/13genes_sigma_1.pdf}
-    \label{subfig:alife:sigma_1}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/13genes_sigma_0.pdf}
-    \label{subfig:alife:sigma_0}
-  \end{subfigure}
-  \caption[Influence of environmental supercoiling on the phenotype of the example individual in Figure~\ref{fig:alife:13genes}]{Influence of the environment supercoiling $\sigma_{env}$ on the stable state local supercoiling level (top row) and gene transcription levels (bottom rows) of the example individual.
-  From left to right and top to bottom: at $\sigma_{env} = 0.1$, no genes are activated ($e > 0.5$); at $\sigma_{env} = 0.0$ and at $\sigma_{env} = -0.1$, 8 genes are activated; at $\sigma_{env} = -0.2$, 10 genes are activated.
-  Lower values of $\sigma_{env}$ result in the activation of more genes, reflecting the \emph{in vivo} effect of higher negative supercoiling.}
-  \label{fig:alife:sigma_env}
+\begin{subfigure}[t]{0.48\textwidth}
+\includegraphics[width=\textwidth]{alife/img/13genes_sigma_1.pdf}
+\label{subfig:alife:sigma_1}
+\end{subfigure}
+\begin{subfigure}[t]{0.48\textwidth}
+\includegraphics[width=\textwidth]{alife/img/13genes_sigma_0.pdf}
+\label{subfig:alife:sigma_0}
+\end{subfigure}
+\caption[Influence of environmental supercoiling on the phenotype of the example individual in Figure~\ref{fig:alife:13genes}]{Influence of the environment supercoiling $\sigma_{env}$ on the stable state local supercoiling level (top row) and gene transcription levels (bottom rows) of the example individual.
+From left to right and top to bottom: at $\sigma_{env} = 0.1$, no genes are activated ($e > 0.5$); at $\sigma_{env} = 0.0$ and at $\sigma_{env} = -0.1$, 8 genes are activated; at $\sigma_{env} = -0.2$, 10 genes are activated.
+Lower values of $\sigma_{env}$ result in the activation of more genes, reflecting the \emph{in vivo} effect of higher negative supercoiling.}
+\label{fig:alife:sigma_env}
 \end{figure}
 
 Figure~\ref{fig:alife:sigma_env} captures the influence of the environmental change in supercoiling $\sigma_{env}$ on the local supercoiling level due to the transcription-supercoiling coupling (top row) and on the repartition of genes between the activated and inhibited states (bottom rows), again using the example individual already shown in figure~\ref{fig:alife:13genes}.
@@ -177,17 +177,17 @@ Finally, for $\sigma_{env} = -0.2$, there is a strong environmental pressure tow
 \label{sec:alife:gene_pos}
 
 \begin{figure}[H]
-  \centering
-  \begin{subfigure}[t]{0.42\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/inversion_genome.pdf}
-    \label{subfig:alife:inversion_genome}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.56\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/inversion_expr_level.pdf}
-    \label{subfig:alife:inversion_expr}
-  \end{subfigure}
-  \caption[Effect of a genomic inversion on the example individual in Figure~\ref{fig:alife:13genes}]{Genome, local supercoiling and gene expression levels of a new individual obtained from the individual in figure~\ref{fig:alife:13genes} by switching the positions and orientations of genes B and C.}
-  \label{fig:alife:inversion}
+\centering
+\begin{subfigure}[t]{0.42\textwidth}
+\includegraphics[width=\textwidth]{alife/img/inversion_genome.pdf}
+\label{subfig:alife:inversion_genome}
+\end{subfigure}
+\begin{subfigure}[t]{0.56\textwidth}
+\includegraphics[width=\textwidth]{alife/img/inversion_expr_level.pdf}
+\label{subfig:alife:inversion_expr}
+\end{subfigure}
+\caption[Effect of a genomic inversion on the example individual in Figure~\ref{fig:alife:13genes}]{Genome, local supercoiling and gene expression levels of a new individual obtained from the individual in figure~\ref{fig:alife:13genes} by switching the positions and orientations of genes B and C.}
+\label{fig:alife:inversion}
 \end{figure}
 
 Figure~\ref{fig:alife:inversion} again shows the local supercoiling and gene expression levels of the individual in figure~\ref{fig:alife:13genes}, after reversing the positions and orientations of genes B and C.
@@ -232,8 +232,8 @@ Then, in each environment, we compute the gap $g_A$ (resp. $g_B$), or average sq
 The gap $g_A$ is computed as follows:
 
 \begin{equation}
-  g_A(e^A) = \frac{1}{n} \sum_{i=1}^{n} (e^A_i - \tilde{e}^A_i)^2
-  \label{eq:alife_gap}
+g_A(e^A) = \frac{1}{n} \sum_{i=1}^{n} (e^A_i - \tilde{e}^A_i)^2
+\label{eq:alife_gap}
 \end{equation}
 
 The gap $g_B$ is computed in the same way.
@@ -252,12 +252,12 @@ Genomic inversions hence affect gene syntenies and orientations, and therefore a
 When mutating a genome during reproduction, we draw the number of inversions $k$ to perform from a Poisson law with parameter $\lambda = 2$, giving an average of 2 inversions between an individual and its ancestor; the probability of not undergoing any mutations is $P(k=0) = e^{-\lambda} \approx 0.136$.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{alife/img/genome_inversion.pdf}
-  \caption[Effect of an inversion on the hand-drawn genome in Figure \ref{fig:alife:network}]{Result of the inversion of a genomic segment containing genes B and C from the individual presented in figure~\ref{fig:alife:network}.
-  The gene interactions which have changed due to the inversion are drawn in red.
-  This illustration genome corresponds to the actual individual in our model presented in figure~\ref{fig:alife:inversion}.}
-  \label{fig:alife:genome_inv}
+\centering
+\includegraphics[width=0.8\textwidth]{alife/img/genome_inversion.pdf}
+\caption[Effect of an inversion on the hand-drawn genome in Figure \ref{fig:alife:network}]{Result of the inversion of a genomic segment containing genes B and C from the individual presented in figure~\ref{fig:alife:network}.
+The gene interactions which have changed due to the inversion are drawn in red.
+This illustration genome corresponds to the actual individual in our model presented in figure~\ref{fig:alife:inversion}.}
+\label{fig:alife:genome_inv}
 \end{figure}
 
 Figure \ref{fig:alife:genome_inv} presents a genome obtained by performing an inversion on the genome shown in figure~\ref{fig:alife:network}.
@@ -287,12 +287,12 @@ Conversely, less than 5\% of \emph{A} genes are activated in environment B, in w
 The final expression levels of \emph{A} genes therefore show that specific sets of genes can be activated by the transcription-supercoiling coupling despite environmental hurdles.
 
 \begin{figure}[H]
-  \centering
+\centering
 \includegraphics[width=0.8\textwidth]{alife/img/mean_activation.pdf}
 \caption[Fraction of activated genes of each type at the end of evolution in the proof-of-concept model]{Fraction of activated genes of each type in each environment at the end of the lifecycle, averaged over the best individual in the last generation of each replica.
-  Boxplots represent the median and quartiles, and dots flier data points.
-  For \emph{A} genes and \emph{B} genes, activation levels differ depending on the environment: $p$-value $2.40\times10^{-17}$ for \emph{A} genes, and $p$-value $<1\times10^{-25}$ for \emph{B} genes (Student's $t$-test for dependent samples).}
-  \label{fig:alife:mean_activ}
+Boxplots represent the median and quartiles, and dots flier data points.
+For \emph{A} genes and \emph{B} genes, activation levels differ depending on the environment: $p$-value $2.40\times10^{-17}$ for \emph{A} genes, and $p$-value $<1\times10^{-25}$ for \emph{B} genes (Student's $t$-test for dependent samples).}
+\label{fig:alife:mean_activ}
 \end{figure}
 
 Furthermore, in each of the 15 replicates, the fitness of the best individual in the population increases continuously over the course of evolution, as shown in figure~\ref{fig:alife:fitnesses}.
@@ -300,10 +300,10 @@ As the fitnesses keep increasing until the end of the simulation, this suggests 
 The rhythm of evolution is however progressively slower and slower (note the logarithmic time scale in the figure), as the pool of available favorable mutations decreases.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{alife/img/all_fitness.pdf}
-  \caption[Fitness of every replicate during evolution in the proof-of-concept model]{Evolution of the fitness of the best individual of each replicate at every generation.}
-  \label{fig:alife:fitnesses}
+\centering
+\includegraphics[width=0.8\textwidth]{alife/img/all_fitness.pdf}
+\caption[Fitness of every replicate during evolution in the proof-of-concept model]{Evolution of the fitness of the best individual of each replicate at every generation.}
+\label{fig:alife:fitnesses}
 \end{figure}
 
 Finally, details of the evolution of one of the 15 replicate populations are shown in figure~\ref{fig:alife:evolution}.
@@ -314,21 +314,21 @@ As already mentioned above, this asymmetry comes from the different requirements
 \emph{A} genes therefore have to be activated in a harder environment, and inhibited in a simpler environment, whereas \emph{B} genes have to do the opposite.
 
 \begin{figure}[H]
-  \centering
-  \begin{subfigure}[t]{0.8\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/rep_13_env_A.pdf}
-    \label{subfig:alife:env_A}
-  \end{subfigure}
+\centering
+\begin{subfigure}[t]{0.8\textwidth}
+\includegraphics[width=\textwidth]{alife/img/rep_13_env_A.pdf}
+\label{subfig:alife:env_A}
+\end{subfigure}
 
-  \begin{subfigure}[t]{0.8\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/rep_13_env_B.pdf}
-    \label{subfig:alife:env_B}
-  \end{subfigure}
+\begin{subfigure}[t]{0.8\textwidth}
+\includegraphics[width=\textwidth]{alife/img/rep_13_env_B.pdf}
+\label{subfig:alife:env_B}
+\end{subfigure}
 
-  \caption[Number of activated genes during evolution in one of the replicates in the proof-of-concept model]{Number of activated genes of each type and fitness of the best individual at every generation of replicate 13, with a population size of $N=100$, for 250,000 generations.
-  The number of active \emph{AB} genes increases until it reaches 20, in both environment A (top) and environment B (bottom).
-  The number of active \emph{A} (resp. \emph{B}) genes increases in environment A (resp. B) and decreases in environment B (resp. A) over time, thus converging towards their evolutionary target.}
-  \label{fig:alife:evolution}
+\caption[Number of activated genes during evolution in one of the replicates in the proof-of-concept model]{Number of activated genes of each type and fitness of the best individual at every generation of replicate 13, with a population size of $N=100$, for 250,000 generations.
+The number of active \emph{AB} genes increases until it reaches 20, in both environment A (top) and environment B (bottom).
+The number of active \emph{A} (resp. \emph{B}) genes increases in environment A (resp. B) and decreases in environment B (resp. A) over time, thus converging towards their evolutionary target.}
+\label{fig:alife:evolution}
 \end{figure}
 
 This is shown in more detail in figure~\ref{fig:alife:best_indiv}, which shows the supercoiling level and gene activation levels of the best individual of the last generation of replicate 13, in both environments.
@@ -339,29 +339,29 @@ These domains also show qualitatively different responses to the different envir
 This shows the plasticity of the response to environmental change at the local supercoiling level.
 
 \begin{figure}[H]
-  \centering
-  \begin{subfigure}[t]{0.42\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/genome_and_tsc_rep13_env_A.pdf}
-    \label{subfig:alife:best_genome_A}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.56\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/best_rep13_env_A.pdf}
-    \label{subfig:alife:best_expr_A}
-  \end{subfigure}
-  \vspace{-5mm}
+\centering
+\begin{subfigure}[t]{0.42\textwidth}
+\includegraphics[width=\textwidth]{alife/img/genome_and_tsc_rep13_env_A.pdf}
+\label{subfig:alife:best_genome_A}
+\end{subfigure}
+\begin{subfigure}[t]{0.56\textwidth}
+\includegraphics[width=\textwidth]{alife/img/best_rep13_env_A.pdf}
+\label{subfig:alife:best_expr_A}
+\end{subfigure}
+\vspace{-5mm}
 
-  \begin{subfigure}[t]{0.42\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/genome_and_tsc_rep13_env_B.pdf}
-    \label{subfig:alife:best_genome_B}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.56\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/best_rep13_env_B.pdf}
-    \label{subfig:alife:best_expr_B}
-  \end{subfigure}
-  \caption[Best individual at the end of evolution in one of the replicates in the proof-of-concept model, evaluated in both environments]{Local supercoiling along the genome and gene transcription levels of the best individual in replicate 13 after 250,000 generations.
-  Environment A is on top and environment B at the bottom.
-  \emph{AB} genes are colored blue, \emph{A} genes colored red, and \emph{B} genes colored green.}
-  \label{fig:alife:best_indiv}
+\begin{subfigure}[t]{0.42\textwidth}
+\includegraphics[width=\textwidth]{alife/img/genome_and_tsc_rep13_env_B.pdf}
+\label{subfig:alife:best_genome_B}
+\end{subfigure}
+\begin{subfigure}[t]{0.56\textwidth}
+\includegraphics[width=\textwidth]{alife/img/best_rep13_env_B.pdf}
+\label{subfig:alife:best_expr_B}
+\end{subfigure}
+\caption[Best individual at the end of evolution in one of the replicates in the proof-of-concept model, evaluated in both environments]{Local supercoiling along the genome and gene transcription levels of the best individual in replicate 13 after 250,000 generations.
+Environment A is on top and environment B at the bottom.
+\emph{AB} genes are colored blue, \emph{A} genes colored red, and \emph{B} genes colored green.}
+\label{fig:alife:best_indiv}
 \end{figure}
 
 Our experimental results show that, in a model of gene transcription that is structured around the transcription"=supercoiling coupling, complex gene interaction networks can in fact evolve.
@@ -376,28 +376,28 @@ Note that, for extreme parameter values, gene expression levels did in some case
 In this situation, we chose to retain the gene expression levels at the last step as the phenotype of the affected individuals.
 
 \begin{figure}[H]
-  \centering
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_epsilon-0.003.pdf}
-    \label{subfig:alife:param_epsilon_1}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_epsilon-0.01.pdf}
-    \label{subfig:alife:param_epsilon_2}
-  \end{subfigure}
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_epsilon-0.003.pdf}
+\label{subfig:alife:param_epsilon_1}
+\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_epsilon-0.01.pdf}
+\label{subfig:alife:param_epsilon_2}
+\end{subfigure}
 
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_epsilon.pdf}
-    \label{subfig:alife:param_epsilon_3}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_epsilon-0.1.pdf}
-    \label{subfig:alife:param_epsilon_4}
-  \end{subfigure}
-  \caption[Parameter exploration in the proof-of-concept model: varying $\epsilon$]{Average fraction of activated genes in each environment at the end of evolution, for increasing values of $\epsilon$, from top to bottom and left to right.
-  Every replicate is shown as a dot, and the bottom-left panel ($\epsilon = 0.03$) recalls data from the main run (which has 15 replicates) for comparison.
-  For all values of $\epsilon$ except $0.1$, the behavior from the main run is qualitatively replicated.}
-  \label{fig:alife:param_epsilon}
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_epsilon.pdf}
+\label{subfig:alife:param_epsilon_3}
+\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_epsilon-0.1.pdf}
+\label{subfig:alife:param_epsilon_4}
+\end{subfigure}
+\caption[Parameter exploration in the proof-of-concept model: varying $\epsilon$]{Average fraction of activated genes in each environment at the end of evolution, for increasing values of $\epsilon$, from top to bottom and left to right.
+Every replicate is shown as a dot, and the bottom-left panel ($\epsilon = 0.03$) recalls data from the main run (which has 15 replicates) for comparison.
+For all values of $\epsilon$ except $0.1$, the behavior from the main run is qualitatively replicated.}
+\label{fig:alife:param_epsilon}
 \end{figure}
 
 The results of the additional simulations are presented in figures~\ref{fig:alife:param_epsilon},~\ref{fig:alife:param_c} and~\ref{fig:alife:param_sigma}.
@@ -406,55 +406,55 @@ For the values of $\epsilon$ lower than the default (top row), representing a hi
 In this case, promoters are not sensitive enough to the supercoiling variations caused by the transcription-supercoiling coupling, and genes are unable to overcome the highly positive supercoiling of environment A.
 
 \begin{figure}[H]
-  \centering
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_inter-coef-0.1.pdf}
-    \label{subfig:alife:param_c_1}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_inter_coef.pdf}
-    \label{subfig:alife:param_c_2}
-  \end{subfigure}
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_inter-coef-0.1.pdf}
+\label{subfig:alife:param_c_1}
+\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_inter_coef.pdf}
+\label{subfig:alife:param_c_2}
+\end{subfigure}
 
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_inter-coef-1.0.pdf}
-    \label{subfig:alife:param_c_3}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_inter-coef-3.0.pdf}
-    \label{subfig:alife:param_c_4}
-  \end{subfigure}
-  \caption[Parameter exploration in the proof-of-concept model: varying $c$]{Average fraction of activated genes in each environment at the end of evolution, for increasing values of $c$, from top to bottom and left to right.
-  Every replicate is shown as a dot, and the top-right panel ($c = 0.3$) recalls data from the main run for comparison.
-  For all values of $c$ except $0.1$, the behavior from the main run is qualitatively replicated.}
-  \label{fig:alife:param_c}
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_inter-coef-1.0.pdf}
+\label{subfig:alife:param_c_3}
+\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_inter-coef-3.0.pdf}
+\label{subfig:alife:param_c_4}
+\end{subfigure}
+\caption[Parameter exploration in the proof-of-concept model: varying $c$]{Average fraction of activated genes in each environment at the end of evolution, for increasing values of $c$, from top to bottom and left to right.
+Every replicate is shown as a dot, and the top-right panel ($c = 0.3$) recalls data from the main run for comparison.
+For all values of $c$ except $0.1$, the behavior from the main run is qualitatively replicated.}
+\label{fig:alife:param_c}
 \end{figure}
 
 For $c$, we chose values of $c = 0.1$, $c = 1.0$, and $c = 3.0$, for an initial value of $c = 0.3$, and the results are shown in figure~\ref{fig:alife:param_c}.
 Similarly to $\epsilon$, when $c$ is too low (top-left panel), genes do not interact strongly enough and a differentiated phenotype does not evolve depending on the environment, whereas higher values of $c$ (bottom row) show the same evolutionary behavior as the main run (top-right panel).
 
 \begin{figure}[H]
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_sigma-0.01.pdf}
-    \label{subfig:alife:param_sigma_1}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_sigma-0.05.pdf}
-    \label{subfig:alife:param_sigma_2}
-  \end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_sigma-0.01.pdf}
+\label{subfig:alife:param_sigma_1}
+\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_sigma-0.05.pdf}
+\label{subfig:alife:param_sigma_2}
+\end{subfigure}
 
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_sigma.pdf}
-    \label{subfig:alife:param_sigma_3}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.49\textwidth}
-    \includegraphics[width=\textwidth]{alife/img/mean_activation_sigma-0.2.pdf}
-    \label{subfig:alife:param_sigma_4}
-  \end{subfigure}
-  \caption[Parameter exploration in the proof-of-concept model: varying $\sigma_A$ and $\sigma_B$]{Average fraction of activated genes in each environment at the end of evolution, for more and more distinct environments $\sigma_A$ and $\sigma_B$, from top to bottom and left to right.
-  Every replicate is shown as a dot, and the bottom-left panel ($\sigma_A = 0.1$, $\sigma_B = -0.1$) recalls data from the main run for comparison.
-  For all values except $\sigma_A = 0.2$ and $\sigma_B = -0.2$, the behavior from the main run is qualitatively replicated.}
-  \label{fig:alife:param_sigma}
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_sigma.pdf}
+\label{subfig:alife:param_sigma_3}
+\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}
+\includegraphics[width=\textwidth]{alife/img/mean_activation_sigma-0.2.pdf}
+\label{subfig:alife:param_sigma_4}
+\end{subfigure}
+\caption[Parameter exploration in the proof-of-concept model: varying $\sigma_A$ and $\sigma_B$]{Average fraction of activated genes in each environment at the end of evolution, for more and more distinct environments $\sigma_A$ and $\sigma_B$, from top to bottom and left to right.
+Every replicate is shown as a dot, and the bottom-left panel ($\sigma_A = 0.1$, $\sigma_B = -0.1$) recalls data from the main run for comparison.
+For all values except $\sigma_A = 0.2$ and $\sigma_B = -0.2$, the behavior from the main run is qualitatively replicated.}
+\label{fig:alife:param_sigma}
 \end{figure}
 
 Finally, we also investigated different amplitudes in the difference in supercoiling level between the two environments, by choosing values of $\sigma_A = 0.01$, $\sigma_A = 0.05$ and $\sigma_A = 0.2$, and $\sigma_B = -\sigma_A$ respectively in each case (for an initial value of $\sigma_A = 0.1$ and $\sigma_B = -0.1$).

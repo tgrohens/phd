@@ -21,11 +21,11 @@ While using \emph{Aevol}, I developed a set of Python tools, \emph{aevol-utiliti
 The default \emph{Aevol} executables indeed do not provide the most accessible interface to an untrained user, and do not reflect the way the platform is used to run experiments at present.
 The typical use case of \emph{Aevol} consists in the following steps, for each replicate of a given experiment:
 \begin{enumerate}
-  \item Create an initial random individual and initial population using this individual, with a different seed.
-  \item Run the proper evolution experiment for a given number of generations.
-  \item Pick an individual in the final population, and trace its lineage since the original population.
-  \item Compute a series of statistics over this lineage, by recovering every individual in the lineage.
-  \item Analyse and plot the resulting data.
+\item Create an initial random individual and initial population using this individual, with a different seed.
+\item Run the proper evolution experiment for a given number of generations.
+\item Pick an individual in the final population, and trace its lineage since the original population.
+\item Compute a series of statistics over this lineage, by recovering every individual in the lineage.
+\item Analyse and plot the resulting data.
 \end{enumerate}
 
 The \emph{aevol-utilities} repository comprises a Python library (named \texttt{aevol.py}), and a series of Jupyter notebooks that are built upon this library.
@@ -62,7 +62,7 @@ This file contains in particular the \texttt{plot\_genome\_and\_tsc} function us
 
 \subsection{Tooling}
 
-In order to analyze the results of  \emph{EvoTSC} simulations more easily, I developed an extensive set of notebooks for data analysis and visualisation.
+In order to analyze the results of \emph{EvoTSC} simulations more easily, I developed an extensive set of notebooks for data analysis and visualisation.
 The notebooks are available in a separate repository: \url{https://gitlab.inria.fr/tgrohens/evotsc-notebooks}, and are also licensed under the BSD 3-clause.
 In particular, these notebooks contain the code responsible for the computation of gene expression as a function of supercoiling (such as in Figure~\ref{fig:ploscb:activity-by-sigma}), for the generation of contiguous gene subnetworks (Figure~\ref{fig:ploscb:min_subnetwork}), and for the gene knock-out analysis (Figure~\ref{fig:ploscb:ko_genomes},~\ref{fig:ploscb:ko_graph} and~\ref{fig:ploscb:ko_graph}).
 

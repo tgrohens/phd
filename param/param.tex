@@ -4,7 +4,7 @@
 In this chapter, I explore the robustness of the characteristics of evolving populations to variations in the parameters of the \emph{EvoTSC} model.
 To this aim, I present several sets of additional evolutionary simulations.
 In these simulations, I first measure whether populations are able to evolve differentiated gene expression patterns as a response to different environments in the model variants.
-I then compare the speed of evolution of these populations with  the main runs presented in Chapter~\ref{chap:ploscb}.
+I then compare the speed of evolution of these populations with the main runs presented in Chapter~\ref{chap:ploscb}.
 I first explore the sensitivity of the model to the genome-level parameters (see Table~\ref{tab:param:params} below): the maximum interaction distance for the transcription-supercoiling coupling, the mean intergenic distance, and the strength of the environment-caused shift in background supercoiling.
 I then investigate simulating a higher number of genes on the genome.
 Finally, I discuss the evolutionary effect of allowing intergenic distances to mutate, by introducing indels in intergenic sections as a new mutational operator in the model.
@@ -93,20 +93,20 @@ Comparing the effect of background supercoiling variation on the transcriptional
 In order to test this hypothesis, I measured the average gene expression as a function of background supercoiling in random genomes with maximum interaction distances ranging from 1 kb to 50 kb, with an average intergenic distance remaining constant at 125 bp.
 For each interaction distance, I generated 100 genomes, and made each genome undergo 100 replication events to shuffle the genes on the genome via genomic inversions.
 Figure~\ref{fig:param:inter25k-random-activ-by-sigma} shows the result of this experiment.
-As the interaction distance increases, the response curve of genes to a changing background supercoiling level indeed becomes flatter and flatter, which can be interpreted as a buffering of the effect of the environmental perturbation on gene expression by the supercoiling-mediated interaction of a higher and higher number of  genes.
+As the interaction distance increases, the response curve of genes to a changing background supercoiling level indeed becomes flatter and flatter, which can be interpreted as a buffering of the effect of the environmental perturbation on gene expression by the supercoiling-mediated interaction of a higher and higher number of genes.
 Conversely, as the interaction distance gets closer to zero, the curve is closer and closer to that of an isolated, non-interacting gene.
 
 
 \begin{figure}[H]
 \centering
-  \begin{subfigure}[t]{0.495\textwidth}
-    \includegraphics[width=\textwidth]{param/interaction-25k/effective_graph_combined_in_degree.pdf}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.495\textwidth}
-    \includegraphics[width=\textwidth]{param/interaction-25k/effective_graph_combined_out_degree.pdf}
-  \end{subfigure}
-  \caption[Average in- and out-degree of effective interaction graph nodes, with an interaction distance of 25 kb]{Average out-degree (left) and in-degree (right) of the genes in the effective interaction graph, separated by gene type, for individuals with an interaction distance of 5 kb (main run) or 25 kb.}
-  \label{fig:param:inter25k-degree}
+\begin{subfigure}[t]{0.495\textwidth}
+\includegraphics[width=\textwidth]{param/interaction-25k/effective_graph_combined_in_degree.pdf}
+\end{subfigure}
+\begin{subfigure}[t]{0.495\textwidth}
+\includegraphics[width=\textwidth]{param/interaction-25k/effective_graph_combined_out_degree.pdf}
+\end{subfigure}
+\caption[Average in- and out-degree of effective interaction graph nodes, with an interaction distance of 25 kb]{Average out-degree (left) and in-degree (right) of the genes in the effective interaction graph, separated by gene type, for individuals with an interaction distance of 5 kb (main run) or 25 kb.}
+\label{fig:param:inter25k-degree}
 \end{figure}
 
 Figure~\ref{fig:param:inter25k-degree} finally presents the average in- and out-degree of the genes in the effective interaction graph obtained with gene knockouts, compared to the same data from the main run.
@@ -339,7 +339,7 @@ The initial value of the mean intergenic distance was set to 125 bp, in order to
 
 \begin{figure}[H]
 \centering
-  \includegraphics[width=0.8\textwidth]{param/evolve-intergene/intergenic_size_all.pdf}
+\includegraphics[width=0.8\textwidth]{param/evolve-intergene/intergenic_size_all.pdf}
 \caption[Average intergenic size during evolution, with indels]{Average intergenic distance during evolution with indels, compared with the constant average intergenic distance in the main run.
 Lighter lines represent the first and last decile of the data.}
 \label{fig:param:evolve-intergene-intergene}
@@ -364,7 +364,7 @@ Similarly to the main run, differentiated expression levels evolve in the two en
 
 \begin{figure}[H]
 \centering
-  \includegraphics[width=0.8\textwidth]{param/evolve-intergene/fitness_all_with_main.pdf}
+\includegraphics[width=0.8\textwidth]{param/evolve-intergene/fitness_all_with_main.pdf}
 \caption[Average fitness during evolution, with indels]{Average fitness during evolution, with indels and without indels (main run).
 Lighter lines represent the first and last decile of the data.}
 \label{fig:param:evolve-intergene-fitness}

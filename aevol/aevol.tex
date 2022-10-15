@@ -2,7 +2,7 @@
 \label{chap:aevol}
 
 In this chapter, I present the first main line of work of that I undertook during my Ph.D.
-In order to understand the role of epistasis in the prediction of evolution, I focused on the study of the specific case of mutations affecting the DNA supercoiling level in bacteria, which were shown to be repeatable at the phenotypic level,  and partially repeatable at the molecular level, in an experimental evolution setting.
+In order to understand the role of epistasis in the prediction of evolution, I focused on the study of the specific case of mutations affecting the DNA supercoiling level in bacteria, which were shown to be repeatable at the phenotypic level, and partially repeatable at the molecular level, in an experimental evolution setting.
 In order to replicate these results in the easier to study \emph{in silico} artificial evolution setting offered by the \emph{Aevol} software platform, I implemented a model of supercoiling in \emph{Aevol}, and tried to detect epistatic interactions in the evolutionary trajectories of populations evolved in the model.
 
 \section{Introduction}
@@ -12,7 +12,7 @@ In the \emph{Long-Term Evolution Experiment} (LTEE), started by Richard Lenski i
 Every day since the beginning of the experiment, which is still running and has reached over 75,000 generations of bacteria, a sample from each population has been propagated into fresh medium, and samples have been cryogenically conserved every 500 generations, resulting in the longest-running evolution experiment in the lab.
 The LTEE demonstrated that fitness can keep on increasing for much longer than originally expected in a constant environment~\citep{good2017}.
 As sequencing capacity and synthetic biology subsequently developed in the late 1990s and early 2000s, identifying the precise DNA mutations underpinning these increases in fitness became possible.
-When sequencing the conserved \emph{E. coli} lineages in the LTEE, beneficial mutations -- mutations that confer their bearer a higher growth rate than the ancestral strain in the conditions of the experiment -- were in particular found in the \emph{topA} gene  and the \emph{fis} gene, in one of the twelve lineages~\citep{crozat2005}.
+When sequencing the conserved \emph{E. coli} lineages in the LTEE, beneficial mutations -- mutations that confer their bearer a higher growth rate than the ancestral strain in the conditions of the experiment -- were in particular found in the \emph{topA} gene and the \emph{fis} gene, in one of the twelve lineages~\citep{crozat2005}.
 
 The genes affected by these mutations are involved in the regulation of DNA supercoiling: Topoisomerase I (encoded by \emph{topA}) directly modifies the supercoiling level by introducing supercoils, and FIS (encoded by \emph{fis}) is a nucleoid-associated protein which helps regulate supercoiling by binding to DNA.
 This makes these mutation extremely interesting in two regards.
@@ -93,7 +93,7 @@ In a large deletion, the genetic content between the endpoints is simply discard
 In an inversion, the segment is reinserted left-to-right between the endpoints, reversing the orientation of every gene located on the inversion.
 Finally, in a translocation, the genetic content is removed, turned into a circular plasmid, cut at a random point in the plasmid, and reinserted at another insertion point in the genome.
 
-Local mutations, on the contrary, comprise small insertions, small  deletions (collectively known as indels), and switches.
+Local mutations, on the contrary, comprise small insertions, small deletions (collectively known as indels), and switches.
 In a small insertion or deletion, up to 6 contiguous bases are either inserted (choosing each base at random) or deleted at a random point in the genome.
 In a switch, the value of a random nucleotide is switched, from 1 to 0 or vice-versa.
 
@@ -169,39 +169,39 @@ Studying a given lineage, rather than the best individual at every generation (w
 As a theoretical haploid Wright-Fisher population with $N$ individuals coalesces on average in $2N$ generations without mutation or selection~\citep{felsenstein2019}, we chose to analyze the data from generation 0 to 990,000 of every replicate (excluding the last 10,000 generations), ensuring that each lineage is indeed ancestral to the whole population of the last generation of that replicate.
 
 \begin{table}
-  \begin{center}
-    \begin{tabular}{ l r r }
-    \toprule
-    \textbf{Parameter} & \textbf{Symbol} & \textbf{Value}\\
-    \midrule
-    Population size & N & 1,024 (32x32 grid) \\
-    Initial genome size & $g_0$ & 5,000 bp \\
-    Local mutation rate & $\mu_{loc}$ & $10^{-7}$ bp$^{-1}$.gen$^{-1}$ \\
-    Rearrangement rate & $\mu_{rear}$ &$10^{-6}$ bp$^{-1}$.gen$^{-1}$ \\
-    \midrule
-    Initial supercoiling level & $\gamma_0$ & 0 \\
-    Supercoiling mutation probability & $p$ & $10^{-1}$ \\
-    Supercoiling mutation variance & $s^2$ & $10^{-2}$ \\
-    \midrule
-    Generations & T & 1,000,000 \\
-    Number of replicates & $n$ & 5\\
-    \bottomrule
-    \end{tabular}
-    \end{center}
-  \caption[Table of parameter values for the \emph{Aevol} runs]{Table of parameter values used in the \emph{Aevol} evolutionary runs.
-  The top part describes parameters common to the experimental and control set of rules, the middle part the supercoiling-related parameters introduced in the supercoiling model, and the bottom part the simulation parameters.}
-  \label{tab:aevol:param_values}
+\begin{center}
+\begin{tabular}{ l r r }
+\toprule
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Value}\\
+\midrule
+Population size & N & 1,024 (32x32 grid) \\
+Initial genome size & $g_0$ & 5,000 bp \\
+Local mutation rate & $\mu_{loc}$ & $10^{-7}$ bp$^{-1}$.gen$^{-1}$ \\
+Rearrangement rate & $\mu_{rear}$ &$10^{-6}$ bp$^{-1}$.gen$^{-1}$ \\
+\midrule
+Initial supercoiling level & $\gamma_0$ & 0 \\
+Supercoiling mutation probability & $p$ & $10^{-1}$ \\
+Supercoiling mutation variance & $s^2$ & $10^{-2}$ \\
+\midrule
+Generations & T & 1,000,000 \\
+Number of replicates & $n$ & 5\\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption[Table of parameter values for the \emph{Aevol} runs]{Table of parameter values used in the \emph{Aevol} evolutionary runs.
+The top part describes parameters common to the experimental and control set of rules, the middle part the supercoiling-related parameters introduced in the supercoiling model, and the bottom part the simulation parameters.}
+\label{tab:aevol:param_values}
 \end{table}
 
 
 \subsection{Evolution of the Fitness Level}
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{aevol/images/fitness_all.pdf}
-  \caption[Evolution of the fitness of the control and experimental runs in \emph{Aevol}]{Left: Evolution of the fitness at every generation throughout the lineage of the final population of each replicate of the experimental (green) and control (red) runs.
-  Both axes follow logarithmic scales.
-  Right: Fitness of the lineage individual at the 990,000th generation of each run, separated between supercoiling (green) and control (red) runs.}
-  \label{fig:aevol:fitness}
+\includegraphics[width=\textwidth]{aevol/images/fitness_all.pdf}
+\caption[Evolution of the fitness of the control and experimental runs in \emph{Aevol}]{Left: Evolution of the fitness at every generation throughout the lineage of the final population of each replicate of the experimental (green) and control (red) runs.
+Both axes follow logarithmic scales.
+Right: Fitness of the lineage individual at the 990,000th generation of each run, separated between supercoiling (green) and control (red) runs.}
+\label{fig:aevol:fitness}
 \end{figure}
 
 Figure~\ref{fig:aevol:fitness} presents, on the left-hand side, the fitness of the individual at every generation of the lineage of the final population, or lineage individual, in each replicate.
@@ -214,10 +214,10 @@ Adding the new phenotypic dimension of the supercoiling level, and the associate
 \subsection{Evolution of the Supercoiling Level}
 
 \begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{aevol/images/supercoiling_all.pdf}
-  \caption[Evolution of the supercoiling level of the experimental runs in \emph{Aevol}]{Evolution of the relative level of supercoiling at every generation of the lineage of each of the experimental runs.}
-  \label{fig:aevol:sc}
+\centering
+\includegraphics[width=0.9\textwidth]{aevol/images/supercoiling_all.pdf}
+\caption[Evolution of the supercoiling level of the experimental runs in \emph{Aevol}]{Evolution of the relative level of supercoiling at every generation of the lineage of each of the experimental runs.}
+\label{fig:aevol:sc}
 \end{figure}
 
 Figure~\ref{fig:aevol:sc} shows the evolution of the supercoiling level throughout the lineage in each of the 5 replicates.
@@ -255,14 +255,14 @@ In the experimental runs, no such pattern is visible at first sight, including f
 There therefore seems to be no sign of epistasis between the supercoiling mutations and the genomic mutations, when following the approach explained above.
 
 \begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{aevol/images/epistasis_control.pdf}
-  \includegraphics[width=0.9\textwidth]{aevol/images/epistasis_sc.pdf}
-  \caption[Measuring epistasis with the average times before and after mutations]{Average time before and after a mutation of each kind, in the control runs (top) and the experimental runs (bottom).
-  For each kind of mutation, the times presented show the wait time until a neutral mutation of that kind after a non-neutral mutation of any kind, and the time until the next non-neutral mutation of any kind after a mutation of that kind.
-  The bars show the average over the five replicates, and the colored dots are the value for every replicate.
-  The average number of neutral mutations of each type is displayed at the bottom of the corresponding bar.}
-  \label{fig:aevol:epistasis}
+\centering
+\includegraphics[width=0.9\textwidth]{aevol/images/epistasis_control.pdf}
+\includegraphics[width=0.9\textwidth]{aevol/images/epistasis_sc.pdf}
+\caption[Measuring epistasis with the average times before and after mutations]{Average time before and after a mutation of each kind, in the control runs (top) and the experimental runs (bottom).
+For each kind of mutation, the times presented show the wait time until a neutral mutation of that kind after a non-neutral mutation of any kind, and the time until the next non-neutral mutation of any kind after a mutation of that kind.
+The bars show the average over the five replicates, and the colored dots are the value for every replicate.
+The average number of neutral mutations of each type is displayed at the bottom of the corresponding bar.}
+\label{fig:aevol:epistasis}
 \end{figure}
 
 \paragraph{Role of the Genome Size}
