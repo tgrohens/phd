@@ -2,17 +2,17 @@
 \label{chap:epistasis}
 
 The results obtained with the \emph{EvoTSC} model that I have presented up until now tackle the role that DNA supercoiling plays in the evolution of the structure of bacterial genomes, via the transcription-supercoiling coupling.
-In this chapter, I take the \emph{EvoTSC} model in another direction, in order to return to the idea of epistasis between mutations in the supercoiling level and other mutations that was the question at the root of the research agenda of my PhD.
-In the experiment conducted with \emph{Aevol} and presented in Chapter~\ref{chap:aevol}, the main hypothesis to explain why I was not able to detect a signal of epistasis between supercoiling mutations and other kinds of mutations is that the model of supercoiling that I implemented could be too restricted.
-As a result, supercoiling mutations in that model would not generate interesting enough evolutionary paths for populations to explore the fitness landscape in a qualitatively different way than in their absence.
-In \emph{EvoTSC}, supercoiling is on the contrary sufficiently finely modeled to allow the evolution of regulatory networks based on local variations in the level of supercoiling, as demonstrated in the previous chapters.
+In this chapter, I take the \emph{EvoTSC} model in another direction, and return to the idea of epistasis between mutations in the supercoiling level and other mutations that was the question at the root of the research agenda of my PhD.
+In the experiment conducted with \emph{Aevol} and presented in Chapter~\ref{chap:aevol}, the main hypothesis to explain why I was not able to detect a signal of epistasis between supercoiling mutations and other kinds of mutations is that the model of supercoiling that I implemented could have too been simplistic in order for supercoiling mutations to open up evolutionary paths in the fitness landscape that allow the lineages that bear these mutations to evolve faster than other lineages.
+In \emph{EvoTSC}, supercoiling is on the contrary sufficiently finely modeled to allow the evolution of regulatory networks based on local variations in the level of supercoiling (as shown in the previous chapters), which indicates that supercoiling mutations could present such epistatic interactions in this model.
 
-In this chapter, I therefore present an experiment, inspired by the \emph{LTEE}, in which previously evolved individuals must adapt to new environmental conditions.
-In order to conduct this experiment in the \emph{EvoTSC} model, I introduced a small addition to the model, by letting the supercoiling level of individuals evolve, in a similar fashion to the experiment using \emph{Aevol} presented in Chapter~\ref{chap:aevol}.
-However, unlike in the \emph{Aevol} experiment, the non-linear effect of the basal supercoiling level on gene expression in the \emph{EvoTSC} model could this time allow populations in which supercoiling evolves to follow qualitatively different evolutionary trajectories than populations with a constant supercoiling level.
-In the chapter, I first present the methodology of this new experiment, including the new mutational operator for the supercoiling level.
-Then, I compare the evolution of populations with and without supercoiling mutations in a new environment.
-Finally, I investigate more thoroughly the fitness landscapes that are available to exploration through supercoiling mutations.
+In order to verify this hypothesis, I present in this chapter an experiment (inspired by the \emph{LTEE}) in which previously evolved individuals must adapt to new environmental conditions, through genomic rearrangements (as in the previous chapters) and with or without supercoiling mutations, using the \emph{EvoTSC} model.
+In the \emph{LTEE}, supercoiling mutations have indeed been shown to evolve repeatedly, and to confer direct fitness benefits~\citep{crozat2005,crozat2010}.
+In order to let the supercoiling level of individuals in \emph{EvoTSC} evolve, I used a similar mutational operator to the one used in the \emph{Aevol} experiment presented in Chapter~\ref{chap:aevol}.
+However, unlike in the \emph{Aevol} experiment, the non-linear effect of the basal supercoiling level on gene expression in the \emph{EvoTSC} model could allow populations with supercoiling mutations to follow qualitatively different evolutionary trajectories than populations with a constant supercoiling level.
+In this chapter, I first present the methodology of this experiment, including the new mutational operator for the evolution of the supercoiling level.
+Then, I show that in this experiment, populations adapt faster to new environments with supercoiling mutations than without supercoiling mutations.
+Finally, in order to understand this evolutionary advantage, I investigate the fitness landscapes that result from these supercoiling mutations.
 
 
 \section{Experimental Framework}
@@ -163,6 +163,8 @@ This means that, when supercoiling mutations are available, both the supercoilin
 Figure~\ref{fig:epistasis:fitness-landscapes-evolved} shows for comparison the fitness landscapes at the end of the 50,000 generations of evolution for the 5 replicates of one of the shocked wild-types, originating from a population that evolved with (top) or without (bottom) supercoiling mutations.
 In both cases, after only 50,000 generations, the fitness landscape already has a comparable shape to that of the wild-type individuals, with a single fitness peak at which the evolved individual is located.
 Even after an environmental shock, and whether supercoiling mutations are available to evolution or not, the best individual at the end of evolution is therefore at the global peak of the supercoiling fitness landscape that emerges through the evolution of the genomic organization.
+
+\subsection{Evolution with Supercoiling Mutations Only}
 
 \begin{figure}[H]
 \centering
