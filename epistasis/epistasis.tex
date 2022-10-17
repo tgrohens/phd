@@ -41,8 +41,8 @@ Then, exactly as in the main experiment, the individual can undergo a series of 
 
 \begin{figure}
 \centering
-\includegraphics[width=0.8\textwidth]{epistasis/img/wt-with-sc/fitness_all_with_main.pdf}
-\includegraphics[width=0.8\textwidth]{epistasis/img/wt-with-sc/basal_sc_all.pdf}
+\includegraphics[width=0.9\textwidth]{epistasis/img/wt-with-sc/fitness_all_with_main.pdf}
+\includegraphics[width=0.9\textwidth]{epistasis/img/wt-with-sc/basal_sc_all.pdf}
 \caption[Average basal supercoiling and fitness during evolution of the wild-types, with basal supercoiling level mutations]{Top: average fitness of the best individual in every replicate during evolution, for the 10 wild-types with (light blue) and the 30 wild-types without (dark blue) supercoiling mutations.
 At the last generation, the fitness of populations with supercoiling mutations is significantly higher than the fitness of populations without supercoiling mutations ($p = 7.3\cdot10^{-4}$, Student's \emph{t}-test for independent samples).
 Bottom: average basal supercoiling level of the best individual in every replicate during evolution of the wild-types with (light blue) and without (dark blue) supercoiling mutations.
@@ -97,12 +97,12 @@ This allowed me to compare the speed of the initial evolution after the shock in
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.495\textwidth]{epistasis/img/control/gene_activity_env_A.pdf}
-\includegraphics[width=0.495\textwidth]{epistasis/img/control/gene_activity_env_B.pdf}
-
 \includegraphics[width=0.495\textwidth]{epistasis/img/with-sc/gene_activity_env_A.pdf}
 \includegraphics[width=0.495\textwidth]{epistasis/img/with-sc/gene_activity_env_B.pdf}
-\caption[Evolution of the number of activated genes in each environment, with a]{Average number of activated genes of each type in environment A (left) and B (right) during evolution, without (top) and with (bottom) supercoiling mutations.
+
+\includegraphics[width=0.495\textwidth]{epistasis/img/control/gene_activity_env_A.pdf}
+\includegraphics[width=0.495\textwidth]{epistasis/img/control/gene_activity_env_B.pdf}
+\caption[Evolution of the number of activated genes in each environment, with a]{Average number of activated genes of each type in environment A (left) and B (right) during evolution, with (top) and without (bottom) supercoiling mutations.
 Lighter lines represent the first and last decile of the data.}
 \label{fig:epistasis:activ-by-env}
 \end{figure}
@@ -114,18 +114,22 @@ Starting from a genome in which genes have been positioned (by selection) to for
 
 \begin{figure}
 \centering
-\includegraphics[width=0.8\textwidth]{epistasis/img/relative_fitness_grouped.pdf}
-\caption[Average relative fitness to the ancestor, during evolution after an environmental shock]{Evolution of the average fitness relative to the wild-type before the environmental shock, for the populations with (light blue) and without (dark blue) supercoiling mutations.
+\includegraphics[width=0.9\textwidth]{epistasis/img/relative_fitness_grouped.pdf}
+\includegraphics[width=0.9\textwidth]{epistasis/img/with-sc/basal_sc_all.pdf}
+\caption[Average fitness relative to the ancestor and basal supercoiling, during evolution after an environmental shock]{Top: Evolution of the average fitness relative to the wild-type before the environmental shock, for the populations with (light blue) and without (dark blue) supercoiling mutations.
 At the last generation, the relative fitness of populations with supercoiling mutations is significantly higher than the relative fitness of populations without supercoiling mutations ($p = 5.8\cdot10^{-6}$, Student's \emph{t}-test for independent samples).
+Bottom: Evolution of the average basal supercoiling level of the populations with supercoiling mutations (light blue), compared to the basal supercoiling level of populations without supercoiling mutations (dark blue).
 Lighter lines represent the first and last quantile of the data.}
 \label{fig:epistasis:rel-fitness}
 \end{figure}
 
 In the \emph{LTEE}, the repeated fixation of supercoiling mutations in 11 of the 12 replicates is the proof that, in each of these replicates, the lineages that bear these mutations were able to outcompete the other lineages present in the replicate.
 A similar pattern can be observed in this experiment in the evolution of the populations with supercoiling mutations, compared to the evolution of populations without supercoiling mutations, after the environmental shock.
-Figure~\ref{fig:epistasis:rel-fitness} shows the evolution of the average relative fitness of the best individual of each population compared to the fitness (before the environmental shock) of the wild-type individual that the population originates from.
+Figure~\ref{fig:epistasis:rel-fitness} shows the evolution of the average relative fitness of the best individual of each population compared to the fitness (before the environmental shock) of the wild-type individual that the population originates from (top), and the evolution of the basal supercoiling level in the populations with supercoiling mutations.
 Similarly to the evolution of the wild-types, it seems that the populations in which supercoiling can evolve perform better over time than the populations in which it cannot.
 In particular, the populations with supercoiling mutations end up with a higher average fitness than populations without supercoiling mutations, after only 50,000 generations of evolution (see the statistical test in the legend of the figure).
+Averaging over all the 125 populations with supercoiling mutations, the supercoiling level (bottom) seems to evolve towards a slightly less negative level than just after the shock.
+However, as the supercoiling level had not clearly converged by the end of the evolution of the wild-types (see Figure~\ref{fig:epistasis:wt-evolution}), this trend could equally well be the same as in the wild-types or a sign of adaptation to the new environments after the shock.
 
 \subsection{Supercoiling Fitness Landscapes}
 
