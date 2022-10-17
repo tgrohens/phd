@@ -23,7 +23,7 @@ In order to evaluate the possible epistatic interactions between supercoiling mu
 
 This experiment consists in two successive evolutionary runs.
 First, I let two sets of populations -- with and without supercoiling mutations -- evolve for 1,000,000 generations, and extracted \emph{wild-type} individuals from these evolved populations.
-To obtain these wild-types, I let 10 fresh populations evolve with supercoiling mutations, and reused the 30 populations that already evolved without supercoiling mutations that I presented in Chapter~\ref{chap:ploscb}.
+To obtain these wild-types, I reused the 30 populations that already evolved without supercoiling mutations that I presented in Chapter~\ref{chap:ploscb}, and let 10 fresh populations evolve with supercoiling mutations .
 Then, I subjected these wild-types to new environmental conditions, replicating the beginning of the \emph{LTEE}.
 In order to model these new conditions within the \emph{EvoTSC} model, I reassigned at random the types (\emph{A}, \emph{B} or \emph{AB}) of every gene in the genome of the wild-type individuals, while keeping constant the number of genes of each type in the genomes.
 As the environment in \emph{EvoTSC} is represented by a pair of environments (A and B) with different gene expression targets, this corresponds to replacing the original environments with new environments A' and B', in which different subsets of genes (\emph{A'}, \emph{B'}, or \emph{AB'}) must be activated or inhibited.
@@ -37,7 +37,7 @@ I then used these shocked individuals to create new populations, and let these p
 The mutational operator that I used for the mutations in the basal supercoiling level $\sigma_{basal}$ of individuals in \emph{EvoTSC} is similar to the one that I implemented in \emph{Aevol} and that is presented in Section~\ref{sec:aevol:mut-sc}.
 When mutating an individual, we first decide whether to mutate its basal supercoiling level with a probability $p$, and draw a small change $\delta\sigma_{basal}$ to be added to the supercoiling level according to a normal law $\mathcal{N}(0, s^2)$.
 In this experiment, $p=0.1$ and $s^2=0.0001$.
-Then, exactly as in the main experiment, the individual can undergo a series of genomic inversions which rearrange the relative position of genes on their genome.
+Then, exactly as in the main experiment, the individual can undergo a series of genomic inversions which rearrange the relative position of genes on its genome.
 
 \begin{figure}
 \centering
@@ -51,12 +51,12 @@ Lighter lines represent the first and last decile of the data.}
 \end{figure}
 
 Figure~\ref{fig:epistasis:wt-evolution} presents the evolution of the fitness (top) and basal supercoiling level (bottom) of the best individual in each replicate during the evolution of the wild-type populations, with and without supercoiling mutations.
-We can first see that, in the wild-types that evolve with supercoiling mutations (light blue), fitness evolves in a qualitatively similar fashion to the main run, and is slightly higher by the end of evolution than without supercoiling mutations (see the statistical test in the legend of the figure).
+We can first see that, in the wild-types that evolve with supercoiling mutations (light blue), fitness evolves in a qualitatively similar fashion to the main run, and is slightly higher by the end of evolution than without supercoiling mutations (dark blue, see the statistical test in the legend of the figure).
 Then, looking at the basal supercoiling level, we can see that the average level of negative supercoiling decreases over time during evolution.
-This indicates that the supercoiling level can indeed be targeted by selection in the model, and that there is furthermore a clear selection pressure towards reducing the amount of negative supercoiling.
+This indicates that the supercoiling level can indeed be targeted by selection in the model, and that there is a clear selection pressure towards reducing the amount of negative supercoiling in the specific context of this experiment.
 A possible hypothesis to explain both the higher fitness and lower negative supercoiling level of wild-types with supercoiling mutations comes from recalling that, with the initial basal supercoiling level of $\sigma_{basal} = -0.066$, genes tend to have a high expression level in both environments (see the dash-dotted curve of Figure~\ref{fig:ploscb:activity-by-sigma}).
 As a consequence, decreasing the level of negative supercoiling of the genome corresponds to shifting the background supercoiling in both environments to a less negative value.
-This lessens the bias towards high gene expression that is present in both environments, and therefore helps reduce the number of \emph{A} genes that are wrongly activated in environment B in these populations (data not shown).
+This decreases the bias towards high gene expression that is present in both environments, and therefore facilitates gene inhibition when required by the environment (data not shown).
 
 \subsection{Environmental Shock}
 
@@ -72,22 +72,22 @@ The gene type (color) and activity (light or dark) of two-thirds of the genes ch
 \end{figure}
 
 In order to simulate the effect of an environmental shock on a given individual, that is to say of replacing environments A and B by new environments A' and B', we assign a new type at random to every gene on the genome of this individual, ensuring that the number of genes of each type remains constant.
-As there are 3 gene types (\emph{A}, \emph{B}, and \emph{AB}), each gene has one in three chances of actually staying of the same type, and two in three chances of actually changing types.
+As there are 3 gene types (\emph{A}, \emph{B}, and \emph{AB}), each gene has one in three chances of effectively staying of the same type, and two in three chances of effectively changing types.
 This represents the fact that some genes that had to be activated (resp. inhibited) in environment A or B must now be inhibited (resp. activated) in environment A' or B'.
-Note that the only property of the environments that changes is the genes that must be activated in each environment, but not the shift in supercoiling $\sigma_A$ or $\sigma_B$ caused by either environment.
+Note that the only property of the environments that changes is the genes that must be activated in each environment, but not the shift in supercoiling $\sigma_A$ or $\sigma_B$ that is caused by either environment.
 
 A representative example of an environmental shock is depicted in Figure~\ref{fig:epistasis:shock}.
 On the left-hand side is the genome of a wild-type individual that evolved with supercoiling mutations, and on the right-hand side is the result of applying an environmental shock to this individual.
 The type (color) of two third of the genes changes, but not the local supercoiling level along the genome, as the gene positions themselves -- and hence their expression level, as determined by the transcription-supercoiling coupling -- remain unchanged.
-As a result, a large number of genes end up wrongly activated or inhibited, which opens the door to future compensatory mutations in the re-adaptation to this new environment.
+As a result, a large number of genes end up wrongly activated or inhibited, which opens the door to future compensatory mutations in the re-adaptation to this new environment: while the fitness of the wild-type was $1.34\cdot10^{-2}$, the fitness of the shocked individual is only $3.08\cdot10^{-29}$.
 
 \subsection{Experimental Protocol}
 
 The populations that I used for the wild-types without supercoiling mutations are the main populations already presented in detail in Chapters~\ref{chap:ploscb} and~\ref{chap:param}.
-For the wild-types with supercoiling mutations, I evolved 10 new populations, for the same number of generations (1,000,000) as the main runs, with all other parameters kept exactly the same.
+For the wild-types with supercoiling mutations, I evolved 10 new populations, for the same number of generations as the main runs, with all other parameters kept exactly the same.
 I then chose 5 representative wild-types at random from each set of simulations.
 From each of these wild-type individuals that evolved with or without supercoiling mutations, I created 5 different shocked individuals with shuffled genes, resulting in a total of 25 shocked individuals.
-For each shocked individual, I then created 5 populations, each initialized with clones of that individual but with different seeds, and let each population evolve for 50,000 generations, in order to recover from the environmental shock.
+For each shocked individual, I then created 5 populations, each initialized with clones of that individual but using different seeds, and let each population evolve for 50,000 generations, in order to recover from the environmental shock.
 This allowed me to compare the speed of the initial evolution after the shock in 125 populations with supercoiling mutations, and 125 populations without supercoiling mutations.
 
 
