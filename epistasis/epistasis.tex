@@ -3,30 +3,34 @@
 
 The results obtained with the \emph{EvoTSC} model that I have presented up until now tackle the role that DNA supercoiling plays in the evolution of the structure of bacterial genomes, via the transcription-supercoiling coupling.
 In this chapter, I take the \emph{EvoTSC} model in another direction, and return to the idea of epistasis between mutations in the supercoiling level and other mutations that was the question at the root of the research agenda of my PhD.
-In the experiment conducted with \emph{Aevol} and presented in Chapter~\ref{chap:aevol}, the main hypothesis to explain why I was not able to detect a signal of epistasis between supercoiling mutations and other kinds of mutations is that the model of supercoiling that I implemented could have too been simplistic in order for supercoiling mutations to open up evolutionary paths in the fitness landscape that allow the lineages that bear these mutations to evolve faster than other lineages.
-In \emph{EvoTSC}, supercoiling is on the contrary sufficiently finely modeled to allow the evolution of regulatory networks based on local variations in the level of supercoiling (as shown in the previous chapters), which indicates that supercoiling mutations could present such epistatic interactions in this model.
+In the experiment conducted with \emph{Aevol} and presented in Chapter~\ref{chap:aevol}, the main hypothesis to explain why I was not able to detect a signal of epistasis between supercoiling mutations and other kinds of mutations is that the model of supercoiling that I implemented could have been too simplistic for supercoiling mutations to open up evolutionary paths in the fitness landscape, and allow the lineages that bear these mutations to evolve faster than other lineages.
+In \emph{EvoTSC}, supercoiling is on the contrary sufficiently finely modeled to allow the evolution of regulatory networks based on local variations in the level of supercoiling (as shown in the previous chapters), which indicates that supercoiling mutations could present such an evolutionary role in this model.
 
-In order to verify this hypothesis, I present in this chapter an experiment (inspired by the \emph{LTEE}) in which previously evolved individuals must adapt to new environmental conditions, through genomic rearrangements (as in the previous chapters) and with or without supercoiling mutations, using the \emph{EvoTSC} model.
+In order to verify this hypothesis, I present in this chapter an experiment (inspired by the \emph{LTEE}) in which I measure whether previously evolved individuals can adapt faster to new environmental conditions with or without supercoiling mutations, using the \emph{EvoTSC} model.
 In the \emph{LTEE}, supercoiling mutations have indeed been shown to evolve repeatedly, and to confer direct fitness benefits~\citep{crozat2005,crozat2010}.
-In order to let the supercoiling level of individuals in \emph{EvoTSC} evolve, I used a similar mutational operator to the one used in the \emph{Aevol} experiment presented in Chapter~\ref{chap:aevol}.
-However, unlike in the \emph{Aevol} experiment, the non-linear effect of the basal supercoiling level on gene expression in the \emph{EvoTSC} model could allow populations with supercoiling mutations to follow qualitatively different evolutionary trajectories than populations with a constant supercoiling level.
+In order to let the supercoiling level of individuals in \emph{EvoTSC} evolve, I introduce a similar mutational operator to the one used in the \emph{Aevol} experiment presented in Chapter~\ref{chap:aevol}.
+Unlike in the \emph{Aevol} experiment, the non-linear effect of the basal supercoiling level on gene expression in the \emph{EvoTSC} model could allow populations with supercoiling mutations to follow qualitatively different evolutionary trajectories than populations with a constant supercoiling level in this model.
 In this chapter, I first present the methodology of this experiment, including the new mutational operator for the evolution of the supercoiling level.
-Then, I show that in this experiment, populations adapt faster to new environments with supercoiling mutations than without supercoiling mutations.
-Finally, in order to understand this evolutionary advantage, I investigate the fitness landscapes that result from these supercoiling mutations.
+Then, I show that in this experiment, populations indeed adapt faster to new environments with supercoiling mutations than without supercoiling mutations.
+Finally, in order to understand this evolutionary advantage, I investigate the fitness landscapes that result from supercoiling mutations in the \emph{EvoTSC} model.
 
 
 \section{Experimental Framework}
 
-Performing exactly the same experiment as the \emph{Aevol} experiment described in Chapter~\ref{chap:aevol} is not possible in \emph{EvoTSC} (at the time of writing), as the ancestry tree of the population throughout generations and the precise set of mutations at each reproduction event are not recorded.
+Performing exactly the same experiment as the \emph{Aevol} experiment described in Chapter~\ref{chap:aevol} by measuring the waiting intervals before and after supercoiling mutations is not possible in \emph{EvoTSC} (at the time of writing), as the ancestry tree of the population throughout generations and the precise set of mutations at each reproduction event are not recorded.
 Studying the lineage of the final population in order to study the properties of the mutations that fixed in the lineage is therefore not possible in \emph{EvoTSC}.
-I therefore devised another experiment, which reproduces the setup of the \emph{LTEE} in an \emph{in silico} setting, in order to evaluate the possible epistatic interactions between supercoiling mutations and other mutations.
+In order to evaluate the possible epistatic interactions between supercoiling mutations and other mutations in \emph{EvoTSC}, I instead devised another experiment, which reproduces the setup of the \emph{LTEE} in an \emph{in silico} setting.
 
-The experiment consists in two successive sets of evolutionary runs.
-The initial set consists in the evolution of two groups of populations, with and without supercoiling mutations, for 1,000,000 generations, from which to extract \emph{wild-type} (evolved) individuals.
-In order to model the change of environment at the beginning of the \emph{LTEE} in the \emph{EvoTSC} model, I reassign the types to every gene in the genome of the wild-type individuals at random, but keep the number of genes of each type constant.
-As the environment in \emph{EvoTSC} is represented by a pair of environments (A and B) with different expression targets, this corresponds to replacing these environments with new environments A' and B', in which new subsets of genes must be activated or inhibited.
-We call this change of environment an \emph{environmental shock}, and the individuals with shuffled gene types \emph{shocked} individuals.
-I then use these shocked individuals to create new populations, and let these populations evolve in the new environments (which we still call A and B for simplicity) in order to study their re-adaptation.
+This experiment consists in two successive evolutionary runs.
+First, I let two sets of populations -- with and without supercoiling mutations -- evolve for 1,000,000 generations, and extracted \emph{wild-type} individuals from these evolved populations.
+To obtain these wild-types, I let 10 fresh populations evolve with supercoiling mutations, and reused the 30 populations that already evolved without supercoiling mutations that I presented in Chapter~\ref{chap:ploscb}.
+Then, I subjected these wild-types to new environmental conditions, replicating the beginning of the \emph{LTEE}.
+In order to model these new conditions within the \emph{EvoTSC} model, I reassigned at random the types (\emph{A}, \emph{B} or \emph{AB}) of every gene in the genome of the wild-type individuals, while keeping constant the number of genes of each type in the genomes.
+As the environment in \emph{EvoTSC} is represented by a pair of environments (A and B) with different gene expression targets, this corresponds to replacing the original environments with new environments A' and B', in which different subsets of genes (\emph{A'}, \emph{B'}, or \emph{AB'}) must be activated or inhibited.
+Throughout this chapter, I will refer to this change of environment as an \emph{environmental shock}, and to the individuals with shuffled gene types as \emph{shocked} individuals.
+For the sake of clarity, I also refer to the new environments as A and B, and to the new gene types as \emph{A}, \emph{B} and \emph{AB}.
+Note that, as there are three gene types, any given gene has a one in three chance of keeping the same type (and expression target) after the shock, and a two in three chance of having a new type.
+I then used these shocked individuals to create new populations, and let these populations evolve again in the new environments in order to study their re-adaptation.
 
 \subsection{Introducing Supercoiling Mutations}
 
