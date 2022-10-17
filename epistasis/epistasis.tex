@@ -63,8 +63,8 @@ This decreases the bias towards high gene expression that is present in both env
 \begin{figure}
 \centering
 \begin{elasticrow}[width=\textwidth]
-\elasticfigure{epistasis/img/init_indiv_wt_00_no_shuffle_env_A.pdf}
-\elasticfigure{epistasis/img/init_indiv_wt_00_shuffle_00_env_A.pdf}
+\elasticfigure{epistasis/img/init_indiv_wt_01_no_shuffle_env_A.pdf}
+\elasticfigure{epistasis/img/init_indiv_wt_01_shuffle_00_env_A.pdf}
 \end{elasticrow}
 \caption[Evolved wild-type individual before and after an environmental shock]{Genome of one of the wild-types that evolved with supercoiling mutations (left), and shocked individual created from that individual (right), both evaluated in environment A.
 The gene type (color) and activity (light or dark) of two-thirds of the genes changes, but not the local supercoiling level, as relative gene positions and gene expression levels remain constant.}
@@ -189,20 +189,35 @@ Even after an environmental shock, and whether supercoiling mutations are availa
 
 \subsection{Evolution with Supercoiling Mutations Only}
 
+In order to understand to which extent the exploration of these supercoiling fitness landscapes is actually driven by supercoiling mutations, rather than by the genomic inversions which alter these fitness landscapes, I re-ran the tape of evolution after the environmental shock.
+This time, I let only the supercoiling level of individuals evolve, but not their genomic organization, and ran these new simulations only for the 5 wild-types which had already evolved with supercoiling mutations.
+
+The evolution of the average fitness in these simulations is shown in Figure~\ref{fig:epistasis:sc-only-fitness}.
+During the 50,000 generations of evolution, the average fitness of each population with only supercoiling mutations (light blue) does increase, but to a much smaller extent than when genomic rearrangements are allowed (dark blue).
+For each wild-type, the basal supercoiling level evolves over time, indicating that selection is taking place, but the fitness increase resulting from these mutations nonetheless remains considerably smaller than what is possible with genomic inversions.
+
 \begin{figure}
 \centering
-\includegraphics[width=0.8\textwidth]{epistasis/img/sc-only/fitness_per_wt.pdf}
-\includegraphics[width=0.8\textwidth]{epistasis/img/sc-only/sc_per_wt.pdf}
-\caption[Average basal supercoiling and fitness during evolution with only basal supercoiling level mutations]{Average fitness (top) and basal supercoiling level (bottom) of the 25 populations created from each wild-type, during evolution in populations with only supercoiling mutations.
+\includegraphics[width=0.9\textwidth]{epistasis/img/sc-only/relative_fitness_grouped.pdf}
+\caption[Average relative fitness during evolution after an environmental shock, with only supercoiling mutations]{Evolution of the average fitness relative to the wild-type before the environmental shock, for the populations with only supercoiling mutations (light blue) and the populations with both supercoiling mutations and genomic rearrangements (dark blue).
 Lighter lines represent the first and last decile of the data.}
-\label{fig:epistasis:sc-only-evolution}
+\label{fig:epistasis:sc-only-fitness}
 \end{figure}
 
-In order to understand to which extent the exploration of the supercoiling fitness landscape is actually driven by the supercoiling mutations, and not by the genomic inversions which alter the landscape, I re-ran the tape of evolution after the environmental shock, but this time letting only the supercoiling level of individuals evolve, and not their genomic organization.
-I ran this new experiment only for the 5 wild-types which had already evolved with supercoiling mutations.
-The evolutionary results of this experiment are shown in Figure~\ref{fig:epistasis:sc-only-evolution}.
-During the 50,000 generations of evolution, the fitness of each population does increase, but to a much smaller extent than in the original simulations presented in Figure~\ref{fig:epistasis:wt-evolution}.
-For each wild-type, the basal supercoiling level evolves over time, indicating that selection is taking place, but the fitness increase resulting from these mutations nonetheless remains considerably smaller than what is possible with genomic inversions.
+\begin{figure}
+\centering
+\includegraphics[width=0.9\textwidth]{epistasis/img/sc-only/sc_wt_01_all_shuffles.pdf}
+\caption[Evolution of the basal supercoiling level in shocked individuals with supercoiling mutations only]{Evolution of the basal supercoiling level of each of the replicates of all the shocked individuals created from the wild-type presented in Figure~\ref{fig:epistasis:shock}.
+For each shocked individual, the 5 replicates are drawn in the same color to highlight the repeatability of the final basal supercoiling level.}
+\label{fig:epistasis:sc-only-basal-sc}
+\end{figure}
+
+Figure~\ref{fig:epistasis:sc-only-basal-sc} shows the evolution of the basal supercoiling level of all the replicates of the 5 shocked individuals created from one of the wild-types that evolved with supercoiling mutations, when only supercoiling mutations are allowed.
+For each of the shocked individuals, the supercoiling level of each of its replicates seem to converge to nearly identical values by the end of evolution.
+This shows that, when only supercoiling mutations are available, evolution seems to be fully repeatable.
+In the simulations in which only the supercoiling level can evolve, the shape of the fitness landscape does indeed not change, as it depends on the (constant) organization of genes on the genome.
+It is therefore possible to compare the evolved individuals with the original shocked individuals directly on their fitness landscape.
+The fitness landscapes of the same shocked individuals are presented in Figure~\ref{fig:epistasis:sc-only-fitness-landscape}, along with the original supercoiling level of each shocked individual (circles) and the evolved supercoiling level of each replicate (stars).
 
 \begin{figure}
 \centering
@@ -213,17 +228,16 @@ Note that for all shocked individuals, the 5 stars of each of their evolved repl
 \label{fig:epistasis:sc-only-fitness-landscape}
 \end{figure}
 
-In the simulations in which only the supercoiling level can evolve, the shape of the fitness landscape does not change, as it depends on the (constant) organization of genes on the genome.
-It is therefore possible to compare the evolved individuals with the original shocked individuals directly on their fitness landscape.
-The fitness landscapes of the 5 shocked individuals obtained from one of the wild-type individuals that evolved with supercoiling mutations are presented in Figure~\ref{fig:epistasis:sc-only-fitness-landscape}, along with the original supercoiling level of each shocked individual (circles) and the evolved supercoiling level of each replicate (stars).
-
-We can first observe that, for every shocked individual obtained from the wild-type, their basal supercoiling level (circle) is not anymore at a peak of the fitness landscape, as a result of the environmental shock.
-At the end of evolution, the basal supercoiling level of each replicate (star) however reaches a peak in the fitness landscape.
-In particular, for each shocked individual, the 5 evolved replicates reach the same fitness peak, as the 5 stars on each landscape are virtually stacked at the same location.
-In this case, when the only mutations allowed are supercoiling mutations, the evolutionary process therefore seems to be completely reproducible.
+We can first observe that the basal supercoiling level (circle) of each of the shocked individuals does not stand at a peak of their respective fitness landscape anymore, after the landscapes have been altered by the environmental shock.
+At the end of evolution, the basal supercoiling level of each replicate (stars) of these shocked individuals however always reaches a peak of the altered fitness landscape, but not necessarily a global one.
+For each shocked individual, the 5 evolved replicates of that individual seem to reach the same fitness peak, as the 5 stars on each landscape are virtually stacked at the same location.
+In this case, when the only mutations allowed are supercoiling mutations, the evolutionary process therefore seems to be completely reproducible (as is also shown in Figure~\ref{fig:epistasis:sc-only-basal-sc}).
 Moreover, while the evolved populations all reach local fitness peaks, they do not all cross the fitness valleys that separate their local fitness peaks from higher, but further located, peaks.
-While the populations generated from shocked individuals 1 and 2 in particular were able to cross fitness valleys and reach the global peak of their respective fitness landscape, populations 3, 4 and 5 were not.
-Overall, supercoiling mutations in the \emph{EvoTSC} model therefore seem to play a role in the local exploration of the fitness landscape that stems from the genomic organization of the individuals, rather than play a decisive role in guiding the evolutionary trajectories of evolving populations.
+While the populations generated from shocked individuals 1 and 2 in particular were able to cross fitness valleys and reach the global peak of their respective fitness landscape in these simulations, populations 3, 4 and 5 were not.
+In particular, the basal supercoiling level of population 4 evolved towards a local fitness peak that is located in the opposite direction to the global peak of the fitness landscape of that population.
+
+Overall, the evolutionary trajectories of the populations in which only supercoiling mutations are allowed show us that, in the \emph{EvoTSC model}, supercoiling mutations do have an evolutionary effect, but that this effect is very weak compared to that of genomic rearrangements.
+Supercoiling mutations seem to play a role in finding local optimizations on the fitness landscape that stems from the genomic organization of individuals, rather than open new evolutionary paths through a broad regulatory effect on gene activity.
 
 
 \section{Discussion}
