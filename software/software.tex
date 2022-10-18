@@ -13,7 +13,8 @@ The associated commits can be found here: \url{https://gitlab.inria.fr/aevol/aev
 
 As presented in Section~\ref{sec:aevol:aevol_sc}, I developed during my Ph.D. a version of \emph{Aevol} that incorporates the effect of supercoiling on gene transcription.
 This version can be found here: \url{https://gitlab.inria.fr/tgrohens/aevol/-/tree/rebased-supercoiling}.
-Developing this extension of the model required extensive changes in the evaluation of individuals, in order to take supercoiling into account; in the code handling the mutations, as I added a new kind of mutations to the model; and in the post-treatments, the code that analyses experimental data after the main simulation is complete.
+Developing this extension of the model required extensive changes in the evaluation of individuals, in order to take supercoiling into account.
+I had to update both the code handling the mutations -- as I added a new kind of mutations to the model -- and the \emph{Aevol} post-treatments, the code that analyses experimental data after the main simulation is complete.
 
 \subsection{Tooling for \emph{Aevol}}
 
@@ -21,11 +22,11 @@ While using \emph{Aevol}, I developed a set of Python tools, \emph{aevol-utiliti
 The default \emph{Aevol} executables indeed do not provide the most accessible interface to an untrained user, and do not reflect the way the platform is used to run experiments at present.
 The typical use case of \emph{Aevol} consists in the following steps, for each replicate of a given experiment:
 \begin{enumerate}
-\item Create an initial random individual and initial population using this individual, with a different seed.
-\item Run the proper evolution experiment for a given number of generations.
-\item Pick an individual in the final population, and trace its lineage since the original population.
-\item Compute a series of statistics over this lineage, by recovering every individual in the lineage.
-\item Analyse and plot the resulting data.
+\item Creating an initial random individual and an initial population using this individual, with a different seed for each replicate.
+\item Running the proper evolution experiment for a given number of generations.
+\item Picking an individual in the final population, and tracing its lineage since the original population.
+\item Computing a series of statistics over this lineage, by recovering every individual in the lineage.
+\item Analyzing and plotting the resulting data.
 \end{enumerate}
 
 The \emph{aevol-utilities} repository comprises a Python library (named \texttt{aevol.py}), and a series of Jupyter notebooks that are built upon this library.
