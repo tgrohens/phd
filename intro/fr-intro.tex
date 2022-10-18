@@ -3,7 +3,7 @@
 \chapter{Résumé en français}
 
 L'évolution des êtres vivants par sélection naturelle est souvent présentée comme un processus impossible à prédire, car elle trouve sa source dans les mutations aléatoires qui affectent le cœur du vivant, c'est-à-dire la molécule d'ADN, dont la séquence est le support principal de l'information biologique.
-Pourtant, s'il n'est pas possible d'identifier avec certitude quelles mutations vont survenir en réponse à une pression de sélection donnée, ni lesquelles vont être fixées, de nombreuses expériences laissent penser que le chemin que suit l'évolution n'est pas entièrement dû au hasard.
+Pourtant, s'il n'est pas possible d'identifier avec certitude quelles mutations vont survenir en réponse à une pression de sélection donnée, ni lesquelles parmi celles-ci vont être fixées, de nombreuses expériences laissent penser que le chemin que suit l'évolution n'est pas entièrement dû au hasard.
 Cette observation n'est pas nouvelle à l'échelle des organismes macroscopiques : Darwin la faisait déjà dans l'\emph{Origine des Espèces}~\citep{darwin1859}.
 Il l'exposa ensuite plus en détail dans la \emph{Variation des animaux et des plantes sous l'action de la domestication}~\citep{darwin1868}, en décrivant de nombreuses plantes et animaux sélectionnés et domestiqués par l'espèce humaine depuis des dizaines de milliers d'années.
 Ce caractère répétable est également observable à l'échelle des micro-organismes, avec l'apparition sans cesse renouvelée de résistances aux traitements d'infections bactériennes ou virales~\citep{levy2004}.
@@ -23,43 +23,45 @@ En particulier, il peut y avoir des interactions épistatiques entre différents
 Par exemple, la duplication d'une séquence à l'intérieur d'un gène donné peut être suivie d'une divergence et d'une spécialisation ultérieures de chacune des parties répétées, comme dans la famille des spectrines~\citep{thomas1997}, protéines qui jouent un rôle important dans la structure des cellules eucaryotes.
 Il y a alors épistasie entre un réarrangement chromosomique -- la duplication d'une partie d'un gène -- et les mutations ponctuelles qui la suivent : en l'absence de cette duplication, les mutations qui rendent possible la spécialisation des parties dupliquées du gène seraient en effet délétères.
 
-Un cas particulier d'interactions épistatiques est celui des interactions entre les mutations dans les gènes régulant la superhélicité de l'ADN (que j'appellerai mutations de superhélicité), et les mutations dans les gènes eux-mêmes régulés par la superhélicité.
+Un cas particulier d'interactions épistatiques est celui des interactions entre les mutations dans les gènes régulant la superhélicité de l'ADN (que j'appellerai mutations de superhélicité) et les mutations dans les gènes eux-mêmes régulés par la superhélicité.
 La superhélicité de l'ADN, c'est-à-dire le niveau d'enroulement de l'ADN autour de lui-même, joue en effet un rôle important dans la régulation de la transcription des gènes chez les bactéries, car le niveau de transcription des gènes dépend directement de la superhélicité au niveau de leur promoteur.
-L'intérêt évolutif des mutations de superhélicité, et leur caractère répétable, a été particulièrement mis en exergue grâce à la \emph{Long Term Evolution Experiment} (\emph{LTEE}) menée dans le laboratoire de Richard Lenski~\citep{lenski1991}.
-Dans cette expérience, 12 souches de la bactérie \emph{Escherichia coli} évoluent depuis 1988 dans un environnement de laboratoire, et 11 des 12 souches de l'expérience ont vu leur niveau de superhélicité augmenter très tôt au cours de celle-ci, grâce à des mutations touchant un faible nombre de gènes bien identifiés.
+L'intérêt évolutif des mutations de superhélicité, ainsi que leur caractère répétable, ont été particulièrement mis en exergue grâce à la \emph{Long Term Evolution Experiment} (\emph{LTEE}) menée dans le laboratoire de Richard Lenski~\citep{lenski1991}.
+Dans cette expérience, 12 souches de la bactérie \emph{Escherichia coli} évoluent depuis 1988 dans un environnement de laboratoire et 11 des 12 souches de l'expérience ont vu leur niveau de superhélicité augmenter très tôt au cours de celle-ci, grâce à des mutations touchant un faible nombre de gènes bien identifiés.
 Comme le niveau de superhélicité est finement régulé par l'activité de plusieurs enzymes (appelées topoisomérases) et par la fixation de protéines sur l'ADN, une mutation dans un gène codant pour l'une ou l'autre de ces protéines peut en effet engendrer un changement de l'activité transcriptionnelle à l'échelle du génome entier.
-Les mutations répétées de superhélicité apparaissant dans cette expérience pourraient donc être le signe d'un paysage d'interactions épistatiques biaisé, en augmentant la proportion de mutations favorables pouvant apparaître dans les génomes qui les contiennent, et par là le futur succès évolutif de leur lignée.
+Les mutations répétées de superhélicité apparaissant dans cette expérience pourraient donc être le signe d'un paysage d'interactions épistatiques biaisé, qui augmenterait la proportion de mutations favorables pouvant apparaître dans les génomes qui les contiennent, rendant par là plus probable le futur succès évolutif de leur lignée.
 
-Le questionnement majeur sous-tendant les travaux que j'ai menés pendant ma thèse a donc été de déterminer à quel point la présence ou non de mutations de superhélicité dans une lignée permet de prédire le futur succès de celle-ci, afin de comprendre plus généralement l'influence des biais épistatiques dans la répétabilité et la prédictibilité de l'évolution au travers de cet exemple.
-Pour cela, j'ai étudié le rôle évolutif des mutations de superhélicité au cours de l'adaptation à un nouvel environnement en employant une approche d'évolution expérimentale \emph{in silico}, celle-ci s'inscrivant dans le cadre plus large de la biologie évolutive des systèmes~\citep{beslon2021}.
+Le questionnement majeur sous-tendant les travaux que j'ai menés pendant ma thèse a donc été de déterminer à quel point la présence ou non de mutations de superhélicité dans une lignée permet de prédire le futur succès de celle-ci, afin de comprendre plus généralement l'influence des biais épistatiques dans la répétabilité et la prédictibilité de l'évolution.
+Pour cela, j'ai étudié le rôle évolutif des mutations de superhélicité au cours de l'adaptation à un nouvel environnement, en employant une approche d'évolution expérimentale \emph{in silico}, qui s'inscrit dans le cadre plus large de la biologie évolutive des systèmes~\citep{beslon2021}.
 J'ai commencé par intégrer un modèle d'expression des gènes prenant en compte le niveau de superhélicité à l'échelle du chromosome dans un logiciel de simulation d'évolution existant au sein de mon équipe de thèse, le logiciel \emph{Aevol}.
-Ce modèle, et les premiers résultats obtenus à l'aide de celui-ci, sont présentés dans le chapitre~\ref{chap:aevol} de la thèse.
+Ce modèle et les premiers résultats obtenus à l'aide de celui-ci sont présentés dans le chapitre~\ref{chap:aevol} de la thèse.
 Les expériences menées dans ce cadre ont permis d'obtenir un résultat évolutif qualitativement semblable à celui de la \emph{LTEE}, la superhélicité étant la cible de nombreuses mutations au début de l'évolution.
 Toutefois, celle-ci se stabilise rapidement alors même que le reste du génome des individus continue d'évoluer, ne permettant pas de conclure sur de possibles interactions épistatiques.
 
 Or, le rôle que tient le niveau de superhélicité de l'ADN dans la régulation de l'expression des gènes bactériens provient en réalité de son caractère extrêmement dynamique~\citep{martisb.2019}.
-Ce caractère dynamique de la superhélicité, tant dans le temps que le long du génome, est en particulier dû à la transcription des gènes elle-même~\citep{visser2022}.
-En effet, d'après un modèle initialement proposé par~\cite{liu1987}, lorsqu'un gène est en cours de transcription par une ARN polymérase, l'encombrant complexe qui en résulte ne peut pivoter autour de l'ADN aussi vite que l'ADN ne s'enroule sur lui-même.
-Le couple ainsi exercé sur l'ADN provoque alors une accumulation de superhélicité en avant du gène transcrit, et un déficit de superhélicité en arrière de celui-ci.
-La transcription d'un gène donné peut donc influer -- par l'intermédiaire des changements locaux de superhélicité qu'elle engendre -- sur la transcription des gènes à proximité de celui-ci, et ainsi créer un réseau d'interactions entre les niveaux d'expressions de gènes proches sur le génome.
+Ce caractère dynamique de la superhélicité, tant dans le temps que le long du génome, est en particulier dû à la transcription elle-même des gènes~\citep{visser2022}.
+En effet, d'après un modèle initialement proposé par~\cite{liu1987}, lorsqu'un gène est en cours de transcription par une ARN polymérase, l'encombrant complexe qui en résulte ne peut pivoter autour de l'ADN aussi vite que l'ADN s'enroule autour de lui-même.
+Le couple ainsi exercé sur l'ADN provoque alors une accumulation de superhélicité en avant du gène transcrit et un déficit de superhélicité en arrière de celui-ci.
+La transcription d'un gène donné peut donc influer -- par l'intermédiaire des changements locaux de superhélicité qu'elle engendre -- sur la transcription des gènes à proximité de celui-ci et ainsi créer un réseau d'interactions entre les niveaux d'expressions de gènes proches sur le génome.
 Une modélisation de la superhélicité prenant en compte les variations locales de celle-ci dues à la transcription semble donc pertinente pour l'étude du rôle évolutif des mutations de superhélicité.
 Une approche aussi précise s'étant révélée délicate à mettre en place dans \emph{Aevol}, j'ai opté pour la création d'un nouveau modèle représentant plus abstraitement le génome, mais décrivant plus fidèlement le couplage entre superhélicité et transcription.
-J'ai implémenté ce nouveau modèle -- appelé \emph{EvoTSC} -- en Python, et celui-ci est disponible à l'adresse \url{https://gitlab.inria.fr/tgrohens/evotsc}.
+J'ai implémenté ce nouveau modèle -- appelé \emph{EvoTSC} -- en Python.
+Le code de celui-ci est disponible à l'adresse suivante : \url{https://gitlab.inria.fr/tgrohens/evotsc}.
 
 À l'aide d'\emph{EvoTSC}, j'ai dans un premier temps montré que, dans un modèle où le seul mécanisme de régulation de l'activité des gènes est le couplage médié par la superhélicité entre les niveaux de transcription de gènes proches, et où les seules mutations possibles sont les inversions chromosomiques (qui réorganisent les positions relatives des gènes), il est possible d'obtenir par sélection naturelle des individus dont les gènes atteignent avec précision des niveaux d'expression optimaux dépendant de l'environnement.
 En particulier, il est possible d'obtenir des gènes activés par une relaxation globale de l'ADN, alors que leurs promoteurs sont intrinsèquement inhibés par la relaxation de l'ADN.
-Ces premiers résultats sont présentés dans le chapitre~\ref{chap:alife}, et démontrent que la superhélicité peut jouer un rôle majeur dans la régulation de l'activité des gènes bactériens, et permettre l'existence de réseaux de régulation génétique en l'absence de facteurs de transcription.
+Ces premiers résultats sont présentés dans le chapitre~\ref{chap:alife}.
+Ils démontrent que la superhélicité peut jouer un rôle majeur dans la régulation de l'activité des gènes bactériens en permettant l'existence de réseaux de régulation génétique même en l'absence de facteurs de transcription.
 Ils ont été publiés, d'abord sous forme d'article dans la conférence \emph{ALIFE 2021}~\citep{grohens2021}, puis dans une version étendue dans le journal associé, \emph{Artificial Life}~\citep{grohens2022a}.
 
-Dans un second temps, j'ai ensuite cherché à caractériser plus en détail l'impact évolutif de la superhélicité sur la structure des génomes et des réseaux de régulations bactériens.
+Dans un second temps, j'ai cherché à caractériser plus en détail l'impact évolutif de la superhélicité sur la structure des génomes et des réseaux de régulations bactériens.
 Toujours en utilisant le modèle \emph{EvoTSC}, j'ai montré qu'au niveau le plus local, des paires convergentes ou divergentes de gènes voisins se forment, conformément aux prédictions théoriques du couplage entre superhélicité et transcription.
 J'ai montré que cette organisation à l'échelle locale du génome n'était toutefois pas entièrement suffisante pour expliquer les niveaux d'expression des gènes observés dans le génome complet, mais que des sous-réseaux impliquant jusqu'à plusieurs dizaines de gènes peuvent au contraire être nécessaires.
-Enfin, en utilisant une approche par knock-out de gène, j'ai montré que, dans les génomes des individus évolués, c'est sous la forme d'un réseau unique et s'étendant à l'échelle du génome entier que s'organise la régulation de l'expression des gènes dans le modèle \emph{EvoTSC}.
-Ce second ensemble de résultats est présenté dans le chapitre~\ref{chap:ploscb}, et a été mis en forme dans une prépublication~\citep{grohens2022b}, prochainement soumise à relecture par les pairs.
+Enfin, en utilisant une approche par knock-out de gène, j'ai montré que, dans le génome des individus évolués, c'est sous la forme d'un réseau unique et s'étendant à l'échelle du génome entier que s'organise la régulation de l'expression des gènes dans le modèle \emph{EvoTSC}.
+Ce second ensemble de résultats est présenté dans le chapitre~\ref{chap:ploscb} et a été mis en forme dans une prépublication qui sera prochainement soumise à relecture par les pairs~\citep{grohens2022b}.
 
 Dans le chapitre~\ref{chap:param}, je présente ensuite un ensemble d'expériences complémentaires qui montrent la robustesse des résultats du modèle \emph{EvoTSC} présentés dans les chapitres précédents, en réponse à des variations des principaux paramètres du modèle visant à représenter la diversité des génomes bactériens et des changements environnementaux.
 J'ai finalement incorporé dans \emph{EvoTSC} un modèle d'évolution du niveau de superhélicité globale, afin de pouvoir caractériser, de la même manière que dans les expériences menées avec \emph{Aevol}, les possibles relations épistatiques entre mutations de superhélicité et réarrangements chromosomiques.
-Ces résultats sont présentés dans le chapitre~\ref{chap:epistasis}, et ouvrent la voie à la conclusion de ce manuscrit au chapitre~\ref{chap:conclusion}.
+Ces résultats sont présentés dans le chapitre~\ref{chap:epistasis} et ouvrent la voie à la conclusion de ce manuscrit au chapitre~\ref{chap:conclusion}.
 
 \paragraph{}
 L'annexe~\ref{chap:software} présente les contributions logicielles que j'ai réalisées tout au long de ma thèse.
@@ -68,8 +70,8 @@ Ensuite, j'ai développé le modèle \emph{EvoTSC}, ainsi qu'un ensemble d'outil
 
 Pour finir, l'irruption de la pandémie de Covid-19 en France au printemps 2020 a perturbé le cours de ma thèse d'une manière particulière.
 Je me suis en effet porté volontaire pour participer à une collaboration entre l'Assistance Publique-Hôpitaux de Paris (AP-HP) et un groupe de chercheur·ses et d'ingénieur·es Inria constitué à cet effet.
-Avec l'accord de mon directeur de thèse, j'ai alors interrompu mes travaux sur la superhélicité, et je me suis pleinement consacré à cet effort pendant plusieurs semaines.
-J'ai ainsi participé à la construction d'un modèle de l'épidémie de Covid-19 dans l'agglomération parisienne, visant à aider les équipes de l'AP-HP à suivre en temps réel -- et essayer de prédire -- l'évolution de cette épidémie à l'aide de données de régulation médicale.
+Avec l'accord de mon directeur de thèse, j'ai alors interrompu mes travaux sur la superhélicité pour me consacrer pleinement à cet effort pendant plusieurs semaines en avril et mai 2020.
+Dans ce cadre, j'ai participé à la construction d'un modèle de l'épidémie de Covid-19 dans l'agglomération parisienne, visant à aider les équipes de l'AP-HP à suivre en temps réel -- et essayer de prédire -- l'évolution de cette épidémie à l'aide de données de régulation médicale.
 Ces travaux ont par la suite mené à une publication~\citep{gaubert2020}, présentée dans l'annexe~\ref{chap:covid}.
 
 \selectlanguage{english}
