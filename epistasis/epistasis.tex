@@ -236,8 +236,8 @@ Moreover, while the evolved populations all reach local fitness peaks, they do n
 While the populations generated from shocked individuals 1 and 2 in particular were able to cross fitness valleys and reach the global peak of their respective fitness landscape in these simulations, populations 3, 4 and 5 were not.
 In particular, the basal supercoiling level of population 4 evolved towards a local fitness peak that is located in the opposite direction to the global peak of the fitness landscape of that population.
 
-Overall, the evolutionary trajectories of the populations in which only supercoiling mutations are allowed show us that, in the \emph{EvoTSC model}, supercoiling mutations do have an evolutionary effect, but that this effect is very weak compared to that of genomic rearrangements.
-Supercoiling mutations seem to play a role in finding local optimizations on the fitness landscape that stems from the genomic organization of individuals, rather than open new evolutionary paths through a broad regulatory effect on gene activity.
+Overall, the evolutionary trajectories of the populations in which only supercoiling mutations are allowed show us that in the \emph{EvoTSC} model, supercoiling mutations do have an evolutionary effect, but that this effect is very weak compared to that of genomic rearrangements.
+In this model, supercoiling mutations seem to play a role in finding local optimizations on the fitness landscape that stems from the genomic organization of individuals, rather than in opening new evolutionary paths through a broad regulatory effect on gene activity.
 
 
 \section{Discussion}
@@ -247,15 +247,18 @@ In the \emph{LTEE}, such supercoiling mutations were indeed found in all but one
 However, as these mutations were shown to be directly beneficial in the ancestral strain, the extent to which these mutations could additionally have been indirectly selected because of their epistatic interactions remains unclear.
 
 In order to study this question in the \emph{in silico} setting of the \emph{EvoTSC} model, I first evolved wild-type populations with supercoiling mutations, and showed that these population have a higher fitness than populations that evolved without supercoiling mutations.
-I then subjected individuals extracted from these populations to environmental shocks, and showed that the populations seeded with these individuals re-evolved a higher fitness after 50,000 generations with supercoiling mutations than the populations without supercoiling mutations.
-As in the \emph{LTEE}, supercoiling mutations in \emph{EvoTSC} therefore seem to confer a relative advantage to the lineages in which they appear.
+I then subjected wild-type individuals extracted from both populations to environmental shocks and let populations seeded with these individuals evolve again.
+I showed that the populations in which the supercoiling can evolve re-evolved a higher fitness when compared to their wild-type ancestor before the shock than the populations in which it cannot, after 50,000 generations of evolution.
+As in the \emph{LTEE}, supercoiling mutations in \emph{EvoTSC} therefore seem to confer a relative advantage on the lineages in which they appear.
 
-In order to have a more quantitative idea of the evolutionary possibilities afforded by these supercoiling mutations, I computed empirical fitness landscapes as a function of supercoiling in the wild-type and re-evolved individuals.
-I showed that, in the wild-types that evolved both with or without supercoiling, the supercoiling level of evolved individuals corresponds to the global peak of the fitness landscape.
-As these fitness landscapes are rooted in the organization of the genes on the genome (via the transcription-supercoiling coupling), these results show that supercoiling mutations are in fact not necessary to reach the peak of the fitness landscape (even though the peaks are on average higher with supercoiling mutations, as shown previously).
-I then ran another set of simulations in which only the supercoiling level evolves, in order to evaluate precisely the extent to which supercoiling mutations allow for the exploration of the fitness landscapes.
-I showed that, while supercoiling mutations do allow populations to reach local fitness peaks (as could be expected), they are by themselves not sufficient to allow populations to reach the global peak of their respective fitness landscapes.
+In order to have a more quantitative idea of the evolutionary possibilities afforded by these supercoiling mutations, I then computed empirical fitness landscapes as a function of supercoiling in the wild-type and re-evolved individuals.
+I showed that, in the wild-types that evolved both with or without supercoiling, the supercoiling level of evolved individuals corresponds to the global peak of the one-dimensional supercoiling fitness landscape.
+As these fitness landscapes are rooted in the organization of the genes on the genome (via the transcription-supercoiling coupling), these results show that supercoiling mutations are in fact not necessary to reach the peak of the fitness landscape, even though the peaks are on average higher with supercoiling mutations (as shown during the evolution of the wild-types themselves).
+I then ran another set of simulations in which only the supercoiling level is allowed to evolve, in order to evaluate precisely the extent to which supercoiling mutations enable the exploration of the supercoiling fitness landscape.
+I showed that, while supercoiling mutations do allow populations to repeatably reach local fitness peaks (as could naively be expected), they are by themselves not sufficient to allow populations to reach the global peak of their respective fitness landscape.
 
-Taken together, these observations seem to indicate that, in the \emph{EvoTSC} model, supercoiling mutations allow for the local exploration of the fitness landscape generated by genomic rearrangements rather than the opening of new of evolutionary paths that would be otherwise inaccessible.
-A more definite answer to this question could be obtained with the help of the complete lineages, and mutation histories, of evolved populations.
-This data would indeed allow us to reconstruct the succession of fitness landscapes, or the fitness seascape, generated by successive genomic inversions, and to assess whether supercoiling mutations allow evolving populations to reach the successive peaks of this fitness seascape.
+Taken together, these observations seem to indicate that, in the \emph{EvoTSC} model, supercoiling mutations allow for a local exploration of the fitness landscape generated by genomic rearrangements rather than for the opening of new evolutionary paths that would otherwise be inaccessible.
+These mutations could nonetheless provide a significant enough fitness advantage to the lineages in which they appear, by finding a locally optimal level of supercoiling, for these lineages to be repeatedly selected.
+The perfect repeatability of the discovery of local fitness peaks through supercoiling mutations in the context of this experiment echoes the repeated fixation of supercoiling mutations in the \emph{LTEE}, suggesting that these mutations could indeed have been selected for their direct fitness effect rather than for their indirect effect on evolvability or robustness.
+A further answer to this question could be obtained with the help of the complete lineages and mutation histories of populations evolved in the \emph{EvoTSC} model.
+This data would indeed allow us to reconstruct the succession of fitness landscapes, or the fitness seascape, generated by successive genomic inversions, and to assess the extent to which supercoiling mutations indeed allow evolving populations to reach the successive peaks of this fitness seascape during evolution.
