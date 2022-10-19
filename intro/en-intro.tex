@@ -1,60 +1,78 @@
 \chapter{Introduction}
 \label{chap:intro}
 
-The evolution of living things by natural selection is often presented as an unpredictable process, because it originates in the random mutations that affect the core of living things: the DNA molecule, whose sequence is the main carrier of biological information.
-However, while it is not possible to identify with certainty which specific mutations will occur in response to a given selection pressure, many experiments suggest that the path that evolution follows is not entirely random and may even be reproducible.
-This may seem obvious at the scale of organisms, thinking of the many plants and animals selected and domesticated by the human species over tens of thousands of years, or the repeated appearance of resistance to treatments for bacterial or viral infections.
-However, it is only since the 20th century that we have been able to try to understand the basis of this repeatability at the molecular level.
-We then observed that it is sometimes the same gene, or even the same nucleotide within a gene, that is affected by mutations when a selection experiment is repeated for a given characteristic.
-In this case, evolution no longer seems to be able to follow a multitude of different paths to reach the same visible result, but is forced to stick to a well-defined route.
+Note: this chapter is an English translation of the French summary at the start of the thesis.
 
-One mechanism that may explain this repeatability of evolution is epistasis, or the role that the genetic environment plays in the effect of a given mutation.
-Indeed, it is possible for a mutation to have a favorable effect in the presence of another mutation, but an unfavorable effect in the absence of it.
-These epistatic relationships can thus constrain the options available to evolution, by requiring that a mutation of a given gene occur before that of a second gene, in order for the latter to be favorable.
-In a context of competition between different strains within the same population (for example, of pathogenic bacteria), a better understanding of these epistatic relationships would then allow, for example, a more accurate prediction of the fixation or not of future mutations, and thus of the victorious strain, offering the possibility of more accurately orienting a treatment.
-The type of epistatic relationships most often studied is that of interactions between point mutations, i.e. between mutations affecting only a small number of contiguous nucleotides within the same gene, as these are the easiest mutations to detect.
-However, there are many other types of epistatic interactions that are more complex and less well studied.
-For example, the duplication of a gene followed by a divergence and specialization of its two copies in two different functions, a process that plays a major role in innovation at the molecular level, can be interpreted in this context.
-There is then an epistasis between a chromosomal rearrangement, the duplication of a gene and the subsequent point mutations; in the absence of this duplication, the mutations which make possible the specialization of the copies of the gene would indeed be deleterious. \textbf{Is the example really necessary?}
+\paragraph{}
+The evolution of living organisms by natural selection is often presented as a process that is impossible to predict, because it finds its source in the random mutations that affect the heart of living beings: the DNA molecule, whose sequence is the main carrier of biological information.
+However, if it is not possible to identify with certainty which mutations will occur in response to a given selection pressure, nor which of these mutations will be fixed, many experiments suggest that the course followed by evolution is not entirely random.
+This observation is not new at the scale of macroscopic organisms, as Darwin already made it in the \emph{Origin of Species}~\citep{darwin1859}.
+He then exposed it in more detail in the \emph{Variation of Animals and Plants under Domestication}~\citep{darwin1868}, in which he describes numerous plant and animal species selected and domesticated by humans over the last tens of thousands of years.
+This repeatability is also observable at the scale of microorganisms, with the constantly renewed appearance of resistance to treatments of bacterial or viral infections~\citep{levy2004}.
+However, it is only since the end of the 20th century, with the development of DNA sequencing, that we have been able to try and understand the basis of this repeatability -- and therefore of this phenotypic predictability -- at the molecular level.
+Indeed, we can now observe that it is sometimes the same gene, or even the same nucleotide within a gene, that is affected by mutations when a selection experiment for a given trait is repeated.
+In this case, evolution no longer seems to be able to follow a multitude of different paths to the same visible result, but instead seems to be forced to stick to a well-defined path.
 
-The starting point of my thesis was therefore the study of a particular case of epistatic interactions, those generated by mutations in genes regulating DNA supercoiling.
-DNA supercoiling, or the degree to which DNA is wrapped around itself, plays an important role in the regulation of gene activity in bacteria, because the level of gene transcription depends directly on the supercoiling at the promoter.
-As the level of supercoiling is finely regulated by the activity of several enzymes, called topoisomerases, a mutation in a gene coding for one of these can lead to a change in transcriptional activity at the scale of the entire genome,
-This opens the door to the emergence of numerous compensatory mutations.
-The evolutionary role of supercoiling mutations, and their repeatability, has been highlighted in particular in the \emph{Long Term Evolution Experiment} carried out in the laboratory of Richard Lenski, which has been evolving 12 strains of \emph{Escherichia coli} in a laboratory environment since 1988.
-Indeed, 11 of the 12 strains have seen their supercoiling increase very early in the course of the experiment.
+One mechanism that may explain this repeatability of evolution is epistasis, or the role that the genetic context plays on the effect of a given mutation.
+Indeed, it is possible for a mutation to have a favorable effect in the presence of another mutation, but an unfavorable effect in its absence.
+These epistatic relationships can thus constrain the options that are available to evolution, by requiring that a mutation in one gene occurs before another mutation in a second gene, so that the second mutation is favorable.
+In a context of competition between different strains within the same population (for example, of pathogenic bacteria), a better understanding of these epistatic relationships would allow, for example, to predict more accurately the fixation or not of future mutations, and thus the winning strain, offering the possibility to guide treatments more accurately.
+The most often studied type of epistatic relationships is that of interactions between point mutations (i.e., mutations affecting only one nucleotide, or sometimes a few contiguous nucleotides) within the same gene, as these mutations are the easiest to detect.
+In this case, changing an amino acid present at a certain position in the protein coded by the gene can modulate the effect of changing another amino acid in the protein.
+These epistatic relationships are now better and better understood, for example by exhaustively measuring the selective value of the $2^N$ possible mutants for a group of $N$ nucleotides of interest (see~\cite{achaz2014} for an overview of such experiments).
+Other more complex and less well-studied types of epistatic interactions however exist.
+In particular, there may be epistatic interactions between different types of mutations, such as between local mutations and chromosomal rearrangements, or between genes playing different kinds of roles, for example between a gene encoding a regulatory protein and another gene whose expression is regulated by that protein.
+For example, the duplication of a sequence within a given gene can be followed by a subsequent divergence and specialization of each of the repeated parts, such as in the spectrin family of proteins~\citep{thomas1997}, which play an important role in the structure of eukaryotic cells.
+In that case, there is epistasis between a chromosomal rearrangement -- the duplication of a part of a gene -- and the point mutations which follow this duplication: in the absence of this duplication, the mutations which make possible the specialization of the duplicated parts of the gene would have been deleterious.
 
-To address the study of the evolutionary role of these mutations during adaptation to a new environment, I opted for an evolutionary systems biology approach.
-I started by integrating a gene expression model taking into account the level of supercoiling at the chromosome level in an evolutionary simulation software existing within my thesis team, the software \emph{Aevol}.
-This model, and the first results obtained with it, are presented in chapter~\ref{chap:aevol} of the thesis.
-However, the experiments carried out in this framework did not lead to a convincing result, the supercoiling converging very quickly during the evolution to a constant level, while the rest of the genome of the individuals continues to evolve.
+A particular case of epistatic interactions is the interactions between mutations in genes which regulate DNA supercoiling (which I will call supercoiling mutations throughout this manuscript) and mutations in genes themselves regulated by supercoiling.
+DNA supercoiling, i.e. the level of twisting and writhing of DNA around itself, indeed plays an important role in the regulation of gene transcription in bacteria, because the transcription level of a gene depends directly on the level of supercoiling at its promoter.
+The evolutionary interest of supercoiling mutations, as well as their repeatability, has been particularly highlighted in the \emph{Long Term Evolution Experiment} (\emph{LTEE}) conducted in the laboratory of Richard Lenski~\citep{lenski1991}.
+In this experiment, 12 strains of the bacterium \emph{Escherichia coli} have been evolving since 1988 in a laboratory environment, and 11 of the 12 strains in the experiment have seen their level of supercoiling increase very early in the experiment, thanks to mutations affecting a small number of well identified genes~\citep{crozat2010}.
+Since the level of supercoiling is finely regulated by the activity of several enzymes (called topoisomerases) and by the binding of nucleoid-associated proteins to DNA, a mutation in a gene coding for any of these proteins might lead to a genome-wide change in transcriptional activity.
+The repeated supercoiling mutations that appear in this experiment could therefore indicate a biased epistatic interaction landscape, which would increase the proportion of favorable mutations that can appear in the genomes that contain these supercoiling mutations.
+Such biased epistatic relationships could thereby make the future evolutionary success of the lineages that bear these supercoiling mutations more likely.
 
-The role in the regulation of gene expression that the level of supercoiling in bacterial DNA holds actually comes from the highly dynamic nature of supercoiling, which is largely related to gene transcription. \textbf{??}
-When a gene is transcribed by an RNA polymerase, the resulting bulky enzyme complex is unable to turn around the DNA as fast as the DNA turns around itself, resulting in an accumulation of supercoiling downstream of the gene, and a deficit of supercoiling upstream of it.
-The transcription of a given gene can thus influence, through the changes in supercoiling in its vicinity that it generates, the transcription of genes in its vicinity, thus creating a network of interactions and couplings between the expression levels of nearby genes on the genome.
-As such a detailed modeling of supercoiling was difficult to implement in the model \emph{Aevol}, I opted to study, in a first step, its evolutionary role in a model integrating a simplified genome, but describing more accurately supercoiling.
-I implemented this model, called \emph{EvoTSC}, from scratch in Python, and it is available at \url{https://gitlab.inria.fr/tgrohens/evotsc}.
+The major question underlying my PhD work was therefore to determine to which extent the presence or absence of supercoiling mutations in a lineage can predict its future evolutive success, in order to understand more broadly the influence of epistatic biases in the repeatability and predictability of evolution.
+To this end, I investigated the evolutionary role of supercoiling mutations during adaptation to a new environment through an \emph{in silico} experimental evolutionary approach, situated within the broader framework of evolutionary systems biology~\citep{beslon2021}.
+I started by integrating a model of gene expression that describes the level of supercoiling at the whole-chromosome scale into \emph{Aevol}, an artificial evolution software platform that has been developed in my research team.
+This model and the first results obtained with it are presented in Chapter~\ref{chap:aevol} of the thesis.
+The experiment carried out in this framework led to results qualitatively similar to that of the \emph{LTEE}, in that the supercoiling level was the target of many mutations at the beginning of the evolution.
+However, the supercoiling rapidly stabilized while the rest of the genome of the individuals continued to evolve, making it impossible to conclude on possible epistatic interactions within these experiments.
 
-Using \emph{EvoTSC}, I first showed that, in a model where the only mechanism for regulating gene activity is supercoiling-mediated coupling between the transcript levels of nearby genes, and where the only possible mutations are chromosomal inversions (which rearrange the relative positions of the genes), it is possible to obtain by natural selection individuals whose genes accurately follow environment-dependent targets.
-In particular, it is possible to obtain genes that are activated by global DNA relaxation, while their promoters are inhibited by local relaxation.
-These first results are presented in the chapter~\ref{chap:alife}, and demonstrate that supercoiling can indeed play a major role in the regulation of bacterial gene activity, as a support of a genetic regulation network.
-They were published, first as a paper in the conference \emph{ALIFE 2021}~\citep{grohens2021}, and then in an extended version in the associated journal, \emph{Artificial Life}~\citep{grohens2022a}.
+The role that the level of DNA supercoiling plays in regulating bacterial gene expression indeed actually stems from its extremely dynamic character~\citep{martisb.2019}.
+The dynamic character of supercoiling, both in time and along the genome, is in particular due to gene transcription itself~\citep{visser2022}.
+Indeed, according to a model originally proposed by~\cite{liu1987}, when a gene is being transcribed by an RNA polymerase, the bulky complex that results cannot rotate around DNA as fast as DNA wraps around itself.
+The torque exerted by this complex on DNA thus causes an accumulation of supercoiling in front of the transcribed gene, and a deficit of supercoiling behind the gene.
+The transcription of a given gene can therefore influence -- through the local changes in supercoiling that it generates -- the transcription of genes near that gene, and thus create a network of interactions between the expression levels of nearby genes in the genome.
+Modeling supercoiling in order to take into account the local variations of supercoiling caused by transcription therefore seems particularly relevant for the study of the evolutionary role of supercoiling mutations.
+As such a precise approach proved to be difficult to implement in \emph{Aevol}, I opted for the creation of a new model representing the genome more abstractly, but describing the coupling between supercoiling and transcription more faithfully.
+I implemented this new model -- called \emph{EvoTSC} -- in Python, and its code is available at the following address: \url{https://gitlab.inria.fr/tgrohens/evotsc}.
 
-In a second step, I then sought to characterize in more detail the evolutionary impact of supercoiling in the structure of bacterial genomes.
-Still using the \emph{EvoTSC} model, I showed that at the most local level, convergent or divergent pairs of neighboring genes are formed, in accordance with theoretical predictions of the coupling between supercoiling and transcription.
-I have shown that this organization at the local genome scale is, however, not entirely sufficient to explain the gene expression levels observed in the whole genome, but that subnetworks involving up to several tens of genes may instead be required.
-Finally, using a gene knockout approach, I have shown that in the genomes of evolved individuals, it is in the form of a single, genome-wide network that the regulation of gene expression is organized in the EvoTSC model.
-This second set of results is presented in chapter~\ref{chap:ploscb}, and has been formatted in a pre-publication~\citep{grohens2022b}, soon to be submitted for peer review.
+Using EvoTSC, I first showed that, in a model where the only mechanism for regulating gene activity is the supercoiling-mediated coupling between the transcription levels of nearby genes, and where the only possible mutations are chromosomal inversions (which rearrange the relative positions of genes on the genome), it is possible to obtain through natural selection individuals whose genes precisely reach environment-dependent target expression levels.
+In particular, it is possible to obtain genes that are activated by global DNA relaxation, even though their promoters are intrinsically inhibited by DNA relaxation.
+These first results are presented in Chapter~\ref{chap:alife}.
+They demonstrate that supercoiling can play a major role in the regulation of bacterial gene activity, by enabling the emergence of gene regulatory networks even in the absence of transcription factors.
+These results were first published as a paper in the \emph{ALIFE 2021} conference~\citep{grohens2021}, and then in an extended version in the associated journal \emph{Artificial Life}~\citep{grohens2022a}.
 
-In chapter~\ref{chap:param}, I then present a set of complementary experiments that show the robustness of the model results \emph{EvoTSC} presented so far, when varying the main parameters of the model.
-Finally, I have incorporated in EvoTSC a model of the evolution of the global supercoiling level, in order to characterize, as in the experiments conducted with Aevol, the possible epistatic relationships between supercoiling mutations and chromosomal rearrangements.
-These results are presented in the chapter~\ref{chap:epistasis}.
+In a second step, I sought to characterize in more detail the evolutionary impact of supercoiling on the structure of bacterial genomes and regulatory networks.
+Still using the \emph{EvoTSC} model, I showed that at the most local level, convergent or divergent pairs of neighboring genes are formed, in accordance with the theoretical predictions of the transcription-supercoiling coupling.
+I showed that this organization at the local genome scale is however not entirely sufficient to explain the gene expression levels observed in the whole genome, but that sub-networks involving up to dozens of genes may instead be required.
+Finally, using a gene knockout approach, I showed that in the genome of evolved individuals, the regulation of gene expression in the EvoTSC model is organized as a single genome-wide network.
+This second set of results is presented in Chapter~\ref{chap:ploscb} and has been written up in a pre-publication that will be submitted for peer-review~\citep{grohens2022b}.
 
-The appendix~\ref{chap:software} presents the software contributions I made throughout my thesis.
-I first participated in the development of \emph{Aevol} and associated tools to manage simulations, then developed the \emph{EvoTSC} model as well as a set of tools to visualize and analyze the resulting data.
+In Chapter~\ref{chap:param}, I then present a set of complementary experiments that underline the robustness of the results that I described in the previous chapters in response to variations in the main parameters of the model, which aim at representing the diversity of bacterial genomes and possible environmental perturbations.
+Finally, I incorporated into \emph{EvoTSC} a model of the evolution of the global supercoiling level, in order to be able to characterize, in the same way as in the experiments carried out with \emph{Aevol}, the possible epistatic relationships between supercoiling mutations and chromosomal rearrangements.
+In particular, I studied the fitness landscapes that stem from supercoiling mutations in the model.
+These results are presented in Chapter~\ref{chap:epistasis} and set the stage for the conclusion of this manuscript in Chapter~\ref{chap:conclusion}.
 
-Finally, the course of my thesis having been disrupted by the outbreak of the Covid-19 pandemic in France in the spring of 2020, I volunteered to collaborate, within a team of Inria researchers and engineers, with the Assistance Publique-Hôpitaux de Paris (AP-HP).
-Together we built a model of the epidemic in the Parisian agglomeration, which aimed to help the AP-HP teams to follow in real time and try to predict the evolution of the epidemic using medical regulation data.
-This work subsequently led to a publication~\citep{gaubert2020}, presented in Appendix~\ref{chap:covid}.
+\paragraph{}
+Appendix~\ref{chap:software} presents the software contributions that I made throughout my PhD.
+I first participated in the development of the \emph{Aevol} framework and of associated tools that manage simulations and analyze their results.
+I then developed the \emph{EvoTSC} model, as well as a set of tools to visualize and analyze the data produced by the model.
 
-\selectlanguage{english}
+Finally, the outbreak of the Covid-19 pandemic in France in the spring of 2020 disrupted the course of my PhD in a particular way.
+At that time, I volunteered to participate in a collaboration between the Assistance Publique-Hôpitaux de Paris (AP-HP) and a group of Inria researchers and engineers formed for this purpose.
+With the agreement of my supervisor, I interrupted my work on supercoiling to fully dedicate myself to this effort for several weeks in April and May 2020.
+In this context, I participated in the construction of a model of the Covid-19 epidemic in the Paris area, which aimed at helping the AP-HP teams to follow in real time -- and try to predict -- the evolution of this epidemic using medical regulation data.
+This work subsequently led to a peer-reviewed publication~\citep{gaubert2020}, which is presented in Appendix~\ref{chap:covid}.
