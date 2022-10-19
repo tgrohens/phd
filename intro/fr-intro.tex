@@ -1,6 +1,7 @@
 \selectlanguage{french}
 
 \chapter{Résumé en français}
+\label{chap:fr-intro}
 
 L'évolution des êtres vivants par sélection naturelle est souvent présentée comme un processus impossible à prédire, car elle trouve sa source dans les mutations aléatoires qui affectent le cœur du vivant, c'est-à-dire la molécule d'ADN, dont la séquence est le support principal de l'information biologique.
 Pourtant, s'il n'est pas possible d'identifier avec certitude quelles mutations vont survenir en réponse à une pression de sélection donnée, ni lesquelles parmi celles-ci vont être fixées, de nombreuses expériences laissent penser que le chemin que suit l'évolution n'est pas entièrement dû au hasard.
@@ -19,14 +20,14 @@ Le type de relations épistatiques le plus souvent étudié est celui des intera
 Dans ce cas, le changement d'un acide aminé présent à un certain endroit de la protéine codée par le gène peut voir son effet modulé par le changement d'un autre acide aminé de la protéine.
 Ces relations épistatiques sont de mieux en mieux comprises, par exemple en mesurant exhaustivement la valeur sélective des $2^N$ mutants possibles pour un groupe de $N$ nucléotides d'intérêt (voir~\cite{achaz2014} pour une vue d'ensemble de telles expériences).
 D'autres types d'interactions épistatiques, plus complexes et moins bien étudiés, existent toutefois.
-En particulier, il peut y avoir des interactions épistatiques entre différents types de mutations, comme entre mutations locales et réarrangements chromosomiques, ou entre gènes jouant des rôles de natures différentes, par exemple entre un gène codant pour une protéine régulatrice et un autre gène régulé par cette protéine.
+En particulier, il peut y avoir des interactions épistatiques entre différents types de mutations, comme entre mutations locales et réarrangements chromosomiques, ou entre gènes jouant des rôles de natures différentes, par exemple entre un gène codant pour une protéine régulatrice et un autre gène dont l'expression est régulée par cette protéine.
 Par exemple, la duplication d'une séquence à l'intérieur d'un gène donné peut être suivie d'une divergence et d'une spécialisation ultérieures de chacune des parties répétées, comme dans la famille des spectrines~\citep{thomas1997}, protéines qui jouent un rôle important dans la structure des cellules eucaryotes.
 Il y a alors épistasie entre un réarrangement chromosomique -- la duplication d'une partie d'un gène -- et les mutations ponctuelles qui la suivent : en l'absence de cette duplication, les mutations qui rendent possible la spécialisation des parties dupliquées du gène seraient en effet délétères.
 
 Un cas particulier d'interactions épistatiques est celui des interactions entre les mutations dans les gènes régulant la superhélicité de l'ADN (que j'appellerai mutations de superhélicité) et les mutations dans les gènes eux-mêmes régulés par la superhélicité.
 La superhélicité de l'ADN, c'est-à-dire le niveau d'enroulement de l'ADN autour de lui-même, joue en effet un rôle important dans la régulation de la transcription des gènes chez les bactéries, car le niveau de transcription des gènes dépend directement de la superhélicité au niveau de leur promoteur.
 L'intérêt évolutif des mutations de superhélicité, ainsi que leur caractère répétable, ont été particulièrement mis en exergue grâce à la \emph{Long Term Evolution Experiment} (\emph{LTEE}) menée dans le laboratoire de Richard Lenski~\citep{lenski1991}.
-Dans cette expérience, 12 souches de la bactérie \emph{Escherichia coli} évoluent depuis 1988 dans un environnement de laboratoire et 11 des 12 souches de l'expérience ont vu leur niveau de superhélicité augmenter très tôt au cours de celle-ci, grâce à des mutations touchant un faible nombre de gènes bien identifiés.
+Dans cette expérience, 12 souches de la bactérie \emph{Escherichia coli} évoluent depuis 1988 dans un environnement de laboratoire et 11 des 12 souches de l'expérience ont vu leur niveau de superhélicité augmenter très tôt au cours de celle-ci, grâce à des mutations touchant un faible nombre de gènes bien identifiés~\citep{crozat2010}.
 Comme le niveau de superhélicité est finement régulé par l'activité de plusieurs enzymes (appelées topoisomérases) et par la fixation de protéines sur l'ADN, une mutation dans un gène codant pour l'une ou l'autre de ces protéines peut en effet engendrer un changement de l'activité transcriptionnelle à l'échelle du génome entier.
 Les mutations répétées de superhélicité apparaissant dans cette expérience pourraient donc être le signe d'un paysage d'interactions épistatiques biaisé, qui augmenterait la proportion de mutations favorables pouvant apparaître dans les génomes qui les contiennent, rendant par là plus probable le futur succès évolutif de leur lignée.
 
@@ -61,6 +62,7 @@ Ce second ensemble de résultats est présenté dans le chapitre~\ref{chap:plosc
 
 Dans le chapitre~\ref{chap:param}, je présente ensuite un ensemble d'expériences complémentaires qui montrent la robustesse des résultats du modèle \emph{EvoTSC} présentés dans les chapitres précédents, en réponse à des variations des principaux paramètres du modèle visant à représenter la diversité des génomes bactériens et des changements environnementaux.
 J'ai finalement incorporé dans \emph{EvoTSC} un modèle d'évolution du niveau de superhélicité globale, afin de pouvoir caractériser, de la même manière que dans les expériences menées avec \emph{Aevol}, les possibles relations épistatiques entre mutations de superhélicité et réarrangements chromosomiques.
+Je me suis en particulier intéressé à l'étude des paysages adaptatifs (\emph{fitness landscapes}) résultant des mutations de superhélicité.
 Ces résultats sont présentés dans le chapitre~\ref{chap:epistasis} et ouvrent la voie à la conclusion de ce manuscrit au chapitre~\ref{chap:conclusion}.
 
 \paragraph{}
