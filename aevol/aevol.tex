@@ -53,7 +53,7 @@ It was originally created to investigate the influence of classical population g
 In \emph{Aevol}, individuals have a very abstract phenotype, in exchange for a genome that is modeled down to the nucleotide level, and follows the ``central dogma of molecular biology''~\citep{crick1958}, with an accurate representation of RNA transcription and gene translation.
 This approach contrasts with other artificial evolution platforms such as \emph{Avida}~\citep{adami1994,ofria2004}, which aim at studying the evolutionary process itself, rather than its impact on biological organisms.
 For instance, \emph{Aevol} has been used to study the effect of mutation rate on genome size~\citep{knibbe2005}, or of the selection pressure on the percentage of non-coding bases and number of genes on the genome~\citep{batut2013}.
-As an excellent and very thorough description of \emph{Aevol} (in French) can be found in~\cite{liard2020}, the following presentation of the model will be kept short and to the point.
+As an excellent and very thorough description of \emph{Aevol} (in French) can be found in~\cite{liard2020}, the following presentation of the model will be kept short and focused on the aspects relevant to this research.
 Figure~\ref{fig:aevol:model} provides a comprehensive overview of the evolutionary algorithm at the core of \emph{Aevol}.
 
 \subsection{The Genotype-Phenotype Map in \emph{Aevol}}
@@ -62,19 +62,19 @@ A genome or genotype in \emph{Aevol} consists in a sequence of binary characters
 The genome sequence explicitly describes the first (forward) strand of DNA, while the second (reverse) strand is obtained by complementing the sequence, replacing $0$ by $1$ and vice-versa.
 In order to turn this genotype into a phenotype (Figure~\ref{fig:aevol:model} C), the decoding algorithm starts by looking for sequences that code for RNAs, reading the forward strand left-to-right and the reverse strand right-to-left.
 An RNA starts with a promoter sequence, which has to match a consensus sequence with up to $d_{max}$ errors, and ends with a hairpin-like terminator.
-Then, each RNA is scanned for genes, which start with a ribosome binding site followed by a 3-nucleotide start codon.
+Then, each RNA is scanned for genes, which start with a ribosome binding site followed by a 3-nucleotide start codon, which defines the reading frame.
 Reading continues until a stop codon is found in the same frame, and the resulting string of codons is then translated into a protein, or discarded if no stop codon is found in frame before the end of the RNA sequence.
 An RNA can thus contain zero, one, or several protein-coding genes.
 
-As the genetic alphabet is binary in \emph{Aevol}, there are 8 different 3-nucleotide codons, and 6 codons can therefore be used to encode protein data, on top of the start and stop codons.
+As the genetic alphabet is binary in \emph{Aevol}, there are 8 different 3-nucleotide codons, and 6 codons can therefore be used to encode protein data, in addition to the start and stop codons.
 These codons are grouped into three pairs, each respectively encoding the width $w$, height $h$, and mean position $m$ of a triangle kernel function from $[0, 1]$ to $[0, 1]$ (as represented in Figure~\ref{fig:aevol:model} B).
 The mean $m$ represents the main function that the protein fulfills in the abstract phenotypic space, the height $h$ the intensity with which it does, and the width $w$ the pleiotropic ability of the protein to fulfill neighboring phenotypic functions.
 
 In order to obtain the final contribution of the protein to the phenotype, the constitutive height $h$ of the gene is weighted by the expression level $e$ of the RNA that carries the gene, which depends on the activity of the promoter of that RNA.
-In the model, the promoter activity decreases linearly with the difference $d$ between its sequence and the consensus sequence, and vanishes at $d=d_{max}$.
+In the model, the promoter activity decreases linearly with the difference $d$ between its sequence and the consensus sequence, and vanishes when $d > d_{max}$.
 The expression level of the RNA is then given by the following equation: $e = 1 - \frac{d}{1+d_{max}}$.
 Finally, in order to compute the complete phenotype of the individual from the set of its proteins, the kernel functions representing each gene are summed, resulting in a piecewise-linear phenotype function.
-As the maximum degree to which each phenotypic function can be fulfilled is bound to 1, the phenotype function is finally capped using Łukasiewicz operators in order to keep within this limit.
+As the maximum degree to which each phenotypic function can be fulfilled is bounded by 1, the phenotype function is finally capped using Łukasiewicz operators in order to keep within this limit.
 
 \subsection{Fitness}
 
@@ -168,7 +168,7 @@ All the data from this experiment is available online on the \href{https://doi.o
 The data that is presented in the rest of this section was obtained by reconstructing the lineage, starting from the initial generation, of a random individual at the last generation of each replicate.
 Studying a given lineage, rather than the best individual at every generation (which need not sire one another), allows us to reconstruct the precise set of mutations that happened throughout the evolutionary history of this lineage, and therefore gives us information about the possible causal link between these mutations, and hence about their possible epistatic relationships.
 
-As a theoretical haploid Wright-Fisher population with $N$ individuals coalesces on average in $2N$ generations without mutation or selection~\citep{felsenstein2019}, we chose to analyze the data from generation 0 to 990,000 of every replicate (excluding the last 10,000 generations), ensuring that each lineage is indeed ancestral to the whole population of the last generation of that replicate.
+As a theoretical haploid Wright-Fisher population with $N$ individuals coalesces on average in $2N$ generations without mutation or selection~\citep{felsenstein2019}, we chose to analyze the data from generation 0 to 990,000 of every replicate (excluding the last 10,000 generations), ensuring that the last individual in each lineage is indeed ancestral to the whole population of the last generation of that replicate.
 
 \begin{table}
 \begin{center}
@@ -229,7 +229,7 @@ This is in strong contrast to the fitness of the runs (presented in Figure~\ref{
 It therefore seems that the supercoiling level might play a role in the early evolution of the runs, but not in their long-term fitness improvement.
 This result is in a sense slightly disappointing but was not entirely unexpected.
 Indeed, in the early evolution of individuals in \emph{Aevol}, the phenotypic target is only very imperfectly approached by the proteins expressed by the individual.
-At that stage, mutations in the supercoiling level, which affect the expression level of every protein equally, could indeed have a positive effect by bringing the whole phenotype closer to the optimum, in a very broad swipe.
+At that stage, mutations in the supercoiling level, which affect the expression level of every protein equally, could indeed have a positive effect by bringing the whole phenotype closer to the optimum, in a very broad stroke.
 Indeed, as individuals in \emph{Aevol} evolve from an ancestor with a single good gene, phenotypic functions are often under-performed by individuals at the early stages of evolution in the model, as the width and height of the kernel functions of their genes can be small, and as the expression level of their RNAs can be quite low if their promoters contain too many errors.
 The different supercoiling values towards which each of the replicates tends to converge in Figure~\ref{fig:aevol:sc} could therefore be interpreted as a founding effect coming from the genome of the original individual in that run, which could be confirmed by a more detailed analysis of the series of mutations that happened in each lineage.
 
@@ -285,7 +285,7 @@ I then tried to detect signals of positive or negative epistasis between the dif
 While this approach did not lead to meaningful results in the experimental runs, it did hint at a possible epistatic link between duplications or deletions and the other mutation kinds, due to their effect on genome size, in the control runs, which seems promising for further investigation.
 
 \paragraph{}
-The verdict of these preliminary experiments was that the model of supercoiling that I implemented in \emph{Aevol}, in which supercoiling is kept constant along the genome and affects the expression level of all genes equally, was probably too simplistic to obtain meaningful results as-is.
+The verdict of these preliminary experiments was that the model of supercoiling that I implemented in \emph{Aevol}, in which supercoiling is kept constant along the genome and affects the expression level of all genes equally, was probably too simplistic to obtain meaningful results.
 Rather than pursuing this avenue of research further by implementing a more precise model in \emph{Aevol}, I chose instead to go in a different direction.
 In order to decouple the complexity of the \emph{Aevol} model from the study of the evolutionary role of supercoiling, I decided to simplify the individual model, genotype-phenotype map, and mutational operators as much as possible, in order to model the effect of supercoiling on gene expression more precisely while keeping the overall complexity of the model in check.
 The results of this renewed approach are presented in the following chapters.

@@ -51,7 +51,7 @@ The genome of an example individual with 20 genes and a basal supercoiling $\sig
 Inside the genome is the resulting local level of DNA supercoiling when this individual is evaluated in an environment with a supercoiling shift of $\delta\sigma_{env}~=~0$.
 As expected given the twin-domain model of supercoiling, we can observe a buildup in negative supercoiling (blue) between genes in divergent orientations, such as genes C and D or F and G, and a buildup in positive supercoiling (red) between genes in convergent orientations, such as genes J and K or Q and R.
 The right-hand side panel of Figure~\ref{fig:ploscb:random_indiv} shows the computation of the stable state of gene expression levels for this individual.
-Note that, in this model and throughout this article, we conflate
+Note that, in this model and throughout this chapter, we conflate
 gene transcription rates with mRNA concentrations, as we assume that mRNAs degrade at a constant rate, and as transcription rates in our model are only affected by the effect of supercoiling on transcription.
 We furthermore conflate transcription rates with expression levels, as we again assume proteins to be translated at a rate proportional to the associated mRNA concentrations and to degrade at a constant rate.
 
@@ -70,7 +70,7 @@ If gene $j$ is upstream of gene $i$, and if it is on the same strand as (or poin
 Conversely, if gene $j$ is upstream of gene $i$ but on the other strand than (or points away from) gene $i$, it generates a buildup in negative supercoiling at gene $i$ ($\eta = -1$).
 If gene $j$ is instead located downstream of gene $i$, the sign of the interaction in each case is switched: $\eta = 1$ if the genes are on the same strand, and $\eta = -1$ otherwise.
 
-We then apply a scaling coefficient $c$, which represents the intensity to which the transcription"=generated torsion of DNA affects the local supercoiling level.
+We then apply a torsional drag coefficient $c$, which represents the intensity to which the transcription"=generated torsion of DNA affects the local supercoiling level through drag.
 Finally, the strength of the interaction decreases linearly with the distance $d(i, j)$ between the promoter of gene $i$, which is the position where the local level of supercoiling affects the probability that an RNA polymerase binds to the DNA and starts transcribing gene $i$, and the middle of gene $j$, which is the average location of the RNA polymerases that transcribe gene $j$, assuming that DNA is transcribed at a constant speed.
 When this distance reaches a threshold of $d_{max}$, the two genes are considered to be too far away to interact and the effect vanishes; in other words, $d_{max}$ represents the maximum interaction distance on either side of the gene.
 
@@ -100,7 +100,7 @@ e_i = e^{m (U_i - 1)}
 \end{equation}
 
 The transcription level of a gene is therefore expressed in arbitrary units between $e^{-m}$, the minimum expression level when the promoter is most hindered by supercoiling (when $U_i$ = 0), and 1, the maximum expression level, when the promoter is most activated by supercoiling (when $U_i$ = 1).
-Throughout this manuscript, we will describe a gene as activated if its transcription level is above the mean of these two values $e_{1/2} = \frac{1}{2}(e^{-m} + 1)$, and inhibited otherwise.
+Throughout this chapter, we will describe a gene as activated if its transcription level is above the mean of these two values $e_{1/2} = \frac{1}{2}(e^{-m} + 1)$, and inhibited otherwise.
 
 \paragraph{Computation of Gene Expression Levels}
 
@@ -353,7 +353,7 @@ Bottom: subnetworks of size 7 (left) and 9 (right), centered around gene 6 (of t
 \label{fig:ploscb:subnetwork_examples}
 \end{figure}
 
-For every odd subnetwork size $k$ between 1 and the genome size, and for every gene on the genome, we extracted the subnetwork of size $k$ centered around that gene, and computed the expression level of every gene in the subnetwork, in the same way as for a complete genome, in each environment.
+For every odd subnetwork size $k$ between 1 and the genome size, and for every gene on the genome, we extracted the subnetwork of $k$ consecutive genes centered around that gene, and computed the expression level of every gene in this subnetwork, in the same way as for a complete genome, in each environment.
 This allowed us to compute the minimum subnetwork size at which a gene has the same activation state as in the complete genome, which we interpret as an indicator of the complexity of the interaction network necessary to produce the activation state of that gene in the complete genome.
 Two representative examples are presented in Figure~\ref{fig:ploscb:subnetwork_examples}, and the complete results are then shown in Figure~\ref{fig:ploscb:min_subnetwork}.
 
@@ -401,7 +401,7 @@ The inner ring represents the absolute difference in the level of local supercoi
 \end{figure}
 
 \paragraph{Transcriptional Gene Knockouts}
-A transcriptional gene knockout (or simply a gene knockout in the manuscript) completely suppresses the transcription of a gene, adapting the principle of gene knockouts to the transcription rather than the translation step of gene expression.
+A transcriptional gene knockout (or simply a gene knockout in this chapter) completely suppresses the transcription of a gene, adapting the principle of gene knockouts to the transcription rather than the translation step of gene expression.
 In order to knock out a gene in an individual in our model, we simply set the transcription rate of that gene to zero during every step of the computation of the gene expression levels of that individual.
 This virtually removes the knocked-out gene from the genome, while keeping the intergenic distance between its upstream and downstream neighbors unchanged, and mimics a loss of function its the promoter.
 The result of such a knockout on the genome of an evolved individual is shown in Figure~\ref{fig:ploscb:ko_genomes}.
