@@ -3,12 +3,12 @@
 \label{chap:alife}
 
 This chapter presents the proof-of-concept version of the \emph{EvoTSC} model, and the first results that I obtained with that version of the model: I show that the evolution of differentiated expression levels in different environments is possible when gene expression is only regulated by the transcription-supercoiling coupling.
-The text of the chapter is an edited version of an article published in the \emph{Artificial Life} journal~\citep{grohens2022a}.
+The text of the chapter is a slightly edited version of an article published in the \emph{Artificial Life} journal~\citep{grohens2022a}; the main difference is that most of the introduction of the journal version has been subsumed into Chapter \ref{chap:background} of this manuscript.
 
 \paragraph{}
 Both the importance of gene regulation via supercoiling and the detailed mechanisms of the transcription"=supercoiling coupling, at the local scale, have already been studied extensively in the literature (see Section~\ref{sec:background:sc}).
 However, a thorough analysis of the effect of the transcription-supercoiling coupling on gene expression at the whole-genome scale -- and of its possible evolutionary use by natural selection -- remains lacking, in particular in the dense prokaryotic genomes, in which large groups of genes are likely to interact through this coupling.
-In this work, we describe a new model which incorporates a high-level model of global supercoiling regulation and of the transcription"=supercoiling coupling within an \emph{in silico} experimental evolution setting.
+In this chapter, we describe a new model which incorporates a high-level model of global supercoiling regulation and of the transcription"=supercoiling coupling within an \emph{in silico} experimental evolution setting.
 Using this model, we first investigate the non-linear variation in gene transcription levels at the whole-genome scale in response to variations in the global supercoiling level.
 Then, we study the evolutionary trajectory of gene activation patterns in individuals subjected to different environments.
 
@@ -490,3 +490,6 @@ Incorporating such precise mechanistic processes into our model could give more 
 Similarly, increasing the number of genes of individuals in our model to match bacterial gene numbers might provide more fine-grained results, but is computationally intractable in the current implementation of the model.
 Furthermore, investigating the behaviors of individuals when they are placed successively in different environments, rather than evaluated separately in each environment, would also bring more information on the plasticity of the network of gene interaction levels that emerges from the transcription-supercoiling coupling.
 Finally, another valuable approach in order to bring this model closer to biology would be to incorporate it into a larger existing framework, such as the Aevol \emph{in silico} experimental evolution platform~\citep{rutten2019}, which models the bacterial genome in much more detail, in order to leverage the power of a well-understood digital organism model.
+
+To conclude, as we have seen with this evolutionary model, the transcription"=supercoiling coupling has a strong enough effect on gene expression to allow for the evolution of supercoiling"=mediated gene regulation in response to different environments.
+As this regulation is encoded by the position itself of genes on the genome, studying the structure of evolved genomes in the model could both help understand in finer detail the mechanics of this mode of regulation, and provide us with possible clues to explain the organization of bacterial genomes.
